@@ -18,7 +18,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 {
 	if(self = [super initWithWindowNibName: windowNibName])
 	{
-		historyController = [controller retain];
+		historyController = controller;
 	}
 	
 	return self;
@@ -27,7 +27,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 - (void) dealloc
 {
 	[historyController release];
-	[super dealloc];
 }
 
 - (void) awakeFromNib

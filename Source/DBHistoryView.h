@@ -26,12 +26,12 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 
 //
 
-- (NSString*) string: (NSString*) string withAttributes: (NSDictionary*) attributes constrainedToWidth: (CGFloat) width;
+- (NSString*) string: (NSString*) string withAttributes: (NSD*) attributes constrainedToWidth: (CGFloat) width;
 - (void) setTextColor: (NSColor*) color;
-- (void) setTextSize: (NSInteger) size;
+- (void) setTextSize: (NSI) size;
 
 //
-- (NSInteger) selectedRow;
+- (NSI) selectedRow;
 - (void) updateSelectedRow;
 - (void) reloadData;
 

@@ -11,7 +11,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 
 @interface DBLocationTextField (Private)
 - (void) frameDidChange: (NSNotification*) notification;
-- (NSRect) progressIndicatorRectForFrame: (NSRect) frame;
+- (NSR) progressIndicatorRectForFrame: (NSR) frame;
 @end
 
 
@@ -54,7 +54,6 @@ const short kProgressIndicatorPadding = 3;
 - (void) dealloc
 {
 	[mProgressIndicator release];
-	[super dealloc];
 }
 
 
@@ -68,7 +67,7 @@ const short kProgressIndicatorPadding = 3;
 
 #pragma mark -
 
-- (NSRect) progressIndicatorRectForFrame: (NSRect) frame
+- (NSR) progressIndicatorRectForFrame: (NSR) frame
 {
 	return NSMakeRect(NSWidth(frame) - NSHeight(frame), 0, NSHeight(frame), NSHeight(frame));
 }
@@ -97,7 +96,7 @@ const short kProgressIndicatorPadding = 3;
 
 - (void) frameDidChange: (NSNotification*) notification
 {
-	NSRect spinnerRect = [self progressIndicatorRectForFrame: [self frame]];
+	NSR spinnerRect = [self progressIndicatorRectForFrame: [self frame]];
 	
 	[[self cell] setExtraSpaceOnRight: spinnerRect.size];
 	

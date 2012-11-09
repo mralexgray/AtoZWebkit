@@ -11,7 +11,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 
 @interface DBBezelWindow : DBLeveledWindow
 {
-	NSPoint	dragStartLocation;
+	NSP	dragStartLocation;
 	NSView*	subview;
 	BOOL	resizing;
 	BOOL	moving;

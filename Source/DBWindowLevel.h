@@ -15,7 +15,7 @@ static NSString* kWindowLevelChangedNotification = @"WindowLevelChanged";
 
 }
 
-+ (NSInteger) windowLevel;
-+ (void) setWindowLevel: (NSInteger) level;
++ (NSI) windowLevel;
++ (void) setWindowLevel: (NSI) level;
 
 @end

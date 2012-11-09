@@ -42,12 +42,12 @@
 					 NSInteger digit, lastDigit;
 					 // STEP n = 0: Read the 1st Char in a 8-Chars subblock
 					 // Leave 5 bits, asserting there's another encoding Char
-					 if ((digit = (NSInteger)chars[charsOffset] - charDigitsBase) < 0 || digit >= charDigitsLen || (digit = charDigits[digit]) == -1)
+					 if ((digit = (NSI)chars[charsOffset] - charDigitsBase) < 0 || digit >= charDigitsLen || (digit = charDigits[digit]) == -1)
 								return nil; // invalid character
 					 lastDigit = digit << 3;
 					 // STEP n = 5: Read the 2nd Char in a 8-Chars subblock
 					 // Insert 3 bits, leave 2 bits, possibly trailing if no more Char
-					 if ((digit = (NSInteger)chars[charsOffset + 1] - charDigitsBase) < 0 || digit >= charDigitsLen || (digit = charDigits[digit]) == -1)
+					 if ((digit = (NSI)chars[charsOffset + 1] - charDigitsBase) < 0 || digit >= charDigitsLen || (digit = charDigits[digit]) == -1)
 								return nil; // invalid character
 					 bytes[bytesOffset] = (Byte)((digit >> 2) | lastDigit);
 					 lastDigit = (digit & 3) << 6;
@@ -57,12 +57,12 @@
 					 }
 					 // STEP n = 2: Read the 3rd Char in a 8-Chars subblock
 					 // Leave 7 bits, asserting there's another encoding Char
-					 if ((digit = (NSInteger)chars[charsOffset + 2] - charDigitsBase) < 0 || digit >= charDigitsLen || (digit = charDigits[digit]) == -1)
+					 if ((digit = (NSI)chars[charsOffset + 2] - charDigitsBase) < 0 || digit >= charDigitsLen || (digit = charDigits[digit]) == -1)
 								return nil; // invalid character
 					 lastDigit |= (Byte)(digit << 1);
 					 // STEP n = 7: Read the 4th Char in a 8-chars Subblock
 					 // Insert 1 bit, leave 4 bits, possibly trailing if no more Char
-					 if ((digit = (NSInteger)chars[charsOffset + 3] - charDigitsBase) < 0 || digit >= charDigitsLen || (digit = charDigits[digit]) == -1)
+					 if ((digit = (NSI)chars[charsOffset + 3] - charDigitsBase) < 0 || digit >= charDigitsLen || (digit = charDigits[digit]) == -1)
 								return nil; // invalid character
 					 bytes[bytesOffset + 1] = (Byte)((digit >> 4) | lastDigit);
 					 lastDigit = (Byte)((digit & 15) << 4);
@@ -72,7 +72,7 @@
 					 }
 					 // STEP n = 4: Read the 5th Char in a 8-Chars subblock
 					 // Insert 4 bits, leave 1 bit, possibly trailing if no more Char
-					 if ((digit = (NSInteger)chars[charsOffset + 4] - charDigitsBase) < 0 || digit >= charDigitsLen || (digit = charDigits[digit]) == -1)
+					 if ((digit = (NSI)chars[charsOffset + 4] - charDigitsBase) < 0 || digit >= charDigitsLen || (digit = charDigits[digit]) == -1)
 								return nil; // invalid character
 					 bytes[bytesOffset + 2] = (Byte)((digit >> 1) | lastDigit);
 					 lastDigit = (Byte)((digit & 1) << 7);
@@ -82,12 +82,12 @@
 					 }
 					 // STEP n = 1: Read the 6th Char in a 8-Chars subblock
 					 // Leave 6 bits, asserting there's another encoding Char
-					 if ((digit = (NSInteger)chars[charsOffset + 5] - charDigitsBase) < 0 || digit >= charDigitsLen || (digit = charDigits[digit]) == -1)
+					 if ((digit = (NSI)chars[charsOffset + 5] - charDigitsBase) < 0 || digit >= charDigitsLen || (digit = charDigits[digit]) == -1)
 								return nil; // invalid character
 					 lastDigit |= (Byte)(digit << 2);
 					 // STEP n = 6: Read the 7th Char in a 8-Chars subblock
 					 // Insert 2 bits, leave 3 bits, possibly trailing if no more Char
-					 if ((digit = (NSInteger)chars[charsOffset + 6] - charDigitsBase) < 0 || digit >= charDigitsLen || (digit = charDigits[digit]) == -1)
+					 if ((digit = (NSI)chars[charsOffset + 6] - charDigitsBase) < 0 || digit >= charDigitsLen || (digit = charDigits[digit]) == -1)
 								return nil; // invalid character
 					 bytes[bytesOffset + 3] = (Byte)((digit >> 3) | lastDigit);
 					 lastDigit = (Byte)((digit & 7) << 5);
@@ -97,7 +97,7 @@
 					 }
 					 // STEP n = 3: Read the 8th Char in a 8-Chars subblock
 					 // Insert 5 bits, leave 0 bit, next encoding Char may not exist
-					 if ((digit = (NSInteger)chars[charsOffset + 7] - charDigitsBase) < 0 || digit >= charDigitsLen || (digit = charDigits[digit]) == -1)
+					 if ((digit = (NSI)chars[charsOffset + 7] - charDigitsBase) < 0 || digit >= charDigitsLen || (digit = charDigits[digit]) == -1)
 								return nil; // invalid character
 					 bytes[bytesOffset + 4] = (Byte)(digit | lastDigit);
 					 //// This point is always reached for chars.length multiple of 8

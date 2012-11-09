@@ -12,7 +12,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	NSTrackingRectTag _tag;
 }
 
-- (id)initWithFrame:(NSRect)frame label:(NSString *)aLabel;
+- (id)initWithFrame:(NSR)frame label:(NSString *)aLabel;
 
 - (void)setLabel:(NSString *)aLabel;
 - (NSString *)label;

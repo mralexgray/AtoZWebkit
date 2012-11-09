@@ -10,10 +10,10 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 
 @implementation DBActionMenuView
 
-- (id)initWithFrame:(NSRect)frame {
+- (id)initWithFrame:(NSR)frame {
 	 self = [super initWithFrame:frame];
 	 if (self) {
-		  bgImage = [[NSImage imageNamed:@"action_menu"] retain];
+		  bgImage = [NSImage imageNamed:@"action_menu"];
 		opacity = 1.0;
 		
 		webspose	= [[DBActionMenuItem alloc] initWithFrame:NSMakeRect(15,28,100,18) label:@"Webspose"];
@@ -36,7 +36,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 - (void)mouseEntered:(NSEvent *)theEvent {
 }
 
-- (void)drawRect:(NSRect)rect {
+- (void)drawRect:(NSR)rect {
 	 [bgImage compositeToPoint:NSZeroPoint
 					operation:NSCompositeSourceOver
 					 fraction:opacity];
@@ -48,7 +48,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	[history release];
 	[bookmarks release];
 	[bgImage release];
-	[super dealloc];
 }
 
 @end

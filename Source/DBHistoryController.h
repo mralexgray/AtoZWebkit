@@ -37,14 +37,14 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 - (void) removeSelected;
 
 // History View
-- (NSInteger) numberOfDates;
-- (NSInteger) numberOfItemsForDate: (NSCalendarDate*) date;
-- (NSInteger) numberOfRows;
-- (BOOL) isDateAtIndex: (NSInteger) index;
-- (NSCalendarDate*) dateAtIndex: (NSInteger) index;
-- (id) itemAtIndex: (NSInteger) index;
-- (id) objectForDate: (NSCalendarDate*) date index: (NSInteger) index;
-- (void) rowClicked: (NSInteger) row;
+- (NSI) numberOfDates;
+- (NSI) numberOfItemsForDate: (NSCalendarDate*) date;
+- (NSI) numberOfRows;
+- (BOOL) isDateAtIndex: (NSI) index;
+- (NSCalendarDate*) dateAtIndex: (NSI) index;
+- (id) itemAtIndex: (NSI) index;
+- (id) objectForDate: (NSCalendarDate*) date index: (NSI) index;
+- (void) rowClicked: (NSI) row;
 
 - (NSMenu *)menuForHistory;
 

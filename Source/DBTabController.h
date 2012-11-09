@@ -43,7 +43,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 - (void)setDefaultWebView:(WebView *)aWebView;
 - (DBTabBar *)tabBar;
 
-- (NSInteger)tabCount;
+- (NSI)tabCount;
 
 - (void)reloadTab;
 - (void)reloadAllTabs;

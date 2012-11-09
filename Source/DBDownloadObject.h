@@ -57,7 +57,7 @@ extern NSString* kFinishedString;
 - (void) setURLResponse: (NSURLResponse*) response;
 - (CGFloat) bytesLoaded;
 - (void) setBytesLoaded: (CGFloat) bytes;
-- (NSInteger) percentComplete;
+- (NSI) percentComplete;
 
 - (NSString *)stringStatus;
 - (void) cancel;

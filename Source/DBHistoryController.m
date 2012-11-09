@@ -42,13 +42,12 @@ NSString* nameOfHistoryFile = @"History.plist";
 	[webHistory release];
 	[view release];
 	
-	[super dealloc];
 }
 
 - (void) setView: (id) newView
 {
 	[view release];
-	view = [newView retain];
+	view = newView;
 	[view setNeedsDisplay: YES];
 }
 
@@ -288,7 +287,7 @@ NSString* nameOfHistoryFile = @"History.plist";
 // numberOfDates
 //
 
-- (NSInteger) numberOfDates
+- (NSI) numberOfDates
 {
 	NSInteger number;
 	
@@ -302,7 +301,7 @@ NSString* nameOfHistoryFile = @"History.plist";
 // numberOfRows
 //
 
-- (NSInteger) numberOfRows
+- (NSI) numberOfRows
 {
 	NSInteger				number		= 0;
 	NSArray*		dates		= [webHistory orderedLastVisitedDays];
@@ -325,7 +324,7 @@ NSString* nameOfHistoryFile = @"History.plist";
 // numberOfItemsForDate:
 //
 
-- (NSInteger) numberOfItemsForDate: (NSCalendarDate*) date
+- (NSI) numberOfItemsForDate: (NSCalendarDate*) date
 {
 	NSInteger number;
 	
@@ -339,7 +338,7 @@ NSString* nameOfHistoryFile = @"History.plist";
 // isDateAtIndex:
 //
 
-- (BOOL) isDateAtIndex: (NSInteger) index
+- (BOOL) isDateAtIndex: (NSI) index
 {
 	BOOL isDate			= NO;
 	
@@ -379,7 +378,7 @@ NSString* nameOfHistoryFile = @"History.plist";
 // dateAtIndex:
 //
 
-- (NSCalendarDate*) dateAtIndex: (NSInteger) index
+- (NSCalendarDate*) dateAtIndex: (NSI) index
 {
 	NSCalendarDate*	date	= nil;
 	NSArray*		dates	= [webHistory orderedLastVisitedDays];
@@ -394,7 +393,7 @@ NSString* nameOfHistoryFile = @"History.plist";
 // itemAtIndex:
 //
 
-- (id) itemAtIndex: (NSInteger) index
+- (id) itemAtIndex: (NSI) index
 {
 	id				item			= nil;
 	
@@ -443,7 +442,7 @@ NSString* nameOfHistoryFile = @"History.plist";
 // objectForDate:index:
 //
 
-- (id) objectForDate: (NSCalendarDate*) date index: (NSInteger) index
+- (id) objectForDate: (NSCalendarDate*) date index: (NSI) index
 {
 	NSArray*		items		= nil;
 	WebHistoryItem*	item		= nil;
@@ -474,7 +473,7 @@ NSString* nameOfHistoryFile = @"History.plist";
 // rowClicked:
 //
 
-- (void) rowClicked: (NSInteger) row
+- (void) rowClicked: (NSI) row
 {
 	if(row > -1 && ![self isDateAtIndex: row])
 	{

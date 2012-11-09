@@ -25,7 +25,6 @@ static NSInteger coloring = 0;
 
 - (void)dealloc {
 	[sourceCode release];
-	[super dealloc];
 }
 
 - (IBAction) showWindow: (id) sender
@@ -57,7 +56,7 @@ static NSInteger coloring = 0;
 }
 
 //	Feel free to change the style of this method as you like, since you made the class
-- (void) savePanelDidEnd: (NSSavePanel*) sheet returnCode: (NSInteger) returnCode contextInfo: (void*) contextInfo
+- (void) savePanelDidEnd: (NSSavePanel*) sheet returnCode: (NSI) returnCode contextInfo: (void*) contextInfo
 {
 	if (sheet != nil && returnCode == NSOKButton)
 	{
@@ -76,7 +75,6 @@ static NSInteger coloring = 0;
 
 - (void)setSourceCode:(NSString *)aStr { 
 	[sourceCode release];
-	[aStr retain];
 	sourceCode = aStr;
 	
 	if(sourceCode && sourceView)

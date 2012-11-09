@@ -11,7 +11,7 @@
 
 @implementation DBWhiteView
 
-- (void)drawRect:(NSRect)rect
+- (void)drawRect:(NSR)rect
 {
 	[[NSC linen] set];
 //	[[NSColor whiteColor] set];

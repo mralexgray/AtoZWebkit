@@ -13,12 +13,12 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	self = [super init];
 	if (self) {
 		// set the controller
-		_controller = [controller retain];
+		_controller = controller;
 		
 		// create a status item
 		NSStatusBar *bar = [NSStatusBar systemStatusBar];
 		_item = [bar statusItemWithLength:33];
-		[_item retain]; // the item must be retained to stay in the menubar
+		 // the item must be retained to stay in the menubar
 		[_item setImage:[NSImage imageNamed:@"DeskBrowse_Small"]];
 		
 		// load the archived menu and use it, fixing the bug about it not showing when no main menubar is shown
@@ -37,7 +37,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	[_controller release];
 	[[NSStatusBar systemStatusBar] removeStatusItem:_item];
 	[_item release];
-	[super dealloc];
 }
 
 - (NSMenu *)standardMenu {

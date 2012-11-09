@@ -12,7 +12,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 @implementation DBLeveledWindow
 
 
-- (id) initWithContentRect: (NSRect) contentRect styleMask: (NSUInteger) styleMask backing: (NSBackingStoreType) backingType defer: (BOOL) flag
+- (id) initWithContentRect: (NSR) contentRect styleMask: (NSUI) styleMask backing: (NSBackingStoreType) backingType defer: (BOOL) flag
 {
 	if (self = [super initWithContentRect: contentRect styleMask: styleMask backing: backingType defer: flag])
 	{
@@ -28,7 +28,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 {
 	[[NSNotificationCenter defaultCenter] removeObserver: self];
 	
-	[super dealloc];
 }
 
 

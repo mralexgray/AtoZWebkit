@@ -18,9 +18,9 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 {
 	if (self = [super init])
 	{
-		mDefaultColor	= [[NSColor colorWithDeviceRed: 0.0 green: 0.0 blue: 0.0 alpha: 0.0] retain];
-		mMouseOverColor = [[NSColor colorWithDeviceRed: 0.7 green: 0.7 blue: 0.7 alpha: 0.4] retain];
-		mMouseDownColor	= [[NSColor colorWithDeviceRed: 0.55 green: 0.55 blue: 0.55 alpha: 0.4] retain];
+		mDefaultColor	= [NSColor colorWithDeviceRed: 0.0 green: 0.0 blue: 0.0 alpha: 0.0];
+		mMouseOverColor = [NSColor colorWithDeviceRed: 0.7 green: 0.7 blue: 0.7 alpha: 0.4];
+		mMouseDownColor	= [NSColor colorWithDeviceRed: 0.55 green: 0.55 blue: 0.55 alpha: 0.4];
 		
 		[self setFont: [NSFont systemFontOfSize: 10.0]];
 //		[self sendActionOn: 0];
@@ -38,20 +38,19 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	[mMouseOverColor release];
 	[mMouseDownColor release];
 	
-	[super dealloc];
 }
 
 
 #pragma mark -
 
-- (void) setFrame: (NSRect) frame
+- (void) setFrame: (NSR) frame
 {
 	mFrame = frame;
 	
 	[self resetTrackingRect];
 }
 
-- (NSRect) frame
+- (NSR) frame
 {
 	return mFrame;
 }
@@ -59,14 +58,14 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 
 #pragma mark -
 
-- (NSRect) textFrameForFrame: (NSRect) frame
+- (NSR) textFrameForFrame: (NSR) frame
 {
-	NSRect textFrame = NSMakeRect(frame.origin.x + DBPaddingOnSidesOfTextFrame, frame.origin.y, frame.size.width - DBPaddingOnSidesOfTextFrame * 2, frame.size.height);
+	NSR textFrame = NSMakeRect(frame.origin.x + DBPaddingOnSidesOfTextFrame, frame.origin.y, frame.size.width - DBPaddingOnSidesOfTextFrame * 2, frame.size.height);
 	
 	return textFrame;
 }
 
-- (NSDictionary*) textAttributes
+- (NSD*) textAttributes
 {
 	return [NSDictionary dictionaryWithObjects: @[[NSColor blackColor], [self font]] forKeys: @[@"NSColor", NSFontAttributeName]];
 }
@@ -74,7 +73,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 
 #pragma mark -
 
-- (void) drawBackgroundInFrame: (NSRect) frame
+- (void) drawBackgroundInFrame: (NSR) frame
 {
 	NSColor* backgroundColor = mDefaultColor;
 		
@@ -91,9 +90,9 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	[NSBezierPath fillRoundRectInRect: frame radius: 15];
 }
 
-- (void) drawTextInFrame: (NSRect) frame
+- (void) drawTextInFrame: (NSR) frame
 {
-	NSRect			textFrame			= [self textFrameForFrame: frame];
+	NSR			textFrame			= [self textFrameForFrame: frame];
 	NSDictionary*	stringAttributes	= [self textAttributes];
 	NSString*		drawText			= [[self stringValue] truncatedToWidth: textFrame.size.width withAttributes: stringAttributes];
 	NSSize			stringSize			= [drawText sizeWithAttributes: stringAttributes];
@@ -114,7 +113,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	[drawText drawInRect: textFrame withAttributes: stringAttributes];
 }
 
-- (void) drawArrow: (NSRect) frame
+- (void) drawArrow: (NSR) frame
 {
 //	[[NSColor colorWithDeviceWhite: 0.85 alpha: 1.0] set];
 	[[NSColor blackColor] set];
@@ -127,11 +126,10 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	[path fill];
 }
 
-- (void) drawWithFrame: (NSRect) cellFrame inView: (NSView*) controlView
+- (void) drawWithFrame: (NSR) cellFrame inView: (NSView*) controlView
 {
 	if (controlView != mControlView)
 	{
-		[controlView retain];
 		[mControlView release];
 		
 		mControlView = controlView;
@@ -146,7 +144,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		
 	[self drawBackgroundInFrame: cellFrame];
 	[self drawTextInFrame: cellFrame];
-	NSRect arrowRect = NSMakeRect(NSMaxX(cellFrame) - 9, cellFrame.origin.y + 5, 6, NSHeight(cellFrame) - 12);
+	NSR arrowRect = NSMakeRect(NSMaxX(cellFrame) - 9, cellFrame.origin.y + 5, 6, NSHeight(cellFrame) - 12);
 	[self drawArrow: arrowRect];
 }
 
@@ -201,7 +199,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		[mControlView removeTrackingRect: mTrackingRectTag];
 	}
 	
-	NSPoint mouseLocation	= [[mControlView window] mouseLocationOutsideOfEventStream];
+	NSP mouseLocation	= [[mControlView window] mouseLocationOutsideOfEventStream];
 	BOOL	mouseInFrame	= NSMouseInRect(mouseLocation, mFrame, NO);
 	
 	mTrackingRectTag = [mControlView addTrackingRect: mFrame owner: self userData: nil assumeInside: mouseInFrame];
@@ -242,7 +240,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		[mStringValue release];
 		mStringValue = [stringValue copy];
 		
-		NSRect			frame				= mFrame;
+		NSR			frame				= mFrame;
 		NSDictionary*	stringAttributes	= [self textAttributes];
 		NSSize			stringSize			= [[self stringValue] sizeWithAttributes: stringAttributes];
 		CGFloat			desiredWidth		= stringSize.width + DBPaddingOnSidesOfTextFrame * 2;

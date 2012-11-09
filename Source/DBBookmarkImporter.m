@@ -117,7 +117,7 @@ NSString* kShiiraBookmarkTitleKey					= @"Title";
 	return pathOfCaminoBookmarksFile;
 }
 
-- (NSArray*) caminoBookmarksExcludingBookmarks: (NSArray*) excludedBookmarks
+- (NSA*) caminoBookmarksExcludingBookmarks: (NSA*) excludedBookmarks
 {
 	NSMutableArray* caminoBookmarks				= [NSMutableArray array];
 	NSString*		pathOfCaminoBookmarksFile	= [self pathOfCaminoBookmarksFile];
@@ -139,7 +139,7 @@ NSString* kShiiraBookmarkTitleKey					= @"Title";
 	return caminoBookmarks;
 }
 
-- (void) processCaminoBookmarksFromDictionary: (NSDictionary*) caminoDictionary intoArray: (NSMutableArray*) bookmarkStorage excludingBookmarks: (NSArray*) excludedBookmarks
+- (void) processCaminoBookmarksFromDictionary: (NSD*) caminoDictionary intoArray: (NSMA*) bookmarkStorage excludingBookmarks: (NSA*) excludedBookmarks
 {
 	NSArray* children = caminoDictionary[kCaminoChildrenKey];
 	
@@ -200,7 +200,7 @@ NSString* kShiiraBookmarkTitleKey					= @"Title";
 						if (addBookmark)
 						{
 							[bookmarkStorage addObject: newBookmark];
-							[(NSMutableArray*)excludedBookmarks addObject: newBookmark];
+							[(NSMA*)excludedBookmarks addObject: newBookmark];
 						}
 						
 						[newBookmark release];
@@ -289,7 +289,7 @@ NSString* kShiiraBookmarkTitleKey					= @"Title";
 	return pathOfFirefoxBookmarksFile;
 }
 
-- (NSArray*) firefoxBookmarksExcludingBookmarks: (NSArray*) excludedBookmarks
+- (NSA*) firefoxBookmarksExcludingBookmarks: (NSA*) excludedBookmarks
 {
 	NSArray*	firefoxBookmarks			= [NSMutableArray array];
 	NSString*	pathOfFirefoxBookmarksFile	= [self pathOfFirefoxBookmarksFile];
@@ -349,7 +349,7 @@ NSString* kShiiraBookmarkTitleKey					= @"Title";
 	return pathOfMozillaBookmarksFile;
 }
 
-- (NSArray*) mozillaBookmarksExcludingBookmarks: (NSArray*) excludedBookmarks
+- (NSA*) mozillaBookmarksExcludingBookmarks: (NSA*) excludedBookmarks
 {
 	NSArray*	mozillaBookmarks			= [NSMutableArray array];
 	NSString*	pathOfMozillaBookmarksFile	= [self pathOfMozillaBookmarksFile];
@@ -362,7 +362,7 @@ NSString* kShiiraBookmarkTitleKey					= @"Title";
 	return mozillaBookmarks;
 }
 
-- (NSArray*) mozillaBookmarksFromPath: (NSString*) filePath excludingBookmarks: (NSArray*) excludedBookmarks
+- (NSA*) mozillaBookmarksFromPath: (NSString*) filePath excludingBookmarks: (NSA*) excludedBookmarks
 {
 	NSMutableArray* bookmarks = [NSMutableArray array];
 	
@@ -415,7 +415,7 @@ NSString* kShiiraBookmarkTitleKey					= @"Title";
 						if (addBookmark)
 						{
 							[bookmarks addObject: newBookmark];
-							[(NSMutableArray*)excludedBookmarks addObject: newBookmark];
+							[(NSMA*)excludedBookmarks addObject: newBookmark];
 						}
 						
 						[newBookmark release];
@@ -448,7 +448,7 @@ NSString* kShiiraBookmarkTitleKey					= @"Title";
 	return pathOfSafariBookmarksFile;
 }
 
-- (NSArray*) safariBookmarksExcludingBookmarks: (NSArray*) excludedBookmarks
+- (NSA*) safariBookmarksExcludingBookmarks: (NSA*) excludedBookmarks
 {	
 	NSMutableArray* safariBookmarks				= [NSMutableArray array];
 	NSString*		pathOfSafariBookmarksFile	= [self pathOfSafariBookmarksFile];
@@ -470,7 +470,7 @@ NSString* kShiiraBookmarkTitleKey					= @"Title";
 	return safariBookmarks;
 }
 
-- (void) processSafariBookmarksFromDictionary: (NSDictionary*) safariDictionary intoArray: (NSMutableArray*) bookmarkStorage excludingBookmarks: (NSArray*) excludedBookmarks
+- (void) processSafariBookmarksFromDictionary: (NSD*) safariDictionary intoArray: (NSMA*) bookmarkStorage excludingBookmarks: (NSA*) excludedBookmarks
 {
 	NSString* webBookmarkType = safariDictionary[kSafariWebBookmarkType];
 	
@@ -533,7 +533,7 @@ NSString* kShiiraBookmarkTitleKey					= @"Title";
 						if (addBookmark)
 						{
 							[bookmarkStorage addObject: newBookmark];
-							[(NSMutableArray*)excludedBookmarks addObject: newBookmark];
+							[(NSMA*)excludedBookmarks addObject: newBookmark];
 						}
 						
 						[newBookmark release];
@@ -561,7 +561,7 @@ NSString* kShiiraBookmarkTitleKey					= @"Title";
 	return pathOfShiiraBookmarksFile;
 }
 
-- (NSArray*) shiiraBookmarksExcludingBookmarks: (NSArray*) excludedBookmarks
+- (NSA*) shiiraBookmarksExcludingBookmarks: (NSA*) excludedBookmarks
 {
 	NSMutableArray* shiiraBookmarks				= [NSMutableArray array];
 	NSString*		pathOfShiiraBookmarksFile	= [self pathOfShiiraBookmarksFile];
@@ -583,7 +583,7 @@ NSString* kShiiraBookmarkTitleKey					= @"Title";
 	return shiiraBookmarks;
 }
 
-- (void) processShiiraBookmarksFromDictionary: (NSDictionary*) shiiraDictionary intoArray: (NSMutableArray*) bookmarkStorage excludingBookmarks: (NSArray*) excludedBookmarks
+- (void) processShiiraBookmarksFromDictionary: (NSD*) shiiraDictionary intoArray: (NSMA*) bookmarkStorage excludingBookmarks: (NSA*) excludedBookmarks
 {
 	NSArray* children = shiiraDictionary[kShiiraChildrenKey];
 	
@@ -644,7 +644,7 @@ NSString* kShiiraBookmarkTitleKey					= @"Title";
 						if (addBookmark)
 						{
 							[bookmarkStorage addObject: newBookmark];
-							[(NSMutableArray*)excludedBookmarks addObject: newBookmark];
+							[(NSMA*)excludedBookmarks addObject: newBookmark];
 						}
 						
 						[newBookmark release];

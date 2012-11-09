@@ -21,9 +21,9 @@ NSString* const kBookmarkEditWindowNibName = @"BookmarkEdit";
 {
 	if (self = [super initWithWindowNibName: kBookmarkEditWindowNibName])
 	{
-		mOutlineDataSource	= [dataSource retain];
-		mBookmarkController	= [bookmarkController retain];
-		mOutlineViewFont	= [[NSFont systemFontOfSize: 10.0] retain];
+		mOutlineDataSource	= dataSource;
+		mBookmarkController	= bookmarkController;
+		mOutlineViewFont	= [NSFont systemFontOfSize: 10.0];
 		
 		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(reloadData) name: kBookmarksDidChangeNotification object: nil];
 	}
@@ -39,7 +39,6 @@ NSString* const kBookmarkEditWindowNibName = @"BookmarkEdit";
 	[mBookmarkController release];
 	[mOutlineViewFont release];
 		
-	[super dealloc];
 }
 
 
@@ -79,7 +78,6 @@ NSString* const kBookmarkEditWindowNibName = @"BookmarkEdit";
 	[mOutlineView setDraggingSourceOperationMask: NSTableViewDropAbove forLocal: YES];
 	[mOutlineView registerForDraggedTypes: @[kBookmarkDragType]];
 	
-	[self retain];
 }
 
 

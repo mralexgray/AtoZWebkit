@@ -253,7 +253,6 @@ static NSString *strTemp 	= nil;
 	[actionMenu					release];
 	[symbolicHotKeyController	release];
 	
-	[super dealloc];
 }
 
 #pragma mark -
@@ -266,7 +265,7 @@ static NSString *strTemp 	= nil;
 	[firstTab setView: newWebView];
 	
 	[currentWebView release];
-	currentWebView = [newWebView retain];
+	currentWebView = newWebView;
 }
 
 - (NSWindow*) currentWindow
@@ -462,7 +461,7 @@ static NSString *strTemp 	= nil;
 	BOOL isHidden = [bookmarkBar isHidden];
 	
 	CGFloat height = [bookmarkBar frame].size.height;
-	NSRect wvf = [currentWebView frame];
+	NSR wvf = [currentWebView frame];
 	
 	if (isHidden)
 	{
@@ -509,7 +508,7 @@ static NSString *strTemp 	= nil;
 		[NSApp activateIgnoringOtherApps: YES];
 		[self lock: YES];
 		
-		NSRect screenRect = [[NSScreen mainScreen] frame];
+		NSR screenRect = [[NSScreen mainScreen] frame];
 		
 		[websposeWindow setFrame: screenRect display: YES];
 		[websposeWindow makeKeyAndOrderFront: self];
@@ -699,7 +698,6 @@ static NSString *strTemp 	= nil;
 {
 	if (status != currentStatus)
 	{
-		[status			retain];
 		[currentStatus	release];
 		
 		currentStatus = status;
@@ -717,7 +715,6 @@ static NSString *strTemp 	= nil;
 {
 	if(title != currentTitle)
 	{
-		[title			retain];
 		[currentTitle	release];
 		
 		currentTitle = title;
@@ -770,9 +767,9 @@ static NSString *strTemp 	= nil;
 {
 	NSUserDefaults*	userDefaults;
 	
-	userDefaults		= [[NSUserDefaults standardUserDefaults] retain];
+	userDefaults		= [NSUserDefaults standardUserDefaults];
 	
-	homePage			= [userDefaults[kHomePage] retain];
+	homePage			= userDefaults[kHomePage];
 	
 	BOOL showMenuExtra	= [userDefaults boolForKey: kShowMenuExtra];
 	if (showMenuExtra) {
@@ -794,7 +791,7 @@ static NSString *strTemp 	= nil;
 	if(loadingState != statusText)
 	{
 		[loadingState release];
-		loadingState = [statusText retain]; // set the loading state to the status text
+		loadingState = statusText; // set the loading state to the status text
 	}
 }
 
@@ -1436,7 +1433,7 @@ static NSString *strTemp 	= nil;
 {
 	// Change currentWebView
 	[currentWebView release];	
-	currentWebView = [[notification  userInfo][@"WebView"] retain];
+	currentWebView = [notification  userInfo][@"WebView"];
 	
 	// Get selected tab
 	DBTab*			tab						= [notification  userInfo][@"Tab"];
@@ -1600,7 +1597,7 @@ static NSString *strTemp 	= nil;
 
 - (void) mouseDown: (NSEvent*) theEvent
 {
-	NSPoint location = [theEvent locationInWindow];
+	NSP location = [theEvent locationInWindow];
 	
 	if ([theEvent window] != actionMenuWindow && actionMenuVisible)
 	{
@@ -1757,7 +1754,7 @@ static NSString *strTemp 	= nil;
 	return [self application:sender openFile:filename];
 }
 
-- (void) application: (NSApplication*) sender openFiles: (NSArray*) filenames
+- (void) application: (NSApplication*) sender openFiles: (NSA*) filenames
 {
 	if (!inWebsposeMode && !windowIsVisible)
 	{
@@ -2347,7 +2344,7 @@ static NSString *strTemp 	= nil;
 	return status;
 }
 
-- (NSRect)webViewFrame:(WebView *)sender {
+- (NSR)webViewFrame:(WebView *)sender {
 	return [[sender window] frame];
 }
 
@@ -2402,7 +2399,7 @@ static NSString *strTemp 	= nil;
 
 //- (NSWindow *)downloadWindowForAuthenticationSheet:(WebDownload *)download {}
 
-- (void)webView:(WebView *)sender mouseDidMoveOverElement:(NSDictionary *)elementInfo modifierFlags:(NSUInteger)modifierFlags
+- (void)webView:(WebView *)sender mouseDidMoveOverElement:(NSDictionary *)elementInfo modifierFlags:(NSUI)modifierFlags
 {
 	if(sender == currentWebView) // if this is the visible webview
 	{
@@ -2453,7 +2450,7 @@ static NSString *strTemp 	= nil;
 	}
 }
 
-- (void)webView:(WebView *)sender setFrame:(NSRect)frame {}		// dont let the window change size or position
+- (void)webView:(WebView *)sender setFrame:(NSR)frame {}		// dont let the window change size or position
 //- (void)webViewUnfocus:(WebView *)sender {}
 //- (void)webViewFocus:(WebView*)sender {}
 

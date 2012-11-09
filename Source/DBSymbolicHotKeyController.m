@@ -32,7 +32,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 {
 	[mSavedHotKeyState release];
 	
-	[super dealloc];
 }
 
 

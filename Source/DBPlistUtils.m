@@ -11,7 +11,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 
 /*+ (void) setIsBackgroundApp: (BOOL) flag
 {
-	NSDictionary* plistTags = (NSDictionary*) CFBundleGetLocalInfoDictionary(CFBundleGetMainBundle());applicationservices
+	NSDictionary* plistTags = (NSD*) CFBundleGetLocalInfoDictionary(CFBundleGetMainBundle());applicationservices
 	
 	if (flag)
 	{

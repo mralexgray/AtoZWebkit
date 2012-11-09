@@ -12,14 +12,14 @@
  
 @implementation NSBezierPath (RoundRects)
  
-+(void)			fillRoundRectInRect:(NSRect)rect radius:(CGFloat) radius
++(void)			fillRoundRectInRect:(NSR)rect radius:(CGFloat) radius
 {
 		  NSBezierPath*	p = [self bezierPathWithRoundRectInRect: rect radius: radius];
 		  [p fill];
 }
  
  
-+(void)			strokeRoundRectInRect:(NSRect)rect radius:(CGFloat) radius
++(void)			strokeRoundRectInRect:(NSR)rect radius:(CGFloat) radius
 {
 		  NSBezierPath*	p = [self bezierPathWithRoundRectInRect: rect radius: radius];
 		  [p stroke];
@@ -36,7 +36,7 @@
 //				  2004-02-04		witness Created.
 // -----------------------------------------------------------------------------
  
-+(NSBezierPath*)		  bezierPathWithRoundRectInRect:(NSRect)rect radius:(CGFloat) radius
++(NSBezierPath*)		  bezierPathWithRoundRectInRect:(NSR)rect radius:(CGFloat) radius
 {
 		  // Make sure radius doesn't exceed a maximum size to avoid artifacts:
 		  if( radius >= (rect.size.height /2) )
@@ -49,7 +49,7 @@
 					 return [self bezierPathWithRect: rect];
 		  
 		  // Now draw our rectangle:
-		  NSRect						innerRect = NSInsetRect( rect, radius, radius );		  // Make rect with corners being centers of the corner circles.
+		  NSR						innerRect = NSInsetRect( rect, radius, radius );		  // Make rect with corners being centers of the corner circles.
 		  NSBezierPath	 *path = [self bezierPath];
  
 		  [path moveToPoint: NSMakePoint(rect.origin.x,rect.origin.y +radius)];
@@ -79,47 +79,47 @@
 }
  
  
-NSPoint  UKCenterOfRect( NSRect rect )
+NSP  UKCenterOfRect( NSR rect )
 {
 		  return NSMakePoint( NSMidX(rect), NSMidY(rect) );
 }
  
-NSPoint  UKTopCenterOfRect( NSRect rect )
+NSP  UKTopCenterOfRect( NSR rect )
 {
 		  return NSMakePoint( NSMidX(rect), NSMaxY(rect) );
 }
  
-NSPoint  UKTopLeftOfRect( NSRect rect )
+NSP  UKTopLeftOfRect( NSR rect )
 {
 		  return NSMakePoint( NSMinX(rect),NSMaxY(rect) );
 }
  
-NSPoint  UKTopRightOfRect( NSRect rect )
+NSP  UKTopRightOfRect( NSR rect )
 {
 		  return NSMakePoint( NSMaxX(rect), NSMaxY(rect) );
 }
  
-NSPoint  UKLeftCenterOfRect( NSRect rect )
+NSP  UKLeftCenterOfRect( NSR rect )
 {
 		  return NSMakePoint( NSMinX(rect), NSMidY(rect) );
 }
  
-NSPoint  UKBottomCenterOfRect( NSRect rect )
+NSP  UKBottomCenterOfRect( NSR rect )
 {
 		  return NSMakePoint( NSMidX(rect), NSMinY(rect) );
 }
  
-NSPoint  UKBottomLeftOfRect( NSRect rect )
+NSP  UKBottomLeftOfRect( NSR rect )
 {
 		  return rect.origin;
 }
  
-NSPoint  UKBottomRightOfRect( NSRect rect )
+NSP  UKBottomRightOfRect( NSR rect )
 {
 		  return NSMakePoint( NSMaxX(rect), NSMinY(rect) );
 }
  
-NSPoint  UKRightCenterOfRect( NSRect rect )
+NSP  UKRightCenterOfRect( NSR rect )
 {
 		  return NSMakePoint( NSMaxX(rect), NSMidY(rect) );
 }

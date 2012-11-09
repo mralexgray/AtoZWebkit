@@ -41,7 +41,7 @@ extern NSString* const DBBookmarkRows;
 - (unsigned) numberOfBookmarks;
 - (DBBookmark*) bookmarkAtIndex: (unsigned) index;
 - (void) addBookmark: (DBBookmark*) bookmark toFront: (BOOL) toFront;
-- (BOOL) addBookmarks: (NSArray*) bookmarks;
+- (BOOL) addBookmarks: (NSA*) bookmarks;
 
 - (void) save;
 - (void) load;
@@ -57,23 +57,23 @@ extern NSString* const DBBookmarkRows;
 
 // View methods
 - (void) setTableView: (NSTableView*) tableView;
-- (NSInteger) numberOfRows;
-- (NSString*) stringForRow: (NSInteger) row;
+- (NSI) numberOfRows;
+- (NSString*) stringForRow: (NSI) row;
 - (void) tableViewDoubleClick;
 - (void) tableViewDeleteKeyPressed: (NSTableView*) tableView;
-- (void) loadBookmarkAtIndex: (NSInteger) index;
+- (void) loadBookmarkAtIndex: (NSI) index;
 - (void) bookmarkDelete: (NSNotification*) notification;
 - (void) deleteBookmark: (DBBookmark*) bookmark;
-- (void) deleteBookmarkAtIndex: (NSInteger) index;
+- (void) deleteBookmarkAtIndex: (NSI) index;
 
 // Main window
 - (IBAction) openEditWindow: (id) sender;
 - (IBAction) closeEditWindow: (id) sender;
 
 // Bookmark bar
-- (NSArray*) bookmarks;
+- (NSA*) bookmarks;
 - (NSEnumerator*) bookmarkEnumerator;
-- (void) bookmarkDraggedFromIndex: (NSInteger) index toIndex: (NSInteger) newIndex;
+- (void) bookmarkDraggedFromIndex: (NSI) index toIndex: (NSI) newIndex;
 
 // Bookmark editing window
 - (void) newBookmarkFolder;

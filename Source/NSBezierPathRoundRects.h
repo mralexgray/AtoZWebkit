@@ -12,17 +12,17 @@
 
 @interface NSBezierPath (RoundRects)
 
-+(void)			fillRoundRectInRect:(NSRect)rect radius:(CGFloat) radius;
-+(void)			strokeRoundRectInRect:(NSRect)rect radius:(CGFloat) radius;
-+(NSBezierPath*)		  bezierPathWithRoundRectInRect:(NSRect)rect radius:(CGFloat) radius;
-NSPoint  UKCenterOfRect( NSRect rect );
-NSPoint  UKTopCenterOfRect( NSRect rect );
-NSPoint  UKTopLeftOfRect( NSRect rect );
-NSPoint  UKTopRightOfRect( NSRect rect );
-NSPoint  UKLeftCenterOfRect( NSRect rect );
-NSPoint  UKBottomCenterOfRect( NSRect rect );
-NSPoint  UKBottomLeftOfRect( NSRect rect );
-NSPoint  UKBottomRightOfRect( NSRect rect );
-NSPoint  UKRightCenterOfRect( NSRect rect );
++(void)			fillRoundRectInRect:(NSR)rect radius:(CGFloat) radius;
++(void)			strokeRoundRectInRect:(NSR)rect radius:(CGFloat) radius;
++(NSBezierPath*)		  bezierPathWithRoundRectInRect:(NSR)rect radius:(CGFloat) radius;
+NSP  UKCenterOfRect( NSR rect );
+NSP  UKTopCenterOfRect( NSR rect );
+NSP  UKTopLeftOfRect( NSR rect );
+NSP  UKTopRightOfRect( NSR rect );
+NSP  UKLeftCenterOfRect( NSR rect );
+NSP  UKBottomCenterOfRect( NSR rect );
+NSP  UKBottomLeftOfRect( NSR rect );
+NSP  UKBottomRightOfRect( NSR rect );
+NSP  UKRightCenterOfRect( NSR rect );
 
 @end

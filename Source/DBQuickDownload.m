@@ -41,7 +41,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 
 - (void)setFilename:(NSString *)aString {
 	[_filename release];
-	_filename = [aString retain];
+	_filename = aString;
 }
 
 - (NSString *)filename {

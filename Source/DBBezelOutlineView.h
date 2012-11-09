@@ -13,8 +13,8 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 
 
 @interface NSOutlineView (SGSAdditions)
-//@property (strong, nonatomic) NSButtonCell* outlineCell;
-- (void) setOutlineCell: (NSButtonCell*) newCell;
+@property (strong, NATOM) NSButtonCell* outlineCell;
+//- (void) setOutlineCell: (NSButtonCell*) newCell;
 //
 @end
 

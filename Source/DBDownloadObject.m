@@ -27,7 +27,7 @@ NSString* kFinishedString	= @"Finished";
 {
 	if(self = [self init])
 	{
-		mURLDownload = [download retain];
+		mURLDownload = download;
 		
 		[self setURLRequest: [download request]];
 	}
@@ -45,7 +45,6 @@ NSString* kFinishedString	= @"Finished";
 	[mDisplayName			release];
 	[mURL					release];
 	
-	[super dealloc];
 }
 
 #pragma mark -
@@ -67,7 +66,6 @@ NSString* kFinishedString	= @"Finished";
 	
 	if(request != mURLRequest)
 	{
-		[request		retain];
 		[mURLRequest	release];
 		
 		mURLRequest = request;
@@ -78,7 +76,7 @@ NSString* kFinishedString	= @"Finished";
 	
 	// File name
 	[mFileName release];
-	mFileName = [[[[mURL absoluteString] lastPathComponent] stringByReplacingPercentEscapesUsingEncoding: NSUTF8StringEncoding] retain];
+	mFileName = [[[mURL absoluteString] lastPathComponent] stringByReplacingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
 	
 	// Display name
 	[self setDisplayName: [mFileName lastPathComponent]];
@@ -91,7 +89,6 @@ NSString* kFinishedString	= @"Finished";
 {
 	if(response != mURLResponse)
 	{
-		[response		retain];
 		[mURLResponse	release];
 		
 		mURLResponse = response;
@@ -110,7 +107,6 @@ NSString* kFinishedString	= @"Finished";
 {
 	if(URL != mURL)
 	{
-		[URL	retain];
 		[mURL	release];
 		
 		mURL = URL;
@@ -144,7 +140,6 @@ NSString* kFinishedString	= @"Finished";
 {
 	if(name != mDisplayName)
 	{
-		[name			retain];
 		[mDisplayName	release];
 		
 		mDisplayName = name;
@@ -163,7 +158,6 @@ NSString* kFinishedString	= @"Finished";
 {
 	if(path != mDownloadedFilePath)
 	{
-		[path					retain];
 		[mDownloadedFilePath	release];
 		
 		mDownloadedFilePath = path;
@@ -211,7 +205,7 @@ NSString* kFinishedString	= @"Finished";
 	mExpectedLength	= [mURLResponse expectedContentLength];
 }
 
-- (NSInteger) percentComplete
+- (NSI) percentComplete
 {
 	NSInteger percentComplete = (mBytesLoaded / (CGFloat) mExpectedLength) * 100.0;
 	

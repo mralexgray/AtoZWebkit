@@ -23,7 +23,7 @@ NSString*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 @implementation DBBookmark
 
 
-- (id) initWithDictionary: (NSDictionary*) dictionary
+- (id) initWithDictionary: (NSD*) dictionary
 {
 	NSArray* subBookmarks = dictionary[kBookmarkInfoMoreBookmarksKey];
 	
@@ -52,12 +52,12 @@ NSString*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 
 - (id) initWithURL: (NSURL*) URL title: (NSString*) title
 {
-	NSRect newFrame = NSMakeRect(0, 0, 100, 15);
+	NSR newFrame = NSMakeRect(0, 0, 100, 15);
 	
 	if (self = [super initWithFrame: newFrame])
 	{
-		mURL	= [URL retain];
-		mTitle	= [title retain];
+		mURL	= URL;
+		mTitle	= title;
 	}
 	
 	return self;
@@ -68,7 +68,6 @@ NSString*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 	[mURL release];
 	[mTitle release];
 	
-	[super dealloc];
 }
 
 #pragma mark -
@@ -130,7 +129,6 @@ NSString*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 {
 	if (url != mURL)
 	{
-		[url retain];
 		[mURL release];
 		
 		mURL = url;
@@ -145,7 +143,7 @@ NSString*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 - (void) setURLString: (NSString*) urlString
 {
 	[mURL release];
-	mURL = [[NSURL URLWithString: urlString] retain];
+	mURL = [NSURL URLWithString: urlString];
 }
 
 - (NSString*) title
@@ -244,7 +242,7 @@ NSString*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 @implementation BookmarkFolder
 
 
-- (id) initWithDictionary: (NSDictionary*) dictionary
+- (id) initWithDictionary: (NSD*) dictionary
 {
 	NSString* title = dictionary[kBookmarkInfoTitleKey];
 	
@@ -271,7 +269,6 @@ NSString*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 {
 	[mContainedBookmarks release];
 	
-	[super dealloc];
 }
 
 
@@ -332,12 +329,12 @@ NSString*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 
 #pragma mark -
 
-- (NSArray*) subBookmarks
+- (NSA*) subBookmarks
 {
 	return mContainedBookmarks;
 }
 
-- (void) setSubBookmarks: (NSArray*) bookmarks
+- (void) setSubBookmarks: (NSA*) bookmarks
 {
 	if (bookmarks != mContainedBookmarks)
 	{

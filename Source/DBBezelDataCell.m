@@ -20,7 +20,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	return self;
 }
 
-- (void) drawInteriorWithFrame: (NSRect) cellFrame inView: (NSView*) controlView
+- (void) drawInteriorWithFrame: (NSR) cellFrame inView: (NSView*) controlView
 {
 //	NSMD *attrs = [NSMD dictionaryWithDictionary:[[self attributedStringValue] attributesAtIndex:0 effectiveRange:NULL]];
 	NSMD *attrs = [NSMD dictionary];
@@ -36,13 +36,13 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	
 	[attrs setValue: [self font] forKey: NSFontAttributeName];
 	
-	NSRect		drawFrame	= NSMakeRect(cellFrame.origin.x + 10, cellFrame.origin.y + 2, cellFrame.size.width - 20, cellFrame.size.height);
+	NSR		drawFrame	= NSMakeRect(cellFrame.origin.x + 10, cellFrame.origin.y + 2, cellFrame.size.width - 20, cellFrame.size.height);
 	NSString*	drawString	= [[self stringValue] truncatedToWidth: drawFrame.size.width withAttributes: attrs];
 	
 	[drawString drawInRect: drawFrame withAttributes: attrs];
 }
 
-- (NSColor*) highlightColorWithFrame: (NSRect) cellFrame inView: (NSView*) controlView
+- (NSColor*) highlightColorWithFrame: (NSR) cellFrame inView: (NSView*) controlView
 {
 	return [NSColor colorWithDeviceRed: 0.0 green: 0.0 blue: 0.0 alpha: 0.7];
 }

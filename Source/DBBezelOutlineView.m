@@ -7,24 +7,31 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 
 #import "DBBezelOutlineView.h"
 
+//@interface NSOutlineView ()
+////{
+//// 	NSButtonCell *_outlineCell;
+////}
+//@end
 //
-@implementation NSOutlineView (SGSAdditions)
+////
+//@implementation NSOutlineView (SGSAdditions)
+//
 //@dynamic outlineCell;
-- (void) setOutlineCell: (NSButtonCell*) newCell
-{
-	if (newCell	 != _outlineCell)
-	{
-////		[newCell  retain];
-////		[_outlineCell release];
-//
-		_outlineCell = newCell;
-	}
-}
-//
+//- (void) setOutlineCell: (NSButtonCell*) newCell
+//{
+//	if (newCell	 != _outlineCell)
+//	{
+//////		[newCell  retain];
+//////		[_outlineCell release];
+////
+//		_outlineCell = newCell;
+//	}
+//}
+////
 //- (NSButtonCell*) outlineCell {
 //	return _outlineCell;
 //}
-@end
+//@end
 
 
 @implementation DBBezelOutlineView
@@ -65,8 +72,8 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	[newOutlineCell release];
 
 	// Have to do this so the columns size themselves properly before display
-	NSRect frame	= [self frame];
-	NSRect newFrame	= frame;
+	NSR frame	= [self frame];
+	NSR newFrame	= frame;
 	
 	newFrame.size.width = newFrame.size.width + 1;
 	

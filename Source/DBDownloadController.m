@@ -37,7 +37,7 @@ NSString* downloadFileWrapperExtension		= @"download";
 		mNumloadsfinished	= 0;
 		
 		// font of table cells
-		mTableCellFont		= [[NSFont systemFontOfSize: 12.0] retain];
+		mTableCellFont		= [NSFont systemFontOfSize: 12.0];
 		
 		// register for notifications
 		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(handleNotification:) name: @"DBDownloadNotification" object: nil];
@@ -60,7 +60,6 @@ NSString* downloadFileWrapperExtension		= @"download";
 	[mBezelController release];
 	[mTableCellFont release];
 	
-	[super dealloc];
 }
 
 - (void) awakeFromNib
@@ -139,7 +138,7 @@ NSString* downloadFileWrapperExtension		= @"download";
 	[msg beginSheetModalForWindow: [self window] modalDelegate: self didEndSelector: @selector(alertDidEnd:returnCode:contextInfo:) contextInfo: nil];
 }
 
-- (void) alertDidEnd: (NSAlert*) alert returnCode: (NSInteger) returnCode contextInfo: (void*) contextInfo
+- (void) alertDidEnd: (NSAlert*) alert returnCode: (NSI) returnCode contextInfo: (void*) contextInfo
 {
 	if (returnCode == NSOKButton)
 	{
@@ -185,7 +184,7 @@ NSString* downloadFileWrapperExtension		= @"download";
 	}
 }
 
-- (NSInteger) downloadsInProgress
+- (NSI) downloadsInProgress
 {
 	return mNumloads;
 }
@@ -210,12 +209,12 @@ NSString* downloadFileWrapperExtension		= @"download";
 #pragma mark -
 
 
-- (NSInteger) numberOfRowsInTableView: (NSTableView*) tableView
+- (NSI) numberOfRowsInTableView: (NSTableView*) tableView
 {	
 	return [mDownloads count];
 }
 
-- (id) tableView: (NSTableView*) tableView objectValueForTableColumn: (NSTableColumn*) column row: (NSInteger) row
+- (id) tableView: (NSTableView*) tableView objectValueForTableColumn: (NSTableColumn*) column row: (NSI) row
 {
 	id				value		= nil;
 	NSString*		identifier	= [column identifier];
@@ -235,7 +234,7 @@ NSString* downloadFileWrapperExtension		= @"download";
 
 #pragma mark -
 
-- (void) tableView: (NSTableView*) tableView willDisplayCell: (id) cell forTableColumn: (NSTableColumn*) tableColumn row: (NSInteger) row
+- (void) tableView: (NSTableView*) tableView willDisplayCell: (id) cell forTableColumn: (NSTableColumn*) tableColumn row: (NSI) row
 {
 	[(NSCell*)cell setFont: [NSFont systemFontOfSize: 10.0]];
 }

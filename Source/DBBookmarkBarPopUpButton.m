@@ -14,13 +14,13 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 @implementation DBBookmarkBarPopUpButton
 
 
-- (id) initWithFrame: (NSRect) frameRect pullsDown: (BOOL) flag
+- (id) initWithFrame: (NSR) frameRect pullsDown: (BOOL) flag
 {
 	if (self = [super initWithFrame: frameRect pullsDown: flag])
 	{
 		mText			=  @"More...";//[[NSString stringWithString: @"More..."] retain];
-		mTextFont		= [[NSFont userFontOfSize: 11.0] retain];
-		mDefaultColor	= [[NSColor colorWithDeviceRed: 0.0 green: 0.0 blue: 0.0 alpha: 0.0] retain];
+		mTextFont		= [NSFont userFontOfSize: 11.0];
+		mDefaultColor	= [NSColor colorWithDeviceRed: 0.0 green: 0.0 blue: 0.0 alpha: 0.0];
 	}
 	
 	return self;
@@ -32,14 +32,13 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	[mTextFont release];
 	[mDefaultColor release];
 	
-	[super dealloc];
 }
 
 
 #pragma mark -
 
 
-- (void) drawRect: (NSRect) rect
+- (void) drawRect: (NSR) rect
 {	
 	[self drawBackground];
 	[self drawText];
@@ -55,9 +54,9 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 
 - (void) drawText
 {
-	NSRect			frame				= [self bounds];
+	NSR			frame				= [self bounds];
 	NSSize			padding				= NSMakeSize(4.0, 0.0);
-	NSRect			textFrame			= NSMakeRect(frame.origin.x + padding.width, frame.origin.y + padding.height, frame.size.width - padding.width * 2, frame.size.height - padding.height * 2);
+	NSR			textFrame			= NSMakeRect(frame.origin.x + padding.width, frame.origin.y + padding.height, frame.size.width - padding.width * 2, frame.size.height - padding.height * 2);
 	NSDictionary*	stringAttributes	= [NSDictionary dictionaryWithObjects: @[[NSColor blackColor], mTextFont] forKeys: @[@"NSColor", NSFontAttributeName]];
 	NSString*		drawText			= [mText truncatedToWidth: textFrame.size.width withAttributes: stringAttributes];
 	NSSize			stringSize			= [drawText sizeWithAttributes: stringAttributes];

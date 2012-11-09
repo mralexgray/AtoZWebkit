@@ -32,7 +32,7 @@ NSString*	kImportingStatus		= @"Importing...";
 			NSLog(@"Failed to load nib: %@", windowNibName);
 		}
 		
-		mBookmarkController = [bookmarkController retain];
+		mBookmarkController = bookmarkController;
 	}
 	
 	return self;
@@ -41,7 +41,6 @@ NSString*	kImportingStatus		= @"Importing...";
 - (void)dealloc
 {
 	[mBookmarkController release];
-	[super dealloc];
 }
 
 - (void) showWindow: (id) sender

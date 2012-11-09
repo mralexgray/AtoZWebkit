@@ -13,7 +13,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	self = [super init];
 	
 	if (self) {
-		NSRect screen = [[NSScreen mainScreen] frame];
+		NSR screen = [[NSScreen mainScreen] frame];
 		CGFloat width = 220;
 		CGFloat height = 186;
 		bezel = [[NSWindow alloc] initWithContentRect:NSMakeRect(((screen.size.width/2) - (width/2)), ((screen.size.height/2) - height), width, height) styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:NO];
@@ -57,7 +57,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	[imageView release];
 	[bgView release];
 	
-	[super dealloc];
 }
 
 - (void)handleNotification:(NSNotification *)note {
@@ -70,7 +69,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 }
 
 - (void)setDownloadFile:(NSString *)filename {
-	[filename retain];
 	[file release];
 	file = filename;
 }
@@ -85,7 +83,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	[bezel setIsVisible:YES];
 	[bezel display];
 	[bezel invalidateShadow];
-	timer = [[NSTimer scheduledTimerWithTimeInterval:0.005 target:self selector:@selector(fadeInWindow:) userInfo:nil repeats:YES] retain];
+	timer = [NSTimer scheduledTimerWithTimeInterval:0.005 target:self selector:@selector(fadeInWindow:) userInfo:nil repeats:YES];
 }
 
 - (void)showBezelForFile:(NSString *)filename {
@@ -94,7 +92,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 }
 
 - (void)hideBezel {
-	timer = [[NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(fadeOutWindow:) userInfo:nil repeats:YES] retain];
+	timer = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(fadeOutWindow:) userInfo:nil repeats:YES];
 }
 
 - (void)fadeOutWindow:(NSTimer *)theTimer {

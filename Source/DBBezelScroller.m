@@ -15,13 +15,13 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 {
 	if(self = [super init])
 	{
-		topOfKnob		= [[NSImage imageNamed: @"scrbartop.png"] retain];
-		middleOfKnob	= [[NSImage imageNamed: @"scrbarcenter.png"] retain];
-		bottomOfKnob	= [[NSImage imageNamed: @"scrbarbottom.png"] retain];
+		topOfKnob		= [NSImage imageNamed: @"scrbartop.png"];
+		middleOfKnob	= [NSImage imageNamed: @"scrbarcenter.png"];
+		bottomOfKnob	= [NSImage imageNamed: @"scrbarbottom.png"];
 		
-		knobSlotTop		= [[NSImage imageNamed: @"scrbgtop.png"] retain];
-		knobSlotFiller	= [[NSImage imageNamed: @"scrbgcenter.png"] retain];
-		knobSlotBottom	= [[NSImage imageNamed: @"scrbgbottom.png"] retain];
+		knobSlotTop		= [NSImage imageNamed: @"scrbgtop.png"];
+		knobSlotFiller	= [NSImage imageNamed: @"scrbgcenter.png"];
+		knobSlotBottom	= [NSImage imageNamed: @"scrbgbottom.png"];
 				
 		[topOfKnob		setScalesWhenResized: YES];
 		[middleOfKnob	setScalesWhenResized: YES];
@@ -47,18 +47,17 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	[knobSlotFiller	release];
 	[knobSlotBottom	release];
 	
-	[super dealloc];
 }
 
 
-- (void) drawRect: (NSRect) rect
+- (void) drawRect: (NSR) rect
 {
-	NSRect		backgroundRect	= NSMakeRect(0, 0, [self frame].size.width, [self frame].size.height);
+	NSR		backgroundRect	= NSMakeRect(0, 0, [self frame].size.width, [self frame].size.height);
 	NSColor*	backgroundColor = [NSColor colorWithDeviceRed: 0.0 green: 0.0 blue: 0.0 alpha: 0.7];	
 	[backgroundColor set];
-	NSRectFill(backgroundRect);
+	NSRFill(backgroundRect);
 	
-	NSRect slotRect		= [self rectForPart: NSScrollerKnobSlot];
+	NSR slotRect		= [self rectForPart: NSScrollerKnobSlot];
 	
 	NSSize topSize		= NSMakeSize(slotRect.size.width, [knobSlotTop size].height);
 	NSSize bottomSize	= NSMakeSize(slotRect.size.width, [knobSlotBottom size].height);
@@ -79,7 +78,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 
 - (void) drawKnob
 {	
-	NSRect knobRect = [self rectForPart: NSScrollerKnob];
+	NSR knobRect = [self rectForPart: NSScrollerKnob];
 
 	[topOfKnob		setSize: NSMakeSize(knobRect.size.width, 6.0)];
 	[middleOfKnob	setSize: NSMakeSize(knobRect.size.width, knobRect.size.height - 12.0)];
@@ -92,7 +91,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 
 /*- (void) drawArrow: (NSScrollerArrow) arrow highlight: (BOOL) flag
 {
-	NSRect arrowRect = [self rectForPart: NSScrollerIncrementLine];
+	NSR arrowRect = [self rectForPart: NSScrollerIncrementLine];
 	  
 	[[NSColor yellowColor] set];
 	[NSBezierPath fillRect: arrowRect];

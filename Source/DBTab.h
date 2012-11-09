@@ -40,11 +40,11 @@ static BOOL		tabImagesInitialized;
 	BOOL		loading;
 }
 
-- (void) drawTabInRect: (NSRect) rect;
-- (void) drawCloseButtonInRect: (NSRect) rect;
-- (NSRect) rectForCloseButton;
-- (BOOL) pointInCloseButton: (NSPoint) point;
-- (void) drawLabelInRect: (NSRect) rect;
+- (void) drawTabInRect: (NSR) rect;
+- (void) drawCloseButtonInRect: (NSR) rect;
+- (NSR) rectForCloseButton;
+- (BOOL) pointInCloseButton: (NSP) point;
+- (void) drawLabelInRect: (NSR) rect;
 
 - (void) setLabel: (NSString*) newLabel;
 - (void) setSelected: (BOOL) flag;

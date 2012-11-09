@@ -27,8 +27,8 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(frameDidChange) name: NSViewBoundsDidChangeNotification object: bar];
 															
 		tabs		= [[NSMutableArray alloc] init];
-		tabView		= [view retain];
-		tabBar		= [bar retain];
+		tabView		= view;
+		tabBar		= bar;
 		tabWidth	= 120.0;
 		
 		// create new tab ** Do not call newTabWithWebView: here **
@@ -53,7 +53,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 
 - (void)setDefaultWebView:(WebView *)aWebView {
 	[defaultWebView release];
-	defaultWebView = [aWebView retain];
+	defaultWebView = aWebView;
 }
 
 - (DBTabBar *)tabBar {
@@ -69,7 +69,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	[tabBar		release];
 	[defaultWebView release];
 	
-	[super dealloc];
 }
 
 - (void) tabClicked: (NSNotification*) notification
@@ -238,7 +237,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	}
 			
 	DBTab*	currentTab;
-	NSPoint	newOrigin;
+	NSP	newOrigin;
 	NSSize	newSize;
 	
 	newSize	= NSMakeSize(tabWidth, 29);
@@ -407,7 +406,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	return tabWithWebView;
 }
 
-- (NSInteger)tabCount {
+- (NSI)tabCount {
 	return [tabs count];
 }
 

@@ -10,7 +10,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 @implementation DBBezelWindow
 
 
-- (id) initWithContentRect: (NSRect) contentRect styleMask: (NSUInteger) aStyle backing: (NSBackingStoreType) bufferingType defer: (BOOL) flag
+- (id) initWithContentRect: (NSR) contentRect styleMask: (NSUI) aStyle backing: (NSBackingStoreType) bufferingType defer: (BOOL) flag
 {
 	if (self = [super initWithContentRect: contentRect styleMask: NSBorderlessWindowMask backing: bufferingType defer: flag])
 	{
@@ -37,7 +37,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 - (void) mouseDown: (NSEvent*) theEvent
 {
 	 dragStartLocation	= [theEvent locationInWindow];
-	NSPoint origin		= [self frame].origin;
+	NSP origin		= [self frame].origin;
 	NSSize	size		= [self frame].size;
 
 	/*if (((origin.y + dragStartLocation.y) > ((origin.y + size.height) - 19)))
@@ -64,15 +64,15 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 {
 	 if ([theEvent type] == NSLeftMouseDragged)
 	{
-		  NSPoint origin;
+		  NSP origin;
 		NSSize	size;
 		NSSize	minSize;
-		  NSPoint newLocation;
+		  NSP newLocation;
 		
-		NSRect		screenRect	= [[self screen] frame];
+		NSR		screenRect	= [[self screen] frame];
 		
-		NSRect		newFrameRect;
-		NSPoint		newOrigin	= [self frame].origin;
+		NSR		newFrameRect;
+		NSP		newOrigin	= [self frame].origin;
 		NSSize		newSize		= [self frame].size;
 		
 		  origin		= [self frame].origin;

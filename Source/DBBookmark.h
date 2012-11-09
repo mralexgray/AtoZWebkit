@@ -29,7 +29,7 @@ extern NSString* kDBDeleteBookmarkNotification;
 	NSNumber*				mIndex;
 }
 
-- (id) initWithDictionary: (NSDictionary*) dictionary;
+- (id) initWithDictionary: (NSD*) dictionary;
 - (id) initWithURL: (NSURL*) URL title: (NSString*) title;
 - (void) load;
 - (void) remove;
@@ -59,8 +59,8 @@ extern NSString* kDBDeleteBookmarkNotification;
 
 - (unsigned) numberOfBookmarks;
 
-- (NSArray*) subBookmarks;						// These should not be used by outsiders; they are used only for NSCoding
-- (void) setSubBookmarks: (NSArray*) bookmarks;	//
+- (NSA*) subBookmarks;						// These should not be used by outsiders; they are used only for NSCoding
+- (void) setSubBookmarks: (NSA*) bookmarks;	//
 
 - (void) addBookmark: (DBBookmark*) bookmark;
 - (void) removeBookmark: (DBBookmark*) bookmark;

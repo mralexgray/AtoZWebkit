@@ -39,8 +39,8 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	}
 
 	// Have to do this so the columns size themselves properly before display
-	NSRect frame	= [self frame];
-	NSRect newFrame	= frame;
+	NSR frame	= [self frame];
+	NSR newFrame	= frame;
 	
 	newFrame.size.width = newFrame.size.width + 1;
 	
@@ -88,7 +88,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 #pragma mark -
 #pragma mark Drag and Drop
 
-/*- (NSImage*) dragImageForRowsWithIndexes: (NSIndexSet*) dragRows tableColumns: (NSArray*) tableColumns event: (NSEvent*) dragEvent offset: (NSPointPointer) dragImageOffset
+/*- (NSImage*) dragImageForRowsWithIndexes: (NSIndexSet*) dragRows tableColumns: (NSA*) tableColumns event: (NSEvent*) dragEvent offset: (NSPPointer) dragImageOffset
 {
 
 	// Get our superclass's image -- it's a good starting point.
@@ -96,7 +96,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	NSSize		superImageSize	= [superImage size];
 	
 	// Allocate an image which is just a bit larger.
-	NSRect imageRect;
+	NSR imageRect;
 	imageRect.origin.x		= 0.0f;
 	imageRect.origin.y		= 0.0f;
 	imageRect.size.width	= superImageSize.width + 3.0f;
@@ -107,7 +107,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	
 	// Create a transparent row-sized fill.
 	[[[NSColor colorWithDeviceRed: 0.0 green: 0.0 blue: 0.0 alpha: 0.77] colorWithAlphaComponent: kDragImageAlpha] set];
-//	NSRectFill(imageRect);
+//	NSRFill(imageRect);
 	
 	// Frame it with transparent black.
 	[[NSColor blackColor] set];
@@ -122,7 +122,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	return newImage;
 }*/
 
-- (NSUInteger) draggingSourceOperationMaskForLocal: (BOOL) isLocal
+- (NSUI) draggingSourceOperationMaskForLocal: (BOOL) isLocal
 {
 	NSUInteger operation = NSDragOperationNone;
 	

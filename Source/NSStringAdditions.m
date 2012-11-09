@@ -9,7 +9,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 
 @implementation NSString (SGSAdditions)
 
-- (NSString*) truncatedToWidth: (CGFloat) width withAttributes: (NSDictionary*) attributes
+- (NSString*) truncatedToWidth: (CGFloat) width withAttributes: (NSD*) attributes
 {
 	NSString*	fixedString		= self;
 	NSString*	currentString	= self;

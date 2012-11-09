@@ -16,13 +16,13 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 //		initWithFrame:
 ////-------------------------------------------------
 
-- (id) initWithFrame: (NSRect) frame
+- (id) initWithFrame: (NSR) frame
 {
 	if(self = [super initWithFrame: frame])
 	{
-		textColor				= [[NSColor colorWithDeviceRed: 0.8 green: 0.8 blue: 0.8 alpha: 1.0] retain];
-		selectedTextColor		= [[NSColor whiteColor] retain];
-		finishedTextColor		= [[NSColor colorWithDeviceRed: 0.8 green: 0.8 blue: 0.8 alpha: 0.5] retain];
+		textColor				= [NSColor colorWithDeviceRed: 0.8 green: 0.8 blue: 0.8 alpha: 1.0];
+		selectedTextColor		= [NSColor whiteColor];
+		finishedTextColor		= [NSColor colorWithDeviceRed: 0.8 green: 0.8 blue: 0.8 alpha: 0.5];
 		
 		textSize				= 10;
 		textAttributes			= [[NSMD alloc] init];
@@ -62,7 +62,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	[finishedTextColor	release];
 	[textAttributes		release];
 	
-	[super dealloc];
 }
 
 
@@ -73,7 +72,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 - (void) setDelegate: (id) object
 {
 	[delegate release];
-	delegate = [object retain];
+	delegate = object;
 	[self setNeedsDisplay: YES];
 }
 
@@ -82,13 +81,13 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 //		drawRect:
 ////-------------------------------------------------
 
-- (void) drawRect: (NSRect) rect
+- (void) drawRect: (NSR) rect
 {
 	if (delegate != nil)
 	{
-		NSRect			displayArea			= NSMakeRect([self frame].origin.x + 20, [self frame].origin.y, [self frame].size.width - 40, [self frame].size.height);
-		NSRect			dateArea			= NSMakeRect(displayArea.origin.x, displayArea.origin.y, displayArea.size.width, displayArea.size.height);
-		NSRect			pageArea			= NSMakeRect(displayArea.origin.x + 20, displayArea.origin.y, displayArea.size.width - 20, displayArea.size.height);
+		NSR			displayArea			= NSMakeRect([self frame].origin.x + 20, [self frame].origin.y, [self frame].size.width - 40, [self frame].size.height);
+		NSR			dateArea			= NSMakeRect(displayArea.origin.x, displayArea.origin.y, displayArea.size.width, displayArea.size.height);
+		NSR			pageArea			= NSMakeRect(displayArea.origin.x + 20, displayArea.origin.y, displayArea.size.width - 20, displayArea.size.height);
 		
 		NSInteger				dates				= [delegate numberOfDates];
 		
@@ -149,7 +148,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 //		string:withAttributes:contstrainedToWidth:
 ////-------------------------------------------------
 
-- (NSString*) string: (NSString*) string withAttributes: (NSDictionary*) attributes constrainedToWidth: (CGFloat) width
+- (NSString*) string: (NSString*) string withAttributes: (NSD*) attributes constrainedToWidth: (CGFloat) width
 {
 	NSString*	fixedString		= string;
 	NSString*	currentString	= [string stringByAppendingString: @"..."];
@@ -186,7 +185,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 - (void) setTextColor: (NSColor*) color
 {
 	[textColor release];
-	textColor = [color retain];
+	textColor = color;
 	
 	[textAttributes setValue: textColor forKey: NSForegroundColorAttributeName];
 }
@@ -196,7 +195,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 //		setTextSize:
 ////-------------------------------------------------
 
-- (void) setTextSize: (NSInteger) size
+- (void) setTextSize: (NSI) size
 {
 	textSize = size;
 	
@@ -212,7 +211,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 {
 	if(delegate != nil)
 	{
-		NSPoint clickPoint	= [self convertPoint: [theEvent locationInWindow] fromView: nil];
+		NSP clickPoint	= [self convertPoint: [theEvent locationInWindow] fromView: nil];
 		CGFloat	clickPointY	= (([self frame].origin.y + [self frame].size.height) - 5) - clickPoint.y;
 		
 		selectedRow			= ceil(clickPointY / rowHeight);
@@ -282,7 +281,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	}
 }
 
-- (NSInteger) selectedRow
+- (NSI) selectedRow
 {
 	return selectedRow;
 }

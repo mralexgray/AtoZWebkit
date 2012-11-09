@@ -13,8 +13,8 @@ extern CGFloat		DBPaddingOnSidesOfTextFrame;
 
 @protocol DBBookmarkBarCell
 
-- (void) setFrame: (NSRect) frame;
-- (NSRect) frame;
+- (void) setFrame: (NSR) frame;
+- (NSR) frame;
 
 - (void) setStringValue: (NSString*) stringValue;
 - (void) setMenu: (NSMenu*) menu;
@@ -22,7 +22,7 @@ extern CGFloat		DBPaddingOnSidesOfTextFrame;
 - (void) mouseDown: (NSEvent*) event;
 - (void) mouseUp: (NSEvent*) event;
 
-- (void) drawWithFrame: (NSRect) frameRect inView: (NSView*) controlView;
+- (void) drawWithFrame: (NSR) frameRect inView: (NSView*) controlView;
 
 - (NSImage*) dragImage;
 - (NSMenuItem*) menuItem;

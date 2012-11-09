@@ -111,8 +111,6 @@
 	 _cancelled			 = [[NSConditionLock alloc] initWithCondition:NO];
 
 	 // Retain instance variables
-	 [_target			retain];
-	 [_argument 		retain];
 
 	 return self;
 }	// end initWithTarget
@@ -143,7 +141,6 @@
 	 _port2				 = nil;
 	 _cancelled			= nil;
 
-	 [super dealloc];
 }	// end dealloc
 
 

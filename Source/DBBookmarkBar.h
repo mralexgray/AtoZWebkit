@@ -22,12 +22,12 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	BOOL					mDragging;
 	CGFloat					mLastMouseX;
 	
-	NSRect					mLastFrame;
+	NSR					mLastFrame;
 }
 
 - (void) setBookmarkController: (DBBookmarkController*) bookmarkController;
 - (void) reloadData;
-- (void) setVisiblePosition: (NSPoint) position;
-- (NSArray*) menuItemsForPopUpButton: (NSPopUpButton*) popUpButton;
+- (void) setVisiblePosition: (NSP) position;
+- (NSA*) menuItemsForPopUpButton: (NSPopUpButton*) popUpButton;
 
 @end

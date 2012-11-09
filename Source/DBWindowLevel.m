@@ -11,9 +11,9 @@ static NSInteger sWindowLevel;
 
 @implementation DBWindowLevel
 
-+ (NSInteger) windowLevel {	return sWindowLevel; }
++ (NSI) windowLevel {	return sWindowLevel; }
 
-+ (void) setWindowLevel: (NSInteger) level
++ (void) setWindowLevel: (NSI) level
 {
 	level != sWindowLevel ? ^{
 		sWindowLevel = level;

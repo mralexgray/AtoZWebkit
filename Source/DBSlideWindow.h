@@ -23,14 +23,14 @@ typedef enum
 
 @interface DBSlideWindow : NSWindow
 
-@property (assign, nonatomic)	BOOL		snapsToEdges;		/* whether or not the window snaps to edges */
-@property (assign, nonatomic)	 CGFloat		snapTolerance;	/* distance from edge within which snapping occurs */
-@property (assign, nonatomic)	 BOOL		snapping;		/* whether we're currently snapping to an edge */
-@property (assign, nonatomic)	 NSPoint		dragStartLocation;	/* keeps track of last drag's mousedown point */
- @property (assign, nonatomic)	CGFloat		padding;
-@property (assign, nonatomic)	CGFloat		minWidth;
-@property (assign, nonatomic)	NSSize		clickDistanceFromWindowEdge;
-@property (assign, nonatomic)	DBDragMode	currentDragMode;
+@property (ASS, NATOM)	BOOL		snapsToEdges;		/* whether or not the window snaps to edges */
+@property (ASS, NATOM)	 CGFloat		snapTolerance;	/* distance from edge within which snapping occurs */
+@property (ASS, NATOM)	 BOOL		snapping;		/* whether we're currently snapping to an edge */
+@property (ASS, NATOM)	 NSP		dragStartLocation;	/* keeps track of last drag's mousedown point */
+ @property (ASS, NATOM)	CGFloat		padding;
+@property (ASS, NATOM)	CGFloat		minWidth;
+@property (ASS, NATOM)	NSSize		clickDistanceFromWindowEdge;
+@property (ASS, NATOM)	DBDragMode	currentDragMode;
 @property (unsafe_unretained)	id			controller;
 
 - (void) saveFrame;

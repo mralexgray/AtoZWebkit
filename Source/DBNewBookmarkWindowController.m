@@ -19,9 +19,9 @@ NSString* const kNewBookmarkWindowNibName = @"NewBookmark";
 {
 	if (self = [super initWithWindowNibName: kNewBookmarkWindowNibName])
 	{
-		mBookmarkController = [bookmarkController retain];
-		mBookmarkTitle		= [bookmarkTitle retain];
-		mBookmarkURL		= [bookmarkURL retain];
+		mBookmarkController = bookmarkController;
+		mBookmarkTitle		= bookmarkTitle;
+		mBookmarkURL		= bookmarkURL;
 	}
 	
 	return self;
@@ -33,7 +33,6 @@ NSString* const kNewBookmarkWindowNibName = @"NewBookmark";
 	[mBookmarkURL release];
 	[mBookmarkTitle release];
 	
-	[super dealloc];
 }
 
 
@@ -59,7 +58,6 @@ NSString* const kNewBookmarkWindowNibName = @"NewBookmark";
 	
 	[mTitleField setStringValue: titleFieldValue];
 	
-	[self retain];
 }
 
 

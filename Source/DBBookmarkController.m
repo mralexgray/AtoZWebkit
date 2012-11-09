@@ -23,15 +23,15 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 
 @interface NSIndexSet (SGSAdditions)
 
-- (NSArray*) arrayOfIndexes;
-+ (NSIndexSet*) indexSetFromArray: (NSArray*) array;
+- (NSA*) arrayOfIndexes;
++ (NSIndexSet*) indexSetFromArray: (NSA*) array;
 
 @end
 
 
 @interface NSMutableArray (SGSAdditions)
 
-- (NSInteger) moveObjectsAtIndexes: (NSIndexSet*) indexSet toIndex: (NSInteger) index;
+- (NSI) moveObjectsAtIndexes: (NSIndexSet*) indexSet toIndex: (NSI) index;
 
 @end
 
@@ -62,7 +62,6 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 	[mBookmarkTableView release];
 	[mCurrentNewBookmarkURL release];
 	
-	[super dealloc];
 }
 
 - (void) awakeFromNib
@@ -142,7 +141,7 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 	}
 }
 
-- (BOOL) addBookmarks: (NSArray*) bookmarks
+- (BOOL) addBookmarks: (NSA*) bookmarks
 {
 	BOOL addedBookmarks	= NO;
 	
@@ -410,14 +409,14 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 	}
 }
 
-- (NSInteger) numberOfRows
+- (NSI) numberOfRows
 {
 	NSInteger numberOfRows = [mBookmarks count];
 	
 	return numberOfRows;
 }
 
-- (NSString*) stringForRow: (NSInteger) row
+- (NSString*) stringForRow: (NSI) row
 {
 	NSString* string = nil;
 
@@ -463,7 +462,7 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 	}
 }
 
-- (void) loadBookmarkAtIndex: (NSInteger) index
+- (void) loadBookmarkAtIndex: (NSI) index
 {		
 	if (index < [mBookmarks count])
 	{
@@ -501,7 +500,7 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 	}
 }
 
-- (void) deleteBookmarkAtIndex: (NSInteger) index
+- (void) deleteBookmarkAtIndex: (NSI) index
 {	
 	DBBookmark* bookmark = mBookmarks[index];
 	
@@ -534,7 +533,7 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 #pragma mark -
 #pragma mark Bookmark Bar
 
-- (NSArray*) bookmarks
+- (NSA*) bookmarks
 {
 	return mBookmarks;
 }
@@ -544,9 +543,9 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 	return [mBookmarks objectEnumerator];
 }
 
-- (void) bookmarkDraggedFromIndex: (NSInteger) index toIndex: (NSInteger) newIndex
+- (void) bookmarkDraggedFromIndex: (NSI) index toIndex: (NSI) newIndex
 {
-	DBBookmark* draggedBookmark = [mBookmarks[index] retain];
+	DBBookmark* draggedBookmark = mBookmarks[index];
 	
 	[mBookmarks removeObjectAtIndex: index];
 	
@@ -574,7 +573,7 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 
 #pragma mark -
 
-- (id) outlineView: (NSOutlineView*) outlineView child: (NSInteger) index ofItem: (id) item
+- (id) outlineView: (NSOutlineView*) outlineView child: (NSI) index ofItem: (id) item
 {
 	id childItem = nil;
 	
@@ -602,7 +601,7 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 	return isExpandable;
 }
 
-- (NSInteger) outlineView: (NSOutlineView*) outlineView numberOfChildrenOfItem: (id) item
+- (NSI) outlineView: (NSOutlineView*) outlineView numberOfChildrenOfItem: (id) item
 {
 	NSInteger numberOfChildren = 0;
 	
@@ -642,12 +641,12 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 #pragma mark -
 #pragma mark NSTableView Data Source Methods
 
-- (NSInteger) numberOfRowsInTableView: (NSTableView*) tableView
+- (NSI) numberOfRowsInTableView: (NSTableView*) tableView
 {
 	return [self numberOfRows];
 }
 
-- (id) tableView: (NSTableView*) tableView objectValueForTableColumn: (NSTableColumn*) column row: (NSInteger) row
+- (id) tableView: (NSTableView*) tableView objectValueForTableColumn: (NSTableColumn*) column row: (NSI) row
 {	
 	return [self stringForRow:row];
 }
@@ -656,13 +655,13 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 #pragma mark -
 #pragma mark NSTableView Delegate Methods
 
-- (void) tableView: (NSTableView*) tableView willDisplayCell: (id) cell forTableColumn: (NSTableColumn*) tableColumn row: (NSInteger) row
+- (void) tableView: (NSTableView*) tableView willDisplayCell: (id) cell forTableColumn: (NSTableColumn*) tableColumn row: (NSI) row
 {
 	[cell setFont: [NSFont systemFontOfSize: 10.0]];
 }
 
 
-- (BOOL) tableView: (NSTableView*) tableView writeRows: (NSArray*) rows toPasteboard: (NSPasteboard*) pboard
+- (BOOL) tableView: (NSTableView*) tableView writeRows: (NSA*) rows toPasteboard: (NSPasteboard*) pboard
 {
 	// Put rows in an NSIndexSet
 	
@@ -700,7 +699,7 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 }
 
 
-- (NSDragOperation) tableView: (NSTableView*) tableView validateDrop: (id <NSDraggingInfo>) info proposedRow: (NSInteger) row proposedDropOperation: (NSTableViewDropOperation) operation
+- (NSDragOperation) tableView: (NSTableView*) tableView validateDrop: (id <NSDraggingInfo>) info proposedRow: (NSI) row proposedDropOperation: (NSTableViewDropOperation) operation
 {
 	if (row == -1)
 	{
@@ -719,7 +718,7 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 }
 
 
-- (BOOL) tableView: (NSTableView*) tableView acceptDrop: (id <NSDraggingInfo>) info row: (NSInteger) dropRow dropOperation: (NSTableViewDropOperation) operation;
+- (BOOL) tableView: (NSTableView*) tableView acceptDrop: (id <NSDraggingInfo>) info row: (NSI) dropRow dropOperation: (NSTableViewDropOperation) operation;
 {
 	BOOL			accepted	= NO;
 	NSPasteboard*	pboard		= [info draggingPasteboard];
@@ -778,7 +777,7 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 
 // Creates an array of NSNumbers from the NSIndexSet
 
-- (NSArray*) arrayOfIndexes
+- (NSA*) arrayOfIndexes
 {
 	NSMutableArray*	arrayOfIndexes	= [NSMutableArray array];
 	NSInteger				index			= [self lastIndex];
@@ -802,7 +801,7 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 
 // Creates an NSIndexSet from an array of NSNumbers
 
-+ (NSIndexSet*) indexSetFromArray: (NSArray*) array
++ (NSIndexSet*) indexSetFromArray: (NSA*) array
 {
 	NSMutableIndexSet*	indexSet		= [NSMutableIndexSet indexSet];
 	NSEnumerator*		arrayEnumerator	= [array objectEnumerator];
@@ -828,10 +827,10 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 @implementation NSMutableArray (SGSAdditions)
 
 
-- (NSInteger) moveObjectsAtIndexes: (NSIndexSet*) indexSet toIndex: (NSInteger) index
+- (NSI) moveObjectsAtIndexes: (NSIndexSet*) indexSet toIndex: (NSI) index
 {
 	NSInteger				returnVal			= 0;
-	NSMutableArray* objectsToMove		= (NSMutableArray*)[self objectsAtIndexes: indexSet];
+	NSMutableArray* objectsToMove		= (NSMA*)[self objectsAtIndexes: indexSet];
 	NSEnumerator*	objectEnumerator	= [objectsToMove reverseObjectEnumerator];
 	id				currentObject		= nil;
 	

@@ -18,10 +18,10 @@
 + (id)statistics;
 + (void)emptyCache;
 + (void)setCacheDisabled:(BOOL)fp8;
-+ (NSInteger)javaScriptObjectsCount;
-+ (NSInteger)javaScriptInterpretersCount;
-+ (NSInteger)javaScriptNoGCAllowedObjectsCount;
-+ (NSInteger)javaScriptReferencedObjectsCount;
++ (NSI)javaScriptObjectsCount;
++ (NSI)javaScriptInterpretersCount;
++ (NSI)javaScriptNoGCAllowedObjectsCount;
++ (NSI)javaScriptReferencedObjectsCount;
 + (id)javaScriptRootObjectClasses;
 + (void)garbageCollectJavaScriptObjects;
 + (BOOL)shouldPrintExceptions;
@@ -31,12 +31,12 @@
 
 @interface WebKitStatistics : NSObject {}
 
-+ (NSInteger)webViewCount;
-+ (NSInteger)frameCount;
-+ (NSInteger)dataSourceCount;
-+ (NSInteger)viewCount;
-+ (NSInteger)bridgeCount;
-+ (NSInteger)HTMLRepresentationCount;
++ (NSI)webViewCount;
++ (NSI)frameCount;
++ (NSI)dataSourceCount;
++ (NSI)viewCount;
++ (NSI)bridgeCount;
++ (NSI)HTMLRepresentationCount;
 
 @end
 
@@ -75,7 +75,7 @@
 - (void)_close;
 - (id)_createFrameNamed:(id)fp8 inParent:(id)fp12 allowsScrolling:(BOOL)fp16;
 - (void)_finishedLoadingResourceFromDataSource:(id)fp8;
-- (void)_mainReceivedBytesSoFar:(NSUInteger)fp8 fromDataSource:(id)fp12 complete:(BOOL)fp16;
+- (void)_mainReceivedBytesSoFar:(NSUI)fp8 fromDataSource:(id)fp12 complete:(BOOL)fp16;
 - (void)_receivedError:(id)fp8 fromDataSource:(id)fp12;
 - (void)_mainReceivedError:(id)fp8 fromDataSource:(id)fp12 complete:(BOOL)fp16;
 - (void)_downloadURL:(id)fp8;
@@ -87,8 +87,8 @@
 - (id)_findFrameNamed:(id)fp8 sourceFrame:(id)fp12;
 - (id)_openNewWindowWithRequest:(id)fp8;
 - (id)_menuForElement:(id)fp8;
-- (void)_mouseDidMoveOverElement:(id)fp8 modifierFlags:(NSUInteger)fp12;
-- (void)_goToItem:(id)fp8 withLoadType:(NSInteger)fp12;
+- (void)_mouseDidMoveOverElement:(id)fp8 modifierFlags:(NSUI)fp12;
+- (void)_goToItem:(id)fp8 withLoadType:(NSI)fp12;
 - (void)_loadItem:(id)fp8;
 - (void)_loadBackForwardListFromOtherView:(id)fp8;
 - (void)_setFormDelegate:(id)fp8;
@@ -138,8 +138,8 @@
 - (void)_addScrollerDashboardRegions:(id)fp8 from:(id)fp12;
 - (void)_addScrollerDashboardRegions:(id)fp8;
 - (id)_dashboardRegions;
-- (void)_setDashboardBehavior:(NSInteger)fp8 to:(BOOL)fp12;
-- (BOOL)_dashboardBehavior:(NSInteger)fp8;
+- (void)_setDashboardBehavior:(NSI)fp8 to:(BOOL)fp12;
+- (BOOL)_dashboardBehavior:(NSI)fp8;
 - (void)handleAuthenticationForResource:(id)fp8 challenge:(id)fp12 fromDataSource:(id)fp16;
 
 @end

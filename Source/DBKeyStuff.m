@@ -93,7 +93,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 //
 // --------------------------------------
 
-+ (NSString*) stringForKeyCode: (unsigned short) keyCode modifiers: (NSUInteger) modifiers
++ (NSString*) stringForKeyCode: (unsigned short) keyCode modifiers: (NSUI) modifiers
 {
 	NSString*	result		= nil;
 	
@@ -456,7 +456,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 //
 // --------------------------------------
 
-+ (NSString*) stringForModifiers: (NSUInteger) modifiers
++ (NSString*) stringForModifiers: (NSUI) modifiers
 {
 	NSMutableString*	stringResult = [NSMutableString string];
 	unichar				character;

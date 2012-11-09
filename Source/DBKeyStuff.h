@@ -20,8 +20,8 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 }
 
 + (unichar) characterForKeyCode: (unsigned short) keyCode;
-+ (NSString*) stringForKeyCode: (unsigned short) keyCode modifiers: (NSUInteger) modifiers;
-+ (NSString*) stringForModifiers: (NSUInteger) modifiers;
++ (NSString*) stringForKeyCode: (unsigned short) keyCode modifiers: (NSUI) modifiers;
++ (NSString*) stringForModifiers: (NSUI) modifiers;
 + (NSString*) stringForKeyCode: (unsigned short) keyCode;
 
 @end

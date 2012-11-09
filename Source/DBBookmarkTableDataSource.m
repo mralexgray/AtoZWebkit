@@ -23,7 +23,7 @@ NSString* const kBookmarkDragType	= @"DBBookmarkDragType";
 {
 	if (self = [super init])
 	{
-		mBookmarkController = [bookmarkController retain];
+		mBookmarkController = bookmarkController;
 	}
 	
 	return self;
@@ -33,16 +33,15 @@ NSString* const kBookmarkDragType	= @"DBBookmarkDragType";
 {
 	[mBookmarkController release];
 	
-	[super dealloc];
 }
 
 
-- (NSInteger) numberOfRowsInTableView: (NSTableView*) tableView
+- (NSI) numberOfRowsInTableView: (NSTableView*) tableView
 {
 	return [mBookmarkController numberOfBookmarks];
 }
 
-- (id) tableView: (NSTableView*) tableView objectValueForTableColumn: (NSTableColumn*) tableColumn row: (NSInteger) row
+- (id) tableView: (NSTableView*) tableView objectValueForTableColumn: (NSTableColumn*) tableColumn row: (NSI) row
 {
 	id			value				= nil;
 	NSString*	columnIdentifier	= [tableColumn identifier];
@@ -70,7 +69,7 @@ NSString* const kBookmarkDragType	= @"DBBookmarkDragType";
 {
 	if (self = [super init])
 	{
-		mBookmarkController = [bookmarkController retain];
+		mBookmarkController = bookmarkController;
 	}
 	
 	return self;
@@ -81,11 +80,10 @@ NSString* const kBookmarkDragType	= @"DBBookmarkDragType";
 	[mBookmarkController release];
 	[mDraggingBookmarks release];
 	
-	[super dealloc];
 }
 
 
-- (NSInteger) outlineView: (NSOutlineView*) outlineView numberOfChildrenOfItem: (id) item
+- (NSI) outlineView: (NSOutlineView*) outlineView numberOfChildrenOfItem: (id) item
 {
 	NSInteger numberOfChildren = 0;
 	
@@ -110,7 +108,7 @@ NSString* const kBookmarkDragType	= @"DBBookmarkDragType";
 }
 
 
-- (id) outlineView: (NSOutlineView*) outlineView child: (NSInteger) index ofItem: (id) item
+- (id) outlineView: (NSOutlineView*) outlineView child: (NSI) index ofItem: (id) item
 {
 	id child = nil;
 	
@@ -159,7 +157,7 @@ NSString* const kBookmarkDragType	= @"DBBookmarkDragType";
 	[[NSNotificationCenter defaultCenter] postNotificationName: kBookmarksDidChangeNotification object: mBookmarkController];
 }
 
-- (BOOL) outlineView: (NSOutlineView*) olv writeItems: (NSArray*) items toPasteboard: (NSPasteboard*) pboard
+- (BOOL) outlineView: (NSOutlineView*) olv writeItems: (NSA*) items toPasteboard: (NSPasteboard*) pboard
 {
 	BOOL wroteToPasteboard = NO;
 	
@@ -174,14 +172,14 @@ NSString* const kBookmarkDragType	= @"DBBookmarkDragType";
 	return wroteToPasteboard;
 }
 
-- (NSDragOperation) outlineView: (NSOutlineView*) olv validateDrop: (id <NSDraggingInfo>) info proposedItem: (id) item proposedChildIndex: (NSInteger) index
+- (NSDragOperation) outlineView: (NSOutlineView*) olv validateDrop: (id <NSDraggingInfo>) info proposedItem: (id) item proposedChildIndex: (NSI) index
 {
 	NSDragOperation operation = NSDragOperationGeneric;
 	
 	return operation;
 }
 
-- (BOOL) outlineView: (NSOutlineView*) olv acceptDrop: (id <NSDraggingInfo>) info item: (id) item childIndex: (NSInteger) index
+- (BOOL) outlineView: (NSOutlineView*) olv acceptDrop: (id <NSDraggingInfo>) info item: (id) item childIndex: (NSI) index
 {
 	BOOL			acceptDrop		= NO;
 	

@@ -118,7 +118,6 @@ pascal OSStatus HotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent
 	[wbInvocation	release];
 	[sbInvocation	release];
 	
-	[super			dealloc];
 }
 
 
@@ -147,7 +146,7 @@ pascal OSStatus HotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent
 		[invocation setTarget:		listener];
 		
 		[sbInvocation release];
-		sbInvocation = [invocation retain];
+		sbInvocation = invocation;
 	}
 	else
 	{
@@ -181,7 +180,7 @@ pascal OSStatus HotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent
 		[invocation setTarget:		listener];
 		
 		[wbInvocation release];
-		wbInvocation = [invocation retain];
+		wbInvocation = invocation;
 	}
 	else
 	{

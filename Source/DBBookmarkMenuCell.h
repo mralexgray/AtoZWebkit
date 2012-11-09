@@ -24,7 +24,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	BOOL				mMouseDown;
 	BOOL				mPopUpMenuVisible;
 	
-	NSRect				mFrame;
+	NSR				mFrame;
 }
 
 @end

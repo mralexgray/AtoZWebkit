@@ -10,11 +10,11 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 @implementation DBTabBar
 
 
-- (id) initWithFrame: (NSRect) frame
+- (id) initWithFrame: (NSR) frame
 {
 	 if (self = [super initWithFrame:frame])
 	{
-		  tabBarImage = [[NSImage imageNamed: @"backbar_fill.png"] retain];
+		  tabBarImage = [NSImage imageNamed: @"backbar_fill.png"];
 		
 		[tabBarImage setSize: frame.size];
 		
@@ -37,12 +37,11 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 {
 	[tabBarImage release];
 	
-	[super dealloc];
 }
 
-- (void) drawRect: (NSRect) rect
+- (void) drawRect: (NSR) rect
 {
-	 NSRect imageRect;
+	 NSR imageRect;
 	
 	imageRect.origin	= NSZeroPoint;
 	imageRect.size		= [tabBarImage size];

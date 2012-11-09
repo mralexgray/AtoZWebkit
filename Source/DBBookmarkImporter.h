@@ -17,27 +17,27 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 
 // Camino
 - (NSString*) pathOfCaminoBookmarksFile;
-- (NSArray*) caminoBookmarksExcludingBookmarks: (NSArray*) excludedBookmarks;
-- (void) processCaminoBookmarksFromDictionary: (NSDictionary*) caminoDictionary intoArray: (NSMutableArray*) bookmarkStorage excludingBookmarks: (NSArray*) excludedBookmarks;
+- (NSA*) caminoBookmarksExcludingBookmarks: (NSA*) excludedBookmarks;
+- (void) processCaminoBookmarksFromDictionary: (NSD*) caminoDictionary intoArray: (NSMA*) bookmarkStorage excludingBookmarks: (NSA*) excludedBookmarks;
 
 // Firefox
 - (NSString*) pathOfFirefoxBookmarksFile;
-- (NSArray*) firefoxBookmarksExcludingBookmarks: (NSArray*) excludedBookmarks;
+- (NSA*) firefoxBookmarksExcludingBookmarks: (NSA*) excludedBookmarks;
 
 // Mozilla
 - (NSString*) pathOfMozillaBookmarksFile;
-- (NSArray*) mozillaBookmarksExcludingBookmarks: (NSArray*) excludedBookmarks;
-- (NSArray*) mozillaBookmarksFromPath: (NSString*) filePath excludingBookmarks: (NSArray*) excludedBookmarks;
+- (NSA*) mozillaBookmarksExcludingBookmarks: (NSA*) excludedBookmarks;
+- (NSA*) mozillaBookmarksFromPath: (NSString*) filePath excludingBookmarks: (NSA*) excludedBookmarks;
 
 // Safari
 - (NSString*) pathOfSafariBookmarksFile;
-- (NSArray*) safariBookmarksExcludingBookmarks: (NSArray*) excludedBookmarks;
-- (void) processSafariBookmarksFromDictionary: (NSDictionary*) safariDictionary intoArray: (NSMutableArray*) bookmarkStorage excludingBookmarks: (NSArray*) excludedBookmarks;
+- (NSA*) safariBookmarksExcludingBookmarks: (NSA*) excludedBookmarks;
+- (void) processSafariBookmarksFromDictionary: (NSD*) safariDictionary intoArray: (NSMA*) bookmarkStorage excludingBookmarks: (NSA*) excludedBookmarks;
 
 // Shiira
 - (NSString*) pathOfShiiraBookmarksFile;
-- (NSArray*) shiiraBookmarksExcludingBookmarks: (NSArray*) excludedBookmarks;
-- (void) processShiiraBookmarksFromDictionary: (NSDictionary*) shiiraDictionary intoArray: (NSMutableArray*) bookmarkStorage excludingBookmarks: (NSArray*) excludedBookmarks;
+- (NSA*) shiiraBookmarksExcludingBookmarks: (NSA*) excludedBookmarks;
+- (void) processShiiraBookmarksFromDictionary: (NSD*) shiiraDictionary intoArray: (NSMA*) bookmarkStorage excludingBookmarks: (NSA*) excludedBookmarks;
 
 @end
 

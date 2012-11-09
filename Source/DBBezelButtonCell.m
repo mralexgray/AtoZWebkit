@@ -11,11 +11,11 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 @implementation DBBezelButtonCell
 
 
-- (void) drawInteriorWithFrame: (NSRect) cellFrame inView: (NSView*) controlView
+- (void) drawInteriorWithFrame: (NSR) cellFrame inView: (NSView*) controlView
 {
 }
 
-- (void) drawWithFrame: (NSRect) cellFrame inView: (NSView*) controlView
+- (void) drawWithFrame: (NSR) cellFrame inView: (NSView*) controlView
 {
 }
 
@@ -23,7 +23,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 {
 }
 
-- (NSColor*) highlightColorWithFrame: (NSRect) cellFrame inView: (NSView*) controlView
+- (NSColor*) highlightColorWithFrame: (NSR) cellFrame inView: (NSView*) controlView
 {
 	return [NSColor colorWithDeviceRed: 0.0 green: 0.0 blue: 0.0 alpha: 0.77];
 }

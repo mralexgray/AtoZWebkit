@@ -11,23 +11,23 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 
 @implementation DBTab
 
-- (id) initWithFrame: (NSRect) frame
+- (id) initWithFrame: (NSR) frame
 {
 	 if (self = [super initWithFrame: frame])
 	{
 		if (!tabImagesInitialized)
 		{
-			selectedTabFill			= [[NSImage imageNamed: @"actvfill.png"] retain];
-			selectedTabRight		= [[NSImage imageNamed: @"actvright.png"] retain];
-			selectedTabLeft			= [[NSImage imageNamed: @"actvleft.png"] retain];
+			selectedTabFill			= [NSImage imageNamed: @"actvfill.png"];
+			selectedTabRight		= [NSImage imageNamed: @"actvright.png"];
+			selectedTabLeft			= [NSImage imageNamed: @"actvleft.png"];
 			
-			unselectedTabFill		= [[NSImage imageNamed: @"disfill.png"] retain];
-			unselectedTabRight		= [[NSImage imageNamed: @"disright.png"] retain];
-			unselectedTabLeft		= [[NSImage imageNamed: @"disleft.png"] retain];
+			unselectedTabFill		= [NSImage imageNamed: @"disfill.png"];
+			unselectedTabRight		= [NSImage imageNamed: @"disright.png"];
+			unselectedTabLeft		= [NSImage imageNamed: @"disleft.png"];
 			
-			tabClose				= [[NSImage imageNamed: @"disclose.png"] retain];
-			tabCloseMouseOver		= [[NSImage imageNamed: @"actvclose.png"] retain];
-			tabCloseMouseDown		= [[NSImage imageNamed: @"actvcloseclicked.png"] retain];
+			tabClose				= [NSImage imageNamed: @"disclose.png"];
+			tabCloseMouseOver		= [NSImage imageNamed: @"actvclose.png"];
+			tabCloseMouseDown		= [NSImage imageNamed: @"actvcloseclicked.png"];
 			
 			tabImagesInitialized	= YES;
 		}
@@ -116,7 +116,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	[URLString	release];
 	[title		release];
 	
-	[super dealloc];
 }
 
 
@@ -163,7 +162,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	if (newFavicon != favicon)
 	{
 		[favicon release];
-		favicon = [newFavicon retain];
+		favicon = newFavicon;
 	}
 }
 
@@ -177,7 +176,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	if (newStatus != status)
 	{
 		[status release];
-		status = [newStatus retain];
+		status = newStatus;
 	}
 }
 
@@ -230,7 +229,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 #pragma mark -
 #pragma mark Drawing
 
-- (void) drawRect: (NSRect) rect
+- (void) drawRect: (NSR) rect
 {
 	[self drawTabInRect: rect];
 	[self drawCloseButtonInRect: [self rectForCloseButton]];
@@ -240,11 +239,11 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 
 #pragma mark -
 
-- (void) drawTabInRect: (NSRect) rect
+- (void) drawTabInRect: (NSR) rect
 {
-	//NSRect	frame				= [self frame];
+	//NSR	frame				= [self frame];
 	//NSSize	size				= frame.size;
-	//NSPoint	origin				= frame.origin;
+	//NSP	origin				= frame.origin;
 	
 	NSColor* bgColor = [NSColor colorWithCalibratedWhite:0.75 alpha:1.0];
 	
@@ -288,9 +287,9 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		rightImage	= unselectedTabRight;
 	}
 	
-	NSPoint leftImageDrawPoint	= rect.origin;
-	NSPoint fillImageDrawPoint	= NSMakePoint(rect.origin.x + [leftImage size].width, rect.origin.y);
-	NSPoint rightImageDrawPoint	= NSMakePoint(fillImageDrawPoint.x + [fillImage size].width, rect.origin.y);
+	NSP leftImageDrawPoint	= rect.origin;
+	NSP fillImageDrawPoint	= NSMakePoint(rect.origin.x + [leftImage size].width, rect.origin.y);
+	NSP rightImageDrawPoint	= NSMakePoint(fillImageDrawPoint.x + [fillImage size].width, rect.origin.y);
 	
 	[leftImage drawAtPoint: leftImageDrawPoint
 				  fromRect: NSMakeRect(0, 0, [leftImage size].width, [leftImage size].height)
@@ -311,7 +310,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 
 #pragma mark -
 
-- (void) drawCloseButtonInRect: (NSRect) rect
+- (void) drawCloseButtonInRect: (NSR) rect
 {
 	NSImage* closeImage = nil;
 	
@@ -335,9 +334,9 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 }
 
 
-- (NSRect) rectForCloseButton
+- (NSR) rectForCloseButton
 {
-	NSRect		closeButtonRect;
+	NSR		closeButtonRect;
 	NSImage*	closeButtonImage = nil;
 	
 	
@@ -361,7 +360,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	
 	// Origin
 	
-	NSRect	bounds			= [self bounds];
+	NSR	bounds			= [self bounds];
 	//CGFloat	topOfTabImage	= bounds.size.height;
 	
 	/*if (selected)
@@ -386,11 +385,11 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	return closeButtonRect;
 }
 
-- (BOOL) pointInCloseButton: (NSPoint) point
+- (BOOL) pointInCloseButton: (NSP) point
 {
 	BOOL	pointInCloseButton	= NO;
-	NSRect  closeButtonRect		= [self rectForCloseButton];
-	NSPoint	rectOrigin			= closeButtonRect.origin;
+	NSR  closeButtonRect		= [self rectForCloseButton];
+	NSP	rectOrigin			= closeButtonRect.origin;
 	NSSize	rectSize			= closeButtonRect.size;
 	
 	if (point.x >= rectOrigin.x && point.x <= rectOrigin.x + rectSize.width && point.y >= rectOrigin.y && point.y <= rectOrigin.y + rectSize.height)
@@ -404,7 +403,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 
 #pragma mark -
 
-- (void) drawLabelInRect: (NSRect) rect
+- (void) drawLabelInRect: (NSR) rect
 {
 	if (label != nil)
 	{
@@ -416,10 +415,10 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		
 		NSString*	stringToDraw	= [label truncatedToWidth: rect.size.width withAttributes: labelAttributes];
 		//NSSize		stringSize		= [stringToDraw sizeWithAttributes: labelAttributes];
-		NSPoint		drawPoint		= NSMakePoint(rect.origin.x, rect.origin.y + drawY);
+		NSP		drawPoint		= NSMakePoint(rect.origin.x, rect.origin.y + drawY);
 		
 //	Use this if we want it centered
-//		NSPoint		drawPoint		= NSMakePoint((rect.origin.x + rect.size.width / 2) - stringSize.width / 2, rect.origin.y + drawY);
+//		NSP		drawPoint		= NSMakePoint((rect.origin.x + rect.size.width / 2) - stringSize.width / 2, rect.origin.y + drawY);
 		
 		NSShadow* whiteShadow = [[NSShadow alloc] init];
 		[whiteShadow setShadowColor:[NSColor whiteColor]];
@@ -482,10 +481,10 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		[self removeTrackingRect: trackingRectTag];
 	}
 	
-	NSPoint mouseLocation	= [[self window] mouseLocationOutsideOfEventStream];
-	 //NSRect	boundsInWindow	= [self convertRect: [self bounds] toView: nil];
-	//NSRect	bounds			= [self bounds];
-	NSRect	trackingRect	= [self rectForCloseButton];
+	NSP mouseLocation	= [[self window] mouseLocationOutsideOfEventStream];
+	 //NSR	boundsInWindow	= [self convertRect: [self bounds] toView: nil];
+	//NSR	bounds			= [self bounds];
+	NSR	trackingRect	= [self rectForCloseButton];
 	
 	BOOL	mouseInView		= [self pointInCloseButton: mouseLocation];
 	
@@ -508,7 +507,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 {
 	mouseOver = YES;
 	
-	NSPoint mousePoint = [self convertPoint: [theEvent locationInWindow] fromView: nil];
+	NSP mousePoint = [self convertPoint: [theEvent locationInWindow] fromView: nil];
 	
 	if ([self pointInCloseButton: mousePoint])
 	{
@@ -536,8 +535,8 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 {
 	if ([theEvent type] == NSLeftMouseDown)
 	{
-		NSPoint		clickPoint	= [self convertPoint: [theEvent locationInWindow] fromView: nil];
-		//NSPoint		origin		= [self frame].origin;
+		NSP		clickPoint	= [self convertPoint: [theEvent locationInWindow] fromView: nil];
+		//NSP		origin		= [self frame].origin;
 		
 		if ([self pointInCloseButton: clickPoint])
 		{
@@ -561,8 +560,8 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 {
 	if ([theEvent type] == NSLeftMouseUp)
 	{
-		NSPoint		clickPoint	= [self convertPoint: [theEvent locationInWindow] fromView: nil];
-		//NSPoint		origin		= [self frame].origin;
+		NSP		clickPoint	= [self convertPoint: [theEvent locationInWindow] fromView: nil];
+		//NSP		origin		= [self frame].origin;
 		
 		if ([self pointInCloseButton: clickPoint])
 		{

@@ -30,7 +30,7 @@ extern OSStatus CGSClearWindowTags(const CGSConnection cid, const CGSWindow wid,
 
 #pragma mark -
 
-- (id)initWithContentRect:(NSRect)contentRect styleMask:(NSUInteger)aStyle backing:(NSBackingStoreType)bufferingType defer:(BOOL)flag
+- (id)initWithContentRect:(NSR)contentRect styleMask:(NSUI)aStyle backing:(NSBackingStoreType)bufferingType defer:(BOOL)flag
 {
 		if (!(self = [super initWithContentRect:contentRect styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:NO])) return nil;
 		[self setLevel:NSNormalWindowLevel];
@@ -70,7 +70,7 @@ extern OSStatus CGSClearWindowTags(const CGSConnection cid, const CGSWindow wid,
 {
 	currentDragMode		= DragModeNone;
 	 dragStartLocation	= [theEvent locationInWindow];
-	NSPoint origin		= [self frame].origin;
+	NSP origin		= [self frame].origin;
 	NSSize	size		= [self frame].size;
 		
 	if (((origin.x + dragStartLocation.x) < ((origin.x + size.width) - 15) && (origin.x + dragStartLocation.x) >= origin.x) && (((origin.y + dragStartLocation.y) <= (origin.y + 70))))
@@ -121,15 +121,15 @@ extern OSStatus CGSClearWindowTags(const CGSConnection cid, const CGSWindow wid,
 - (void)mouseDragged:(NSEvent *)theEvent
 {
 	 if ([theEvent type] == NSLeftMouseDragged) {
-		  NSPoint origin;
+		  NSP origin;
 		NSSize	size;
 		NSSize	minSize;
-		  NSPoint newLocation;
+		  NSP newLocation;
 		
-		NSRect		screenRect			= [[self screen] frame];
+		NSR		screenRect			= [[self screen] frame];
 		
-		NSRect		newFrameRect		= [self frame];
-		NSPoint		newOrigin			= [self frame].origin;
+		NSR		newFrameRect		= [self frame];
+		NSP		newOrigin			= [self frame].origin;
 		NSSize		newSize				= [self frame].size;
 		
 		  origin							= [self frame].origin;
@@ -308,7 +308,7 @@ extern OSStatus CGSClearWindowTags(const CGSConnection cid, const CGSWindow wid,
 	CGFloat			width			= [userDefaults[kSlideWindowWidth]	floatValue];
 	CGFloat			height			= [userDefaults[kSlideWindowHeight]	floatValue];	
 	
-	NSRect			newFrame		= NSMakeRect(-width, y, width, height);
+	NSR			newFrame		= NSMakeRect(-width, y, width, height);
 	
 	[self setFrame: newFrame display: YES animate: NO];
 }
@@ -320,9 +320,9 @@ extern OSStatus CGSClearWindowTags(const CGSConnection cid, const CGSWindow wid,
 
 - (void) setOnScreen: (BOOL) flag
 {
-	NSRect	frame		= [self frame];
-	NSRect	newFrame	= NSZeroRect;
-	NSPoint	origin		= frame.origin;
+	NSR	frame		= [self frame];
+	NSR	newFrame	= NSZeroRect;
+	NSP	origin		= frame.origin;
 	NSSize	size		= frame.size;
 	
 	if (flag)
@@ -353,7 +353,6 @@ extern OSStatus CGSClearWindowTags(const CGSConnection cid, const CGSWindow wid,
 - (void)dealloc
 {
 	[controller release];
-	[super dealloc];
 }
 
 @end

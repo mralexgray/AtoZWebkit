@@ -69,7 +69,6 @@ NSInteger oppositeBoolInt(NSInteger bi) {
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[toolbar release];
-	[super dealloc];
 }
 
 - (void) awakeFromNib
@@ -84,7 +83,7 @@ NSInteger oppositeBoolInt(NSInteger bi) {
 	
 	[toolbar setDelegate:(id)self];
 	
-	NSRect winRect;
+	NSR winRect;
 	winRect.origin = [[self window] frame].origin;
 	winRect.size = NSMakeSize(530, 360);
 	
@@ -99,10 +98,10 @@ NSInteger oppositeBoolInt(NSInteger bi) {
 - (void)showGeneralPane {
 	[tabView selectTabViewItemAtIndex:3];
 	
-	NSRect winRect;
+	NSR winRect;
 	
 	NSSize	currentSize		= [[self window] frame].size;
-	NSPoint	currentOrigin	= [[self window] frame].origin;
+	NSP	currentOrigin	= [[self window] frame].origin;
 	
 	winRect.origin			= NSMakePoint(currentOrigin.x, currentOrigin.y - (sizeOfGeneralPane.height - currentSize.height));
 	winRect.size			= sizeOfGeneralPane;
@@ -115,10 +114,10 @@ NSInteger oppositeBoolInt(NSInteger bi) {
 - (void)showWebPane {
 	[tabView selectTabViewItemAtIndex:3];
 	
-	NSRect winRect;
+	NSR winRect;
 	
 	NSSize	currentSize		= [[self window] frame].size;
-	NSPoint	currentOrigin	= [[self window] frame].origin;
+	NSP	currentOrigin	= [[self window] frame].origin;
 	
 	winRect.origin			= NSMakePoint(currentOrigin.x, currentOrigin.y - (sizeOfWebPane.height - currentSize.height));
 	winRect.size			= sizeOfWebPane;
@@ -131,10 +130,10 @@ NSInteger oppositeBoolInt(NSInteger bi) {
 - (void)showWebsposePane {
 	[tabView selectTabViewItemAtIndex:3];
 	
-	NSRect winRect;
+	NSR winRect;
 	
 	NSSize	currentSize		= [[self window] frame].size;
-	NSPoint	currentOrigin	= [[self window] frame].origin;
+	NSP	currentOrigin	= [[self window] frame].origin;
 	
 	winRect.origin			= NSMakePoint(currentOrigin.x, currentOrigin.y - (sizeOfWebsposePane.height - currentSize.height));
 	winRect.size			= sizeOfWebsposePane;
@@ -181,13 +180,13 @@ NSInteger oppositeBoolInt(NSInteger bi) {
 	return toolbarItem;
 }
 
-- (NSArray*) toolbarDefaultItemIdentifiers: (NSToolbar*) toolbar {
+- (NSA*) toolbarDefaultItemIdentifiers: (NSToolbar*) toolbar {
 	NSArray* identifiers = @[@"com.sgs.prefswindow.toolbar.general", @"com.sgs.prefswindow.toolbar.webcontent", @"com.sgs.prefswindow.toolbar.webspose"];
 	
 	 return identifiers;
 }
 
-- (NSArray*) toolbarAllowedItemIdentifiers: (NSToolbar*) toolbar {
+- (NSA*) toolbarAllowedItemIdentifiers: (NSToolbar*) toolbar {
 	NSArray* identifiers = @[@"com.sgs.prefswindow.toolbar.general", @"com.sgs.prefswindow.toolbar.webcontent", @"com.sgs.prefswindow.toolbar.webspose", NSToolbarSpaceItemIdentifier, NSToolbarFlexibleSpaceItemIdentifier, NSToolbarSeparatorItemIdentifier];
 	
 	 return identifiers;
@@ -416,7 +415,7 @@ NSInteger oppositeBoolInt(NSInteger bi) {
 //
 // -----------------------------------
 
-- (void) setLevel: (NSInteger) newLevel
+- (void) setLevel: (NSI) newLevel
 {
 	[[self window]			setLevel: newLevel];
 	[changePasswordWindow	setLevel: newLevel];
@@ -440,7 +439,7 @@ NSInteger oppositeBoolInt(NSInteger bi) {
 	[openPanel beginSheetForDirectory: startingDirectory file: nil types: nil modalForWindow: [self window] modalDelegate: self didEndSelector: @selector(openPanelDidEnd:returnCode:contextInfo:) contextInfo: nil];
 }
 
-- (void) openPanelDidEnd: (NSOpenPanel*) sheet returnCode: (NSInteger) returnCode contextInfo: (void*) contextInfo
+- (void) openPanelDidEnd: (NSOpenPanel*) sheet returnCode: (NSI) returnCode contextInfo: (void*) contextInfo
 {
 	if (sheet != nil && returnCode == NSOKButton)
 	{

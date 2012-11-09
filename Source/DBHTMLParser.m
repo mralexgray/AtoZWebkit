@@ -55,7 +55,7 @@ NSString* kSpace			= @" ";
 	return [[[DBHTMLParser alloc] init] autorelease];
 }
 
-- (NSArray*) linksFromHTMLString: (NSString*) HTMLString
+- (NSA*) linksFromHTMLString: (NSString*) HTMLString
 {
 	NSMutableArray*	links				= nil;
 	NSScanner*		linkScanner			= [NSScanner scannerWithString: HTMLString];
@@ -150,7 +150,7 @@ NSString* kSpace			= @" ";
 	return links;
 }
 
-- (NSArray*) linksFromHTMLFileAtPath: (NSString*) HTMLFilePath
+- (NSA*) linksFromHTMLFileAtPath: (NSString*) HTMLFilePath
 {
 	NSString* HTMLStringFromFile = [NSString stringWithContentsOfFile: HTMLFilePath encoding: NSUTF8StringEncoding error: nil];
 	

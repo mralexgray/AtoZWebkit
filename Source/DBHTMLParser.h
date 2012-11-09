@@ -19,7 +19,7 @@ static NSString* kLinkURLStringKey	= @"HTMLParserURLString";
 
 + (DBHTMLParser*) HTMLParser;
 
-- (NSArray*) linksFromHTMLString: (NSString*) HTMLString;
-- (NSArray*) linksFromHTMLFileAtPath: (NSString*) HTMLFilePath;
+- (NSA*) linksFromHTMLString: (NSString*) HTMLString;
+- (NSA*) linksFromHTMLFileAtPath: (NSString*) HTMLFilePath;
 
 @end

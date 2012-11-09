@@ -21,7 +21,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	BOOL				mMouseOver;
 	BOOL				mMouseDown;
 	
-	NSRect				mFrame;
+	NSR				mFrame;
 }
 
 - (id) initWithTarget: (id) target action: (SEL) action;

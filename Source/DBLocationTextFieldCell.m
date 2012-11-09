@@ -8,8 +8,8 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 
 
 @interface NSTextFieldCell (Private)
-- (void) _drawFocusRingWithFrame: (NSRect) rect;
-- (NSRect) _focusRingFrameForFrame: (NSRect) editFrame cellFrame: (NSRect) cellFrame;
+- (void) _drawFocusRingWithFrame: (NSR) rect;
+- (NSR) _focusRingFrameForFrame: (NSR) editFrame cellFrame: (NSR) cellFrame;
 @end
 
 
@@ -32,7 +32,6 @@ NSString* const kDefaultImageName	= @"DefaultLocationFieldIcon";
 - (void) dealloc
 {
 	[mImage release];
-	[super dealloc];
 }
 
 
@@ -47,14 +46,13 @@ NSString* const kDefaultImageName	= @"DefaultLocationFieldIcon";
 {
 	if (image != mImage)
 	{
-		[image retain];
 		[mImage release];
 		
 		mImage = image;
 		
 		if (mImage == nil)
 		{
-			mImage = [[NSImage imageNamed: kDefaultImageName] retain];
+			mImage = [NSImage imageNamed: kDefaultImageName];
 		}
 		
 		[mImage setScalesWhenResized: YES];
@@ -73,17 +71,17 @@ NSString* const kDefaultImageName	= @"DefaultLocationFieldIcon";
 
 #pragma mark -
 
-- (NSRect) imageRectForFrame: (NSRect) frame
+- (NSR) imageRectForFrame: (NSR) frame
 {
 	return NSMakeRect(NSMinX(frame), NSMinY(frame), NSHeight(frame), NSHeight(frame));
 }
 
-- (NSRect) textRectForFrame: (NSRect) frame
+- (NSR) textRectForFrame: (NSR) frame
 {
-	NSRect imageRect = [self imageRectForFrame: frame];
+	NSR imageRect = [self imageRectForFrame: frame];
 	
 	// Hack: Subtracting kImagePadding from the origin (and adding to width) because otherwise the text is too far away from the icon. Ick.
-	NSRect textRect = NSMakeRect(NSMinX(frame) + NSWidth(imageRect) - kImagePadding, NSMinY(frame), NSWidth(frame) - NSWidth(imageRect) + kImagePadding - mSpaceOnRight.width, NSHeight(frame));
+	NSR textRect = NSMakeRect(NSMinX(frame) + NSWidth(imageRect) - kImagePadding, NSMinY(frame), NSWidth(frame) - NSWidth(imageRect) + kImagePadding - mSpaceOnRight.width, NSHeight(frame));
 	
 	return textRect;
 }
@@ -91,7 +89,7 @@ NSString* const kDefaultImageName	= @"DefaultLocationFieldIcon";
 
 #pragma mark -
 
-- (void) drawImageWithFrame: (NSRect) frameRect inView: (NSView*) controlView
+- (void) drawImageWithFrame: (NSR) frameRect inView: (NSView*) controlView
 {
 	NSGraphicsContext* currentGraphicsContext = [NSGraphicsContext currentContext];
 	
@@ -121,10 +119,10 @@ NSString* const kDefaultImageName	= @"DefaultLocationFieldIcon";
 	[currentGraphicsContext restoreGraphicsState];
 }
 
-- (void) drawInteriorWithFrame: (NSRect) frameRect inView: (NSView*) controlView
+- (void) drawInteriorWithFrame: (NSR) frameRect inView: (NSView*) controlView
 {
-	NSRect imageRect	= [self imageRectForFrame: frameRect];
-	NSRect textRect		= [self textRectForFrame: frameRect];
+	NSR imageRect	= [self imageRectForFrame: frameRect];
+	NSR textRect		= [self textRectForFrame: frameRect];
 	
 	if ([self image] != nil)
 	{
@@ -150,17 +148,17 @@ NSString* const kDefaultImageName	= @"DefaultLocationFieldIcon";
 
 #pragma mark -
 
-- (void) selectWithFrame: (NSRect) frame inView: (NSView*) controlView editor: (NSText*) editor delegate: (id) delegate start: (NSInteger) selStart length: (NSInteger) selLength
+- (void) selectWithFrame: (NSR) frame inView: (NSView*) controlView editor: (NSText*) editor delegate: (id) delegate start: (NSI) selStart length: (NSI) selLength
 {
 	 [super selectWithFrame: [self textRectForFrame: frame] inView: controlView editor: editor delegate: delegate start: selStart length: selLength];
 }
 
-- (void) editWithFrame: (NSRect) frame inView: (NSView*) controlView editor: (NSText*) editor delegate: (id) delegate event: (NSEvent*) event
+- (void) editWithFrame: (NSR) frame inView: (NSView*) controlView editor: (NSText*) editor delegate: (id) delegate event: (NSEvent*) event
 {
 	 [super editWithFrame: [self textRectForFrame: frame] inView: controlView editor: editor delegate: delegate event: event];
 }
 
-- (void) resetCursorRect: (NSRect) cellFrame inView: (NSView*) controlView
+- (void) resetCursorRect: (NSR) cellFrame inView: (NSView*) controlView
 {
 	[super resetCursorRect: [self textRectForFrame: cellFrame] inView: controlView];
 }
@@ -173,15 +171,15 @@ NSString* const kDefaultImageName	= @"DefaultLocationFieldIcon";
 @implementation DBLocationTextFieldCell (Private)
 
 
-- (void) _drawFocusRingWithFrame: (NSRect) rect
+- (void) _drawFocusRingWithFrame: (NSR) rect
 {
 	 [super _drawFocusRingWithFrame: rect];
 }
 
-- (NSRect) _focusRingFrameForFrame: (NSRect) editFrame cellFrame: (NSRect) cellFrame
+- (NSR) _focusRingFrameForFrame: (NSR) editFrame cellFrame: (NSR) cellFrame
 {
-	NSRect focusRingFrame		= [super _focusRingFrameForFrame: editFrame cellFrame: cellFrame];
-	 NSRect textRect				= [self textRectForFrame:cellFrame];
+	NSR focusRingFrame		= [super _focusRingFrameForFrame: editFrame cellFrame: cellFrame];
+	 NSR textRect				= [self textRectForFrame:cellFrame];
 	
 	 focusRingFrame.origin.x		-= NSMinX(textRect) - NSMinX(cellFrame);
 	 focusRingFrame.size.width	+= NSWidth(cellFrame) - NSWidth(textRect);

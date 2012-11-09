@@ -18,9 +18,9 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 
 - (CGFloat) maxRightEdgeForCells;
 
-- (void) drawBackgroundInRect: (NSRect) rect;
-- (void) drawCellsInRect: (NSRect) rect;
-- (void) drawDragIndicatorInRect: (NSRect) rect;
+- (void) drawBackgroundInRect: (NSR) rect;
+- (void) drawCellsInRect: (NSR) rect;
+- (void) drawDragIndicatorInRect: (NSR) rect;
 
 - (void) arrangeDBBookmarkBarCells;
 
@@ -36,12 +36,12 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 
 @implementation DBBookmarkBar
 
-- (id) initWithFrame: (NSRect) frame
+- (id) initWithFrame: (NSR) frame
 {
 	 if (self = [super initWithFrame: frame])
 	{
 		mBookmarkCells		= [[NSMutableArray alloc] init];
-		mBackgroundColor	= [[NSColor colorWithDeviceRed: 0.35 green: 0.35 blue: 0.35 alpha: 1.0] retain];
+		mBackgroundColor	= [NSColor colorWithDeviceRed: 0.35 green: 0.35 blue: 0.35 alpha: 1.0];
 		
 		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(reloadData) name: kBookmarksDidChangeNotification object: nil];
 		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(frameDidChange:) name: NSViewFrameDidChangeNotification object: self];
@@ -72,13 +72,12 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 	[mExtraBookmarksPopUpButton	release];
 	[mBookmarkCells release];
 	
-	[super dealloc];
 }
 
 
 #pragma mark -
 
-- (void) drawRect: (NSRect) rect
+- (void) drawRect: (NSR) rect
 {
 	[self drawBackgroundInRect: [self bounds]];//rect];
 	[self drawCellsInRect: rect];
@@ -92,7 +91,6 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 {
 	if (bookmarkController != mBookmarkController)
 	{
-		[bookmarkController retain];
 		[mBookmarkController release];
 		
 		mBookmarkController = bookmarkController;
@@ -103,7 +101,7 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 
 - (void) frameDidChange: (NSNotification*) notification
 {
-	NSRect frame = [self frame];
+	NSR frame = [self frame];
 	
 	if (frame.size.width != mLastFrame.size.width)
 	{
@@ -143,7 +141,7 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 	[self setNeedsDisplay: YES];
 }
 
-- (id <DBBookmarkBarCell>) bookmarkCellAtPoint: (NSPoint) point
+- (id <DBBookmarkBarCell>) bookmarkCellAtPoint: (NSP) point
 {
 	id <DBBookmarkBarCell>	bookmarkCell	= nil;
 	
@@ -154,11 +152,11 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 	
 	while ((currentCell = [cellEnumerator nextObject]) != nil)
 	{
-		NSRect cellFrame = [currentCell frame];
+		NSR cellFrame = [currentCell frame];
 		
 		if (NSMaxX(cellFrame) < maxRightEdge)
 		{
-			if (NSPointInRect(point, [currentCell frame]))
+			if (NSPInRect(point, [currentCell frame]))
 			{
 				bookmarkCell = currentCell;
 				break;
@@ -173,12 +171,12 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 	return bookmarkCell;
 }
 
-- (unsigned) indexClosestToPoint: (NSPoint) point
+- (unsigned) indexClosestToPoint: (NSP) point
 {
 	unsigned returnIndex = 0;
 	
 	CGFloat						maxRightEdge		= [self maxRightEdgeForCells];
-	NSRect						lastCellFrame		= NSZeroRect;
+	NSR						lastCellFrame		= NSZeroRect;
 	
 	NSEnumerator*				cellEnumerator		= [mBookmarkCells objectEnumerator];
 	id <DBBookmarkBarCell>	currentCell			= nil;
@@ -186,7 +184,7 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 	
 	while ((currentCell = [cellEnumerator nextObject]) != nil)
 	{
-		NSRect cellFrame = [currentCell frame];
+		NSR cellFrame = [currentCell frame];
 		
 		if (NSMaxX(cellFrame) > maxRightEdge || (point.x < NSMidX(cellFrame) && point.x > NSMidX(lastCellFrame)))
 		{
@@ -202,9 +200,9 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 	return returnIndex;
 }
 
-- (void) setVisiblePosition: (NSPoint) position
+- (void) setVisiblePosition: (NSP) position
 {
-	NSRect frame = [self frame];
+	NSR frame = [self frame];
 	[self setFrame: NSMakeRect(position.x, position.y, frame.size.width, frame.size.height)];
 }
 
@@ -213,7 +211,7 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 
 - (void) mouseDown: (NSEvent*) event
 {
-	NSPoint						clickPoint	= [self convertPoint: [event locationInWindow] fromView: nil];
+	NSP						clickPoint	= [self convertPoint: [event locationInWindow] fromView: nil];
 	id <DBBookmarkBarCell>	clickedCell = [self bookmarkCellAtPoint: clickPoint];
 	
 	[clickedCell mouseDown: event];
@@ -221,7 +219,7 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 
 - (void) mouseUp: (NSEvent*) event
 {
-	NSPoint						clickPoint	= [self convertPoint: [event locationInWindow] fromView: nil];
+	NSP						clickPoint	= [self convertPoint: [event locationInWindow] fromView: nil];
 	id <DBBookmarkBarCell>	clickedCell = [self bookmarkCellAtPoint: clickPoint];
 	
 	[clickedCell mouseUp: event];
@@ -230,7 +228,7 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 - (void) mouseDragged: (NSEvent*) event
 {
 	NSPasteboard*				pboard		= [NSPasteboard pasteboardWithName: NSDragPboard];
-	NSPoint						clickPoint	= [self convertPoint: [event locationInWindow] fromView: nil];
+	NSP						clickPoint	= [self convertPoint: [event locationInWindow] fromView: nil];
 	id <DBBookmarkBarCell>	clickedCell = [self bookmarkCellAtPoint: clickPoint];
 	
 	if (clickedCell != nil)
@@ -254,7 +252,7 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 
 #pragma mark -
 
-- (NSArray*) menuItemsForPopUpButton: (NSPopUpButton*) popUpButton
+- (NSA*) menuItemsForPopUpButton: (NSPopUpButton*) popUpButton
 {
 	NSMutableArray*				menuItems		= [NSMutableArray array];
 	BOOL						fillNow			= NO;
@@ -309,7 +307,7 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 	return operation;
 }
 
-- (NSUInteger) draggingEntered: (id <NSDraggingInfo>) sender
+- (NSUI) draggingEntered: (id <NSDraggingInfo>) sender
 {
 	NSDragOperation returnOperation	= NSDragOperationNone;
 	NSDragOperation operation		= [sender draggingSourceOperationMask];
@@ -343,7 +341,7 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 		
 		if (draggedCell != nil)
 		{
-			NSPoint mouseLocation = [[self window] convertScreenToBase: [NSEvent mouseLocation]];
+			NSP mouseLocation = [[self window] convertScreenToBase: [NSEvent mouseLocation]];
 			
 			if (mouseLocation.x != mLastMouseX)
 			{
@@ -376,7 +374,7 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 - (BOOL) performDragOperation: (id <NSDraggingInfo>) sender
 {
 	BOOL			perform					= NO;
-	NSPoint			dragLocation			= [self convertPoint: [sender draggingLocation] fromView: nil];
+	NSP			dragLocation			= [self convertPoint: [sender draggingLocation] fromView: nil];
 	NSPasteboard*	pboard					= [sender draggingPasteboard];
 	NSNumber*		indexOfDraggedBookmark	= [pboard propertyListForType: DBBookmarkCellPboardType];
 	
@@ -416,7 +414,7 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 - (CGFloat) maxRightEdgeForCells
 {
 	CGFloat	maxRightEdge	=  0;
-	NSRect	frameRect		= [self frame];
+	NSR	frameRect		= [self frame];
 	
 	if ([mExtraBookmarksPopUpButton superview] == self)
 	{
@@ -433,38 +431,38 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 
 #pragma mark -
 
-- (void) drawBackgroundInRect: (NSRect) rect
+- (void) drawBackgroundInRect: (NSR) rect
 {
 //	[mBackgroundColor set];
 //	[[NSColor whiteColor] set];
 	[GRAY3 set];
-	NSRectFill(rect);
+	NSRFill(rect);
 //	NSImage* image = [NSImage imageNamed: @"bb-top-bookmark-stretch"];
 //	[image drawInRect: rect fromRect: NSMakeRect(0, 0, [image size].width, [image size].height) operation: NSCompositeCopy fraction: 1.0];
 }
 
-- (void) drawCellsInRect: (NSRect) rect
+- (void) drawCellsInRect: (NSR) rect
 {
-	NSPoint					mouseLocation		= [[self window] convertScreenToBase: [NSEvent mouseLocation]];//[self convertPoint: [[[NSApp mainWindow] currentEvent] locationInWindow] fromView: nil];
-	NSRect					frameRect			= [self frame];
-	//NSRect					frameMinusPadding	= NSMakeRect(frameRect.origin.x - kDistanceBetweenBookmarks, frameRect.origin.y, frameRect.size.width - (2 * kDistanceBetweenBookmarks), frameRect.size.height);
+	NSP					mouseLocation		= [[self window] convertScreenToBase: [NSEvent mouseLocation]];//[self convertPoint: [[[NSApp mainWindow] currentEvent] locationInWindow] fromView: nil];
+	NSR					frameRect			= [self frame];
+	//NSR					frameMinusPadding	= NSMakeRect(frameRect.origin.x - kDistanceBetweenBookmarks, frameRect.origin.y, frameRect.size.width - (2 * kDistanceBetweenBookmarks), frameRect.size.height);
 	
 	CGFloat					maxRightEdge		= [self maxRightEdgeForCells];
-	NSRect					lastCellFrame		= NSZeroRect;
+	NSR					lastCellFrame		= NSZeroRect;
 	
 	NSEnumerator*			cellEnumerator		= [mBookmarkCells objectEnumerator];
 	id <DBBookmarkBarCell>	currentCell			= nil;
 	
 	while ((currentCell = [cellEnumerator nextObject]) != nil)
 	{
-		NSRect cellFrame = [currentCell frame];
+		NSR cellFrame = [currentCell frame];
 		
 		if (mDragging)
 		{
 			if (mouseLocation.x < NSMidX(cellFrame) && mouseLocation.x > NSMidX(lastCellFrame))
 			{
 				CGFloat	positionOfIndicator		= NSMaxX(lastCellFrame) + (NSMinX(cellFrame) - NSMaxX(lastCellFrame)) / 2;
-				NSRect	rectForDragIndicator	= NSMakeRect(positionOfIndicator, 0, 1, NSHeight(frameRect) - 2);
+				NSR	rectForDragIndicator	= NSMakeRect(positionOfIndicator, 0, 1, NSHeight(frameRect) - 2);
 				
 				[self drawDragIndicatorInRect: rectForDragIndicator];
 			}
@@ -486,11 +484,11 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 	}
 }
 
-- (void) drawDragIndicatorInRect: (NSRect) rect
+- (void) drawDragIndicatorInRect: (NSR) rect
 {
 	[[NSColor lightGrayColor] set];
 
-	NSRectFill(rect);
+	NSRFill(rect);
 }
 
 
@@ -500,20 +498,20 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 {
 	[self adjustPopUpButtonPosition];
 	
-	NSRect					frameRect					= [self frame];
-	//NSRect					frameMinusPadding			= NSMakeRect(frameRect.origin.x - kDistanceBetweenBookmarks, frameRect.origin.y, frameRect.size.width - (2 * kDistanceBetweenBookmarks), frameRect.size.height);
+	NSR					frameRect					= [self frame];
+	//NSR					frameMinusPadding			= NSMakeRect(frameRect.origin.x - kDistanceBetweenBookmarks, frameRect.origin.y, frameRect.size.width - (2 * kDistanceBetweenBookmarks), frameRect.size.height);
 	
 	unsigned				currentCellIndex			= 0;
 	unsigned				numberOfCells				= [mBookmarkCells count];
 	
 	NSEnumerator*			DBBookmarkBarCellEnumerator	= [mBookmarkCells objectEnumerator];
 	id <DBBookmarkBarCell>	currentCell					= nil;
-	NSRect					lastCellFrame				= NSMakeRect(0, 3, 0, 16);
+	NSR					lastCellFrame				= NSMakeRect(0, 3, 0, 16);
 	
 	while ((currentCell = [DBBookmarkBarCellEnumerator nextObject]) != nil)
 	{
-		NSRect	cellFrame		= [currentCell frame];
-		NSRect	newCellFrame	= lastCellFrame;
+		NSR	cellFrame		= [currentCell frame];
+		NSR	newCellFrame	= lastCellFrame;
 		
 		newCellFrame.origin.x	= NSMaxX(lastCellFrame) + kDistanceBetweenBookmarks;
 		newCellFrame.size.width = cellFrame.size.width;
@@ -544,7 +542,7 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 
 - (void) setUpPopUpButton
 {
-	NSRect popUpButtonFrame		= NSMakeRect(0, 3, 51, 15);
+	NSR popUpButtonFrame		= NSMakeRect(0, 3, 51, 15);
 	mExtraBookmarksPopUpButton	= [[DBBookmarkBarPopUpButton alloc] initWithFrame: popUpButtonFrame];
 	
 	[self adjustPopUpButtonPosition];
@@ -552,7 +550,7 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 
 - (void) adjustPopUpButtonPosition
 {
-	NSRect frame	= [mExtraBookmarksPopUpButton frame];
+	NSR frame	= [mExtraBookmarksPopUpButton frame];
 	frame.origin.x	= NSWidth([self frame]) - NSWidth(frame) - kDistanceBetweenBookmarks;
 	
 	[mExtraBookmarksPopUpButton setFrame: frame];
