@@ -199,7 +199,7 @@ NSString* const kBookmarkDragType	= @"DBBookmarkDragType";
 			DBBookmark* bookmark	= mDraggingBookmarks[i];
 			DBBookmark* copy		= [(DBBookmark*)bookmark copy];
 			//NSLog(@"%@", [bookmark class]);
-			NSLog(@"%i", [mDraggingBookmarks count]);
+			NSLog(@"%li", [mDraggingBookmarks count]);
 			NSLog(@"%@ vs %@", bookmark, copy);
 			[item addBookmark: copy];
 			[copy release];

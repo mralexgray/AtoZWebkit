@@ -152,12 +152,12 @@ NSString* const kDefaultImageName	= @"DefaultLocationFieldIcon";
 
 - (void) selectWithFrame: (NSRect) frame inView: (NSView*) controlView editor: (NSText*) editor delegate: (id) delegate start: (NSInteger) selStart length: (NSInteger) selLength
 {
-    [super selectWithFrame: [self textRectForFrame: frame] inView: controlView editor: editor delegate: delegate start: selStart length: selLength];
+	 [super selectWithFrame: [self textRectForFrame: frame] inView: controlView editor: editor delegate: delegate start: selStart length: selLength];
 }
 
 - (void) editWithFrame: (NSRect) frame inView: (NSView*) controlView editor: (NSText*) editor delegate: (id) delegate event: (NSEvent*) event
 {
-    [super editWithFrame: [self textRectForFrame: frame] inView: controlView editor: editor delegate: delegate event: event];
+	 [super editWithFrame: [self textRectForFrame: frame] inView: controlView editor: editor delegate: delegate event: event];
 }
 
 - (void) resetCursorRect: (NSRect) cellFrame inView: (NSView*) controlView
@@ -175,18 +175,18 @@ NSString* const kDefaultImageName	= @"DefaultLocationFieldIcon";
 
 - (void) _drawFocusRingWithFrame: (NSRect) rect
 {
-    [super _drawFocusRingWithFrame: rect];
+	 [super _drawFocusRingWithFrame: rect];
 }
 
 - (NSRect) _focusRingFrameForFrame: (NSRect) editFrame cellFrame: (NSRect) cellFrame
 {
 	NSRect focusRingFrame		= [super _focusRingFrameForFrame: editFrame cellFrame: cellFrame];
-    NSRect textRect				= [self textRectForFrame:cellFrame];
+	 NSRect textRect				= [self textRectForFrame:cellFrame];
 	
-    focusRingFrame.origin.x		-= NSMinX(textRect) - NSMinX(cellFrame);
-    focusRingFrame.size.width	+= NSWidth(cellFrame) - NSWidth(textRect);
+	 focusRingFrame.origin.x		-= NSMinX(textRect) - NSMinX(cellFrame);
+	 focusRingFrame.size.width	+= NSWidth(cellFrame) - NSWidth(textRect);
 	
-    return focusRingFrame;
+	 return focusRingFrame;
 }
 
 

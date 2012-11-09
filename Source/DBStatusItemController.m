@@ -48,10 +48,10 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	[menu insertItem:[NSMenuItem separatorItem] atIndex:1];
 	[menu addItem:[NSMenuItem separatorItem]];
 	NSMenuItem *slide = [[NSMenuItem alloc] initWithTitle:@"Toggle SlideBrowser"
-												   action:@selector(toggleSlideBrowse) 
+													action:@selector(toggleSlideBrowse) 
 											keyEquivalent:@""];
 	NSMenuItem *websp = [[NSMenuItem alloc] initWithTitle:@"Toggle Webspose"
-												   action:@selector(toggleWebspose)
+													action:@selector(toggleWebspose)
 											keyEquivalent:@""];
 	[slide setTarget:_controller];
 	[websp setTarget:_controller];

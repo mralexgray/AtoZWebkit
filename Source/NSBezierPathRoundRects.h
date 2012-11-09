@@ -12,9 +12,9 @@
 
 @interface NSBezierPath (RoundRects)
 
-+(void)         fillRoundRectInRect:(NSRect)rect radius:(CGFloat) radius;
-+(void)         strokeRoundRectInRect:(NSRect)rect radius:(CGFloat) radius;
-+(NSBezierPath*)        bezierPathWithRoundRectInRect:(NSRect)rect radius:(CGFloat) radius;
++(void)			fillRoundRectInRect:(NSRect)rect radius:(CGFloat) radius;
++(void)			strokeRoundRectInRect:(NSRect)rect radius:(CGFloat) radius;
++(NSBezierPath*)		  bezierPathWithRoundRectInRect:(NSRect)rect radius:(CGFloat) radius;
 NSPoint  UKCenterOfRect( NSRect rect );
 NSPoint  UKTopCenterOfRect( NSRect rect );
 NSPoint  UKTopLeftOfRect( NSRect rect );

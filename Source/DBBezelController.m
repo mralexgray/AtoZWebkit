@@ -98,26 +98,26 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 }
 
 - (void)fadeOutWindow:(NSTimer *)theTimer {
-    if ([bezel alphaValue] > 0.0) {
-        [bezel setAlphaValue:[bezel alphaValue] - 0.1];
-    } else {
-        [timer invalidate];
-        [timer release];
+	 if ([bezel alphaValue] > 0.0) {
+		  [bezel setAlphaValue:[bezel alphaValue] - 0.1];
+	 } else {
+		  [timer invalidate];
+		  [timer release];
 		timer = nil;
-    }
+	 }
 }
 
 - (void)fadeInWindow:(NSTimer *)theTimer {
-    if ([bezel alphaValue] < 1.0) {
-        [bezel setAlphaValue:[bezel alphaValue] + 0.2];
-    } else {
-        [timer invalidate];
-        [timer release];
-        timer = nil;
-        
-        [bezel setAlphaValue:1.0];
+	 if ([bezel alphaValue] < 1.0) {
+		  [bezel setAlphaValue:[bezel alphaValue] + 0.2];
+	 } else {
+		  [timer invalidate];
+		  [timer release];
+		  timer = nil;
+		  
+		  [bezel setAlphaValue:1.0];
 		timer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(hideBezel) userInfo:nil repeats:NO];
-    }
+	 }
 }
 
 @end

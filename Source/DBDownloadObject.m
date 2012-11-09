@@ -240,11 +240,11 @@ NSString* kFinishedString	= @"Finished";
 		if (mExpectedLength != NSURLResponseUnknownLength)
 		{
 			//fileSize		= [NSNumber numberWithInt: (mExpectedLength / 1024)]; // kilobytes
-			stringStatus	= [NSString stringWithFormat: @"%i%%", [self percentComplete]];
+			stringStatus	= [NSString stringWithFormat: @"%ld%%", [self percentComplete]];
 		}
 		else
 		{
-			stringStatus = [NSString stringWithFormat: @"?%"];
+			stringStatus = @"?%";//[NSString stringWithFormat: @"?%"];
 		}
 	}
 	else

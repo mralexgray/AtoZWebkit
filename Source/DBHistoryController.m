@@ -349,7 +349,7 @@ NSString* nameOfHistoryFile = @"History.plist";
 	NSInteger i;
 	for(i = 0; i < [self numberOfDates]; i++)
 	{
-		[dateIndexes addObject: [NSNumber numberWithInt: currentIndex]];
+		[dateIndexes addObject: @( currentIndex)];
 		
 		NSInteger j;		
 		for(j = 0; j < [self numberOfItemsForDate: [self dateAtIndex: i]]; j++)

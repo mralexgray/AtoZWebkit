@@ -276,8 +276,8 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	NSMenuItem* menuItem = [[NSMenuItem alloc] initWithTitle: [self stringValue] action: [self action] keyEquivalent: @""];
 	
 	[menuItem setTarget: [self target]];
-	[menuItem autorelease];
-	
+//	[menuItem autorelease];
+
 	return menuItem;
 }
 

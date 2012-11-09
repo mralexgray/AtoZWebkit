@@ -427,34 +427,34 @@ pascal OSStatus HotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent
 {
 	BOOL stop = NO;
 	
-    while (!stop)
-    {
-        EventRecord theEvent;
+	 while (!stop)
+	 {
+		  EventRecord theEvent;
 		
-        if (WaitNextEvent(everyEvent, &theEvent, 0, NULL))
-        {
-            switch (theEvent.what)
-            {
-                case keyDown:
-                case keyUp:
-                case autoKey:
-                {
-                    UInt16       asciiKeyCode       = ((theEvent.message) >> 8)   & 0xFF;
-                    UInt16       virtualKeyCode     = ((theEvent.message) >> 8)   & 0xFF;
-                    UInt32       modifierKeyState   = ((theEvent.modifiers) >> 8) & 0xFF;
+		  if (WaitNextEvent(everyEvent, &theEvent, 0, NULL))
+		  {
+				switch (theEvent.what)
+				{
+					 case keyDown:
+					 case keyUp:
+					 case autoKey:
+					 {
+						  UInt16		 asciiKeyCode		 = ((theEvent.message) >> 8)	& 0xFF;
+						  UInt16		 virtualKeyCode	  = ((theEvent.message) >> 8)	& 0xFF;
+						  UInt32		 modifierKeyState	= ((theEvent.modifiers) >> 8) & 0xFF;
 					
 					[keysField setStringValue: [DBKeyStuff stringForKeyCode: virtualKeyCode modifiers: modifierKeyState]];
-                    NSLog(@"For key %d ('%c') the virtual keycode is: %d with modifiers: %d\n", asciiKeyCode, asciiKeyCode, virtualKeyCode, modifierKeyState);
-                }
-                break;
-                case mouseDown:
-                {
-                    stop = true;
-                }
-                break;
-            }
-        }
-    }
+						  NSLog(@"For key %d ('%c') the virtual keycode is: %d with modifiers: %d\n", asciiKeyCode, asciiKeyCode, virtualKeyCode, modifierKeyState);
+					 }
+					 break;
+					 case mouseDown:
+					 {
+						  stop = true;
+					 }
+					 break;
+				}
+		  }
+	 }
 }
 
 

@@ -16,12 +16,12 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	{
 //		[self setAboveMainWindowLevel: YES]; // Only use this if you want the bezel windows to CGFloat
 		[self setOpaque: NO];
-		[self setBackgroundColor: [NSColor clearColor]];
+		[self setBackgroundColor: BLACK];//[NSColor clearColor]];
 		[self setAlphaValue: 1.0];
 		[self setHasShadow: YES];
 	}
 	
-    return self;
+	 return self;
 }
 
 - (BOOL) canBecomeKeyWindow
@@ -36,7 +36,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 
 - (void) mouseDown: (NSEvent*) theEvent
 {
-    dragStartLocation	= [theEvent locationInWindow];
+	 dragStartLocation	= [theEvent locationInWindow];
 	NSPoint origin		= [self frame].origin;
 	NSSize	size		= [self frame].size;
 
@@ -62,12 +62,12 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 
 - (void) mouseDragged: (NSEvent*) theEvent
 {
-    if ([theEvent type] == NSLeftMouseDragged)
+	 if ([theEvent type] == NSLeftMouseDragged)
 	{
-        NSPoint origin;
+		  NSPoint origin;
 		NSSize	size;
 		NSSize	minSize;
-        NSPoint newLocation;
+		  NSPoint newLocation;
 		
 		NSRect		screenRect	= [[self screen] frame];
 		
@@ -75,11 +75,11 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		NSPoint		newOrigin	= [self frame].origin;
 		NSSize		newSize		= [self frame].size;
 		
-        origin		= [self frame].origin;
+		  origin		= [self frame].origin;
 		size		= [self frame].size;
 		minSize		= [self minSize];
-        newLocation = [theEvent locationInWindow];
-				        
+		  newLocation = [theEvent locationInWindow];
+						  
 		if (moving)
 		{
 			//
@@ -141,7 +141,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		newFrameRect.size		= newSize;
 		
 		[self setFrame: newFrameRect display: YES];
-    }
+	 }
 }
 
 - (void) mouseUp: (NSEvent*) theEvent

@@ -18,7 +18,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 {
 	if (self = [super initWithFrame: frameRect pullsDown: flag])
 	{
-		mText			= [[NSString stringWithString: @"More..."] retain];
+		mText			=  @"More...";//[[NSString stringWithString: @"More..."] retain];
 		mTextFont		= [[NSFont userFontOfSize: 11.0] retain];
 		mDefaultColor	= [[NSColor colorWithDeviceRed: 0.0 green: 0.0 blue: 0.0 alpha: 0.0] retain];
 	}

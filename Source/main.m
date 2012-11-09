@@ -8,5 +8,5 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 
 int main(int argc, const char *argv[])
 {
-    return NSApplicationMain(argc,  (const char **) argv);
+	 return NSApplicationMain(argc,  (const char **) argv);
 }

@@ -12,7 +12,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 
 - (id) initWithContentRect: (NSRect) contentRect styleMask: (NSUInteger) aStyle backing: (NSBackingStoreType) bufferingType defer: (BOOL) flag
 {
-    if (self = [super initWithContentRect: contentRect styleMask: NSBorderlessWindowMask backing: NSBackingStoreBuffered defer: NO])
+	 if (self = [super initWithContentRect: contentRect styleMask: NSBorderlessWindowMask backing: NSBackingStoreBuffered defer: NO])
 	{
 //		[self setLevel: NSNormalWindowLevel + 1];
 		[self setAboveMainWindowLevel: YES];
@@ -21,7 +21,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		[self setAlphaValue: 0.0];
 		[self setHasShadow: YES];
 	}
-    return self;
+	 return self;
 }
 
 - (BOOL) canBecomeKeyWindow

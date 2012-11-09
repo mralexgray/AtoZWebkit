@@ -29,9 +29,9 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	const void*			keyboardLayoutData;
 	KeyboardLayoutRef	currentKeyBoardLayout;
 
-	if(KLGetCurrentKeyboardLayout(&currentKeyBoardLayout) == noErr && KLGetKeyboardLayoutProperty(currentKeyBoardLayout, kKLKCHRData, &keyboardLayoutData) == noErr)
-	{
-		character = KeyTranslate(keyboardLayoutData, keyCode, &state);
+//	if(KLGetCurrentKeyboardLayout(&currentKeyBoardLayout) == noErr && KLGetKeyboardLayoutProperty(currentKeyBoardLayout, kKLKCHRData, &keyboardLayoutData) == noErr)
+//	{
+//		character = KeyTranslate(keyboardLayoutData, keyCode, &state);
 
 		switch(character)
 		{
@@ -76,8 +76,8 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 				break;
 			}
 		}
-	}
-	
+//	}
+
 	return character;
 }
 

@@ -10,7 +10,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 
 typedef enum
 {
-    kDownloadStatusNone = 0,
+	 kDownloadStatusNone = 0,
 	kDownloadStatusDownloading,
 	kDownloadStatusCancelled,
 	kDownloadStatusFinished,

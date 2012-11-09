@@ -13,7 +13,7 @@
 
 - (void)drawRect:(NSRect)rect
 {
-	[RANDOMCOLOR set];
+	[[NSC linen] set];
 //	[[NSColor whiteColor] set];
 	[NSBezierPath fillRect:rect];
 }

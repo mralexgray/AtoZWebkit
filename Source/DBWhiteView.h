@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <AGFoundation/AGFoundation.h>
+
 
 @interface DBWhiteView : NSView {
 

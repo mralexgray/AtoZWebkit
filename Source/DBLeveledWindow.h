@@ -7,8 +7,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 #import <Cocoa/Cocoa.h>
 
 @class DBWindowLevel;
-
-
 @interface DBLeveledWindow : NSWindow
 {
 	BOOL mAboveMainWindowLevel;

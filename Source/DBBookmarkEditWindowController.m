@@ -73,8 +73,8 @@ NSString* const kBookmarkEditWindowNibName = @"BookmarkEdit";
 {
 	[NSApp beginSheet: [self window] modalForWindow: window modalDelegate: nil didEndSelector: nil contextInfo: nil];
 	
-	[mOutlineView setDelegate: self];
-	[mOutlineView setDataSource: mOutlineDataSource];
+	[mOutlineView setDelegate: (id)self];
+	[mOutlineView setDataSource: (id)mOutlineDataSource];
 	
 	[mOutlineView setDraggingSourceOperationMask: NSTableViewDropAbove forLocal: YES];
 	[mOutlineView registerForDraggedTypes: @[kBookmarkDragType]];

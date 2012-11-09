@@ -25,7 +25,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(reloadAllTabs) name:@"DBReloadAllTabs" object: nil];
 		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(frameDidChange) name: NSViewFrameDidChangeNotification object: bar];
 		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(frameDidChange) name: NSViewBoundsDidChangeNotification object: bar];
-														   
+															
 		tabs		= [[NSMutableArray alloc] init];
 		tabView		= [view retain];
 		tabBar		= [bar retain];

@@ -13,7 +13,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 
 - (id) initWithFrame: (NSRect) frame
 {
-    if (self = [super initWithFrame: frame])
+	 if (self = [super initWithFrame: frame])
 	{
 		if (!tabImagesInitialized)
 		{
@@ -46,7 +46,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		NSMenu		*tabMenu	= [[NSMenu alloc] initWithTitle:@"TabMenu"];
 		
 		NSMenuItem	*close		= [[NSMenuItem alloc] initWithTitle:@"Close Tab"
-													   action:@selector(sendCloseNotification)
+														action:@selector(sendCloseNotification)
 												keyEquivalent:@""];
 		
 		NSMenuItem *closeAll	= [[NSMenuItem alloc] initWithTitle:@"Close All Tabs"
@@ -76,9 +76,9 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		[closeAll	release];
 		[reload		release];
 		[reloadAll	release];
-    }
+	 }
 	
-    return self;
+	 return self;
 }
 
 - (void) viewDidMoveToWindow
@@ -445,22 +445,22 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 
 - (void) removeFromSuperview
 {
-    if (trackingRectTag > 0)
-    {
-        [self removeTrackingRect: trackingRectTag];
-    }
+	 if (trackingRectTag > 0)
+	 {
+		  [self removeTrackingRect: trackingRectTag];
+	 }
 
-    [super removeFromSuperview];
+	 [super removeFromSuperview];
 }
 
 - (void) removeFromSuperviewWithoutNeedingDisplay
 {
-    if (trackingRectTag > 0)
-    {
-        [self removeTrackingRect: trackingRectTag];
-    }
+	 if (trackingRectTag > 0)
+	 {
+		  [self removeTrackingRect: trackingRectTag];
+	 }
 
-    [super removeFromSuperviewWithoutNeedingDisplay];
+	 [super removeFromSuperviewWithoutNeedingDisplay];
 }
 
 
@@ -483,7 +483,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	}
 	
 	NSPoint mouseLocation	= [[self window] mouseLocationOutsideOfEventStream];
-    //NSRect	boundsInWindow	= [self convertRect: [self bounds] toView: nil];
+	 //NSRect	boundsInWindow	= [self convertRect: [self bounds] toView: nil];
 	//NSRect	bounds			= [self bounds];
 	NSRect	trackingRect	= [self rectForCloseButton];
 	
@@ -492,9 +492,9 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	trackingRectTag = [self addTrackingRect: trackingRect owner: self userData: nil assumeInside: mouseInView];
 	
 	if (mouseInView)
-    {
+	 {
 		[self mouseEntered: [NSApp currentEvent]];
-    }
+	 }
 	else
 	{
 		[self mouseExited: [NSApp currentEvent]];

@@ -12,9 +12,9 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 
 - (id) initWithFrame: (NSRect) frame
 {
-    if (self = [super initWithFrame:frame])
+	 if (self = [super initWithFrame:frame])
 	{
-        tabBarImage = [[NSImage imageNamed: @"backbar_fill.png"] retain];
+		  tabBarImage = [[NSImage imageNamed: @"backbar_fill.png"] retain];
 		
 		[tabBarImage setSize: frame.size];
 		
@@ -28,9 +28,9 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		
 		[newTab release];
 		[cmenu release];
-    }
+	 }
 	
-    return self;
+	 return self;
 }
 
 - (void) dealloc
@@ -42,15 +42,15 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 
 - (void) drawRect: (NSRect) rect
 {
-    NSRect imageRect;
+	 NSRect imageRect;
 	
 	imageRect.origin	= NSZeroPoint;
 	imageRect.size		= [tabBarImage size];
 	
 	[tabBarImage drawInRect: [self frame]
-				   fromRect: imageRect
+					fromRect: imageRect
 				  operation: NSCompositeCopy
-			       fraction: 1.0];
+					 fraction: 1.0];
 	
 	[[NSColor colorWithCalibratedWhite:0.75 alpha:1.0] set];
 	[NSBezierPath fillRect:NSInsetRect(rect, 0.0f, 1.0f)];

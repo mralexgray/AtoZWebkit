@@ -97,74 +97,74 @@ static NSInteger coloring = 0;
 	}
 	
 	NSDictionary *defaultColorAtts  = @{@"color": [NSColor blueColor]};
-    NSDictionary *commentColorAtts  = @{@"color": [NSColor grayColor]};
-    NSDictionary *codeColorAtts     = @{@"color": [NSColor redColor]};
-    
-    NSString *source = [sourceView string];
-    NSScanner *scanner = [NSScanner scannerWithString: source];
-   
+	 NSDictionary *commentColorAtts  = @{@"color": [NSColor grayColor]};
+	 NSDictionary *codeColorAtts	  = @{@"color": [NSColor redColor]};
+	 
+	 NSString *source = [sourceView string];
+	 NSScanner *scanner = [NSScanner scannerWithString: source];
+	
 	NSRange range = NSMakeRange(0, [source length]);
 		
-    [[sourceView textStorage] removeAttribute:NSForegroundColorAttributeName range:range];
-    
-    NSInteger ixLeft, ixRight;
-    NSDictionary *attsToUse;
-    NSString *tagType;
-    NSString *tagTypeLong;
+	 [[sourceView textStorage] removeAttribute:NSForegroundColorAttributeName range:range];
+	 
+	 NSInteger ixLeft, ixRight;
+	 NSDictionary *attsToUse;
+	 NSString *tagType;
+	 NSString *tagTypeLong;
 	
-    while (![scanner isAtEnd])
-    {
-        // Find next < character
-        [scanner scanUpToString: @"<" intoString: nil];
-        ixLeft = [scanner scanLocation];
+	 while (![scanner isAtEnd])
+	 {
+		  // Find next < character
+		  [scanner scanUpToString: @"<" intoString: nil];
+		  ixLeft = [scanner scanLocation];
 		//ixRight = [scanner scanLocation];
-        
-        if ((ixLeft+3) <= [source length]) {
-            tagTypeLong = [source substringWithRange:NSMakeRange(ixLeft, 3)];
-            tagType = [source substringWithRange:NSMakeRange(ixLeft, 2)];
-        } else {
-            tagTypeLong = @"";
-            tagType = @"";
-        }
-        
-        if ([tagTypeLong isEqualToString: @"<!-"]) {
-            attsToUse = commentColorAtts;
-            
-            if (![scanner scanUpToString: @"->" intoString: nil])
-                break;
-            
-            ixRight = [scanner scanLocation] + 2;
-        } else if ([tagType isEqualToString: @"<%"]) {
-            attsToUse = codeColorAtts;
-            
-            if (![scanner scanUpToString: @"%>" intoString: nil])
-                break;
-            
-            ixRight = [scanner scanLocation] + 2;
-        } else if ([tagType isEqualToString: @"<?"]) {
-            attsToUse = codeColorAtts;
-            
-            if (![scanner scanUpToString: @"?>" intoString: nil])
-                break;
-            
-            ixRight = [scanner scanLocation] + 2;
-        } else {
-            attsToUse = defaultColorAtts;
-            
-            if (![scanner scanUpToString: @">" intoString: nil]) {
-                break;
+		  
+		  if ((ixLeft+3) <= [source length]) {
+				tagTypeLong = [source substringWithRange:NSMakeRange(ixLeft, 3)];
+				tagType = [source substringWithRange:NSMakeRange(ixLeft, 2)];
+		  } else {
+				tagTypeLong = @"";
+				tagType = @"";
+		  }
+		  
+		  if ([tagTypeLong isEqualToString: @"<!-"]) {
+				attsToUse = commentColorAtts;
+				
+				if (![scanner scanUpToString: @"->" intoString: nil])
+					 break;
+				
+				ixRight = [scanner scanLocation] + 2;
+		  } else if ([tagType isEqualToString: @"<%"]) {
+				attsToUse = codeColorAtts;
+				
+				if (![scanner scanUpToString: @"%>" intoString: nil])
+					 break;
+				
+				ixRight = [scanner scanLocation] + 2;
+		  } else if ([tagType isEqualToString: @"<?"]) {
+				attsToUse = codeColorAtts;
+				
+				if (![scanner scanUpToString: @"?>" intoString: nil])
+					 break;
+				
+				ixRight = [scanner scanLocation] + 2;
+		  } else {
+				attsToUse = defaultColorAtts;
+				
+				if (![scanner scanUpToString: @">" intoString: nil]) {
+					 break;
 			}
-            
-            ixRight = [scanner scanLocation] + 1;
-        }
-        
-        if (ixRight > [source length])
-            ixRight --;
-        
-        // Set the color style for everything between the found < and > characters (and the < and > characters themselves)
-        //[[sourceView layoutManager] addTemporaryAttributes: attsToUse forCharacterRange: NSMakeRange(ixLeft, ixRight - ixLeft) ];
+				
+				ixRight = [scanner scanLocation] + 1;
+		  }
+		  
+		  if (ixRight > [source length])
+				ixRight --;
+		  
+		  // Set the color style for everything between the found < and > characters (and the < and > characters themselves)
+		  //[[sourceView layoutManager] addTemporaryAttributes: attsToUse forCharacterRange: NSMakeRange(ixLeft, ixRight - ixLeft) ];
 		[[sourceView textStorage] addAttribute:NSForegroundColorAttributeName value:attsToUse[@"color"] range:NSMakeRange(ixLeft, ixRight - ixLeft)];
-    }
+	 }
 }
 
 - (void)textStorageDidProcessEditing:(NSNotification *)notification {

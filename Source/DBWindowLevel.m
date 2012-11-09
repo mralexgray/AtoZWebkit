@@ -11,22 +11,14 @@ static NSInteger sWindowLevel;
 
 @implementation DBWindowLevel
 
-
-+ (NSInteger) windowLevel
-{
-	return sWindowLevel;
-}
++ (NSInteger) windowLevel {	return sWindowLevel; }
 
 + (void) setWindowLevel: (NSInteger) level
 {
-	BOOL isDifferentLevel = (level != sWindowLevel);
-	
-	if (isDifferentLevel)
-	{
+	level != sWindowLevel ? ^{
 		sWindowLevel = level;
-		
 		[[NSNotificationCenter defaultCenter] postNotificationName: kWindowLevelChangedNotification object: nil];
-	}
+	}() : nil;
 }
 
 

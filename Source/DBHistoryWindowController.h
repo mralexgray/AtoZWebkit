@@ -7,7 +7,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 #import <Cocoa/Cocoa.h>
 
 #import	"DBHistoryView.h"
-#import "DBHistoryController.h";
+#import "DBHistoryController.h"
 
 
 @interface DBHistoryWindowController : NSWindowController

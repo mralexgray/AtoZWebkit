@@ -786,7 +786,7 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 	
 	while (index != NSNotFound)
 	{
-		number = [NSNumber numberWithInt: index];
+		number = @(index);
 		
 		if (number != nil)
 		{

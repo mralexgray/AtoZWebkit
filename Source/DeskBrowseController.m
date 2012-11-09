@@ -48,10 +48,10 @@ char *GetPrivateIP() {
 	char hostname[100];
 	gethostname(hostname, 99);
 	if ((h=gethostbyname(hostname)) == NULL) {
-        perror("Error: ");
-        return "(Error locating Private IP Address)";
-    }
-    return inet_ntoa(*((struct in_addr *)h->h_addr));
+		  perror("Error: ");
+		  return "(Error locating Private IP Address)";
+	 }
+	 return inet_ntoa(*((struct in_addr *)h->h_addr));
 }
 
 static NSURL *urlTemp = nil;
@@ -114,9 +114,9 @@ static NSString *strTemp = nil;
 		
 		// Set up delegation
 		
-		[NSApp			setDelegate: self];
-		[slideWindow	setDelegate: self];
-		[websposeWindow setDelegate:self];
+		[NSApp			setDelegate: (id)self];
+		[slideWindow	setDelegate: (id)self];
+		[websposeWindow setDelegate: (id)self];
 		
 		
 		// Register for notifications
@@ -147,10 +147,10 @@ static NSString *strTemp = nil;
 		// Set up action menu
 		
 		actionMenuWindow	= [[DBActionMenuWindow alloc] initWithContentRect:NSMakeRect(-4, 90, 153, 135)
-														   styleMask:NSBorderlessWindowMask
+															styleMask:NSBorderlessWindowMask
 															 backing:NSBackingStoreRetained
-															   defer:NO];
-															   
+																defer:NO];
+																
 		actionMenu			= [[DBActionMenuView alloc] initWithFrame:NSMakeRect(0,0,153,135)];
 		
 		if (!inWebsposeMode) {
@@ -184,7 +184,7 @@ static NSString *strTemp = nil;
 	
 	// check for deskbrowse updates
 	// NOTE: the 'checkForUpdate' selector deals with looking at the NSUserDefaults
-	//	     and only checking if the user is allowing it too
+	//		  and only checking if the user is allowing it too
 	//
 	// we do this in awakeFromNib because we need the interface to be active
 	//
@@ -338,8 +338,8 @@ static NSString *strTemp = nil;
 	}
 	
 	if ([name isEqualToString:@"DBWebSearch"]) {
-		NSString *search     = [note userInfo][@"searchString"];
-		NSNumber *cs_num     = [note userInfo][@"caseSensitive"];
+		NSString *search	  = [note userInfo][@"searchString"];
+		NSNumber *cs_num	  = [note userInfo][@"caseSensitive"];
 		NSNumber *bkwds_num  = [note userInfo][@"backwards"];
 		BOOL cs = NO;
 		BOOL bkwds = NO;
@@ -414,8 +414,8 @@ static NSString *strTemp = nil;
 //
 	[[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
 	
-    NSString *urlString = [[event paramDescriptorForKeyword:keyDirectObject] stringValue];
-    NSURL *URL = [NSURL URLWithString:urlString];
+	 NSString *urlString = [[event paramDescriptorForKeyword:keyDirectObject] stringValue];
+	 NSURL *URL = [NSURL URLWithString:urlString];
 	NSURLRequest* URLRequest = [NSURLRequest requestWithURL: URL];
 	WebView* webViewToLoadURL = currentWebView;
 		
@@ -612,50 +612,50 @@ static NSString *strTemp = nil;
 
 - (void) lock: (BOOL) shouldLock
 {
-    if (shouldLock) // LOCK
-    {
-        if (symbolicHotKeyController == nil)
-        {
-            symbolicHotKeyController = [[DBSymbolicHotKeyController alloc] init];
-        }
-        
-        [symbolicHotKeyController saveHotKeyState];
-        
-        
-        // Disable Force-Quit, Application switch, and hide menubar and dock
-        SetSystemUIMode(kUIModeAllHidden, kUIOptionDisableForceQuit | kUIOptionDisableSessionTerminate | kUIOptionDisableProcessSwitch | kUIOptionDisableAppleMenu);
-        
-        // Disable hide and quit
-        NSMenu*        mainMenu        = [NSApp mainMenu];
-        NSMenu*        appMenu            = [[mainMenu itemAtIndex: 0]  submenu];
-        NSInteger            indexOfQuitItem = [appMenu indexOfItemWithTarget: NSApp andAction: @selector(terminate:)];
-		NSInteger            indexOfHideItem = [appMenu indexOfItemWithTarget: NSApp andAction: @selector(hide:)];
-		NSMenuItem*    quitMenuItem    = [appMenu itemAtIndex: indexOfQuitItem];
-		NSMenuItem*    hideMenuItem    = [appMenu itemAtIndex: indexOfHideItem];
+	 if (shouldLock) // LOCK
+	 {
+		  if (symbolicHotKeyController == nil)
+		  {
+				symbolicHotKeyController = [[DBSymbolicHotKeyController alloc] init];
+		  }
+		  
+		  [symbolicHotKeyController saveHotKeyState];
+		  
+		  
+		  // Disable Force-Quit, Application switch, and hide menubar and dock
+		  SetSystemUIMode(kUIModeAllHidden, kUIOptionDisableForceQuit | kUIOptionDisableSessionTerminate | kUIOptionDisableProcessSwitch | kUIOptionDisableAppleMenu);
+		  
+		  // Disable hide and quit
+		  NSMenu*		  mainMenu		  = [NSApp mainMenu];
+		  NSMenu*		  appMenu				= [[mainMenu itemAtIndex: 0]  submenu];
+		  NSInteger				indexOfQuitItem = [appMenu indexOfItemWithTarget: NSApp andAction: @selector(terminate:)];
+		NSInteger				indexOfHideItem = [appMenu indexOfItemWithTarget: NSApp andAction: @selector(hide:)];
+		NSMenuItem*	 quitMenuItem	 = [appMenu itemAtIndex: indexOfQuitItem];
+		NSMenuItem*	 hideMenuItem	 = [appMenu itemAtIndex: indexOfHideItem];
 		
 		[quitMenuItem setKeyEquivalent: @""];
 		[hideMenuItem setKeyEquivalent: @""];
-    }
+	 }
 	else // UNLOCK
 	{
-        // Enable all that was disabled
-        SetSystemUIMode(kUIModeNormal, 0);
-        
-        
-        [symbolicHotKeyController restoreHotKeyState];
-        
-        
-        // Enable hide and quit
-        NSMenu*        mainMenu        = [NSApp mainMenu];
-        NSMenu*        appMenu            = [[mainMenu itemAtIndex: 0]  submenu];
-        NSInteger            indexOfQuitItem = [appMenu indexOfItemWithTarget: NSApp andAction: @selector(terminate:)];
-		NSInteger            indexOfHideItem = [appMenu indexOfItemWithTarget: NSApp andAction: @selector(hide:)];
-		NSMenuItem*    quitMenuItem    = [appMenu itemAtIndex: indexOfQuitItem];
-		NSMenuItem*    hideMenuItem    = [appMenu itemAtIndex: indexOfHideItem];
+		  // Enable all that was disabled
+		  SetSystemUIMode(kUIModeNormal, 0);
+		  
+		  
+		  [symbolicHotKeyController restoreHotKeyState];
+		  
+		  
+		  // Enable hide and quit
+		  NSMenu*		  mainMenu		  = [NSApp mainMenu];
+		  NSMenu*		  appMenu				= [[mainMenu itemAtIndex: 0]  submenu];
+		  NSInteger				indexOfQuitItem = [appMenu indexOfItemWithTarget: NSApp andAction: @selector(terminate:)];
+		NSInteger				indexOfHideItem = [appMenu indexOfItemWithTarget: NSApp andAction: @selector(hide:)];
+		NSMenuItem*	 quitMenuItem	 = [appMenu itemAtIndex: indexOfQuitItem];
+		NSMenuItem*	 hideMenuItem	 = [appMenu itemAtIndex: indexOfHideItem];
 		
 		[quitMenuItem setKeyEquivalent: @"q"];
 		[hideMenuItem setKeyEquivalent: @"h"];
-    }
+	 }
 }
 
 
@@ -1405,20 +1405,20 @@ static NSString *strTemp = nil;
 }
 
 - (void)webView:(WebView*)webView 
-        decidePolicyForMIMEType:(NSString*)type 
-        request:(NSURLRequest*)request 
+		  decidePolicyForMIMEType:(NSString*)type 
+		  request:(NSURLRequest*)request 
 		  frame:(WebFrame*)frame 
-        decisionListener:(id<WebPolicyDecisionListener>)listener
+		  decisionListener:(id<WebPolicyDecisionListener>)listener
 {
-    NSString *extension = [[[request URL] path] pathExtension];
-    if ([extension isEqualToString:@"html"] || [extension isEqualToString:@"htm"]) {
-        [listener use];
-        return;
-    }
-    if ([WebView canShowMIMEType:type] || [WebView canShowMIMETypeAsHTML:type]) {
-        [listener use];
-        return;
-    }
+	 NSString *extension = [[[request URL] path] pathExtension];
+	 if ([extension isEqualToString:@"html"] || [extension isEqualToString:@"htm"]) {
+		  [listener use];
+		  return;
+	 }
+	 if ([WebView canShowMIMEType:type] || [WebView canShowMIMETypeAsHTML:type]) {
+		  [listener use];
+		  return;
+	 }
 	NSString *currentPage = [[[[frame dataSource] request] URL] absoluteString];
 	[downloadController prepareForDownloadWithRequest:request];
 	
@@ -1434,8 +1434,8 @@ static NSString *strTemp = nil;
 	[self setURLText:currentPage];
 	[self syncLoadingStateWithStatus];
 	spinnerEnabled  = NO;
-	stopEnabled     = NO;
-	reloadEnabled   = YES;
+	stopEnabled	  = NO;
+	reloadEnabled	= YES;
 	[self updateButtons];
 	
 	[self showDownloadWindow:nil];
@@ -1970,8 +1970,8 @@ didStartProvisionalLoadForFrame:(WebFrame *)frame {
 			
 			[self syncLoadingStateWithStatus];
 			spinnerEnabled  = YES;
-			stopEnabled     = YES;
-			reloadEnabled   = NO;
+			stopEnabled	  = YES;
+			reloadEnabled	= NO;
 			[self updateButtons];
 			
 			[[self currentWindow] makeFirstResponder: currentWebView];
@@ -1980,7 +1980,7 @@ didStartProvisionalLoadForFrame:(WebFrame *)frame {
 }
 
 - (void)webView:(WebView *)sender didReceiveTitle:(NSString *)title
-	   forFrame:(WebFrame *)frame {
+		forFrame:(WebFrame *)frame {
 	DBTab* tab = [tabController tabWithWebView: sender];
 	if(tab)
 	{
@@ -2000,7 +2000,7 @@ didStartProvisionalLoadForFrame:(WebFrame *)frame {
 }
 
 - (void)webView:(WebView *)sender didReceiveIcon:(NSImage *)image
-	   forFrame:(WebFrame *)frame {
+		forFrame:(WebFrame *)frame {
 	DBTab* tab = [tabController tabWithWebView: sender];
 	
 	if(tab)
@@ -2028,8 +2028,8 @@ didStartProvisionalLoadForFrame:(WebFrame *)frame {
 		[self setStatusText:@"Done"];
 		[self syncLoadingStateWithStatus];
 		spinnerEnabled  = NO;
-		stopEnabled     = NO;
-		reloadEnabled   = YES;
+		stopEnabled	  = NO;
+		reloadEnabled	= YES;
 		[self updateButtons];
 	}
 }
@@ -2413,8 +2413,8 @@ didStartProvisionalLoadForFrame:(WebFrame *)frame {
 	// Create alert panel
 	NSAlert *alert;
 	alert = [[NSAlert alloc] init];
-	[alert autorelease];
-	
+//	[alert autorelease];
+
 	[[alert window] setLevel: [DBWindowLevel windowLevel] + 1];
 		
 	// Configure alert panel
@@ -2435,8 +2435,8 @@ didStartProvisionalLoadForFrame:(WebFrame *)frame {
 	// Create alert panel
 	NSAlert *alert;
 	alert = [[NSAlert alloc] init];
-	[alert autorelease];
-	
+//	[alert autorelease];
+
 	[[alert window] setLevel: [DBWindowLevel windowLevel] + 1];
 		
 	// Configure alert panel
@@ -2512,12 +2512,12 @@ didStartProvisionalLoadForFrame:(WebFrame *)frame {
 
 - (NSResponder *)webViewFirstResponder:(WebView *)sender
 {
-    return [[sender window] firstResponder];
+	 return [[sender window] firstResponder];
 }
 
 - (void)webView:(WebView *)sender makeFirstResponder:(NSResponder*)responder
 {
-    [[sender window] makeFirstResponder:responder];
+	 [[sender window] makeFirstResponder:responder];
 }
 
 - (NSArray *)webView:(WebView *)sender contextMenuItemsForElement:(NSDictionary *)element defaultMenuItems:(NSArray *)defaultMenuItems {
@@ -2542,7 +2542,7 @@ didStartProvisionalLoadForFrame:(WebFrame *)frame {
 		
 		NSMenuItem *book = [[NSMenuItem alloc] initWithTitle:@"Bookmark Link"
 													  action:@selector(menuHandlerBookmarkLink)
-											   keyEquivalent:@""];
+												keyEquivalent:@""];
 		
 		urlTemp = element[WebElementLinkURLKey];
 		strTemp = element[WebElementLinkLabelKey];

@@ -49,7 +49,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 @interface DeskBrowseController : NSObject
 {
 	// main browser components
-    IBOutlet DBSlideWindow			*slideWindow; // the main window
+	 IBOutlet DBSlideWindow			*slideWindow; // the main window
 	IBOutlet NSBox*					webViewBox;
 	IBOutlet NSBox*					tabBarBox;
 	IBOutlet NSButton				*back; // back button
@@ -95,7 +95,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	
 	DBStatusItemController		*statusController;
 	
-	DBSymbolicHotKeyController    *symbolicHotKeyController;
+	DBSymbolicHotKeyController	 *symbolicHotKeyController;
 	
 	DBTabController				*tabController;
 		

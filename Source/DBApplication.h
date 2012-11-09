@@ -19,5 +19,5 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 - (void) initHotKeyController;
 - (void) handleKeyEvent: (NSEvent*) theEvent;
 //- (DBHotKeyController*) hotKeyController;
-@property (assign, nonatomic) DBHotKeyController *hotKeyController;
+@property (strong, nonatomic) DBHotKeyController *hotKeyController;
 @end

@@ -11,7 +11,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 @implementation DBActionMenuItem
 
 - (id)initWithFrame:(NSRect)frame {
-    return [self initWithFrame:frame label:@""];
+	 return [self initWithFrame:frame label:@""];
 }
 
 - (id)initWithFrame:(NSRect)frame label:(NSString *)aLabel {
@@ -37,7 +37,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	textStatic[NSForegroundColorAttributeName] = [NSColor colorWithDeviceWhite:1.0 alpha:1.0];
 	textStatic[NSFontAttributeName] = [NSFont systemFontOfSize:12];
 	
-    [label drawInRect:rect withAttributes:textStatic];
+	 [label drawInRect:rect withAttributes:textStatic];
 	
 	[textStatic release];
 }

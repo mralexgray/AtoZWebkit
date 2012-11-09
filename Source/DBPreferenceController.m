@@ -79,10 +79,10 @@ NSInteger oppositeBoolInt(NSInteger bi) {
 	toolbar = [[NSToolbar alloc] initWithIdentifier:@"com.sgs.prefswindow.toolbar"];
 	
 	[toolbar setAllowsUserCustomization: NO];
-    [toolbar setAutosavesConfiguration: YES];
-    [toolbar setDisplayMode: NSToolbarDisplayModeIconAndLabel];
+	 [toolbar setAutosavesConfiguration: YES];
+	 [toolbar setDisplayMode: NSToolbarDisplayModeIconAndLabel];
 	
-	[toolbar setDelegate:self];
+	[toolbar setDelegate:(id)self];
 	
 	NSRect winRect;
 	winRect.origin = [[self window] frame].origin;
@@ -184,17 +184,17 @@ NSInteger oppositeBoolInt(NSInteger bi) {
 - (NSArray*) toolbarDefaultItemIdentifiers: (NSToolbar*) toolbar {
 	NSArray* identifiers = @[@"com.sgs.prefswindow.toolbar.general", @"com.sgs.prefswindow.toolbar.webcontent", @"com.sgs.prefswindow.toolbar.webspose"];
 	
-    return identifiers;
+	 return identifiers;
 }
 
 - (NSArray*) toolbarAllowedItemIdentifiers: (NSToolbar*) toolbar {
 	NSArray* identifiers = @[@"com.sgs.prefswindow.toolbar.general", @"com.sgs.prefswindow.toolbar.webcontent", @"com.sgs.prefswindow.toolbar.webspose", NSToolbarSpaceItemIdentifier, NSToolbarFlexibleSpaceItemIdentifier, NSToolbarSeparatorItemIdentifier];
 	
-    return identifiers;
+	 return identifiers;
 }
 
 - (BOOL) validateToolbarItem: (NSToolbarItem*) toolbarItem {
-    return YES;
+	 return YES;
 }
 
 - (NSArray *)toolbarSelectableItemIdentifiers: (NSToolbar *)toolbar {

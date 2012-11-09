@@ -23,11 +23,11 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
 	if (![controller inWebspose]) {
 		dic[@"searchString"] = [findField stringValue];
-		dic[@"caseSensitive"] = [NSNumber numberWithInt:[caseSensitive state]];
+		dic[@"caseSensitive"] = @([caseSensitive state]);
 		dic[@"backwards"] = @0;
 	} else {
 		dic[@"searchString"] = [websposeFindField stringValue];
-		dic[@"caseSensitive"] = [NSNumber numberWithInt:[webposeCaseSensitive state]];
+		dic[@"caseSensitive"] = @([webposeCaseSensitive state]);
 		dic[@"backwards"] = @0;
 	}
 	
@@ -41,11 +41,11 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
 	if (![controller inWebspose]) {
 		dic[@"searchString"] = [findField stringValue];
-		dic[@"caseSensitive"] = [NSNumber numberWithInt:[caseSensitive state]];
+		dic[@"caseSensitive"] = @([caseSensitive state]);
 		dic[@"backwards"] = @1;
 	} else {
 		dic[@"searchString"] = [websposeFindField stringValue];
-		dic[@"caseSensitive"] = [NSNumber numberWithInt:[webposeCaseSensitive state]];
+		dic[@"caseSensitive"] = @([webposeCaseSensitive state]);
 		dic[@"backwards"] = @1;
 	}
 	

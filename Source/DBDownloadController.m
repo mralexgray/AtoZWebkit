@@ -259,7 +259,7 @@ NSString* downloadFileWrapperExtension		= @"download";
 	DBDownloadObject*	object				= [self objectWithDownload: download];
 	NSFileManager*	fileManager			= [NSFileManager defaultManager];
 	NSString*		saveLocation		= [[[NSUserDefaults standardUserDefaults] objectForKey: kDownloadLocation] stringByExpandingTildeInPath];
-	NSString*       fileWrapperPath		= nil;
+	NSString*		 fileWrapperPath		= nil;
 	
 	if (![fileManager fileExistsAtPath: saveLocation])
 	{
@@ -328,8 +328,8 @@ NSString* downloadFileWrapperExtension		= @"download";
 {
 	DBDownloadObject* object = [self objectWithDownload: download];
 	
-    [object setBytesLoaded: 0];
-    [object setURLResponse: response];
+	 [object setBytesLoaded: 0];
+	 [object setURLResponse: response];
 }
 
 - (BOOL) download: (NSURLDownload*) download shouldDecodeSourceDataOfMIMEType: (NSString*) encodingType
@@ -454,7 +454,7 @@ NSString* downloadFileWrapperExtension		= @"download";
 
 - (void) prepareForDownloadWithRequest: (NSURLRequest*) aRequest
 {
-	WebDownload*	download		= [[WebDownload alloc] initWithRequest: aRequest delegate: self];
+	WebDownload*	download		= [[WebDownload alloc] initWithRequest: aRequest delegate: (id)self];
 	DBDownloadObject*	downloadObject	= [[DBDownloadObject alloc] initWithURLDownload: download];
 	
 	[mDownloads addObject: downloadObject];
@@ -474,7 +474,7 @@ NSString* downloadFileWrapperExtension		= @"download";
 	if ([type isEqualToString: @"beginDownload"])
 	{
 		NSURL*			tURL			= [note userInfo][@"fileURL"];
-		WebDownload*	download		= [[WebDownload alloc] initWithRequest: [NSURLRequest requestWithURL: tURL] delegate: self];
+		WebDownload*	download		= [[WebDownload alloc] initWithRequest: [NSURLRequest requestWithURL: tURL] delegate:(id) self];
 		DBDownloadObject*	downloadObject	= [[DBDownloadObject alloc] initWithURLDownload: download];
 		
 		[mDownloads addObject: downloadObject];

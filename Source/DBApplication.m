@@ -6,7 +6,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 
 #import "DBApplication.h"
 
-//#import "DBHotKeyController.h"
+#import "DBHotKeyController.h"
 #import "DeskBrowseConstants.h"
 #import "DeskBrowseController.h"
 
@@ -88,7 +88,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	
 	/*
 	NSLog(@"WARNING: handleKeyEvent in DBApplication STILL ALLOWS FORCE QUIT! -Ian");
-	
+
 	if ([characters isEqualToString: @"="])		//
 	{											//	TEMORARY
 		[NSApp endSheet: [NSApp keyWindow]];	//
@@ -155,7 +155,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 
 - (void) initHotKeyController
 {
-//	hotKeyController = [[DBHotKeyController alloc] init];
+	_hotKeyController = [[DBHotKeyController alloc] init];
 }
 
 
@@ -165,9 +165,9 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 //
 // --------------------------------------
 
-- (DBHotKeyController*) hotKeyController
-{
-//	return hotKeyController;
-}
+//- (DBHotKeyController*) hotKeyController
+//{
+////	return hotKeyController;
+//}
 
 @end

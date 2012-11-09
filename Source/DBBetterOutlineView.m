@@ -47,10 +47,10 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	}
 	
 	
-    if (!calledSuper)
-    {
+	 if (!calledSuper)
+	 {
 		[super textDidEndEditing: notification];
-    }
+	 }
 }
 
 - (void) editFirstColumnOfSelectedRow

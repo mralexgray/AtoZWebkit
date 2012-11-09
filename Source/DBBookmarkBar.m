@@ -38,7 +38,7 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 
 - (id) initWithFrame: (NSRect) frame
 {
-    if (self = [super initWithFrame: frame])
+	 if (self = [super initWithFrame: frame])
 	{
 		mBookmarkCells		= [[NSMutableArray alloc] init];
 		mBackgroundColor	= [[NSColor colorWithDeviceRed: 0.35 green: 0.35 blue: 0.35 alpha: 1.0] retain];
@@ -188,7 +188,7 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 	{
 		NSRect cellFrame = [currentCell frame];
 		
-		if (NSMaxX(cellFrame) > maxRightEdge || point.x < NSMidX(cellFrame) && point.x > NSMidX(lastCellFrame))
+		if (NSMaxX(cellFrame) > maxRightEdge || (point.x < NSMidX(cellFrame) && point.x > NSMidX(lastCellFrame)))
 		{
 			returnIndex = currentCellIndex;
 			break;
@@ -236,7 +236,7 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 	if (clickedCell != nil)
 	{
 		NSInteger			indexOfCellInArray	= [mBookmarkCells indexOfObject: clickedCell];
-		NSNumber*	numberIndexOfCell	= [NSNumber numberWithInt: indexOfCellInArray];
+		NSNumber*	numberIndexOfCell	= @(indexOfCellInArray);
 		
 		[pboard declareTypes: @[DBBookmarkCellPboardType] owner: self];
 		[pboard setPropertyList: numberIndexOfCell forType: DBBookmarkCellPboardType];

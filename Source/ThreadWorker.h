@@ -9,9 +9,9 @@
 Usage:
 <pre>
 [ThreadWorker 
-        workOn:self 
+		  workOn:self 
   withSelector:&#064;selector(longTask:) 
-    withObject:someData
+	 withObject:someData
 didEndSelector:&#064;selector(longTaskFinished:) ];
 </pre>
 The ThreadWorker class was designed to be simple and
@@ -47,15 +47,15 @@ Change History
 0.7 -
  o  Added ability to mark thread as cancelled.
  o  Changed the behavior when "longTask" takes a second argument.
-    Instead of passing a proxy to the primary thread's "self"
-    it passes a references to the ThreadWorker. The recommended way
-    to pass information from the primary, or originating, thread
-    is to use an NSDictionary to pass in the Things You'll Need.
-    See the Controller.m example.
+	 Instead of passing a proxy to the primary thread's "self"
+	 it passes a references to the ThreadWorker. The recommended way
+	 to pass information from the primary, or originating, thread
+	 is to use an NSDictionary to pass in the Things You'll Need.
+	 See the Controller.m example.
  o  Changed thread's termination behavior so that as soon as your
-    "longTask:" is finished, the thread will exit. This means if
-    you left anything on the NSRunLoop (or more likely an NSURL
-    did it without your knowledge), it will get dumped.
+	 "longTask:" is finished, the thread will exit. This means if
+	 you left anything on the NSRunLoop (or more likely an NSURL
+	 did it without your knowledge), it will get dumped.
 
 0.6.2 - Moved [super dealloc] to the end of the dealloc method and
 ensured "init" returns nil if it fails.
@@ -96,16 +96,16 @@ back to the main, i.e. calling, thread from the secondary thread.
 */
 @interface ThreadWorker : NSObject
 {
-   id               _target;            // The object whose selector will be called
-   SEL              _selector;          // The selector that will be called in another thread
-   id               _argument;          // The argument that will be passed to the selector
-   SEL              _didEndSelector;    // Selector for final notice
-   NSConnection    *_callingConnection; // Connection used to safely communicate between threads
-   NSPort          *_port1;
-   NSPort          *_port2;
-   NSConnection    *_conn2;
-   NSConditionLock *_cancelled;
-   BOOL		        _endRunLoop;
+	id					_target;				// The object whose selector will be called
+	SEL				  _selector;			 // The selector that will be called in another thread
+	id					_argument;			 // The argument that will be passed to the selector
+	SEL				  _didEndSelector;	 // Selector for final notice
+	NSConnection	 *_callingConnection; // Connection used to safely communicate between threads
+	NSPort			 *_port1;
+	NSPort			 *_port2;
+	NSConnection	 *_conn2;
+	NSConditionLock *_cancelled;
+	BOOL				  _endRunLoop;
 }
 
 
@@ -115,9 +115,9 @@ back to the main, i.e. calling, thread from the secondary thread.
 @param target The object to receive the selector message. It is retained.
 @param selector The selector to be called on the target in the worker thread.
 @param userInfo An optional argument if you wish to pass one to the selector
-       and target. It is retained.
+		 and target. It is retained.
 @param didEndSelector An optional selector to call on the target. Use the
-       value 0 (zero) if you don't want a selector called at the end.
+		 value 0 (zero) if you don't want a selector called at the end.
 @result Returns an autoreleased ThreadWorker that manages the worker thread.
  
 @abstract Call this class method to work on something in another thread. 
@@ -125,52 +125,52 @@ back to the main, i.e. calling, thread from the secondary thread.
  
 Example:
  <pre>
-    NSDictionary *thingsIllNeed = [NSDictionary dictionaryWithObjectsAndKeys:
-       self, &#064;"self",
-       myProgressIndicator, &#064;"progress",
-       myStatusField, &#064;"status", nil];
+	 NSDictionary *thingsIllNeed = [NSDictionary dictionaryWithObjectsAndKeys:
+		 self, &#064;"self",
+		 myProgressIndicator, &#064;"progress",
+		 myStatusField, &#064;"status", nil];
  
-    [ThreadWorker workOn:self 
-                  withSelector:&#064;selector(longTask:) 
-                  withObject:thingsIllNeed
-                  didEndSelector:&#064;selector(longTaskFinished:)];
+	 [ThreadWorker workOn:self 
+						withSelector:&#064;selector(longTask:) 
+						withObject:thingsIllNeed
+						didEndSelector:&#064;selector(longTaskFinished:)];
  </pre>
 
 The longTask method in self will then be called and should look
 something like this:
  <pre>
-    - (id)longTask:(id)userInfo
-    {
-        // Do something that takes a while and uses 'userInfo' if you want
-        id otherSelf = [userInfo objectForKey:&#064;"self"];
- 		   NSProgressIndicator *progress =
-            (NSProgressIndicator *)[userInfo objectForKey:&#064;"progress"];
- 		   NSTextField *status =
-            (NSTextField *)[userInfo objectForKey:&#064;"status"];
+	 - (id)longTask:(id)userInfo
+	 {
+		  // Do something that takes a while and uses 'userInfo' if you want
+		  id otherSelf = [userInfo objectForKey:&#064;"self"];
+ 			NSProgressIndicator *progress =
+				(NSProgressIndicator *)[userInfo objectForKey:&#064;"progress"];
+ 			NSTextField *status =
+				(NSTextField *)[userInfo objectForKey:&#064;"status"];
  
-        return userInfo; // Will be passed to didEndSelector
-    }    
+		  return userInfo; // Will be passed to didEndSelector
+	 }	 
  </pre>
 Optionally you can have this "longTask" method accept a second argument
 which will be the controlling ThreadWorker instance which you can use
 to see if the ThreadWorker has been marked as cancelled.
 Your "longTask" method might then look like this:
  <pre>
-    - (id)longTask:(id)userInfo anyNameHere:(ThreadWorker *)tw
-   {
-       ...
-       while(... && ![tw cancelled]){
-           ...
-       }
-   }
+	 - (id)longTask:(id)userInfo anyNameHere:(ThreadWorker *)tw
+	{
+		 ...
+		 while(... && ![tw cancelled]){
+			  ...
+		 }
+	}
  </pre>
 You can name the second parameter anythign you want. You only have to
 match it when you create the ThreadWorker like so:
  <pre>
-    [ThreadWorker workOn:self 
-                  withSelector:&#064;selector(longTask: anyNameHere:) 
-                  withObject:userInfo
-                  didEndSelector:&#064;selector(longTaskFinished:)];
+	 [ThreadWorker workOn:self 
+						withSelector:&#064;selector(longTask: anyNameHere:) 
+						withObject:userInfo
+						didEndSelector:&#064;selector(longTaskFinished:)];
  
  </pre>
 When your longTask method is finished, whatever is returned from it will
@@ -181,74 +181,74 @@ the longTaskFinished will be called on the main thread, which is what you
 need if you want to then modify any GUI components.
 The longTaskFinished method might look something like this, then:
  <pre>
-    - (void)longTaskFinished:(id)userInfo
-    {
-        //Do something now that the thread is done
-        // ...
-    }    
+	 - (void)longTaskFinished:(id)userInfo
+	 {
+		  //Do something now that the thread is done
+		  // ...
+	 }	 
  </pre>
 Of course you will have to have imported the ThreadWorker.h
 file in your class's header file. The top of your header file
 might then look like this:
  <pre>
-    import <Cocoa/Cocoa.h>
-    import "ThreadWorker.h"
+	 import <Cocoa/Cocoa.h>
+	 import "ThreadWorker.h"
  </pre>
 Enjoy.
 
  */
 + (ThreadWorker *)
-    workOn:(id)target 
-    withSelector:(SEL)selector 
-    withObject:(id)userInfo
-    didEndSelector:(SEL)didEndSelector;
+	 workOn:(id)target 
+	 withSelector:(SEL)selector 
+	 withObject:(id)userInfo
+	 didEndSelector:(SEL)didEndSelector;
 
 
-    /*!
-     @method markAsCancelled
-     @abstract Mark the ThreadWorker as cancelled.
-     @discussion
-     Marks the ThreadWorker as cancelled but doesn't actually
-     cancel the thread. It is up to you to check whether or
-     not the ThreadWorker is cancelled using a two-argument
-     "longTask:..." method like so:
+	 /*!
+	  @method markAsCancelled
+	  @abstract Mark the ThreadWorker as cancelled.
+	  @discussion
+	  Marks the ThreadWorker as cancelled but doesn't actually
+	  cancel the thread. It is up to you to check whether or
+	  not the ThreadWorker is cancelled using a two-argument
+	  "longTask:..." method like so:
 <pre>
-     - (id)longTask:(id)userInfo anyNameHere:(ThreadWorker *)tw
-     {
-         ...
-         while(... && ![tw cancelled]){
-             ...
-         }
-     }
+	  - (id)longTask:(id)userInfo anyNameHere:(ThreadWorker *)tw
+	  {
+			...
+			while(... && ![tw cancelled]){
+				 ...
+			}
+	  }
 </pre>
-     */
+	  */
 -(void)markAsCancelled;
 
 
-    /*!
-     @method cancelled
-     @abstract Returns whether or not someone has tried to cancel the thread.
-     @discussion Returns whether or not someone has tried to cancel the thread.
-     */
+	 /*!
+	  @method cancelled
+	  @abstract Returns whether or not someone has tried to cancel the thread.
+	  @discussion Returns whether or not someone has tried to cancel the thread.
+	  */
 -(BOOL)cancelled;
 
 
 
-    /*!
-    @method dealloc
-    @abstract Make sure we clean up after ourselves.
-    @discussion Make sure we clean up after ourselves.
-    */
+	 /*!
+	 @method dealloc
+	 @abstract Make sure we clean up after ourselves.
+	 @discussion Make sure we clean up after ourselves.
+	 */
 - (void) dealloc;
 
 
-    /*!
-    @method description
-     @abstract Just a little note to say, "Good job, Rob!"
-     @discussion
-     Just a little note to say, "Good job, Rob!" to
-     the original author of this Public Domain software.
-     */
+	 /*!
+	 @method description
+	  @abstract Just a little note to say, "Good job, Rob!"
+	  @discussion
+	  Just a little note to say, "Good job, Rob!" to
+	  the original author of this Public Domain software.
+	  */
 + (NSString *)description;
 
 

@@ -7,52 +7,41 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 #import "DBSlideWindow.h"
 
 @implementation DBSlideWindow
+@synthesize controller, currentDragMode, dragStartLocation;
+@synthesize snapTolerance, snapping, snapsToEdges, clickDistanceFromWindowEdge, minWidth, padding;
 
-typedef NSInteger CGSConnection;
-typedef NSInteger CGSWindow;
+typedef NSInteger CGSConnection, CGSWindow;
 extern CGSConnection _CGSDefaultConnection();
-extern OSStatus CGSGetWindowTags(const CGSConnection cid, const CGSWindow wid, NSInteger *tags, NSInteger thirtyTwo);
-extern OSStatus CGSSetWindowTags(const CGSConnection cid, const CGSWindow wid, NSInteger *tags, NSInteger thirtyTwo);
+extern OSStatus CGSGetWindowTags  (const CGSConnection cid, const CGSWindow wid, NSInteger *tags, NSInteger thirtyTwo);
+extern OSStatus CGSSetWindowTags  (const CGSConnection cid, const CGSWindow wid, NSInteger *tags, NSInteger thirtyTwo);
 extern OSStatus CGSClearWindowTags(const CGSConnection cid, const CGSWindow wid, NSInteger *tags, NSInteger thirtyTwo);
 
-- (void)setSticky:(BOOL)flag {
+- (void)setSticky:(BOOL)flag
+{
 	CGSConnection connectionID = _CGSDefaultConnection();
 	CGSWindow winNumber = [self windowNumber];
 	NSInteger allTags[0];
 	NSInteger theTags[2] = {0x0002, 0};
-	
 	if(!CGSGetWindowTags(connectionID, winNumber, allTags, 32)) {
-		if (flag) {
-			CGSSetWindowTags(connectionID, winNumber, theTags, 32);
-		} else {
-			CGSClearWindowTags(connectionID, winNumber, theTags, 32);
-      }
-   }
+		if (flag)	CGSSetWindowTags(connectionID, winNumber, theTags, 32);
+		else		CGSClearWindowTags(connectionID, winNumber, theTags, 32);
+	}
 }
 
 #pragma mark -
 
-- (id)initWithContentRect:(NSRect)contentRect styleMask:(NSUInteger)aStyle backing:(NSBackingStoreType)bufferingType defer:(BOOL)flag {
-    if(self = [super initWithContentRect:contentRect styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:NO])
-	{
+- (id)initWithContentRect:(NSRect)contentRect styleMask:(NSUInteger)aStyle backing:(NSBackingStoreType)bufferingType defer:(BOOL)flag
+{
+		if (!(self = [super initWithContentRect:contentRect styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:NO])) return nil;
 		[self setLevel:NSNormalWindowLevel];
-		[self setOpaque:NO];
-		[self setBackgroundColor:[NSColor clearColor]];
-		[self setAlphaValue:1.0];
-		[self setHasShadow:YES];
-				
-		minWidth = 400.0;
-	}
-	
-    return self;
+		[self setOpaque:YES];
+	[self setBackgroundColor:[NSColor redColor]];
+	[self setAlphaValue:1.0];
+	[self setHasShadow:YES];
+	minWidth = 400.0;
+	 return self;
 }
 
-- (void)dealloc
-{
-	[controller release];
-	
-    [super dealloc];
-}
 
 
 #pragma mark -
@@ -80,7 +69,7 @@ extern OSStatus CGSClearWindowTags(const CGSConnection cid, const CGSWindow wid,
 - (void) mouseDown: (NSEvent*) theEvent
 {
 	currentDragMode		= DragModeNone;
-    dragStartLocation	= [theEvent locationInWindow];
+	 dragStartLocation	= [theEvent locationInWindow];
 	NSPoint origin		= [self frame].origin;
 	NSSize	size		= [self frame].size;
 		
@@ -131,11 +120,11 @@ extern OSStatus CGSClearWindowTags(const CGSConnection cid, const CGSWindow wid,
 
 - (void)mouseDragged:(NSEvent *)theEvent
 {
-    if ([theEvent type] == NSLeftMouseDragged) {
-        NSPoint origin;
+	 if ([theEvent type] == NSLeftMouseDragged) {
+		  NSPoint origin;
 		NSSize	size;
 		NSSize	minSize;
-        NSPoint newLocation;
+		  NSPoint newLocation;
 		
 		NSRect		screenRect			= [[self screen] frame];
 		
@@ -143,14 +132,14 @@ extern OSStatus CGSClearWindowTags(const CGSConnection cid, const CGSWindow wid,
 		NSPoint		newOrigin			= [self frame].origin;
 		NSSize		newSize				= [self frame].size;
 		
-        origin							= [self frame].origin;
+		  origin							= [self frame].origin;
 		size							= [self frame].size;
 		minSize							= [self minSize];
-        newLocation						= [theEvent locationInWindow];
+		  newLocation						= [theEvent locationInWindow];
 		
 		NSSize		distanceMouseMoved = NSMakeSize(newLocation.x - size.width + clickDistanceFromWindowEdge.width, newLocation.y - clickDistanceFromWindowEdge.height);
 		
-        
+		  
 		switch (currentDragMode)
 		{
 			case DragModeMove:
@@ -287,7 +276,7 @@ extern OSStatus CGSClearWindowTags(const CGSConnection cid, const CGSWindow wid,
 		newFrameRect.size		= newSize;
 		
 		[self setFrame: newFrameRect display: YES];
-    }
+	 }
 }
 
 - (void) mouseUp: (NSEvent*) theEvent
@@ -358,6 +347,13 @@ extern OSStatus CGSClearWindowTags(const CGSConnection cid, const CGSWindow wid,
 - (void)setController:(id)aController {
 	[controller release];
 	controller = [aController retain];
+}
+
+
+- (void)dealloc
+{
+	[controller release];
+	[super dealloc];
 }
 
 @end
