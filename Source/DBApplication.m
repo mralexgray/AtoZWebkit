@@ -3,23 +3,18 @@
 The DeskBrowse source code is the legal property of its developers, Joel Levin and Ian Elseth
 *****************************
 */
-
 #import "DBApplication.h"
-
 #import "DBHotKeyController.h"
 #import "DeskBrowseConstants.h"
 #import "DeskBrowseController.h"
 
-
 @implementation DBApplication
-
 
 // --------------------------------------
 //
 //	init
 //
 // --------------------------------------
-
 - (id) init
 {
 	if (self = [super init])
@@ -33,21 +28,17 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	return self;
 }
 
-
 // --------------------------------------
 //
 //	dealloc
 //
 // --------------------------------------
 
-
-
 // --------------------------------------
 //
 //	sendEvent:
 //
 // --------------------------------------
-
 - (void) sendEvent: (NSEvent*) theEvent
 {
 	NSEventType type = [theEvent type];
@@ -64,7 +55,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	[super sendEvent: theEvent];
 }
 
-
 // --------------------------------------
 //
 //	handleKeyEvent:
@@ -72,17 +62,15 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 // Call it handleKeyEvent so we don't accidently override the keyDown: method (which wasn't being called here, but you never know...)
 //
 // --------------------------------------
-
 - (void) handleKeyEvent: (NSEvent*) theEvent
 {
-	NSString*	characters	= [theEvent charactersIgnoringModifiers];
-	//NSString*	characters1	= [theEvent characters];
+	NSS*	characters	= [theEvent charactersIgnoringModifiers];
+	//NSS*	characters1	= [theEvent characters];
 	
 	NSUInteger modifiers	= [theEvent modifierFlags];
 	
 	/*
 	NSLog(@"WARNING: handleKeyEvent in DBApplication STILL ALLOWS FORCE QUIT! -Ian");
-
 	if ([characters isEqualToString: @"="])		//
 	{											//	TEMORARY
 		[NSApp endSheet: [NSApp keyWindow]];	//
@@ -121,7 +109,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	}
 }
 
-
 // --------------------------------------
 //
 //	endSheet:
@@ -130,7 +117,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 //	I'm not sure why this isn't the default implementation.
 //
 // --------------------------------------
-
 - (void) endSheet: (NSWindow*) sheet
 {
 	if (sheet != nil)
@@ -140,28 +126,23 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	}
 }
 
-
 // --------------------------------------
 //
 //	loadHotKeyController
 //
 // --------------------------------------
-
 - (void) initHotKeyController
 {
 	_hotKeyController = [[DBHotKeyController alloc] init];
 }
-
 
 // --------------------------------------
 //
 //	hotKeyController
 //
 // --------------------------------------
-
 //- (DBHotKeyController*) hotKeyController
 //{
 ////	return hotKeyController;
 //}
-
 @end

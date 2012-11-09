@@ -3,40 +3,24 @@
 The DeskBrowse source code is the legal property of its developers, Joel Levin and Ian Elseth
 *****************************
 */
-
 #import "DBBookmarkBarPopUpButton.h"
 #import "DBBookmarkBar.h"
 
 
-
-
-
 @implementation DBBookmarkBarPopUpButton
-
 
 - (id) initWithFrame: (NSR) frameRect pullsDown: (BOOL) flag
 {
 	if (self = [super initWithFrame: frameRect pullsDown: flag])
 	{
+		[AtoZ sharedInstance];
 		mText			=  @"More...";//[[NSString stringWithString: @"More..."] retain];
-		mTextFont		= [NSFont userFontOfSize: 11.0];
-		mDefaultColor	= [NSColor colorWithDeviceRed: 0.0 green: 0.0 blue: 0.0 alpha: 0.0];
+		mTextFont		= [NSFont fontWithName:@"Ivolkswagen-DemiBold" size: 18];
+		mDefaultColor	=  WHITE;//[NSColor colorWithDeviceRed: 0.0 green: 0.0 blue: 0.0 alpha: 0.0];
 	}
 	
 	return self;
 }
-
-- (void) dealloc
-{
-	[mText release];
-	[mTextFont release];
-	[mDefaultColor release];
-	
-}
-
-
-#pragma mark -
-
 
 - (void) drawRect: (NSR) rect
 {	
@@ -46,35 +30,31 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 
 - (void) drawBackground
 {
-	NSColor* backgroundColor = mDefaultColor;
-	
-	[backgroundColor set];
-	[NSBezierPath fillRoundRectInRect: [self bounds] radius: 15];
+	[[NSBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:15]drawWithFill:mDefaultColor andStroke:nil];
 }
-
 - (void) drawText
 {
-	NSR			frame				= [self bounds];
-	NSSize			padding				= NSMakeSize(4.0, 0.0);
-	NSR			textFrame			= NSMakeRect(frame.origin.x + padding.width, frame.origin.y + padding.height, frame.size.width - padding.width * 2, frame.size.height - padding.height * 2);
-	NSDictionary*	stringAttributes	= [NSDictionary dictionaryWithObjects: @[[NSColor blackColor], mTextFont] forKeys: @[@"NSColor", NSFontAttributeName]];
-	NSString*		drawText			= [mText truncatedToWidth: textFrame.size.width withAttributes: stringAttributes];
-	NSSize			stringSize			= [drawText sizeWithAttributes: stringAttributes];
-	
-	if (stringSize.width < textFrame.size.width)
-	{
-		CGFloat extraWidth	= textFrame.size.width - stringSize.width;
-		textFrame.origin.x	= textFrame.origin.x + extraWidth / 2;
-	}
-	
-	textFrame.size.height = stringSize.height;
-	
-	[drawText drawInRect: textFrame withAttributes: stringAttributes];
+	NSR		frame		= [self bounds];
+	NSSZ	padding		= NSMakeSize(4.0, 0.0);
+	NSR		textFrame	= NSMakeRect(	frame.origin.x + padding.width, frame.origin.y + padding.height,
+										frame.size.width - padding.width * 2, frame.size.height - padding.height * 2);
+
+	NSD*	stringAttributes		= @{ @"NSColor": WHITE, NSFontAttributeName : mTextFont };
+	NSS*	drawText			= [mText truncatedToWidth: textFrame.size.width withAttributes: stringAttributes];
+//	NSSZ	stringSize			= [drawText sizeWithAttributes: stringAttributes];
+
+//	if (stringSize.width < textFrame.size.width)
+//	{
+//		CGFloat extraWidth	= textFrame.size.width - stringSize.width;
+//		textFrame.origin.x	= textFrame.origin.x + extraWidth / 2;
+//	}
+//	textFrame.size.height = stringSize.height;
+//	[drawText drawInRect: textFrame withAttributes: stringAttributes];
+	[drawText drawInRect:textFrame withFontNamed:[AtoZ randomFontName] andColor:WHITE];
+
 }
 
-
 #pragma mark -
-
 
 - (void) mouseDown: (NSEvent*) theEvent
 {
@@ -99,7 +79,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		[super mouseDown: theEvent];
 	}
 }
-
 - (void) deselectItems
 {
 	NSInteger numberOfItems = [self numberOfItems];
@@ -118,10 +97,8 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		}
 	}
 }
-
 - (BOOL) shouldBeFilled
 {
 	return mShouldBeFilled;
 }
-
 @end

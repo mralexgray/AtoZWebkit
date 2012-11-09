@@ -3,17 +3,12 @@
 The DeskBrowse source code is the legal property of its developers, Joel Levin and Ian Elseth
 *****************************
 */
-
 #import "DBHistoryController.h"
 
-
-NSString* nameOfHistoryFile = @"History.plist";
-
+NSS* nameOfHistoryFile = @"History.plist";
 @implementation DBHistoryController
 
-
 // Constructor/Destructor
-
 - (id) init
 {
 	if(self = [super init])
@@ -36,14 +31,12 @@ NSString* nameOfHistoryFile = @"History.plist";
 	
 	return self;
 }
-
 - (void) dealloc
 {
 	[webHistory release];
 	[view release];
 	
 }
-
 - (void) setView: (id) newView
 {
 	[view release];
@@ -51,15 +44,13 @@ NSString* nameOfHistoryFile = @"History.plist";
 	[view setNeedsDisplay: YES];
 }
 
-
 // Save/Load
-
 - (void) loadHistoryFile
 {
 	if(webHistory)
 	{
-		NSString*		fullPathOfDeskBrowseFolder	= nil;
-		NSString*		fullHistoryPath				= nil;
+		NSS*		fullPathOfDeskBrowseFolder	= nil;
+		NSS*		fullHistoryPath				= nil;
 		NSFileManager*	fileManager					= nil;
 		NSError*		error						= nil;
 		
@@ -68,7 +59,6 @@ NSString* nameOfHistoryFile = @"History.plist";
 		fullHistoryPath				= [fullPathOfDeskBrowseFolder	stringByAppendingPathComponent: nameOfHistoryFile];
 			
 		[fileManager createPath: fullPathOfDeskBrowseFolder];
-
 		if([fileManager fileExistsAtPath: fullPathOfDeskBrowseFolder])
 		{
 			if([fileManager fileExistsAtPath: fullHistoryPath])
@@ -98,13 +88,12 @@ NSString* nameOfHistoryFile = @"History.plist";
 		NSLog(@"*** -[HistoryController loadHistoryFile] : webHistory object does not exist");
 	}
 }
-
 - (void) saveHistoryFile
 {
 	if(webHistory)
 	{
-		NSString*		fullPathOfDeskBrowseFolder	= nil;
-		NSString*		fullHistoryPath				= nil;
+		NSS*		fullPathOfDeskBrowseFolder	= nil;
+		NSS*		fullHistoryPath				= nil;
 		NSFileManager*	fileManager					= nil;
 		NSError*		error						= nil;
 		
@@ -113,7 +102,6 @@ NSString* nameOfHistoryFile = @"History.plist";
 		fullHistoryPath				= [fullPathOfDeskBrowseFolder	stringByAppendingPathComponent: nameOfHistoryFile];
 			
 		[fileManager createPath: fullPathOfDeskBrowseFolder];
-
 		if([fileManager fileExistsAtPath: fullPathOfDeskBrowseFolder])
 		{
 			if(![webHistory saveToURL: [NSURL fileURLWithPath: fullHistoryPath] error: &error])
@@ -137,9 +125,7 @@ NSString* nameOfHistoryFile = @"History.plist";
 	}
 }
 
-
 // Notifications
-
 - (void) historyDidAddItems: (NSNotification*) notification
 {
 	[self saveHistoryFile];
@@ -155,7 +141,6 @@ NSString* nameOfHistoryFile = @"History.plist";
 		[view reloadData];
 	}
 }
-
 - (void) historyDidRemoveItems: (NSNotification*) notification
 {
 	[self saveHistoryFile];
@@ -172,7 +157,6 @@ NSString* nameOfHistoryFile = @"History.plist";
 		[view reloadData];
 	}
 }
-
 - (void) historyDidRemoveAllItems: (NSNotification*) notification
 {
 	[self saveHistoryFile];
@@ -184,22 +168,18 @@ NSString* nameOfHistoryFile = @"History.plist";
 	}
 }
 
-
 // UI
-
 - (void) clearHistory
 {
 	[webHistory removeAllItems];
 }
-
 - (void) loadSelected
 {
 	NSInteger selectedRow = [view selectedRow];
-
 	if(selectedRow > -1)
 	{
 		WebHistoryItem*			itemToLoad	= [self itemAtIndex: selectedRow - 1];
-		NSString*				URLString	= [itemToLoad URLString];
+		NSS*				URLString	= [itemToLoad URLString];
 		NSMD*	userInfo	= [[NSMD alloc] init];
 		
 		userInfo[@"URLString"] = URLString;
@@ -209,7 +189,6 @@ NSString* nameOfHistoryFile = @"History.plist";
 		[userInfo release];
 	}
 }
-
 - (void) removeSelected
 {
 	NSInteger			selectedRow		= [view selectedRow] - 1;
@@ -244,7 +223,6 @@ NSString* nameOfHistoryFile = @"History.plist";
 	
 	[view reloadData];
 }
-
 - (NSMenu*) menuForHistory
 {
 	NSMenu*			historyMenu		= [[[NSMenu alloc] initWithTitle: @"Back"] autorelease];
@@ -261,7 +239,7 @@ NSString* nameOfHistoryFile = @"History.plist";
 		
 		while ((currentSite = [siteEnumerator nextObject]) != nil && siteIndex++ < 5)
 		{
-			NSString* menuItemTitle = [currentSite title];
+			NSS* menuItemTitle = [currentSite title];
 			
 			if (menuItemTitle == nil)
 			{
@@ -279,14 +257,11 @@ NSString* nameOfHistoryFile = @"History.plist";
 	return historyMenu;
 }
 
-
 // History View
-
 
 //
 // numberOfDates
 //
-
 - (NSI) numberOfDates
 {
 	NSInteger number;
@@ -296,11 +271,9 @@ NSString* nameOfHistoryFile = @"History.plist";
 	return number;
 }
 
-
 //
 // numberOfRows
 //
-
 - (NSI) numberOfRows
 {
 	NSInteger				number		= 0;
@@ -319,11 +292,9 @@ NSString* nameOfHistoryFile = @"History.plist";
 	return number;
 }
 
-
 //
 // numberOfItemsForDate:
 //
-
 - (NSI) numberOfItemsForDate: (NSCalendarDate*) date
 {
 	NSInteger number;
@@ -333,11 +304,9 @@ NSString* nameOfHistoryFile = @"History.plist";
 	return number;
 }
 
-
 //
 // isDateAtIndex:
 //
-
 - (BOOL) isDateAtIndex: (NSI) index
 {
 	BOOL isDate			= NO;
@@ -373,11 +342,9 @@ NSString* nameOfHistoryFile = @"History.plist";
 	return isDate;
 }
 
-
 //
 // dateAtIndex:
 //
-
 - (NSCalendarDate*) dateAtIndex: (NSI) index
 {
 	NSCalendarDate*	date	= nil;
@@ -388,11 +355,9 @@ NSString* nameOfHistoryFile = @"History.plist";
 	return date;
 }
 
-
 //
 // itemAtIndex:
 //
-
 - (id) itemAtIndex: (NSI) index
 {
 	id				item			= nil;
@@ -402,7 +367,6 @@ NSString* nameOfHistoryFile = @"History.plist";
 	NSArray*		currentItems	= nil;
 	NSCalendarDate*	currentDate		= nil;
 	WebHistoryItem*	currentItem		= nil;
-
 	if(index > -1)
 	{
 		NSInteger i;
@@ -437,18 +401,16 @@ NSString* nameOfHistoryFile = @"History.plist";
 	return item;
 }
 
-
 //
 // objectForDate:index:
 //
-
 - (id) objectForDate: (NSCalendarDate*) date index: (NSI) index
 {
 	NSArray*		items		= nil;
 	WebHistoryItem*	item		= nil;
-	NSString*		object		= nil;
-	NSString*		title		= nil;
-	NSString*		URLString	= nil;
+	NSS*		object		= nil;
+	NSS*		title		= nil;
+	NSS*		URLString	= nil;
 	
 	items		= [webHistory orderedItemsLastVisitedOnDay: date];
 	item		= items[index];
@@ -468,17 +430,14 @@ NSString* nameOfHistoryFile = @"History.plist";
 	return object;
 }
 
-
 //
 // rowClicked:
 //
-
 - (void) rowClicked: (NSI) row
 {
 	if(row > -1 && ![self isDateAtIndex: row])
 	{
 	}
 }
-
 
 @end

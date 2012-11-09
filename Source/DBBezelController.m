@@ -4,9 +4,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 *****************************
 */
 
-
 #import "DBBezelController.h"
-
 
 @implementation DBBezelController
 - (id)init {
@@ -41,42 +39,37 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		
 		[[bezel contentView] addSubview:filenameDisplay];
 		
-		file = [[NSString alloc] initWithString:@""];
+		file = @"";//[[NSString alloc] initWithString:@""];
 		
 		[AZNOTCENTER addObserver:self selector:@selector(handleNotification:) name:@"DBNotification" object:nil];
 	}
 	return self;
 }
-
-- (void)dealloc {
-	[AZNOTCENTER removeObserver:self];
-	[bezel release];
-	[file release];
-	[timer release];
-	[filenameDisplay release];
-	[imageView release];
-	[bgView release];
-	
-}
-
+//- (void)dealloc {
+//	[AZNOTCENTER removeObserver:self];
+//	[bezel release];
+//	[file release];
+//	[timer release];
+//	[filenameDisplay release];
+//	[imageView release];
+//	[bgView release];
+//	
+//}
 - (void)handleNotification:(NSNotification *)note {
-	NSString *type = ((NSString *)[note userInfo][@"notificationType"]);
+	NSS *type = ((NSS *)[note userInfo][@"notificationType"]);
 	if ([type isEqualToString:@"showBezelForFile"]) {
-		NSString *tFile = ((NSString *)[note userInfo][@"filename"]);
+		NSS *tFile = ((NSS *)[note userInfo][@"filename"]);
 		[self showBezelForFile:tFile];
-		[tFile release];
+//		[tFile release];
 	}
 }
-
-- (void)setDownloadFile:(NSString *)filename {
-	[file release];
+- (void)setDownloadFile:(NSS *)filename {
+//	[file release];
 	file = filename;
 }
-
-- (NSString *)downloadFile {
+- (NSS *)downloadFile {
 	return file;
 }
-
 - (void)showBezel {
 	[filenameDisplay setStringValue:file];
 	[bezel setAlphaValue:0.0];
@@ -85,37 +78,32 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	[bezel invalidateShadow];
 	timer = [NSTimer scheduledTimerWithTimeInterval:0.005 target:self selector:@selector(fadeInWindow:) userInfo:nil repeats:YES];
 }
-
-- (void)showBezelForFile:(NSString *)filename {
+- (void)showBezelForFile:(NSS *)filename {
 	[self setDownloadFile:filename];
 	[self showBezel];
 }
-
 - (void)hideBezel {
 	timer = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(fadeOutWindow:) userInfo:nil repeats:YES];
 }
-
 - (void)fadeOutWindow:(NSTimer *)theTimer {
 	 if ([bezel alphaValue] > 0.0) {
 		  [bezel setAlphaValue:[bezel alphaValue] - 0.1];
 	 } else {
 		  [timer invalidate];
-		  [timer release];
+//		  [timer release];
 		timer = nil;
 	 }
 }
-
 - (void)fadeInWindow:(NSTimer *)theTimer {
 	 if ([bezel alphaValue] < 1.0) {
 		  [bezel setAlphaValue:[bezel alphaValue] + 0.2];
 	 } else {
 		  [timer invalidate];
-		  [timer release];
+//		  [timer release];
 		  timer = nil;
 		  
 		  [bezel setAlphaValue:1.0];
 		timer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(hideBezel) userInfo:nil repeats:NO];
 	 }
 }
-
 @end

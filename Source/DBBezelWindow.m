@@ -3,19 +3,16 @@
 The DeskBrowse source code is the legal property of its developers, Joel Levin and Ian Elseth
 *****************************
 */
-
 #import "DBBezelWindow.h"
 
-
 @implementation DBBezelWindow
-
 
 - (id) initWithContentRect: (NSR) contentRect styleMask: (NSUI) aStyle backing: (NSBackingStoreType) bufferingType defer: (BOOL) flag
 {
 	if (self = [super initWithContentRect: contentRect styleMask: NSBorderlessWindowMask backing: bufferingType defer: flag])
 	{
 //		[self setAboveMainWindowLevel: YES]; // Only use this if you want the bezel windows to CGFloat
-		[self setOpaque: NO];
+		[self setOpaque: YES];
 		[self setBackgroundColor: BLACK];//[NSColor clearColor]];
 		[self setAlphaValue: 1.0];
 		[self setHasShadow: YES];
@@ -23,23 +20,19 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	
 	 return self;
 }
-
 - (BOOL) canBecomeKeyWindow
 {
 	return YES;
 }
-
 - (BOOL) acceptsFirstResponder
 {
 	return YES;
 }
-
 - (void) mouseDown: (NSEvent*) theEvent
 {
 	 dragStartLocation	= [theEvent locationInWindow];
 	NSP origin		= [self frame].origin;
-	NSSize	size		= [self frame].size;
-
+	NSSZ	size		= [self frame].size;
 	/*if (((origin.y + dragStartLocation.y) > ((origin.y + size.height) - 19)))
 	{
 		moving		= YES;
@@ -59,21 +52,20 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		resizing	= NO;
 	}
 }
-
 - (void) mouseDragged: (NSEvent*) theEvent
 {
 	 if ([theEvent type] == NSLeftMouseDragged)
 	{
 		  NSP origin;
-		NSSize	size;
-		NSSize	minSize;
+		NSSZ	size;
+		NSSZ	minSize;
 		  NSP newLocation;
 		
 		NSR		screenRect	= [[self screen] frame];
 		
 		NSR		newFrameRect;
 		NSP		newOrigin	= [self frame].origin;
-		NSSize		newSize		= [self frame].size;
+		NSSZ		newSize		= [self frame].size;
 		
 		  origin		= [self frame].origin;
 		size		= [self frame].size;
@@ -111,11 +103,10 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 			// Resize stuff
 			//
 			
-			NSSize	distanceMoved;
+			NSSZ	distanceMoved;
 			
 			distanceMoved.width		= newLocation.x - size.width + clickDistanceFromWindowEdge.width;
 			distanceMoved.height	= newLocation.y - clickDistanceFromWindowEdge.height;
-
 			newSize.width		= size.width + distanceMoved.width;
 			newSize.height		= size.height - distanceMoved.height;
 			
@@ -143,12 +134,10 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		[self setFrame: newFrameRect display: YES];
 	 }
 }
-
 - (void) mouseUp: (NSEvent*) theEvent
 {
 	moving		= NO;
 	resizing	= NO;
 }
-
 
 @end

@@ -4,24 +4,22 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 *****************************
 */
 
-
 #import <Cocoa/Cocoa.h>
-
 
 @interface DBBezelController : NSObject {
 	NSWindow *bezel;
-	NSString *file;
+	NSS *file;
 	NSTimer *timer;
 	NSTextField *filenameDisplay;
 	NSImageView *imageView;
 	NSImageView *bgView;
 }
-- (void)setDownloadFile:(NSString *)filename;
-- (NSString *)downloadFile;
+//- (void)setDownloadFile:(NSS *)filename;
+//- (NSS *)downloadFile;
+@property (strong, nonatomic) NSS*downloadFile;
+
 - (void)showBezel;
-- (void)showBezelForFile:(NSString *)filename;
+- (void)showBezelForFile:(NSS *)filename;
 - (void)hideBezel;
-
 - (void)handleNotification:(NSNotification *)note;
-
 @end

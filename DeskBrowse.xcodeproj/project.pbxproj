@@ -466,6 +466,8 @@
 		7B43D319164CD61700AC4D26 /* AtoZ.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AtoZ.framework; path = /Library/Frameworks/AtoZ.framework; sourceTree = "<absolute>"; };
 		7B43D31D164CDB7A00AC4D26 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = /System/Library/Frameworks/SystemConfiguration.framework; sourceTree = "<absolute>"; };
 		7B7A855215F8790F0071741C /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		7BFCBD2A164D773300859A93 /* ThreadWorkerOld.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ThreadWorkerOld.m; path = Source/ThreadWorkerOld.m; sourceTree = "<group>"; };
+		7BFCBD2B164D774200859A93 /* ThreadWorkerOld.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.objj.h; name = ThreadWorkerOld.h; path = Source/ThreadWorkerOld.h; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* DeskBrowse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeskBrowse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -844,7 +846,9 @@
 				5DC2C4FF0EC21CDF00BD0054 /* DBSymbolicHotKeyController.h */,
 				5DC2C5000EC21CDF00BD0054 /* DBSymbolicHotKeyController.m */,
 				5DC2C5020EC21CE800BD0054 /* ThreadWorker.h */,
+				7BFCBD2B164D774200859A93 /* ThreadWorkerOld.h */,
 				5DC2C5030EC21CE800BD0054 /* ThreadWorker.m */,
+				7BFCBD2A164D773300859A93 /* ThreadWorkerOld.m */,
 				5DC2C5050EC21CF100BD0054 /* DBShellExec.h */,
 				5DC2C5060EC21CF100BD0054 /* DBShellExec.m */,
 				5DC2C5140EC21D2D00BD0054 /* DBFindController.h */,

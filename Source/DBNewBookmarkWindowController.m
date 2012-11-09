@@ -3,19 +3,14 @@
 The DeskBrowse source code is the legal property of its developers, Joel Levin and Ian Elseth
 *****************************
 */
-
 #import "DBNewBookmarkWindowController.h"
-
 #import "DBBookmark.h"
 #import "DBBookmarkController.h"
 
-
-NSString* const kNewBookmarkWindowNibName = @"NewBookmark";
-
+NSS* const kNewBookmarkWindowNibName = @"NewBookmark";
 @implementation DBNewBookmarkWindowController
 
-
-- (id) initWithBookmarkController: (DBBookmarkController*) bookmarkController title: (NSString*) bookmarkTitle url: (NSURL*) bookmarkURL
+- (id) initWithBookmarkController: (DBBookmarkController*) bookmarkController title: (NSS*) bookmarkTitle url: (NSURL*) bookmarkURL
 {
 	if (self = [super initWithWindowNibName: kNewBookmarkWindowNibName])
 	{
@@ -26,7 +21,6 @@ NSString* const kNewBookmarkWindowNibName = @"NewBookmark";
 	
 	return self;
 }
-
 - (void) dealloc
 {
 	[mBookmarkController release];
@@ -34,7 +28,6 @@ NSString* const kNewBookmarkWindowNibName = @"NewBookmark";
 	[mBookmarkTitle release];
 	
 }
-
 
 - (void) close
 {
@@ -44,12 +37,11 @@ NSString* const kNewBookmarkWindowNibName = @"NewBookmark";
 	[self release];
 }
 
-
 - (void) runSheetOnWindow: (NSWindow*) window
 {
 	[NSApp beginSheet: [self window] modalForWindow: window modalDelegate: nil didEndSelector: nil contextInfo: nil];
 	
-	NSString* titleFieldValue = @"";
+	NSS* titleFieldValue = @"";
 	
 	if (mBookmarkTitle != nil)
 	{
@@ -60,10 +52,9 @@ NSString* const kNewBookmarkWindowNibName = @"NewBookmark";
 	
 }
 
-
 - (IBAction) ok: (id) sender
 {
-	NSString* newTitle = [mTitleField stringValue];
+	NSS* newTitle = [mTitleField stringValue];
 	
 	if ([newTitle length] <= 0)
 	{
@@ -81,11 +72,9 @@ NSString* const kNewBookmarkWindowNibName = @"NewBookmark";
 	
 	[self close];
 }
-
 - (IBAction) cancel: (id) sender
 {
 	[self close];
 }
-
 
 @end

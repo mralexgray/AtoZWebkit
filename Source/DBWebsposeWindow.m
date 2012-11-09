@@ -3,12 +3,9 @@
 The DeskBrowse source code is the legal property of its developers, Joel Levin and Ian Elseth
 *****************************
 */
-
 #import "DBWebsposeWindow.h"
 
-
 @implementation DBWebsposeWindow
-
 
 - (id) initWithContentRect: (NSR) contentRect styleMask: (NSUI) aStyle backing: (NSBackingStoreType) bufferingType defer: (BOOL) flag
 {
@@ -19,21 +16,18 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		// [self setLevel: NSMainMenuWindowLevel + 1];
 		//
 		
-		[self setBackgroundColor: [NSColor whiteColor]];
+		[self setBackgroundColor: [NSColor colorWithCalibratedRed:0.282 green:1.000 blue:0.108 alpha:1.000]];
 	}
 	
 	return self;
 }
-
 - (BOOL) canBecomeKeyWindow
 {
 	return YES;
 }
-
 - (BOOL) canBecomeMainWindow
 {
 	return YES;
 }
-
 
 @end

@@ -3,27 +3,21 @@
 The DeskBrowse source code is the legal property of its developers, Joel Levin and Ian Elseth
 *****************************
 */
-
 #import "DBBookmarkImportWindowController.h"
-
 @class DBBookmarkController;
 @class DBBookmarkImporter;
 
-
-NSString*	kNameOfCaminoApp		= @"Camino";
-NSString*	kNameOfFirefoxApp		= @"Firefox";
-NSString*	kNameOfMozillaApp		= @"Mozilla";
-NSString*	kNameOfSafariApp		= @"Safari";
-NSString*	kNameOfShiiraApp		= @"Shiira";
-
-NSString*	kNoStatus				= @"";
-NSString*	kDoneImportingStatus	= @"Done";
-NSString*	kImportingStatus		= @"Importing...";
-
+NSS*	kNameOfCaminoApp		= @"Camino";
+NSS*	kNameOfFirefoxApp		= @"Firefox";
+NSS*	kNameOfMozillaApp		= @"Mozilla";
+NSS*	kNameOfSafariApp		= @"Safari";
+NSS*	kNameOfShiiraApp		= @"Shiira";
+NSS*	kNoStatus				= @"";
+NSS*	kDoneImportingStatus	= @"Done";
+NSS*	kImportingStatus		= @"Importing...";
 @implementation DBBookmarkImportWindowController
 
-
-- (id) initWithWindowNibName: (NSString*) windowNibName bookmarkController: (DBBookmarkController*) bookmarkController
+- (id) initWithWindowNibName: (NSS*) windowNibName bookmarkController: (DBBookmarkController*) bookmarkController
 {
 	if (self = [super initWithWindowNibName: windowNibName])
 	{
@@ -37,12 +31,10 @@ NSString*	kImportingStatus		= @"Importing...";
 	
 	return self;
 }
-
 - (void)dealloc
 {
 	[mBookmarkController release];
 }
-
 - (void) showWindow: (id) sender
 {	
 	[self populatePopUpButtonWithOtherBrowsers: mOtherBrowsersPopUpButton];
@@ -52,19 +44,16 @@ NSString*	kImportingStatus		= @"Importing...";
 	
 	[super showWindow: sender];
 }
-
 - (IBAction) importBookmarksFromSelectedBrowser: (id) sender
 {	
 	[NSThread detachNewThreadSelector: @selector(importBookmarksFromSelectedBrowserInNewThread) toTarget: self withObject: nil];
 }
-
 - (void) importBookmarksFromSelectedBrowserInNewThread
 {
 //	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
 	@autoreleasepool {
-
 	BOOL		sortBookmarks			= [mSortBookmarksButton state];
-	NSString*	nameOfSelectedBrowser	= [mOtherBrowsersPopUpButton titleOfSelectedItem];
+	NSS*	nameOfSelectedBrowser	= [mOtherBrowsersPopUpButton titleOfSelectedItem];
 	
 	[mImportButton setEnabled: NO];
 	[mDoneButton setEnabled: NO];
@@ -119,17 +108,15 @@ NSString*	kImportingStatus		= @"Importing...";
 	}
 //	[pool release];
 }
-
 - (void) populatePopUpButtonWithOtherBrowsers: (NSPopUpButton*) popUpButton
 {
 	NSWorkspace* workspace = [NSWorkspace sharedWorkspace];
 	
 	[popUpButton removeAllItems];
 
-
 	// Add Camino if it exsits
 	
-	NSString* pathOfCamino = [workspace fullPathForApplication: kNameOfCaminoApp];
+	NSS* pathOfCamino = [workspace fullPathForApplication: kNameOfCaminoApp];
 	
 	if (pathOfCamino != nil)
 	{
@@ -142,10 +129,9 @@ NSString*	kImportingStatus		= @"Importing...";
 		[caminoMenuItem setImage: caminoIcon];
 	}
 
-
 	// Add Firefox if it exsits
 	
-	NSString* pathOfFirefox = [workspace fullPathForApplication: kNameOfFirefoxApp];
+	NSS* pathOfFirefox = [workspace fullPathForApplication: kNameOfFirefoxApp];
 	
 	if (pathOfFirefox != nil)
 	{
@@ -158,10 +144,9 @@ NSString*	kImportingStatus		= @"Importing...";
 		[firefoxMenuItem setImage: firefoxIcon];
 	}
 
-
 	// Add Mozilla if it exsits
 	
-	NSString* pathOfMozilla = [workspace fullPathForApplication: kNameOfMozillaApp];
+	NSS* pathOfMozilla = [workspace fullPathForApplication: kNameOfMozillaApp];
 	
 	if (pathOfMozilla != nil)
 	{
@@ -174,10 +159,9 @@ NSString*	kImportingStatus		= @"Importing...";
 		[mozillaMenuItem setImage: mozillaIcon];
 	}
 
-
 	// Add Safari if it exsits
 	
-	NSString* pathOfSafari = [workspace fullPathForApplication: kNameOfSafariApp];
+	NSS* pathOfSafari = [workspace fullPathForApplication: kNameOfSafariApp];
 	
 	if (pathOfSafari != nil)
 	{
@@ -190,10 +174,9 @@ NSString*	kImportingStatus		= @"Importing...";
 		[safariMenuItem setImage: safariIcon];
 	}
 
-
 	// Add Shiira if it exsits
 	
-	NSString* pathOfShiira = [workspace fullPathForApplication: kNameOfShiiraApp];
+	NSS* pathOfShiira = [workspace fullPathForApplication: kNameOfShiiraApp];
 	
 	if (pathOfShiira != nil)
 	{
@@ -206,6 +189,5 @@ NSString*	kImportingStatus		= @"Importing...";
 		[shiiraMenuItem setImage: shiiraIcon];
 	}
 }
-
 
 @end

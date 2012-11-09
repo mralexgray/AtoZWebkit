@@ -3,12 +3,9 @@
 The DeskBrowse source code is the legal property of its developers, Joel Levin and Ian Elseth
 *****************************
 */
-
 #import "DBPreferenceController.h"
 #import "DBWebsposePassword.h"
-
 #import "DBHotKeyController.h"
-
 NSInteger stateFromBool(BOOL aBool); // declaration
 NSInteger oppositeBoolInt(NSInteger bi);
 NSInteger stateFromBool(BOOL aBool) {
@@ -18,7 +15,6 @@ NSInteger stateFromBool(BOOL aBool) {
 		return NSOffState;
 	}
 }
-
 NSInteger oppositeBoolInt(NSInteger bi) {
 	if (bi == 0)
 		return 1;
@@ -26,24 +22,20 @@ NSInteger oppositeBoolInt(NSInteger bi) {
 		return 0;
 	return -1; // shouldnt ever get here
 }
-
 @implementation DBPreferenceController
-
 
 // -----------------------------------
 //
 // Constructor and destructor methods
 //
 // -----------------------------------
-
 - (id) init
 {
 	self = [self initWithWindowNibName: @"Preferences"];
 	
 	return self;
 }
-
-- (id) initWithWindowNibName: (NSString*) windowNibName
+- (id) initWithWindowNibName: (NSS*) windowNibName
 {
 	if(self = [super initWithWindowNibName: windowNibName])
 	{
@@ -64,13 +56,11 @@ NSInteger oppositeBoolInt(NSInteger bi) {
 	
 	return self;
 }
-
 - (void) dealloc
 {
 	[AZNOTCENTER removeObserver:self];
 	[toolbar release];
 }
-
 - (void) awakeFromNib
 {	
 	[self syncViewWithUserPrefs];
@@ -92,15 +82,13 @@ NSInteger oppositeBoolInt(NSInteger bi) {
 	
 	[toolbar setSelectedItemIdentifier:@"com.sgs.prefswindow.toolbar.general"];
 }
-
 #pragma mark -
-
 - (void)showGeneralPane {
 	[tabView selectTabViewItemAtIndex:3];
 	
 	NSR winRect;
 	
-	NSSize	currentSize		= [[self window] frame].size;
+	NSSZ	currentSize		= [[self window] frame].size;
 	NSP	currentOrigin	= [[self window] frame].origin;
 	
 	winRect.origin			= NSMakePoint(currentOrigin.x, currentOrigin.y - (sizeOfGeneralPane.height - currentSize.height));
@@ -110,13 +98,12 @@ NSInteger oppositeBoolInt(NSInteger bi) {
 	[tabView selectTabViewItemAtIndex:0];
 	[[self window] display];
 }
-
 - (void)showWebPane {
 	[tabView selectTabViewItemAtIndex:3];
 	
 	NSR winRect;
 	
-	NSSize	currentSize		= [[self window] frame].size;
+	NSSZ	currentSize		= [[self window] frame].size;
 	NSP	currentOrigin	= [[self window] frame].origin;
 	
 	winRect.origin			= NSMakePoint(currentOrigin.x, currentOrigin.y - (sizeOfWebPane.height - currentSize.height));
@@ -126,13 +113,12 @@ NSInteger oppositeBoolInt(NSInteger bi) {
 	[tabView selectTabViewItemAtIndex:1];
 	[[self window] display];
 }
-
 - (void)showWebsposePane {
 	[tabView selectTabViewItemAtIndex:3];
 	
 	NSR winRect;
 	
-	NSSize	currentSize		= [[self window] frame].size;
+	NSSZ	currentSize		= [[self window] frame].size;
 	NSP	currentOrigin	= [[self window] frame].origin;
 	
 	winRect.origin			= NSMakePoint(currentOrigin.x, currentOrigin.y - (sizeOfWebsposePane.height - currentSize.height));
@@ -142,17 +128,14 @@ NSInteger oppositeBoolInt(NSInteger bi) {
 	[tabView selectTabViewItemAtIndex:2];
 	[[self window] display];
 }
-
 #pragma mark -
-
 // -----------------------------------
 //
 // NSToolbar delegate methods
 //
 // -----------------------------------
-
 - (NSToolbarItem*) toolbar: (NSToolbar*) toolbar
-	 itemForItemIdentifier: (NSString*) identifier 
+	 itemForItemIdentifier: (NSS*) identifier 
  willBeInsertedIntoToolbar: (BOOL) willBeInserted {
 	
 	NSToolbarItem* toolbarItem = [[[NSToolbarItem alloc] initWithItemIdentifier: identifier] autorelease];
@@ -179,54 +162,44 @@ NSInteger oppositeBoolInt(NSInteger bi) {
 	
 	return toolbarItem;
 }
-
 - (NSA*) toolbarDefaultItemIdentifiers: (NSToolbar*) toolbar {
 	NSArray* identifiers = @[@"com.sgs.prefswindow.toolbar.general", @"com.sgs.prefswindow.toolbar.webcontent", @"com.sgs.prefswindow.toolbar.webspose"];
 	
 	 return identifiers;
 }
-
 - (NSA*) toolbarAllowedItemIdentifiers: (NSToolbar*) toolbar {
 	NSArray* identifiers = @[@"com.sgs.prefswindow.toolbar.general", @"com.sgs.prefswindow.toolbar.webcontent", @"com.sgs.prefswindow.toolbar.webspose", NSToolbarSpaceItemIdentifier, NSToolbarFlexibleSpaceItemIdentifier, NSToolbarSeparatorItemIdentifier];
 	
 	 return identifiers;
 }
-
 - (BOOL) validateToolbarItem: (NSToolbarItem*) toolbarItem {
 	 return YES;
 }
-
 - (NSArray *)toolbarSelectableItemIdentifiers: (NSToolbar *)toolbar {
 	NSArray* identifiers = @[@"com.sgs.prefswindow.toolbar.general", @"com.sgs.prefswindow.toolbar.webcontent", @"com.sgs.prefswindow.toolbar.webspose"];
 	
 	return identifiers;
 }
-
 #pragma mark -
-
 
 // -----------------------------------
 //
 // NSNotification methods
 //
 // -----------------------------------
-
 - (void) handleNotification: (NSNotification*) note
 {
 	if([note name] == NSUserDefaultsDidChangeNotification)
 	{
 	}
 }
-
 #pragma mark -
-
 
 // -----------------------------------
 //
 // NSWindowController methods
 //
 // -----------------------------------
-
 - (IBAction) showWindow: (id) sender
 {
 	[self syncViewWithUserPrefs];
@@ -234,21 +207,17 @@ NSInteger oppositeBoolInt(NSInteger bi) {
 	
 	[super showWindow: sender];
 }
-
 #pragma mark -
-
 
 // -----------------------------------
 //
 // Interface methods
 //
 // -----------------------------------
-
 - (IBAction) closeWindow: (id) sender
 {
 	[[self window] close];
 }
-
 - (IBAction) savePreferences: (id) sender
 {	
 	NSUserDefaults*	defaults	= [NSUserDefaults standardUserDefaults];
@@ -272,15 +241,14 @@ NSInteger oppositeBoolInt(NSInteger bi) {
 	
 	[self closeWindow: self];
 }
-
 - (IBAction) resetPreferences: (id) sender
 {
-	NSDictionary*	defaultPrefs;
+	NSD*	defaultPrefs;
 	NSUserDefaults*	userDefaults;
 	NSBundle*		mainBundle;
 	
 	mainBundle		= [NSBundle mainBundle];
-	defaultPrefs	= [NSDictionary dictionaryWithContentsOfFile: [[mainBundle bundlePath] stringByAppendingString: kPathToDefaultPrefsFile]];
+	defaultPrefs	= [NSD dictionaryWithContentsOfFile: [[mainBundle bundlePath] stringByAppendingString: kPathToDefaultPrefsFile]];
 	
 	if(defaultPrefs)
 	{
@@ -308,13 +276,11 @@ NSInteger oppositeBoolInt(NSInteger bi) {
 	}
 }
 
-
 // --------------------------------------
 //
 //	checkForUpdates:
 //
 // --------------------------------------
-
 - (IBAction) checkForUpdates: (id) sender
 {
 	[checkForUpdatesIndicator startAnimation: self];
@@ -326,39 +292,33 @@ NSInteger oppositeBoolInt(NSInteger bi) {
 	[checkForUpdatesIndicator stopAnimation: self];
 }
 
-
 // --------------------------------------
 //
 //	changeSBHotKey:
 //
 // --------------------------------------
-
 - (IBAction) changeSBHotKey: (id) sender
 {
 	[[NSApp hotKeyController] getNewSlideBrowseHotKey];
 	[self syncViewWithUserPrefs];
 }
 
-
 // --------------------------------------
 //
 //	changeWBHotKey:
 //
 // --------------------------------------
-
 - (IBAction) changeWBHotKey: (id) sender
 {
 	[[NSApp hotKeyController] getNewWebsposeHotKey];
 	[self syncViewWithUserPrefs];
 }
 
-
 // -----------------------------------
 //
 // Interface methods - Websposé
 //
 // -----------------------------------
-
 - (IBAction) changePassword: (id) sender
 {
 	[changePasswordOld		setStringValue: @""];
@@ -372,14 +332,13 @@ NSInteger oppositeBoolInt(NSInteger bi) {
 	
 	[NSApp beginSheet: changePasswordWindow modalForWindow: [self window] modalDelegate: nil didEndSelector: nil contextInfo: nil];
 }
-
 - (IBAction) savePassword: (id) sender
 {
-	NSString*		oldPassword		= [DBWebsposePassword websposePassword];
+	NSS*		oldPassword		= [DBWebsposePassword websposePassword];
 	
-	NSString*		oldString		= [changePasswordOld	stringValue];
-	NSString*		newString		= [changePasswordNew	stringValue];
-	NSString*		verifyString	= [changePasswordVerify	stringValue];
+	NSS*		oldString		= [changePasswordOld	stringValue];
+	NSS*		newString		= [changePasswordNew	stringValue];
+	NSS*		verifyString	= [changePasswordVerify	stringValue];
 	
 	if (oldPassword == nil || [oldString isEqualToString: oldPassword])
 	{
@@ -400,31 +359,26 @@ NSInteger oppositeBoolInt(NSInteger bi) {
 		[changePasswordStatus setStringValue: @"Old password is incorrect"];
 	}
 }
-
 - (IBAction) cancelPassword: (id) sender
 {
 	[NSApp endSheet: changePasswordWindow];
 }
-
 #pragma mark -
-
 
 // -----------------------------------
 //
 // Other methods
 //
 // -----------------------------------
-
 - (void) setLevel: (NSI) newLevel
 {
 	[[self window]			setLevel: newLevel];
 	[changePasswordWindow	setLevel: newLevel];
 }
-
 - (IBAction) changeDownloadLocation: (id) sender
 {
 	NSOpenPanel*	openPanel			= [NSOpenPanel openPanel];
-	NSString*		startingDirectory	= [[downloadPathField stringValue] stringByExpandingTildeInPath];
+	NSS*		startingDirectory	= [[downloadPathField stringValue] stringByExpandingTildeInPath];
 	
 	if (startingDirectory == nil || ![[NSFileManager defaultManager] fileExistsAtPath: startingDirectory])
 	{
@@ -438,13 +392,12 @@ NSInteger oppositeBoolInt(NSInteger bi) {
 	
 	[openPanel beginSheetForDirectory: startingDirectory file: nil types: nil modalForWindow: [self window] modalDelegate: self didEndSelector: @selector(openPanelDidEnd:returnCode:contextInfo:) contextInfo: nil];
 }
-
 - (void) openPanelDidEnd: (NSOpenPanel*) sheet returnCode: (NSI) returnCode contextInfo: (void*) contextInfo
 {
 	if (sheet != nil && returnCode == NSOKButton)
 	{
-		NSString*	filePath			= [sheet filename];
-		NSString*	abbreviatedFilePath	= [filePath stringByAbbreviatingWithTildeInPath];
+		NSS*	filePath			= [sheet filename];
+		NSS*	abbreviatedFilePath	= [filePath stringByAbbreviatingWithTildeInPath];
 		
 		if (abbreviatedFilePath != nil)
 		{
@@ -452,7 +405,6 @@ NSInteger oppositeBoolInt(NSInteger bi) {
 		}
 	}
 }
-
 - (void) syncViewWithUserPrefs
 {
 	NSUserDefaults*	defaults	= [NSUserDefaults standardUserDefaults];
@@ -479,5 +431,4 @@ NSInteger oppositeBoolInt(NSInteger bi) {
 	[downloadPathField setStringValue: defaults[kDownloadLocation]];
 	
 }
-
 @end

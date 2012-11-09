@@ -3,19 +3,14 @@
 The DeskBrowse source code is the legal property of its developers, Joel Levin and Ian Elseth
 *****************************
 */
-
 #import "DBHistoryView.h"
-
 #import "DBHistoryController.h"
 
-
 @implementation DBHistoryView
-
 
 ////-------------------------------------------------
 //		initWithFrame:
 ////-------------------------------------------------
-
 - (id) initWithFrame: (NSR) frame
 {
 	if(self = [super initWithFrame: frame])
@@ -39,21 +34,17 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	return self;
 }
 
-
 ////-------------------------------------------------
 //		acceptsFirstResponder
 ////-------------------------------------------------
-
 - (BOOL) acceptsFirstResponder
 {
 	return YES;
 }
 
-
 ////-------------------------------------------------
 //		dealloc
 ////-------------------------------------------------
-
 - (void) dealloc
 {
 	[delegate			release];
@@ -64,11 +55,9 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	
 }
 
-
 ////-------------------------------------------------
 //		setDelegate:
 ////-------------------------------------------------
-
 - (void) setDelegate: (id) object
 {
 	[delegate release];
@@ -76,11 +65,9 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	[self setNeedsDisplay: YES];
 }
 
-
 ////-------------------------------------------------
 //		drawRect:
 ////-------------------------------------------------
-
 - (void) drawRect: (NSR) rect
 {
 	if (delegate != nil)
@@ -94,12 +81,10 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		NSInteger				itemsForCurrentDate	= 0;
 		NSInteger				currentDrawRow		= 1;
 		NSCalendarDate*	currentDate			= nil;
-		NSString*		pageString			= nil;
-		NSString*		dateString			= nil;
-
+		NSS*		pageString			= nil;
+		NSS*		dateString			= nil;
 		NSInteger i;
 		NSInteger j;
-
 		// Draw history items
 		for (i = 0; i < dates; i++)
 		{
@@ -117,7 +102,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 			dateString		= [self string: dateString withAttributes: textAttributes constrainedToWidth: dateArea.size.width];
 			
 			[dateString drawAtPoint: NSMakePoint(dateArea.origin.x, dateArea.size.height - (currentDrawRow * rowHeight))	withAttributes: textAttributes];
-
 			itemsForCurrentDate = [delegate numberOfItemsForDate: currentDate];
 			currentDrawRow		+= 1;
 			
@@ -143,16 +127,14 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	}
 }
 
-
 ////-------------------------------------------------
 //		string:withAttributes:contstrainedToWidth:
 ////-------------------------------------------------
-
-- (NSString*) string: (NSString*) string withAttributes: (NSD*) attributes constrainedToWidth: (CGFloat) width
+- (NSS*) string: (NSS*) string withAttributes: (NSD*) attributes constrainedToWidth: (CGFloat) width
 {
-	NSString*	fixedString		= string;
-	NSString*	currentString	= [string stringByAppendingString: @"..."];
-	NSSize		stringSize		= [currentString sizeWithAttributes: attributes];
+	NSS*	fixedString		= string;
+	NSS*	currentString	= [string stringByAppendingString: @"..."];
+	NSSZ		stringSize		= [currentString sizeWithAttributes: attributes];
 	
 	if(stringSize.width > width)
 	{
@@ -177,11 +159,9 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	return fixedString;
 }
 
-
 ////-------------------------------------------------
 //		setTextColor:
 ////-------------------------------------------------
-
 - (void) setTextColor: (NSColor*) color
 {
 	[textColor release];
@@ -190,11 +170,9 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	[textAttributes setValue: textColor forKey: NSForegroundColorAttributeName];
 }
 
-
 ////-------------------------------------------------
 //		setTextSize:
 ////-------------------------------------------------
-
 - (void) setTextSize: (NSI) size
 {
 	textSize = size;
@@ -202,11 +180,9 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	[textAttributes setValue: [NSFont systemFontOfSize: textSize] forKey: NSFontAttributeName];
 }
 
-
 ////-------------------------------------------------
 //		mouseDown:
 ////-------------------------------------------------
-
 - (void) mouseDown: (NSEvent*) theEvent
 {
 	if(delegate != nil)
@@ -228,22 +204,18 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		if ([theEvent clickCount] > 1 && selectedRow > -1) {
 			[delegate loadSelected];
 		}
-
 		[self setNeedsDisplay: YES];
 	}
 }
 
-
 ////-------------------------------------------------
 //		keyDown:
 ////-------------------------------------------------
-
 - (void) keyDown: (NSEvent*) theEvent
 {
 	NSInteger		row			= [self selectedRow];
 	NSInteger		keyCode		= [theEvent keyCode];
 //	unichar	character	= [DBKeyStuff characterForKeyCode: keyCode];
-
 	if(row > -1)
 	{
 //		if(character == NSDeleteFunctionKey)
@@ -253,11 +225,9 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	}
 }
 
-
 ////-------------------------------------------------
 //		reloadData:
 ////-------------------------------------------------
-
 - (void) reloadData
 {
 	if (delegate != nil)
@@ -280,12 +250,10 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		NSLog(@"HistoryController has no delegate");
 	}
 }
-
 - (NSI) selectedRow
 {
 	return selectedRow;
 }
-
 - (void) updateSelectedRow
 {
 	NSInteger numberOfRows = [delegate numberOfRows];
@@ -295,6 +263,5 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		selectedRow = -1;
 	}
 }
-
 
 @end

@@ -13,7 +13,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 
 @interface DBBookmarkBar : NSView
 {
-	DBBookmarkController*		mBookmarkController;
 	NSColor*				mBackgroundColor;
 	DBBookmarkBarPopUpButton*	mExtraBookmarksPopUpButton;
 	
@@ -21,9 +20,9 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	
 	BOOL					mDragging;
 	CGFloat					mLastMouseX;
-	
 	NSR					mLastFrame;
 }
+@property (strong, NATOM) DBBookmarkController*		mBookmarkController;
 
 - (void) setBookmarkController: (DBBookmarkController*) bookmarkController;
 - (void) reloadData;

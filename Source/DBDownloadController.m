@@ -3,22 +3,15 @@
 The DeskBrowse source code is the legal property of its developers, Joel Levin and Ian Elseth
 *****************************
 */
-
 #import "DBDownloadController.h"
-
 #import "DBDownloadObject.h"
 #import "DBBezelController.h"
 #import "DBBezelWindow.h"
 
-
-
-NSString* kDownloadWindowNibName			= @"Downloads";
-
-NSString* defaultDownloadSaveDestination	= @"~/Desktop";
-NSString* downloadFileWrapperExtension		= @"download";
-
+NSS* kDownloadWindowNibName			= @"Downloads";
+NSS* defaultDownloadSaveDestination	= @"~/Desktop";
+NSS* downloadFileWrapperExtension		= @"download";
 @implementation DBDownloadController
-
 
 - (id) init
 {
@@ -51,7 +44,6 @@ NSString* downloadFileWrapperExtension		= @"download";
 	
 	return self;
 }
-
 - (void) dealloc
 {
 	[AZNOTCENTER removeObserver: self];
@@ -61,18 +53,14 @@ NSString* downloadFileWrapperExtension		= @"download";
 	[mTableCellFont release];
 	
 }
-
 - (void) awakeFromNib
 {
 	[mDownloadTableView setTarget: self];
 	[mDownloadTableView setDoubleAction: @selector(tableViewDoubleClick)];
 }
 
-
 #pragma mark -
-
 #pragma mark Interface
-
 - (IBAction) clearDownloads: (id) sender
 {
 	NSMutableArray*	downloadsToRemove	= [NSMutableArray array];
@@ -101,14 +89,12 @@ NSString* downloadFileWrapperExtension		= @"download";
 	[mDownloadTableView reloadData];
 	
 }
-
 - (IBAction) cancelSelected: (id) sender
 {
 	if (mDownloadTableView != nil)
 	{
 		NSInteger				row		= [mDownloadTableView selectedRow];
 		DBDownloadObject*	object	= nil;
-
 		if (row > -1 && row < [mDownloads count]) // a row is selected
 		{
 			object = mDownloads[row];
@@ -131,13 +117,11 @@ NSString* downloadFileWrapperExtension		= @"download";
 		}
 	}
 }
-
 - (IBAction) cancelAllDownloads: (id) sender
 {
 	NSAlert *msg = [NSAlert alertWithMessageText: @"Alert!" defaultButton: @"Yes" alternateButton: @"No" otherButton: nil informativeTextWithFormat: @"Are you sure you want to cancel all active downloads?"];
 	[msg beginSheetModalForWindow: [self window] modalDelegate: self didEndSelector: @selector(alertDidEnd:returnCode:contextInfo:) contextInfo: nil];
 }
-
 - (void) alertDidEnd: (NSAlert*) alert returnCode: (NSI) returnCode contextInfo: (void*) contextInfo
 {
 	if (returnCode == NSOKButton)
@@ -165,7 +149,6 @@ NSString* downloadFileWrapperExtension		= @"download";
 		[mDownloadTableView reloadData];
 	}
 }
-
 - (IBAction) showDownloadInFinder: (id) sender
 {
 	if (mDownloadTableView != nil)
@@ -174,7 +157,7 @@ NSString* downloadFileWrapperExtension		= @"download";
 		
 		if (row > -1 && row < [mDownloads count])
 		{
-			NSString* filePath = [mDownloads[row] downloadedFilePath];
+			NSS* filePath = [mDownloads[row] downloadedFilePath];
 			
 			if ([[NSFileManager defaultManager] fileExistsAtPath: filePath])
 			{
@@ -183,18 +166,13 @@ NSString* downloadFileWrapperExtension		= @"download";
 		}
 	}
 }
-
 - (NSI) downloadsInProgress
 {
 	return mNumloads;
 }
-
 #pragma mark -
-
 #pragma mark NSTableView Methods
-
 #pragma mark -
-
 - (void) tableViewDoubleClick
 {
 	NSInteger row = [mDownloadTableView selectedRow];
@@ -205,21 +183,17 @@ NSString* downloadFileWrapperExtension		= @"download";
 	}
 }
 
-
 #pragma mark -
-
 
 - (NSI) numberOfRowsInTableView: (NSTableView*) tableView
 {	
 	return [mDownloads count];
 }
-
 - (id) tableView: (NSTableView*) tableView objectValueForTableColumn: (NSTableColumn*) column row: (NSI) row
 {
 	id				value		= nil;
-	NSString*		identifier	= [column identifier];
+	NSS*		identifier	= [column identifier];
 	DBDownloadObject*	download	= mDownloads[row];
-
 	if ([identifier isEqualToString: @"FileName"])
 	{
 		value = [download displayName];
@@ -231,18 +205,13 @@ NSString* downloadFileWrapperExtension		= @"download";
 	
 	return value;
 }
-
 #pragma mark -
-
 - (void) tableView: (NSTableView*) tableView willDisplayCell: (id) cell forTableColumn: (NSTableColumn*) tableColumn row: (NSI) row
 {
 	[(NSCell*)cell setFont: [NSFont systemFontOfSize: 10.0]];
 }
-
 #pragma mark -
-
 #pragma mark NSURLDownload Delegate Methods
-
 
 // -----------------------------------
 //
@@ -250,15 +219,14 @@ NSString* downloadFileWrapperExtension		= @"download";
 //
 // -----------------------------------
 
-
-- (void) download: (NSURLDownload*) download decideDestinationWithSuggestedFilename: (NSString*) fileName
+- (void) download: (NSURLDownload*) download decideDestinationWithSuggestedFilename: (NSS*) fileName
 {	
-	NSString*		finalDestination		= nil;
+	NSS*		finalDestination		= nil;
 	
 	DBDownloadObject*	object				= [self objectWithDownload: download];
 	NSFileManager*	fileManager			= [NSFileManager defaultManager];
-	NSString*		saveLocation		= [[NSUserDefaults standardUserDefaults][kDownloadLocation] stringByExpandingTildeInPath];
-	NSString*		 fileWrapperPath		= nil;
+	NSS*		saveLocation		= [[NSUserDefaults standardUserDefaults][kDownloadLocation] stringByExpandingTildeInPath];
+	NSS*		 fileWrapperPath		= nil;
 	
 	if (![fileManager fileExistsAtPath: saveLocation])
 	{
@@ -286,27 +254,22 @@ NSString* downloadFileWrapperExtension		= @"download";
 	
 	[fileWrapper release];
 }
-
 - (void) download: (NSURLDownload*) download didCancelAuthenticationChallenge: (NSURLAuthenticationChallenge*) challenge
 {
 	//
 }
-
-- (void) download: (NSURLDownload*) download didCreateDestination: (NSString*) path
+- (void) download: (NSURLDownload*) download didCreateDestination: (NSS*) path
 {
 	[[self objectWithDownload: download] setDownloadedFilePath: path];
 }
-
 - (void) download: (NSURLDownload*) download didFailWithError: (NSError*) error
 {
 	//
 }
-
 - (void) download: (NSURLDownload*) download didReceiveAuthenticationChallenge: (NSURLAuthenticationChallenge*) challenge
 {
 	//
 }
-
 - (void) download: (NSURLDownload*) download didReceiveDataOfLength: (unsigned) length
 {
 	DBDownloadObject*	object = [self objectWithDownload: download];
@@ -322,7 +285,6 @@ NSString* downloadFileWrapperExtension		= @"download";
 		}
 	}
 }
-
 - (void) download: (NSURLDownload*) download didReceiveResponse: (NSURLResponse*) response
 {
 	DBDownloadObject* object = [self objectWithDownload: download];
@@ -330,12 +292,10 @@ NSString* downloadFileWrapperExtension		= @"download";
 	 [object setBytesLoaded: 0];
 	 [object setURLResponse: response];
 }
-
-- (BOOL) download: (NSURLDownload*) download shouldDecodeSourceDataOfMIMEType: (NSString*) encodingType
+- (BOOL) download: (NSURLDownload*) download shouldDecodeSourceDataOfMIMEType: (NSS*) encodingType
 {
 	return NO;
 }
-
 - (NSURLRequest*) download: (NSURLDownload*) download willSendRequest: (NSURLRequest*) request redirectResponse: (NSURLResponse*) redirectResponse
 {
 	DBDownloadObject* downloadObject	= [self objectWithDownload: download];
@@ -345,7 +305,6 @@ NSString* downloadFileWrapperExtension		= @"download";
 	
 	return request;
 }
-
 - (void) downloadDidBegin: (NSURLDownload*) download
 {
 	DBDownloadObject* downloadObject = [self objectWithDownload: download];
@@ -358,20 +317,19 @@ NSString* downloadFileWrapperExtension		= @"download";
 	// [[downloadWindow toolbar] validateVisibleButtons];
 	[mDownloadTableView reloadData];
 }
-
 - (void) downloadDidFinish: (NSURLDownload*) download
 {	
 	DBDownloadObject*		downloadObject			= [self objectWithDownload: download];
-	NSString*			downloadedFilePath		= [downloadObject downloadedFilePath];
-	NSString*			nameOfDownloadedFile	= [downloadedFilePath lastPathComponent];
+	NSS*			downloadedFilePath		= [downloadObject downloadedFilePath];
+	NSS*			nameOfDownloadedFile	= [downloadedFilePath lastPathComponent];
 	NSFileManager*		fileManager				= [NSFileManager defaultManager];
 	
-	NSString*			parentDirectory		= [downloadedFilePath stringByDeletingLastPathComponent];
-	NSString*			parentExtension		= [parentDirectory pathExtension];
+	NSS*			parentDirectory		= [downloadedFilePath stringByDeletingLastPathComponent];
+	NSS*			parentExtension		= [parentDirectory pathExtension];
 	
 	if ([parentExtension isEqualToString: downloadFileWrapperExtension])
 	{
-		NSString* newDownloadedFilePath = [parentDirectory stringByDeletingLastPathComponent];
+		NSS* newDownloadedFilePath = [parentDirectory stringByDeletingLastPathComponent];
 		newDownloadedFilePath			= [newDownloadedFilePath stringByAppendingPathComponent: nameOfDownloadedFile];
 		newDownloadedFilePath			= [fileManager uniqueFilePath: newDownloadedFilePath];
 		
@@ -387,7 +345,6 @@ NSString* downloadFileWrapperExtension		= @"download";
 	
 	mNumloadsfinished++;
 	mNumloads--;
-
 	[mBezelController showBezelForFile: [downloadObject displayName]];
 	
 	// adjust toolbar items
@@ -416,23 +373,18 @@ NSString* downloadFileWrapperExtension		= @"download";
 	[mDownloadTableView reloadData];
 }
 
-
 - (void) download: (NSURLDownload*) download willResumeWithResponse: (NSURLResponse*) response fromByte: (long long) startingByte
 {
 	//
 }
 
-
 #pragma mark -
-
 #pragma mark Other Methods
-
 // -----------------------------------
 //
 // Other methods
 //
 // -----------------------------------
-
 - (DBDownloadObject*) objectWithDownload: (NSURLDownload*) download
 {
 	DBDownloadObject*	downloadObject	= nil;
@@ -450,7 +402,6 @@ NSString* downloadFileWrapperExtension		= @"download";
 	
 	return downloadObject;
 }
-
 - (void) prepareForDownloadWithRequest: (NSURLRequest*) aRequest
 {
 	WebDownload*	download		= [[WebDownload alloc] initWithRequest: aRequest delegate: (id)self];
@@ -465,10 +416,9 @@ NSString* downloadFileWrapperExtension		= @"download";
 	
 	[mDownloadTableView reloadData];
 }
-
 - (void) handleNotification: (NSNotification*) note
 {
-	NSString* type = [note userInfo][@"notificationType"];
+	NSS* type = [note userInfo][@"notificationType"];
 	
 	if ([type isEqualToString: @"beginDownload"])
 	{
@@ -490,14 +440,13 @@ NSString* downloadFileWrapperExtension		= @"download";
 		NSLog(@"Find the sender and eliminate: NSNotification-showDownloadWindow");
 	}
 }
-
 - (BOOL) deskBrowseShouldTerminate
 {
 	BOOL terminate = YES;
 	
 	if (mNumloads > 0)
 	{
-		NSString* alertMessage = [NSString stringWithFormat: @"%i", mNumloads];
+		NSS* alertMessage = [NSString stringWithFormat: @"%i", mNumloads];
 		
 		if (mNumloads == 1)
 		{
@@ -524,6 +473,5 @@ NSString* downloadFileWrapperExtension		= @"download";
 	
 	return terminate;
 }
-
 
 @end

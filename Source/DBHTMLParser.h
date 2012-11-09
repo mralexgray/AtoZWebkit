@@ -3,23 +3,17 @@
 The DeskBrowse source code is the legal property of its developers, Joel Levin and Ian Elseth
 *****************************
 */
-
 #import <Cocoa/Cocoa.h>
 
-
-static NSString* kLinkTitleKey		= @"HTMLParserLink";
-static NSString* kLinkURLStringKey	= @"HTMLParserURLString";
-
+static NSS* kLinkTitleKey		= @"HTMLParserLink";
+static NSS* kLinkURLStringKey	= @"HTMLParserURLString";
 @interface DBHTMLParser : NSObject
 {
 	NSXMLParser*	mXMLParser;
 	NSMutableArray*	mLinkDictionaries;
 	BOOL			mStillParsing;
 }
-
 + (DBHTMLParser*) HTMLParser;
-
-- (NSA*) linksFromHTMLString: (NSString*) HTMLString;
-- (NSA*) linksFromHTMLFileAtPath: (NSString*) HTMLFilePath;
-
+- (NSA*) linksFromHTMLString: (NSS*) HTMLString;
+- (NSA*) linksFromHTMLFileAtPath: (NSS*) HTMLFilePath;
 @end

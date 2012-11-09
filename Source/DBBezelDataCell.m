@@ -4,12 +4,9 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 *****************************
 */
 
-
 #import "DBBezelDataCell.h"
 
-
 @implementation DBBezelDataCell
-
 - (id) init
 {
 	if (self = [super init])
@@ -19,12 +16,10 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	
 	return self;
 }
-
 - (void) drawInteriorWithFrame: (NSR) cellFrame inView: (NSView*) controlView
 {
 //	NSMD *attrs = [NSMD dictionaryWithDictionary:[[self attributedStringValue] attributesAtIndex:0 effectiveRange:NULL]];
 	NSMD *attrs = [NSMD dictionary];
-
 	if ([self isHighlighted])
 	{
 		[attrs setValue: [NSColor whiteColor] forKey: NSForegroundColorAttributeName];
@@ -37,15 +32,13 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	[attrs setValue: [self font] forKey: NSFontAttributeName];
 	
 	NSR		drawFrame	= NSMakeRect(cellFrame.origin.x + 10, cellFrame.origin.y + 2, cellFrame.size.width - 20, cellFrame.size.height);
-	NSString*	drawString	= [[self stringValue] truncatedToWidth: drawFrame.size.width withAttributes: attrs];
+	NSS*	drawString	= [[self stringValue] truncatedToWidth: drawFrame.size.width withAttributes: attrs];
 	
 	[drawString drawInRect: drawFrame withAttributes: attrs];
 }
-
 - (NSColor*) highlightColorWithFrame: (NSR) cellFrame inView: (NSView*) controlView
 {
 	return [NSColor colorWithDeviceRed: 0.0 green: 0.0 blue: 0.0 alpha: 0.7];
 }
-
 
 @end

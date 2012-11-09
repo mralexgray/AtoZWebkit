@@ -1,20 +1,14 @@
 #import <Cocoa/Cocoa.h>
 #import <WebKit/WebKit.h>
-
 // =================================
 // Private WebKit Classes/Categories
 // =================================
-
 @interface NSURL (WebNSURLExtras)
-
 + (id)_web_URLWithUserTypedString:(id)fp8;
 - (id)_web_userVisibleString;
 - (id)_web_hostString;
-
 @end
-
 @interface WebCoreStatistics : NSObject {}
-
 + (id)statistics;
 + (void)emptyCache;
 + (void)setCacheDisabled:(BOOL)fp8;
@@ -26,20 +20,15 @@
 + (void)garbageCollectJavaScriptObjects;
 + (BOOL)shouldPrintExceptions;
 + (void)setShouldPrintExceptions:(BOOL)fp8;
-
 @end
-
 @interface WebKitStatistics : NSObject {}
-
 + (NSI)webViewCount;
 + (NSI)frameCount;
 + (NSI)dataSourceCount;
 + (NSI)viewCount;
 + (NSI)bridgeCount;
 + (NSI)HTMLRepresentationCount;
-
 @end
-
 @interface WebView (WebPendingPublic)
 - (void)setMainFrameURL:(id)fp8;
 - (id)mainFrameURL;
@@ -54,7 +43,6 @@
 - (void)setContinuousGrammarCheckingEnabled:(BOOL)fp8;
 - (void)toggleContinuousGrammarChecking:(id)fp8;
 @end
-
 @interface WebView (WebPrivate)
 + (id)_supportedMIMETypes;
 + (id)_supportedFileExtensions;
@@ -141,10 +129,8 @@
 - (void)_setDashboardBehavior:(NSI)fp8 to:(BOOL)fp12;
 - (BOOL)_dashboardBehavior:(NSI)fp8;
 - (void)handleAuthenticationForResource:(id)fp8 challenge:(id)fp12 fromDataSource:(id)fp16;
-
 @end
-
 @interface NSURLRequest (CertificateAllowing)
-+ (BOOL)allowsAnyHTTPSCertificateForHost:(NSString*)host;
-+ (void)setAllowsAnyHTTPSCertificate:(BOOL)flag forHost:(NSString*)host;
++ (BOOL)allowsAnyHTTPSCertificateForHost:(NSS*)host;
++ (void)setAllowsAnyHTTPSCertificate:(BOOL)flag forHost:(NSS*)host;
 @end

@@ -3,12 +3,9 @@
 The DeskBrowse source code is the legal property of its developers, Joel Levin and Ian Elseth
 *****************************
 */
-
 #import <Cocoa/Cocoa.h>
-
 #import "DBBookmarkController.h"
 #import "DBBookmarkImporter.h"
-
 
 @interface DBBookmarkImportWindowController : NSWindowController
 {
@@ -21,10 +18,8 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	
 	DBBookmarkController*				mBookmarkController;
 }
-
-- (id) initWithWindowNibName: (NSString*) windowNibName bookmarkController: (DBBookmarkController*) bookmarkController;
+- (id) initWithWindowNibName: (NSS*) windowNibName bookmarkController: (DBBookmarkController*) bookmarkController;
 - (IBAction) importBookmarksFromSelectedBrowser: (id) sender;
 - (void) importBookmarksFromSelectedBrowserInNewThread;
 - (void) populatePopUpButtonWithOtherBrowsers: (NSPopUpButton*) popUpButton;
-
 @end

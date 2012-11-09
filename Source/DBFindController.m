@@ -3,13 +3,10 @@
 The DeskBrowse source code is the legal property of its developers, Joel Levin and Ian Elseth
 *****************************
 */
-
 #import "DBFindController.h"
 #import "DeskBrowseController.h"
 
-
 @implementation DBFindController
-
 - (id)init {
 	self = [super init];
 	if (self) {
@@ -18,7 +15,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	}
 	return self;
 }
-
 - (IBAction)findText:(id)sender {
 	NSMD *dic = [[NSMD alloc] init];
 	if (![controller inWebspose]) {
@@ -36,7 +32,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 													  userInfo:dic];
 	[dic release];
 }
-
 - (IBAction)findPreviousText:(id)sender {
 	NSMD *dic = [[NSMD alloc] init];
 	if (![controller inWebspose]) {
@@ -54,9 +49,8 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 													  userInfo:dic];
 	[dic release];
 }
-
 - (IBAction)toggleFinding:(id)sender {
-	NSString *_title = [[NSApp keyWindow] title];
+	NSS *_title = [[NSApp keyWindow] title];
 	if (![_title isEqualToString:@"SlideBrowser"] && ![_title isEqualToString:@"Webspose"]) {
 		// TODO: make the standard find panel appear
 		// (this was written to allow for finding in the view source window)
@@ -99,5 +93,4 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		}
 	}
 }
-
 @end

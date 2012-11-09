@@ -3,12 +3,9 @@
 The DeskBrowse source code is the legal property of its developers, Joel Levin and Ian Elseth
 *****************************
 */
-
 #import "DeskBrowseController.h"
-
 #import "DBApplication.h"
 #import "DeskBrowseConstants.h"
-
 #import "DBActionMenuView.h"
 #import "DBActionMenuWindow.h"
 #import "DBBookmarkBar.h"
@@ -37,7 +34,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 #import "DBWindowLevel.h"
 #import "DBStatusItemController.h"
 #import "DBSymbolicHotKeyController.h"
-
 //#include <netdb.h>
 //#include <netinet/in.h>
 //#include <arpa/inet.h>
@@ -50,12 +46,9 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 //	if ((h=gethostbyname(hostname)) == NULL) { perror("Error: "); return "(Error locating Private IP Address)"; }
 //	return inet_ntoa(*((struct in_addr *)h->h_addr));
 //}
-
 static NSURL *urlTemp 		= nil;
-static NSString *strTemp 	= nil;
-
+static NSS *strTemp 	= nil;
 @implementation DeskBrowseController
-
 + (void) initialize
 {
 	// This is called before any other method in this class.
@@ -73,7 +66,6 @@ static NSString *strTemp 	= nil;
 		[NSApp initHotKeyController];
 	}
 }
-
 - (id)init
 {
 	if (!(self = [super init])) return  nil;
@@ -84,13 +76,17 @@ static NSString *strTemp 	= nil;
 	// Make sure instance variables match user prefs
 	
 	[self syncVariablesWithUserPrefs];
-
 	// Set up web preferences
 	WebPreferences*	webPrefs = [WebPreferences standardPreferences];
 	[webPrefs setUserStyleSheetLocation:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"userContent" ofType:@"css"]]];
 	// Set up delegation
 	
-	[@[NSApp, slideWindow, websposeWindow] do:^(id obj) { [obj setDelegate: (id)self]; }];
+//	for ( id obj in [NSA arrayWithObjects: NSApp, slideWindow, websposeWindow, nil])  [obj setDelegate: (id)self];
+
+	[NSApp setDelegate: (id)self];
+	[slideWindow setDelegate: (id)self];
+	[websposeWindow setDelegate: (id)self];
+
 
 	// Register for notifications
 	[AZNOTCENTER addObserver: self selector: @selector(handleNotification:)  name: @"DBNotification" 				object: nil];
@@ -105,12 +101,13 @@ static NSString *strTemp 	= nil;
 	[AZNOTCENTER addObserver: self selector: @selector(handleNewTabRequest:) name:@"DBNewBlankTab" 					object:nil];
 	[AZNOTCENTER addObserver: self selector: @selector(windowDidMove:) 		 name: NSWindowDidMoveNotification 		object: nil];
 
+	[AZNOTCENTER addObserver: self selector: @selector(handleNotification:)	name: nAZColorWellChanged				object: nil];
+
+
 	// Assign values to instance variables
 	historyController	= [[DBHistoryController alloc] init];
 	downloadController	= [[DBDownloadController alloc] init];
-
 	windowIsVisible		= NO;   actionMenuVisible	= NO;		stopEnabled			= NO;
-
 	// Set up action menu
 	actionMenuWindow	= [[DBActionMenuWindow alloc] initWithContentRect:NSMakeRect(-4, 90, 153, 135)
 																styleMask:NSBorderlessWindowMask
@@ -128,103 +125,82 @@ static NSString *strTemp 	= nil;
 	[[actionMenuWindow contentView] addSubview:actionMenu];
 	[actionMenuWindow setDelegate:(id)self];
 	[actionMenuWindow setAcceptsMouseMovedEvents: YES];
-
 	
 	return self;
 }
 
 - (IBAction)showDocumentation:(id)sender {	[self loadURLString:@"http://deskbrowse.com/wiki/HowToUse"]; }
 
-- (void)awakeFromNib {
+- (void)awakeFromNib
+{
 	// first run?
 	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
 	// check to see if this is the first run of DeskBrowse
-	BOOL firstRun = [userDefaults boolForKey: kFirstRun];
-	if (firstRun) {
+	[userDefaults boolForKey: kFirstRun] ? ^{
 		// if it is, open the documenatation included in the app bundle
 		[self showDocumentation:self];
 		// now it isnt the first run, so set the preference
 		[userDefaults setBool:NO forKey:kFirstRun];
-	}
+	}() : nil;
 	
 	// check for deskbrowse updates
 	// NOTE: the 'checkForUpdate' selector deals with looking at the NSUserDefaults
 	//		  and only checking if the user is allowing it too
-	//
 	// we do this in awakeFromNib because we need the interface to be active
-	//
-
 
 	// Set up bookmark bar
-	
-	bookmarkController = [[DBBookmarkController alloc] init];	
+	bookmarkController = [[DBBookmarkController alloc] init];
 	[bookmarkBar setBookmarkController: bookmarkController];
 
-
 	// Set up slide window
-	
 	[slideWindow setSticky:YES];
 	[slideWindow setController:self];
 
-
 	// Set window level
-	
 	[DBWindowLevel setWindowLevel: [slideWindow level]];
 
-
 	// Set up tab view
-	
 	[self setupTabView];
-	
 	tabController = [[DBTabController alloc] initWithTabBar: tabBar tabView: tabView];
-	
 	[tabController setDefaultWebView: [self createWebView]];
 
-
 	// Clear status and title text
-	
 	[self setStatusText:@""];
 	[self setTitleText:@""];
 
-
 	// Set URL field's target and action
 	[urlField 			setAction:@selector(loadURL:) withTarget:self];
-	[websposeURLField 	setAction:@selector(loadURL:) witTarget:self];
+	[websposeURLField 	setAction:@selector(loadURL:) withTarget:self];
 	[websposeURLField setFont: [NSFont fontWithName: [[websposeURLField font] fontName] size: 11]];
-
 	// Load slide window size
 	[slideWindow loadFrame];
-
 	[back 		setToolTip:@"Go Back"					];
 	[forward 	setToolTip:@"Go Forward"				];
 	[stop 		setToolTip:@"Stop Loading"				];
 	[reload 	setToolTip:@"Reload The Current Page	"	];
 	[home 		setToolTip:@"Go Home"					];
 }
-
-- (void)dealloc
-{
-	[AZNOTCENTER removeObserver:self];
-	statusController ?
-	[statusController 			release] : nil;
-	[loadingState				release];
-	[homePage					release];
-	[downloadController			release];
-	[historyController			release];
-	[bookmarkController			release];
-	[historyWindowController	 	release];
-	[prefController				release];
-	[tabController				release];
-	[currentWebView				release];
-	[currentStatus				release];
-	[currentTitle				release];
-	[actionMenu					release];
-	[symbolicHotKeyController	release];
-	
-}
-
+//- (void)dealloc
+//{
+//	[AZNOTCENTER removeObserver:self];
+//	statusController ?
+//	[statusController 			release] : nil;
+//	[loadingState				release];
+//	[homePage					release];
+//	[downloadController			release];
+//	[historyController			release];
+//	[bookmarkController			release];
+//	[historyWindowController	 	release];
+//	[prefController				release];
+//	[tabController				release];
+//	[currentWebView				release];
+//	[currentStatus				release];
+//	[currentTitle				release];
+//	[actionMenu					release];
+//	[symbolicHotKeyController	release];
+//	
+//}
 #pragma mark -
-
 - (void) setupTabView
 {
 	NSTabViewItem*	firstTab	= [tabView tabViewItemAtIndex: 0];
@@ -232,56 +208,42 @@ static NSString *strTemp 	= nil;
 	
 	[firstTab setView: newWebView];
 	
-	[currentWebView release];
+//	[currentWebView release];
 	currentWebView = newWebView;
 }
-
 - (NSWindow*) currentWindow
 {
 	NSWindow* currentWindow = nil;
-	
-	if(inWebsposeMode)
-	{
-		currentWindow = websposeWindow;
-	}
-	else
-	{
-		currentWindow = slideWindow;
-	}
-	
-	return currentWindow;
+	return currentWindow = inWebsposeMode ?websposeWindow :slideWindow;
 }
 
 - (void)handleNewTabRequest:(NSNotification *)notification {
 	WebView *newWebView = [self createWebView];
-	if ([[NSUserDefaults standardUserDefaults] boolForKey:kSelectNewTabs])
-		[tabController newTabWithWebView:newWebView select:YES];
-	else
-		[tabController newTabWithWebView:newWebView select:NO];
+	[tabController newTabWithWebView:newWebView select:[[NSUserDefaults standardUserDefaults] boolForKey:kSelectNewTabs]];
 }
 
-- (void)handleNotification:(NSNotification *)note {
-	NSString *type = ((NSString *)[note userInfo][@"notificationType"]);
-	NSString *name = ((NSString *)[note name]);
+- (void)handleNotification:(NSNotification *)note
+{
+	NSS *type = ((NSS *)[note userInfo][@"notificationType"]);
+	NSS *name = ((NSS *)[note name]);
 	
 	if(name == NSUserDefaultsDidChangeNotification)
 	{
 		[self syncVariablesWithUserPrefs];
 		return;
 	}
-	
+	if ( areSame(name, nAZColorWellChanged) ) {
+
+			[slideWindow setBackgroundColor:[note object]];
+	}
+
 	if ([name isEqualToString:@"DBToggleSplitView"]) {
 		if (!inWebsposeMode) {
-			if ([urlField isHidden]) {
-				[searchField setHidden:NO];
-				[urlField setHidden:NO];
-				[urlField selectText:self];
-				[splitView setHidden:NO];
-			} else {
-				[searchField setHidden:YES];
-				[urlField setHidden:YES];
-				[splitView setHidden:YES];
-			}
+			BOOL setHidden = ![[NSUserDefaults standardUserDefaults] boolForKey:kSelectNewTabs];
+			[urlField isHidden] ? [urlField selectText:self] : nil;
+			[searchField 	setHidden:setHidden];
+			[urlField 		setHidden:setHidden];
+			[splitView 		setHidden:setHidden];
 		} else {
 			if ([websposeURLField isHidden]) {
 				[websposeURLField setHidden:NO];
@@ -298,7 +260,7 @@ static NSString *strTemp 	= nil;
 	}
 	
 	if ([name isEqualToString:@"DBWebSearch"]) {
-		NSString *search	  = [note userInfo][@"searchString"];
+		NSS *search	  = [note userInfo][@"searchString"];
 		NSNumber *cs_num	  = [note userInfo][@"caseSensitive"];
 		NSNumber *bkwds_num  = [note userInfo][@"backwards"];
 		BOOL cs = NO;
@@ -315,7 +277,7 @@ static NSString *strTemp 	= nil;
 		if (!srch) { NSBeep(); }
 	}
 	if ([name isEqualToString:@"DBActionMenuItemNotification"]) {
-		NSString *sender = [note userInfo][@"sender"];
+		NSS *sender = [note userInfo][@"sender"];
 		if ([sender isEqualToString:@"Webspose"]) {
 				[self toggleWebspose];
 		} else if ([sender isEqualToString:@"Downloads"]) {
@@ -325,14 +287,11 @@ static NSString *strTemp 	= nil;
 		} else if ([sender isEqualToString:@"Bookmarks"]) {
 			[self showBookmarkWindow:nil];
 		}
-		
-		if(actionMenuVisible)
-		{
-			[self toggleActionMenu: nil];
-		}
+
+		if(actionMenuVisible) [self toggleActionMenu: nil];
 	}
 	if ([type isEqualToString:@"loadURL"]) {
-		NSString *targetURL = ((NSString *)[note userInfo][@"targetURL"]);
+		NSS *targetURL = ((NSS *)[note userInfo][@"targetURL"]);
 		[currentWebView stopLoading:self];
 		if (!windowIsVisible) {
 			[self slideInForcingToFront: YES];
@@ -351,8 +310,8 @@ static NSString *strTemp 	= nil;
 	}
 	if ([type isEqualToString:@"viewSourceRequest"]) {
 		NSMD *dic = [[NSMD alloc] init];
-		NSString *codeString = [[[[currentWebView mainFrame] dataSource] representation] documentSource];
-		NSString *title = [[[currentWebView mainFrame] dataSource] pageTitle];
+		NSS *codeString = [[[[currentWebView mainFrame] dataSource] representation] documentSource];
+		NSS *title = [[[currentWebView mainFrame] dataSource] pageTitle];
 		if (!title) {
 			title = @"";
 		}
@@ -367,14 +326,13 @@ static NSString *strTemp 	= nil;
 		[[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithFloat:([slideWindow frame].size.width)] forKey:@"slideWindowWidth"];
 	}
 }
-
 - (void)openURL:(NSAppleEventDescriptor*)event withReplyEvent:(NSAppleEventDescriptor*)replyEvent {
 //
 //	Called when a link is opened from another app (if DeskBrowse is the default browser)
 //
 	[[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
 	
-	 NSString *urlString = [[event paramDescriptorForKeyword:keyDirectObject] stringValue];
+	 NSS *urlString = [[event paramDescriptorForKeyword:keyDirectObject] stringValue];
 	 NSURL *URL = [NSURL URLWithString:urlString];
 	NSURLRequest* URLRequest = [NSURLRequest requestWithURL: URL];
 	WebView* webViewToLoadURL = currentWebView;
@@ -392,7 +350,6 @@ static NSString *strTemp 	= nil;
 	
 	[[webViewToLoadURL mainFrame] loadRequest: URLRequest];
 }
-
 - (IBAction)toggleActionMenu:(id)sender {
 	if (actionMenuVisible)
 	{
@@ -417,7 +374,6 @@ static NSString *strTemp 	= nil;
 		actionMenuVisible = YES;
 	}
 }
-
 - (IBAction) toggleBookmarkBar: (id) sender
 {
 	//
@@ -448,7 +404,6 @@ static NSString *strTemp 	= nil;
 		[[slideWindow contentView] setNeedsDisplay:YES];
 	}
 }
-
 - (void)windowDidResignKey:(NSNotification *)aNotification {
 	if ([aNotification object] == actionMenuWindow) { // if we are talking about the action menu
 		if ([NSApp keyWindow] != actionMenuWindow) {  // see if it really did resign
@@ -458,11 +413,9 @@ static NSString *strTemp 	= nil;
 		}
 	}
 }
-
 - (BOOL)inWebspose {
 	return inWebsposeMode;
 }
-
 - (void) toggleWebspose
 {	
 	if (!inWebsposeMode) // Enter Websposé
@@ -499,7 +452,7 @@ static NSString *strTemp 	= nil;
 	}
 	else // Exit Websposé
 	{
-		NSString* password = [DBWebsposePassword websposePassword];
+		NSS* password = [DBWebsposePassword websposePassword];
 				
 		BOOL shouldToggle = NO;
 		
@@ -517,7 +470,7 @@ static NSString *strTemp 	= nil;
 			
 			[websposePasswordWindow orderOut: self];
 			
-			NSString* enteredString = [websposePasswordField stringValue];
+			NSS* enteredString = [websposePasswordField stringValue];
 			
 			if ([enteredString isEqualToString: password]/* || [enteredString caseInsensitiveCompare: NSUserName()] == NSOrderedSame*/)
 			{
@@ -564,12 +517,10 @@ static NSString *strTemp 	= nil;
 			[bookmarkBar reloadData];
 			
 			[self lock: NO];
-
 			inWebsposeMode = NO;
 		}
 	}
 }
-
 - (void) lock: (BOOL) shouldLock
 {
 	 if (shouldLock) // LOCK
@@ -618,25 +569,22 @@ static NSString *strTemp 	= nil;
 	 }
 }
 
-
 - (void) loadURLNotification: (NSNotification*) notification
 {
-	NSString* URLString = [notification userInfo][@"URLString"];
+	NSS* URLString = [notification userInfo][@"URLString"];
 	
 	if(URLString != nil)
 	{
 		[self loadURLString: URLString];
 	}
 }
-
-- (void) loadURLString: (NSString*) URLString
+- (void) loadURLString: (NSS*) URLString
 {
 	if (URLString != nil)
 	{
 		DBTab*			tab			= [tabController tabWithWebView: currentWebView];
 		NSURL*			URL			= [NSURL URLWithString: [DBURLFormatter formatAndReturnStringWithString: URLString]];
 		NSURLRequest*	URLRequest	= [NSURLRequest requestWithURL: URL cachePolicy: NSURLRequestUseProtocolCachePolicy timeoutInterval: 60.0];
-
 		if(tab != nil)
 		{
 			[tab setURLString: URLString];
@@ -651,18 +599,15 @@ static NSString *strTemp 	= nil;
 		[self updateButtons];
 	}
 }
-
 - (void)viewPageSource {
 	[self showSourceWindow:self];
 }
-
 - (void) slideWindowResized: (NSNotification*) notification
 {
 	[self setStatusText:	[self statusText]];
 	[self setTitleText:		[self titleText]];
 }
-
-- (void)setStatusText:(NSString *)status
+- (void)setStatusText:(NSS *)status
 {
 	if (status != currentStatus)
 	{
@@ -674,12 +619,10 @@ static NSString *strTemp 	= nil;
 	[statusField			setStringValue: currentStatus];
 	[websposeStatusField	setStringValue: currentStatus];
 }
-
-- (NSString *)statusText {
+- (NSS *)statusText {
 	return currentStatus;
 }
-
-- (void)setTitleText:(NSString *)title
+- (void)setTitleText:(NSS *)title
 {
 	if(title != currentTitle)
 	{
@@ -691,17 +634,14 @@ static NSString *strTemp 	= nil;
 	[titleField			setStringValue: currentTitle];
 	[websposeTitleField	setStringValue: currentTitle];
 }
-
-- (NSString *)titleText {
+- (NSS *)titleText {
 	return currentTitle;
 }
-
 - (DBLocationTextField*) URLField
 {
 	return inWebsposeMode ? websposeURLField : urlField;
 }
-
-- (void)setURLText:(NSString *)url
+- (void)setURLText:(NSS *)url
 {
 	if(url == nil)
 	{
@@ -714,23 +654,19 @@ static NSString *strTemp 	= nil;
 		[websposeURLField	setStringValue: url];
 	}
 }
-
-- (NSString *)URLText {
+- (NSS *)URLText {
 	return [[self URLField] stringValue];
 }
-
-- (NSString*) searchFieldText
+- (NSS*) searchFieldText
 {
 	NSTextField* field = inWebsposeMode ? websposeSearchField : searchField;
 	return [field stringValue];
 }
-
 - (void) setFavicon: (NSImage*) favicon
 {
 	[urlField setImage: favicon];
 	[websposeURLField setImage: favicon];
 }
-
 - (void) syncVariablesWithUserPrefs
 {
 	NSUserDefaults*	userDefaults;
@@ -753,24 +689,20 @@ static NSString *strTemp 	= nil;
 	
 	[userDefaults release];
 }
-
 - (void)syncLoadingStateWithStatus {
-	NSString* statusText = [self statusText];
+	NSS* statusText = [self statusText];
 	if(loadingState != statusText)
 	{
 		[loadingState release];
 		loadingState = statusText; // set the loading state to the status text
 	}
 }
-
 #pragma mark -
-
 #pragma mark IBActions
-
 - (IBAction)loadURL:(id)sender {
 	//DBTab*			tab		= [tabController tabWithWebView: currentWebView];
 	NSTextField*	field	= [self URLField];
-	NSString *URLString;
+	NSS *URLString;
 	if ([[field stringValue] hasPrefix:@":"]) {
 		URLString = [field stringValue];
 	} else {
@@ -779,16 +711,16 @@ static NSString *strTemp 	= nil;
 	if (![[URLString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] isEqualToString:@""]) {
 		// if the url is not nothing, then: check to see if its a javascript statement
 		if ([URLString hasPrefix:@"javascript:"]) {
-			NSString *js = [URLString substringFromIndex:11];
+			NSS *js = [URLString substringFromIndex:11];
 			[currentWebView stringByEvaluatingJavaScriptFromString:js];
 			return;
 		} else if ([URLString hasPrefix:@"file://"]) {
-			NSString *filePath = [URLString substringFromIndex:7];
+			NSS *filePath = [URLString substringFromIndex:7];
 			
 			// is it a directory or a file?
 			if ([[NSFileManager defaultManager] fileExistsAtPath: [filePath stringByReplacingPercentEscapesUsingEncoding: NSASCIIStringEncoding]])
 			{
-				NSDictionary *fileAtts = [[NSFileManager defaultManager] fileAttributesAtPath:filePath traverseLink:YES];
+				NSD *fileAtts = [[NSFileManager defaultManager] fileAttributesAtPath:filePath traverseLink:YES];
 				if ([fileAtts[@"NSFileType"] isEqualTo:@"NSFileTypeDirectory"]) {
 					[[NSWorkspace sharedWorkspace] selectFile:filePath inFileViewerRootedAtPath:[filePath stringByDeletingLastPathComponent]];
 					return;
@@ -807,13 +739,13 @@ static NSString *strTemp 	= nil;
 			
 			if ([URLString hasPrefix:@":apache"]) {
 				// apache command
-				NSString *root = [NSString stringWithFormat:@"http://localhost/~%@/", NSUserName()];
+				NSS *root = [NSString stringWithFormat:@"http://localhost/~%@/", NSUserName()];
 				// check for command arguments
 				NSRange spc = [URLString rangeOfString:@" "];
 				if (spc.location != NSNotFound && [URLString length] > 8) {
 					// there are other arguments, stick those to the end
-					NSString *_args = [URLString substringFromIndex:spc.location + 1];
-					NSString *args = [_args stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+					NSS *_args = [URLString substringFromIndex:spc.location + 1];
+					NSS *args = [_args stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 					root = [NSString stringWithFormat:@"%@%@", root, args];
 				}
 				[self loadURLString:root];
@@ -829,25 +761,25 @@ static NSString *strTemp 	= nil;
 			} else if ([URLString isEqualToString:@":useragent"]) {
 				// user agent
 				[self loadURLString:@"about:blank"];
-				NSString *javascript = @"javascript:document.open();document.write(\"<html><head><title>User Agent Information</title></head><body><font size='-1'>\"+navigator.userAgent+\"</font></body></html>\");document.close();";
+				NSS *javascript = @"javascript:document.open();document.write(\"<html><head><title>User Agent Information</title></head><body><font size='-1'>\"+navigator.userAgent+\"</font></body></html>\");document.close();";
 				[currentWebView stringByEvaluatingJavaScriptFromString:javascript];
 				return;
 			} else if ([URLString isEqualToString:@":ip"]) {
 				// ip address
 				[self loadURLString:@"about:blank"];
-				NSString *privateip = @(GetPrivateIP());
-				NSString *tmpFile = [NSString stringWithFormat:@"/Users/%@/.dbiptmp", NSUserName()];
-				NSString *command = [NSString stringWithFormat:@"curl http://www.whatismyip.org -o \"%@\"", tmpFile];
+				NSS *privateip = @(GetPrivateIP());
+				NSS *tmpFile = [NSString stringWithFormat:@"/Users/%@/.dbiptmp", NSUserName()];
+				NSS *command = [NSString stringWithFormat:@"curl http://www.whatismyip.org -o \"%@\"", tmpFile];
 				system([command UTF8String]);
-				NSString *contents = [NSString stringWithContentsOfFile:tmpFile];
+				NSS *contents = [NSString stringWithContentsOfFile:tmpFile];
 				[[NSFileManager defaultManager] removeFileAtPath:tmpFile handler:nil];
-				NSString *publicip;
+				NSS *publicip;
 				if (!contents || [contents isEqualToString:@""]) {
 					publicip = @"(Error locating public IP Address)";
 				} else {
 					publicip = contents;
 				}
-				NSString *javascript = [NSString stringWithFormat:@"javascript:document.open();document.write(\"<html><head><title>IP Address Information</title></head><body><font size='-1'>Public IP: %@<br>Private IP: %@</font></body></html>\");document.close();", publicip, privateip];
+				NSS *javascript = [NSString stringWithFormat:@"javascript:document.open();document.write(\"<html><head><title>IP Address Information</title></head><body><font size='-1'>Public IP: %@<br>Private IP: %@</font></body></html>\");document.close();", publicip, privateip];
 				[currentWebView stringByEvaluatingJavaScriptFromString:javascript];
 				return;
 			} else if ([URLString isEqualToString:@":clear"] || [URLString isEqualToString:@":cls"]) {
@@ -856,13 +788,13 @@ static NSString *strTemp 	= nil;
 				return;
 			} else if ([URLString hasPrefix:@":wikip"]) {
 				// wikipedia search command
-				NSString *url = @"http://www.wikipedia.com";
+				NSS *url = @"http://www.wikipedia.com";
 				NSRange spc = [URLString rangeOfString:@" "];
 				if (spc.location != NSNotFound && [URLString length] > 7) {
 					// there are other arguments, make a search url
 					// TODO: replace " " with "+"
-					NSString *_args = [URLString substringFromIndex:spc.location + 1];
-					NSString *args = [_args stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+					NSS *_args = [URLString substringFromIndex:spc.location + 1];
+					NSS *args = [_args stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 					url = [NSString stringWithFormat:@"http://www.wikipedia.com/search-redirect.php?search=%@&language=en&go=++%3E++&go=Go", args];
 				}
 				[self loadURLString:url];
@@ -873,15 +805,13 @@ static NSString *strTemp 	= nil;
 				return;
 			}
 		}
-
 		[self loadURLString: URLString];
 	}
 }
-
 - (IBAction) websposeEnterPassword: (id) sender
 {
-	NSString*		password		= [DBWebsposePassword websposePassword];
-	NSString*		enteredString	= [websposePasswordField stringValue];
+	NSS*		password		= [DBWebsposePassword websposePassword];
+	NSS*		enteredString	= [websposePasswordField stringValue];
 	
 	if (password == nil || [enteredString isEqualToString: password]/* || [enteredString caseInsensitiveCompare: NSUserName()] == NSOrderedSame*/)
 	{
@@ -892,19 +822,17 @@ static NSString *strTemp 	= nil;
 		[websposePasswordStatus setStringValue: @"Incorrect password"];
 	}
 }
-
 - (IBAction) websposeCancelPassword: (id) sender
 {
 	[NSApp stopModal];
 }
-
 - (IBAction)saveCurrentPage:(id)sender {
 	NSWindow *kw = [NSApp keyWindow];
 	if ([kw isEqualTo:slideWindow] || [kw isEqualTo:websposeWindow]) {
 		NSSavePanel *sp = [NSSavePanel savePanel];
 		NSInteger result = NSCancelButton;
-		NSString *file = nil;
-		NSString *source = nil;
+		NSS *file = nil;
+		NSS *source = nil;
 		result = [sp runModal];
 		if (result == NSOKButton) {
 			file = [sp filename];
@@ -917,7 +845,6 @@ static NSString *strTemp 	= nil;
 		}
 	}
 }
-
 - (IBAction) showBookmarkWindow: (id) sender
 {
 	if(!bookmarkWindowController)
@@ -928,7 +855,6 @@ static NSString *strTemp 	= nil;
 //	[bookmarkWindowController showWindow: self];
 	[bookmarkController showWindow: nil];
 }
-
 - (IBAction) showBookmarkImportWindow: (id) sender
 {
 	if (bookmarkImportWindowController == nil)
@@ -938,11 +864,9 @@ static NSString *strTemp 	= nil;
 	
 	[bookmarkImportWindowController showWindow: self];
 }
-
 - (IBAction)showDownloadWindow:(id)sender {	
 	[downloadController showWindow: self];
 }
-
 - (IBAction) showHistoryWindow: (id) sender
 {
 	if(!historyWindowController)
@@ -952,14 +876,13 @@ static NSString *strTemp 	= nil;
 	
 	[historyWindowController showWindow: self];
 }
-
 - (IBAction) addBookmark: (id) sender
 {
 	NSURL*		bookmarkURL		= nil;
-	NSString*	bookmarkTitle	= nil;
+	NSS*	bookmarkTitle	= nil;
 		
 	DBTab*		currentTab	= [tabController selectedTab];
-	NSString*	URLString	= [currentTab URLString];
+	NSS*	URLString	= [currentTab URLString];
 	
 	if (!URLString)
 	{
@@ -973,7 +896,6 @@ static NSString *strTemp 	= nil;
 	
 	[bookmarkController newBookmarkWithURL: bookmarkURL title: bookmarkTitle window: [bookmarkWindowController window]];
 }
-
 - (IBAction) showPrefWindow: (id) sender
 {
 	if(!prefController)
@@ -983,79 +905,56 @@ static NSString *strTemp 	= nil;
 	
 	[prefController showWindow: self];
 }
-
 - (IBAction) showSourceWindow: (id) sender
 {
-	NSString *resPath = [[[NSBundle mainBundle] resourcePath] stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
-	NSString *req = [[[[[currentWebView mainFrame] dataSource] request] URL] absoluteString];
-	
-	NSString *code = @"";
-	if ([req rangeOfString:resPath].location != NSNotFound)
-	{
-		NSBeep();
-	}
+	NSS *resPath = [[[NSBundle mainBundle] resourcePath] stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+	NSS *req 	 = [[[[[currentWebView mainFrame] dataSource] request] URL] absoluteString];
+	NSS *code 	 = @"";
+	if ([req rangeOfString:resPath].location != NSNotFound) NSBeep();
 	else
 	{
-		if(!sourceWindowController)
-		{
-			sourceWindowController = [[DBViewSourceWindowController alloc] initWithWindowNibName: @"Source"];
-		}
-		
-		code = [[[[currentWebView mainFrame] dataSource] representation] documentSource];
-		NSString *title = [[[currentWebView mainFrame] dataSource] pageTitle];
-		[sourceWindowController setTitle:[NSString stringWithFormat:@"Source of \"%@\"", title]];
-		[sourceWindowController	setSourceCode:code];
+		sourceWindowController = sourceWindowController ?: [[DBViewSourceWindowController alloc] initWithWindowNibName: @"Source"];
+		[sourceWindowController setTitle:[NSString stringWithFormat:@"Source of \"%@\"", [[[currentWebView mainFrame] dataSource] pageTitle]]];
+		[sourceWindowController	setSourceCode:[[[[currentWebView mainFrame] dataSource] representation] documentSource]];
 		[sourceWindowController	showWindow:self];
 	}
 }
-
-- (IBAction)stopLoading:(id)sender { [currentWebView stopLoading:sender]; }
-
+- (IBAction) stopLoading:(id)sender { [currentWebView stopLoading:sender]; }
 - (IBAction) selectTabRight: (id) sender {	[tabController selectTabRight]; }
-
 - (IBAction) selectTabLeft: (id) sender {	[tabController selectTabLeft]; }
-
 - (IBAction)googleSearch:(id)sender
 {
-
-	NSString* searchString = [self searchFieldText];
+	NSS* searchString = [self searchFieldText];
 	[searchField			setStringValue: searchString];
 	[websposeSearchField	setStringValue: searchString];
 	
 	if (![[searchString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] isEqualToString:@""]) {
 		// if the search is not nothing, then:
 		
-		NSString* query = [[searchString componentsSeparatedByString:@" "] componentsJoinedByString:@"+"]; // replace spaces with pluses
+		NSS* query = [[searchString componentsSeparatedByString:@" "] componentsJoinedByString:@"+"]; // replace spaces with pluses
 		query = [query stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
 		query = [NSString stringWithFormat:@"http://www.google.com/search?q=%@", query];
 		
 		[self loadURLString: query];
 	}
 }
-
-- (IBAction)back:(id)sender
-{
-	if([currentWebView canGoBack])	{ 	[currentWebView goBack]; [self updateButtons];  }
+- (IBAction)back:(id)sender { 	[currentWebView canGoBack] ? ^{ [currentWebView goBack]; [self updateButtons]; }() : nil;
 }
-
-- (IBAction)forward:(id)sender
-{
-	if([currentWebView canGoForward])	{ [currentWebView goForward]; [self updateButtons]; }
+- (IBAction)forward:(id)sender { [currentWebView canGoForward] ? ^{ [currentWebView goForward]; [self updateButtons]; }() : nil;
 }
-
 - (IBAction)reload:(id)sender
 {
 	if(reloadEnabled)
 	{
 		WebDataSource*	dataSource				= [[currentWebView mainFrame] dataSource];
 		WebDataSource*	provisionalDataSource	= [[currentWebView mainFrame] provisionalDataSource];
-		NSURL*			URL						= [[dataSource request] URL];
+		NSURL*			URL						= [[dataSource			  request] URL];
 		NSURL*			pURL					= [[provisionalDataSource request] URL];
 		
 		DBTab* tab = [tabController tabWithWebView: currentWebView];
 		
-		NSString *resPath = [[[NSBundle mainBundle] resourcePath] stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
-		NSString *req = [[[[[currentWebView mainFrame] dataSource] request] URL] absoluteString];
+		NSS *resPath = [[[NSBundle mainBundle] resourcePath] stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+		NSS *req = [[[[[currentWebView mainFrame] dataSource] request] URL] absoluteString];
 		
 		if ([req rangeOfString:resPath].location != NSNotFound) {
 			// trying to reload an error page
@@ -1068,29 +967,17 @@ static NSString *strTemp 	= nil;
 			[currentWebView reload: sender];
 			[self setURLText: URL ? [URL absoluteString] : [pURL absoluteString]];
 		}
-		else
-		{	
-			if(tab)
-			{
-				NSString* URLString = [tab URLString];
-				if(URLString) [self loadURLString: URLString];
-			}
-		}
+		else if(tab)  [tab URLString] ? [self loadURLString: [tab URLString]] : nil;
 	}
 }
-
 - (IBAction)goHome:(id)sender {
 	// load the home page
-	NSString *hp = (NSString *)[NSUserDefaults standardUserDefaults][kHomePage];
+	NSS *hp = (NSS *)[NSUserDefaults standardUserDefaults][kHomePage];
 	[self loadURLString: hp];
 }
-
 - (IBAction)makeTextLarger:(id)sender { 	[currentWebView makeTextLarger:sender]; 	}
-
 - (IBAction)makeTextSmaller:(id)sender { 	[currentWebView makeTextSmaller:sender]; 	}
-
 - (IBAction)showQDownloadWindow:(id)sender{	[quickDownloadWindow makeKeyAndOrderFront:self]; }
-
 - (void)toggleSlideBrowse {
 	if(!inWebsposeMode)
 	{
@@ -1101,17 +988,14 @@ static NSString *strTemp 	= nil;
 		} else if (windowIsVisible)  			[self slideOut];			// window is on the screen // slide out
 	}
 }
-
 - (void)slideInForcingToFront: (BOOL) forceToFront
 {
 	[NSApp activateIgnoringOtherApps: forceToFront];
 	[slideWindow setOnScreen: YES];
 	windowIsVisible = YES; // make our window visible variable YES
 }
-
 - (void)slideOut { 	[slideWindow setOnScreen: NO];   windowIsVisible = NO;	}
-
-- (void)filterErrorMessage:(NSString *)msg forWebView: (WebView*) webView
+- (void)filterErrorMessage:(NSS *)msg forWebView: (WebView*) webView
 {
 //	Tab* tab = [tabController tabWithWebView: webView];
 //	
@@ -1138,10 +1022,8 @@ static NSString *strTemp 	= nil;
 //		[self setStatusText:msg];
 //	}
 }
-
 - (IBAction)close:(id)sender {
 	NSWindow* keyWindow = [NSApp keyWindow];
-
 	if(keyWindow)
 	{
 		if(keyWindow == slideWindow || keyWindow == websposeWindow)
@@ -1149,135 +1031,46 @@ static NSString *strTemp 	= nil;
 		else 			[keyWindow close];
 	}
 }
-
 - (IBAction) closeAllTabs: (id) sender
 {
 	[tabController removeAllTabs]; // This will close all tabs except the selected one
 }
-
 - (IBAction)newBlankTab:(id)sender {
 	WebView*		newView		= [self createWebView];
 	NSUserDefaults* defaults	= [NSUserDefaults standardUserDefaults];
 	
 	[defaults boolForKey: kSelectNewTabs] ? [tabController newTabWithWebView: newView select: YES] :[tabController newTabWithWebView: newView select: NO];
-
 }
-
 - (IBAction)openLocation:(id)sender {
 	if ([urlField isHidden]) { [searchField setHidden:NO];		[urlField setHidden:NO]; }
 	[[self URLField] selectText:self];
 }
 
-/*
- 
- *****************************************************************************************************
- *****************************************************************************************************
- *****************************************************************************************************
- 
- */
-
 
 // Set button visibility
-
 - (void) updateButtons
 {
 	/* Back */
-	
-	if ([currentWebView canGoBack])
-	{
-		[backMenuItem	setState: NSOnState];
-		
-		[back			setEnabled:YES];
-		
-		[websposeBack	setEnabled:YES];
-	}
-	else
-	{
-		[backMenuItem	setEnabled: NO];
-		
-		[back			setEnabled:NO];
-		
-		[websposeBack	setEnabled:NO];
-	}
 
-	
+	[backMenuItem	setState:  [currentWebView canGoBack] ? NSOnState : NO];
+	[@[back, websposeBack] do:^(id obj) { [obj setEnabled:[currentWebView canGoBack]]; }];
+
 	/* Forward */
-	
-	if ([currentWebView canGoForward])
-	{
-		[forwardMenuItem	setEnabled: YES];
-		
-		[forward			setEnabled:YES];
-		
-		[websposeForward	setEnabled:YES];
-	}
-	else
-	{
-		[forwardMenuItem	setEnabled: NO];
-		
-		[forward			setEnabled:NO];
-		
-		[websposeForward	setEnabled:NO];
-	}
+	[@[forwardMenuItem, forward, websposeForward] do:^(id obj) { [obj setEnabled:[currentWebView canGoForward]]; }];
 
-	
 	/* Stop */
-	
-	if (stopEnabled)
-	{
-		[stopMenuItem	setEnabled: YES];
-		
-		[stop			setEnabled:YES];
-		
-		[websposeStop	setEnabled:YES];
-	}
-	else
-	{
-		[stopMenuItem	setEnabled: NO];
-		
-		[stop			setEnabled:NO];
-		
-		[websposeStop	setEnabled:NO];
-	}
+	[@[stopMenuItem, stop, websposeStop] do:^(id obj) { [obj setEnabled:stopEnabled]; }];
 
-	
 	/* Reload */
-	
-	if (reloadEnabled)
-	{
-		[reloadMenuItem	setEnabled: YES];
-		
-		[reload			setEnabled:YES];
-		
-		[websposeReload	setEnabled:YES];
-	}
-	else
-	{
-		[reloadMenuItem	setEnabled: NO];
-		
-		[reload			setEnabled:NO];
-		
-		[websposeReload	setEnabled:NO];
-	}
+	[@[reloadMenuItem, reload, websposeReload]do:^(id obj) { [obj setEnabled: reloadEnabled]; }];
 
-	
 	/* Spinner */
-	
-	if (spinnerEnabled)
-	{
-		[urlField animate: YES];
-		[websposeURLField animate: YES];
-	}
-	else
-	{
-		[urlField animate: NO];
-		[websposeURLField animate: NO];
-	}
-	
+	[urlField 		  animate: spinnerEnabled];
+	[websposeURLField animate: spinnerEnabled];
+
 	// back button menu
 	[back setMenu:[historyController menuForHistory]];
 }
-
 /*
  
  *****************************************************************************************************
@@ -1285,9 +1078,8 @@ static NSString *strTemp 	= nil;
  *****************************************************************************************************
  
  */
-
 - (void)webView:(WebView *)sender
-		decidePolicyForNavigationAction:(NSDictionary *)info
+		decidePolicyForNavigationAction:(NSD *)info
 		request:(NSURLRequest *)request
 		  frame:(WebFrame *)frame
 		decisionListener:(id<WebPolicyDecisionListener>)listener {
@@ -1315,14 +1107,13 @@ static NSString *strTemp 	= nil;
 		[listener use];
 	}
 }
-
 - (void)webView:(WebView*)webView 
-		  decidePolicyForMIMEType:(NSString*)type 
+		  decidePolicyForMIMEType:(NSS*)type 
 		  request:(NSURLRequest*)request 
 		  frame:(WebFrame*)frame 
 		  decisionListener:(id<WebPolicyDecisionListener>)listener
 {
-	 NSString *extension = [[[request URL] path] pathExtension];
+	 NSS *extension = [[[request URL] path] pathExtension];
 	 if ([extension isEqualToString:@"html"] || [extension isEqualToString:@"htm"]) {
 		  [listener use];
 		  return;
@@ -1331,7 +1122,7 @@ static NSString *strTemp 	= nil;
 		  [listener use];
 		  return;
 	 }
-	NSString *currentPage = [[[[frame dataSource] request] URL] absoluteString];
+	NSS *currentPage = [[[[frame dataSource] request] URL] absoluteString];
 	[downloadController prepareForDownloadWithRequest:request];
 	
 	DBTab* tab = [tabController tabWithWebView: webView];
@@ -1352,18 +1143,13 @@ static NSString *strTemp 	= nil;
 	
 	[self showDownloadWindow:nil];
 
-
 	[listener ignore];
 }
-
 /*
-
 *****************************************************************************************************
 *****************************************************************************************************
 *****************************************************************************************************
-
 */
-
 - (WebView*) createWebView
 {
 	WebView*		newWebView	= [[[WebView alloc] initWithFrame: [tabView frame]] autorelease];
@@ -1378,12 +1164,12 @@ static NSString *strTemp 	= nil;
 	if ([newWebView respondsToSelector:@selector(toggleSmartInsertDelete:)])
 		[newWebView toggleSmartInsertDelete:nil];
 	
-	NSMutableString *localAgent = [NSMutableString stringWithString:[newWebView userAgentForURL:[NSURL URLWithString:@"http://localhost"]]];
-	if ([localAgent rangeOfString:@"Safari"].location == NSNotFound) {
-		[localAgent replaceOccurrencesOfString:@"Gecko" withString:@"Gecko, Safari" options:NSLiteralSearch range:NSMakeRange(0, [localAgent length])];
-	}
+	NSMS *localAgent = [NSMS stringWithString:[newWebView userAgentForURL:[NSURL URLWithString:@"http://localhost"]]];
+	if ( [localAgent rangeOfString:@"Safari"].location == NSNotFound)
+		[localAgent replaceOccurrencesOfString:@"Gecko"		 withString:@"Gecko, Safari"
+									   options:NSLiteralSearch 	  range:NSMakeRange(0, [localAgent length])];
 	
-	NSString *appName = [NSString stringWithFormat:@"DeskBrowse/%@", [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"]];
+	NSS *appName = [NSString stringWithFormat:@"DeskBrowse/%@", [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"]];
 	
 	[newWebView setApplicationNameForUserAgent:appName];
 	[newWebView setCustomUserAgent:[NSString stringWithFormat:@"%@ DeskBrowse/%@", localAgent, [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"]]];
@@ -1396,11 +1182,10 @@ static NSString *strTemp 	= nil;
 	
 	return newWebView;
 }
-
 - (void) tabChanged: (NSNotification*) notification
 {
 	// Change currentWebView
-	[currentWebView release];	
+//	[currentWebView release];	
 	currentWebView = [notification  userInfo][@"WebView"];
 	
 	// Get selected tab
@@ -1410,26 +1195,12 @@ static NSString *strTemp 	= nil;
 	WebDataSource*	dataSource				= [[currentWebView mainFrame] dataSource];
 	WebDataSource*	provisionalDataSource	= [[currentWebView mainFrame] provisionalDataSource];
 	NSImage*		faviconImage			= [tab favicon];
-	NSString*		URLString				= [tab URLString];
-	NSString*		titleString				= [tab title];
-	NSString*		statusString			= [tab status];
+	NSS*		URLString				= [tab URLString]	?: @"";
+	NSS*		titleString				= [tab title] 		?: @"";
+	NSS*		statusString			= [tab status] 		?: @"";
 	BOOL			loading					= [tab loading];
 	
-	if(!statusString)
-	{
-		statusString = @"";
-	}
-	
-	if(!titleString)
-	{
-		titleString = @"";
-	}
-	
-	if(!URLString)
-	{
-		URLString = @"";
-	}
-	
+
 	if(dataSource) // This will be nil if the page is not done loading
 	{		
 		/*// Loading
@@ -1443,26 +1214,9 @@ static NSString *strTemp 	= nil;
 		}*/
 		
 		// Page URL
-		if(!URLString)
-		{
-			URLString = [[[dataSource request] URL] absoluteString];
-			
-			if(!URLString)
-			{
-				URLString = @"";
-			}
-		}
-		
+		URLString = URLString ?: [[[dataSource request] URL] absoluteString] ?: @"";
 		// Page title
-		if(!titleString)
-		{
-			titleString = [dataSource pageTitle];
-			
-			if(!titleString)
-			{
-				titleString = @"";
-			}
-		}
+		titleString = titleString ?: [dataSource pageTitle] ?: @"";
 	}
 	else if(provisionalDataSource)  // This will be nil if the page hasn't started loading or is done loading
 	{		
@@ -1477,54 +1231,20 @@ static NSString *strTemp 	= nil;
 		}*/
 		
 		// Page URL
-		if(!URLString)
-		{
-			URLString = [[[provisionalDataSource request] URL] absoluteString];
-			
-			if(!URLString)
-			{
-				URLString = @"";
-			}
-		}
-		
+		URLString = URLString ?: [[[provisionalDataSource request] URL] absoluteString] ?: @"";
 		// Page title
-		if(!titleString)
-		{
-			titleString = [provisionalDataSource pageTitle];
-			
-			if(!titleString)
-			{
-				titleString = @"";
-			}
-		}
+		titleString = titleString ?: [provisionalDataSource pageTitle] ?: @"";
+
 	}
-	else
-	{
-		// Put any last minute initializtions here if necessary
-	}
+	else// Put any last minute initializtions here if necessary
 	
-	if(loading)
-	{
-		spinnerEnabled	= YES;
-		stopEnabled		= YES;
-		reloadEnabled	= NO;
-	}
-	else
-	{
-		spinnerEnabled	= NO;
-		stopEnabled		= NO;
-		reloadEnabled	= YES;
-	}
-	
-	if([URLString length] > 0)
-	{
-		[[self currentWindow] makeFirstResponder: [[tabView selectedTabViewItem] view]];
-	}
-	else
-	{
-		[[self URLField] selectText: self];
-	}
-		
+	spinnerEnabled	= loading;
+	stopEnabled		= loading;
+	reloadEnabled	= !loading;
+
+	[URLString length] > 0 	? [[self currentWindow] makeFirstResponder: [[tabView selectedTabViewItem] view]]
+							: [[self URLField] selectText: self];
+
 	[self setStatusText: statusString];
 	[self setTitleText: titleString];
 	[self setURLText: URLString];
@@ -1532,16 +1252,12 @@ static NSString *strTemp 	= nil;
 	[self updateButtons];
 	[self syncLoadingStateWithStatus];
 }
-
 - (BOOL)actionMenuVisible {
 	return actionMenuVisible;
 }
 
-
 #pragma mark -
-
 #pragma mark NSWindow Delegate Methods
-
 - (void) windowDidMove: (NSNotification*) aNotification
 {
 	if ([aNotification object] == slideWindow && !inWebsposeMode)
@@ -1549,7 +1265,6 @@ static NSString *strTemp 	= nil;
 		[actionMenuWindow setFrame: NSMakeRect([actionMenuWindow frame].origin.x, [slideWindow frame].origin.y + 47, [actionMenuWindow frame].size.width, [actionMenuWindow frame].size.height) display: YES];
 	}
 }
-
 - (void) windowDidResize:(NSNotification *)aNotification
 {
 	if ([aNotification object] == slideWindow && !inWebsposeMode)
@@ -1558,11 +1273,8 @@ static NSString *strTemp 	= nil;
 	}
 }
 
-
 #pragma mark -
-
 #pragma mark NSApplication Delegate Methods
-
 - (void) mouseDown: (NSEvent*) theEvent
 {
 	NSP location = [theEvent locationInWindow];
@@ -1579,7 +1291,6 @@ static NSString *strTemp 	= nil;
 		}
 	}
 }
-
 - (void) keyCombinationPressed: (KeyCombination) keys
 {
 	NSWindow* keyWindow	= [NSApp keyWindow];
@@ -1621,19 +1332,15 @@ static NSString *strTemp 	= nil;
 	}
 }
 
-
 #pragma mark -
-
 - (void)applicationWillFinishLaunching:(NSNotification*)notification
 {	
 	[[NSAppleEventManager sharedAppleEventManager] setEventHandler:self andSelector:@selector(openURL:withReplyEvent:) forEventClass:'GURL' andEventID:'GURL'];
 }
-
 - (void) applicationDidFinishLaunching: (NSNotification*) notification
 {
 	// ---------------------------------------------
 	// Used to be in awakeFromNib
-
 	// Set up hot-key listening
 	
 	[[NSApp hotKeyController] setSlideBrowseListener: self selector: @selector(toggleSlideBrowse)];
@@ -1671,7 +1378,6 @@ static NSString *strTemp 	= nil;
 		[[self URLField] selectText:self];
 	}
 
-
 	// Enter SlideBrowse or Webposé mode if the user wants to
 	
 	NSInteger browserMode	 = [userDefaults integerForKey: kBrowserMode];
@@ -1684,7 +1390,6 @@ static NSString *strTemp 	= nil;
 	{
 		[self toggleWebspose];
 	}
-
 
 	// Set up status item
 	
@@ -1704,10 +1409,8 @@ static NSString *strTemp 	= nil;
 	// ---------------------------------------------
 }
 
-
 #pragma mark -
-
-- (BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename {/*
+- (BOOL)application:(NSApplication *)theApplication openFile:(NSS *)filename {/*
 	NSURL *furl = [NSURL fileURLWithPath:filename];
 	[[currentWebView mainFrame] loadRequest:[NSURLRequest requestWithURL:furl]];
 	if (!inWebsposeMode) {
@@ -1717,11 +1420,9 @@ static NSString *strTemp 	= nil;
 	}
 	return YES;*/
 }
-
-- (BOOL)application:(NSApplication *)sender openFileWithoutUI:(NSString *)filename {
+- (BOOL)application:(NSApplication *)sender openFileWithoutUI:(NSS *)filename {
 	return [self application:sender openFile:filename];
 }
-
 - (void) application: (NSApplication*) sender openFiles: (NSA*) filenames
 {
 	if (!inWebsposeMode && !windowIsVisible)
@@ -1730,12 +1431,12 @@ static NSString *strTemp 	= nil;
 	}
 	
 	NSEnumerator*	fileNameEnumerator	= [filenames objectEnumerator];
-	NSString*		currentFileName		= nil;
+	NSS*		currentFileName		= nil;
 	
 	while ((currentFileName = [fileNameEnumerator nextObject]) != nil)
 	{
 		NSURL*			fileURL				= [NSURL fileURLWithPath: currentFileName];
-		NSString*		formattedFileName	= [fileURL absoluteString];
+		NSS*		formattedFileName	= [fileURL absoluteString];
 		NSURLRequest*	URLRequest			= [NSURLRequest requestWithURL: fileURL];
 		
 		WebView*		webViewToLoadFile	= currentWebView;
@@ -1744,12 +1445,12 @@ static NSString *strTemp 	= nil;
 			// note to ian:
 			// url files are cross-platform (they are originally made for windows) file
 			// that have a link in them, kind of like .webloc files on the mac
-			NSString *contents = [NSString stringWithContentsOfFile:currentFileName];
+			NSS *contents = [NSString stringWithContentsOfFile:currentFileName];
 			// hacky replace-all to get rid of dos line break characters in case this came from windows
 			contents = [[contents componentsSeparatedByString:@"\r"] componentsJoinedByString:@""];
 			
 			NSArray *lines = [contents componentsSeparatedByString:@"\n"];
-			NSString *current = nil;
+			NSS *current = nil;
 			NSInteger i;
 			for (i=0; i<[lines count]; i++) {
 				current = lines[i];
@@ -1772,10 +1473,9 @@ static NSString *strTemp 	= nil;
 	}
 	
 	[NSApp replyToOpenOrPrint: NSApplicationDelegateReplySuccess];
-
 /*
 	NSInteger i;
-	NSString *file = nil;
+	NSS *file = nil;
 	NSURL *furl = nil;
 	if (!inWebsposeMode) {
 		if (!windowIsVisible) {
@@ -1784,7 +1484,7 @@ static NSString *strTemp 	= nil;
 	}
 	for (i=0; i<[filenames count]; i++) {
 		file = [filenames objectAtIndex:i];
-		NSString *file2 = [NSString stringWithFormat:@"file://localhost%@", [file stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+		NSS *file2 = [NSString stringWithFormat:@"file://localhost%@", [file stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
 		furl = [NSURL fileURLWithPath:file];
 		WebView *wv = [self newWebView];
 		if (i == 0)
@@ -1796,9 +1496,7 @@ static NSString *strTemp 	= nil;
 	[NSApp replyToOpenOrPrint:NSApplicationDelegateReplySuccess];*/
 }
 
-
 #pragma mark -
-
 - (void) applicationWillResignActive: (NSNotification*) aNotification
 {
 	if (actionMenuVisible)
@@ -1807,7 +1505,6 @@ static NSString *strTemp 	= nil;
 		actionMenuVisible = NO;
 	}
 }
-
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender {
 	NSApplicationTerminateReply shouldTerminate = NSTerminateCancel;
 	
@@ -1817,38 +1514,33 @@ static NSString *strTemp 	= nil;
 	
 	return shouldTerminate;
 }
-
 - (void) applicationWillTerminate: (NSNotification*) aNotification
 {
 	[bookmarkController save];
 }
 
-
 #pragma mark -
-
 #pragma mark WebKit
-
-- (void) showErrorPageForReason:(NSString *)reason title:(NSString *)title webview:(WebView *)wv {
+- (void) showErrorPageForReason:(NSS *)reason title:(NSS *)title webview:(WebView *)wv {
 	// load the template html file
-	NSString *resourcesPath = [[NSBundle mainBundle] resourcePath];
+	NSS *resourcesPath = [[NSBundle mainBundle] resourcePath];
 	NSURL *resURL = [NSURL fileURLWithPath:resourcesPath];
-	NSString *errorPagePath = [[NSBundle mainBundle] pathForResource:@"error" ofType:@"html"];
+	NSS *errorPagePath = [[NSBundle mainBundle] pathForResource:@"error" ofType:@"html"];
 	
 	// replace the template entries with the real entries
-	NSMutableString *content = [NSMutableString stringWithContentsOfFile:errorPagePath];
+	NSMS *content = [NSMS stringWithContentsOfFile:errorPagePath];
 	NSRange range = NSMakeRange(0, [content length]);
 	[content replaceOccurrencesOfString:@"{error.title}" withString:title options:NSLiteralSearch range:range];
 	range = NSMakeRange(0, [content length]); // the range changed, so get it again
 	[content replaceOccurrencesOfString:@"{error.text}" withString:reason options:NSLiteralSearch range:range];
 	
 	DBTab *tab = [tabController tabWithWebView:wv];
-	NSString *url = [tab URLString];
+	NSS *url = [tab URLString];
 	[[wv mainFrame] loadHTMLString:content baseURL:resURL];
 	[self setURLText:url];
 	[tab setURLString:url];
 }
-
-- (BOOL)handleFileProtocolForPath:(NSString *)path webview:(WebView *)wv {
+- (BOOL)handleFileProtocolForPath:(NSS *)path webview:(WebView *)wv {
 	if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
 		[[NSWorkspace sharedWorkspace] selectFile:[path stringByExpandingTildeInPath] inFileViewerRootedAtPath:@""]; // show file in finder
 		[self setStatusText:@"Done"];
@@ -1863,7 +1555,7 @@ static NSString *strTemp 	= nil;
 - (void)webView:(WebView *)sender didStartProvisionalLoadForFrame:(WebFrame *)frame
 {
 	DBTab* tab = [tabController tabWithWebView: sender];
-	NSString *urlString = [[[[frame provisionalDataSource] request] URL] absoluteString];
+	NSS *urlString = [[[[frame provisionalDataSource] request] URL] absoluteString];
 	
 	if(tab)
 	{
@@ -1890,8 +1582,7 @@ static NSString *strTemp 	= nil;
 		}
 	}
 }
-
-- (void)webView:(WebView *)sender didReceiveTitle:(NSString *)title
+- (void)webView:(WebView *)sender didReceiveTitle:(NSS *)title
 		forFrame:(WebFrame *)frame {
 	DBTab* tab = [tabController tabWithWebView: sender];
 	if(tab)
@@ -1910,7 +1601,6 @@ static NSString *strTemp 	= nil;
 		}
 	}
 }
-
 - (void)webView:(WebView *)sender didReceiveIcon:(NSImage *)image
 		forFrame:(WebFrame *)frame {
 	DBTab* tab = [tabController tabWithWebView: sender];
@@ -1928,7 +1618,6 @@ static NSString *strTemp 	= nil;
 		}
 	}
 }
-
 - (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame {
 	DBTab* tab = [tabController tabWithWebView: sender];
 	if(tab)
@@ -1945,11 +1634,9 @@ static NSString *strTemp 	= nil;
 		[self updateButtons];
 	}
 }
-
 //- (void)webView:(WebView *)sender didFinishProvisionalLoadForFrame:(WebFrame *)frame {
 //	[self webView:sender didFinishLoadForFrame:frame];
 //}
-
 - (void)webView:(WebView *)sender didFailProvisionalLoadWithError:(NSError *)error forFrame:(WebFrame *)frame {
 	DBTab* tab = [tabController tabWithWebView: sender];
 	
@@ -2063,7 +1750,6 @@ static NSString *strTemp 	= nil;
 	reloadEnabled	= YES;
 	[self updateButtons];
 }
-
 - (void)webView:(WebView *)sender didFailLoadWithError:(NSError *)error forFrame:(WebFrame *)frame {
 	DBTab* tab = [tabController tabWithWebView: sender];
 	NSInteger code = [error code];
@@ -2173,7 +1859,6 @@ static NSString *strTemp 	= nil;
 	reloadEnabled	= YES;
 	[self updateButtons];
 }
-
 - (void)webView:(WebView *)sender didCommitLoadForFrame:(WebFrame *)frame {
 	DBTab* tab = [tabController tabWithWebView: sender];
 	
@@ -2196,7 +1881,6 @@ static NSString *strTemp 	= nil;
 		[self updateButtons];
 	}
 }
-
 - (void)webView:(WebView *)sender serverRedirectedForDataSource:(WebFrame *)frame {
 	DBTab* tab = [tabController tabWithWebView: sender];
 	if(tab)
@@ -2209,7 +1893,6 @@ static NSString *strTemp 	= nil;
 		[self syncLoadingStateWithStatus];
 	}
 }
-
 - (void)webView:(WebView *)sender didCancelClientRedirectForFrame:(WebFrame *)frame {
 	DBTab* tab = [tabController tabWithWebView: sender];
 	if(tab)
@@ -2230,7 +1913,6 @@ static NSString *strTemp 	= nil;
 		[self updateButtons];
 	}
 }
-
 - (void)webView:(WebView *)sender willPerformClientRedirectToURL:(NSURL *)URL delay:(NSTimeInterval)seconds fireDate:(NSDate *)date forFrame:(WebFrame *)frame {
 	DBTab* tab = [tabController tabWithWebView: sender];
 	
@@ -2261,7 +1943,6 @@ static NSString *strTemp 	= nil;
 	}
 }
 
-
 - (WebView *)webView:(WebView *)sender createWebViewWithRequest:(NSURLRequest *)request {
 	WebView			*newView = [self createWebView];
 	NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
@@ -2279,10 +1960,8 @@ static NSString *strTemp 	= nil;
 	
 	return newView;
 }
-
 - (void)webViewShow:(WebView *)sender {}
-
-- (void)webView:(WebView *)sender setStatusText:(NSString *)text {
+- (void)webView:(WebView *)sender setStatusText:(NSS *)text {
 	DBTab* tab = [tabController tabWithWebView: sender];
 	
 	if(tab)
@@ -2295,9 +1974,8 @@ static NSString *strTemp 	= nil;
 		[self setStatusText:text];
 	}
 }
-
-- (NSString *)webViewStatusText:(WebView *)sender {
-	NSString*	status	= nil;	
+- (NSS *)webViewStatusText:(WebView *)sender {
+	NSS*	status	= nil;	
 	DBTab*		tab		= [tabController tabWithWebView: sender];
 	
 	if(tab)
@@ -2311,12 +1989,10 @@ static NSString *strTemp 	= nil;
 	
 	return status;
 }
-
 - (NSR)webViewFrame:(WebView *)sender {
 	return [[sender window] frame];
 }
-
-- (void)webView:(WebView *)sender runJavaScriptAlertPanelWithMessage:(NSString *)message {
+- (void)webView:(WebView *)sender runJavaScriptAlertPanelWithMessage:(NSS *)message {
 	DBTab *tab = [tabController tabWithWebView:sender];
 	if(sender != currentWebView) // if this is the visible webview
 	{
@@ -2326,7 +2002,6 @@ static NSString *strTemp 	= nil;
 	NSAlert *alert;
 	alert = [[NSAlert alloc] init];
 //	[alert autorelease];
-
 	[[alert window] setLevel: [DBWindowLevel windowLevel] + 1];
 		
 	// Configure alert panel
@@ -2337,8 +2012,7 @@ static NSString *strTemp 	= nil;
 	// Display alert panel
 	[alert beginSheetModalForWindow:[currentWebView window] modalDelegate:self didEndSelector:NULL contextInfo:NULL];
 }
-
-- (BOOL)webView:(WebView *)sender runJavaScriptConfirmPanelWithMessage:(NSString *)message {
+- (BOOL)webView:(WebView *)sender runJavaScriptConfirmPanelWithMessage:(NSS *)message {
 	DBTab *tab = [tabController tabWithWebView:sender];
 	if(sender != currentWebView) // if this is the visible webview
 	{
@@ -2348,7 +2022,6 @@ static NSString *strTemp 	= nil;
 	NSAlert *alert;
 	alert = [[NSAlert alloc] init];
 //	[alert autorelease];
-
 	[[alert window] setLevel: [DBWindowLevel windowLevel] + 1];
 		
 	// Configure alert panel
@@ -2364,16 +2037,14 @@ static NSString *strTemp 	= nil;
 	// Return result
 	return result == NSAlertFirstButtonReturn;
 }
-
 //- (NSWindow *)downloadWindowForAuthenticationSheet:(WebDownload *)download {}
-
-- (void)webView:(WebView *)sender mouseDidMoveOverElement:(NSDictionary *)elementInfo modifierFlags:(NSUI)modifierFlags
+- (void)webView:(WebView *)sender mouseDidMoveOverElement:(NSD *)elementInfo modifierFlags:(NSUI)modifierFlags
 {
 	if(sender == currentWebView) // if this is the visible webview
 	{
-		NSString *location = [elementInfo[WebElementLinkURLKey] absoluteString];
+		NSS *location = [elementInfo[WebElementLinkURLKey] absoluteString];
 		if (location) {
-			NSString *scheme = [[NSURL URLWithString:location] scheme];
+			NSS *scheme = [[NSURL URLWithString:location] scheme];
 			if ([scheme isEqualToString:@"mailto"]) {
 				location = [[location componentsSeparatedByString:@"mailto:"] componentsJoinedByString:@""];
 				[self setStatusText:[NSString stringWithFormat:@"Send email to %@", location]];
@@ -2385,7 +2056,6 @@ static NSString *strTemp 	= nil;
 		}
 	}
 }
-
 - (void)webView:(WebView *)sender runOpenPanelForFileButtonWithResultListener:(id <WebOpenPanelResultListener>)resultListener {
 	DBTab *tab = [tabController tabWithWebView:sender];
 	if(sender != currentWebView) // if this is the visible webview
@@ -2410,29 +2080,24 @@ static NSString *strTemp 	= nil;
 		[resultListener cancel];
 	}
 }
-
 - (void)webViewClose:(WebView *)sender {
 	if ([tabController tabCount] > 1) { // only close if there is more than one tab open
 		DBTab *t = [tabController tabWithWebView:sender];
 		[tabController removeTab:t redraw:YES resize:YES];
 	}
 }
-
 - (void)webView:(WebView *)sender setFrame:(NSR)frame {}		// dont let the window change size or position
 //- (void)webViewUnfocus:(WebView *)sender {}
 //- (void)webViewFocus:(WebView*)sender {}
-
 - (NSResponder *)webViewFirstResponder:(WebView *)sender
 {
 	 return [[sender window] firstResponder];
 }
-
 - (void)webView:(WebView *)sender makeFirstResponder:(NSResponder*)responder
 {
 	 [[sender window] makeFirstResponder:responder];
 }
-
-- (NSArray *)webView:(WebView *)sender contextMenuItemsForElement:(NSDictionary *)element defaultMenuItems:(NSArray *)defaultMenuItems {
+- (NSArray *)webView:(WebView *)sender contextMenuItemsForElement:(NSD *)element defaultMenuItems:(NSArray *)defaultMenuItems {
 	NSMutableArray *items = [[NSMutableArray alloc] initWithArray:defaultMenuItems copyItems:YES];
 	BOOL link = NO;
 	BOOL frame = NO;
@@ -2507,31 +2172,25 @@ static NSString *strTemp 	= nil;
 	
 	return [items autorelease];
 }
-
 - (void)downloadDidBegin:(NSURLDownload *)download {
 	NSURLRequest *req = [download request];
 	[download cancel];
 	[downloadController prepareForDownloadWithRequest:req];
 	[self showDownloadWindow:self];
 }
-
 - (IBAction)reloadAllTabs:(id)sender {
 	[tabController reloadAllTabs];
 }
-
 - (IBAction)clearCache:(id)sender {
 	[[NSURLCache sharedURLCache] removeAllCachedResponses];
 }
-
 - (void)menuHandlerBookmarkLink {
 	[self showBookmarkWindow: nil];
 	[bookmarkController newBookmarkWithURL: urlTemp title: strTemp window: [bookmarkWindowController window]];
 }
-
 - (void)menuHandlerCopyImageLocation {
 	NSPasteboard *pb = [NSPasteboard generalPasteboard];
 	[pb declareTypes:@[NSStringPboardType] owner:self];
 	[pb setString:[urlTemp absoluteString] forType:NSStringPboardType];
 }
-
 @end

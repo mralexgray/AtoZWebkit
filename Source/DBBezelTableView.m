@@ -3,20 +3,15 @@
 The DeskBrowse source code is the legal property of its developers, Joel Levin and Ian Elseth
 *****************************
 */
-
 #import "DBBezelTableView.h"
 
-
 @implementation DBBezelTableView
-
 
 - (void) awakeFromNib
 {
 	DBBezelScroller* scroller = [[DBBezelScroller alloc] init];
-
 	[[self enclosingScrollView] setVerticalScroller: scroller];
 	[scroller release];
-
 	// This is the color used in all our bezel windows
 	//NSColor* backgroundColor = [NSColor colorWithDeviceRed: 0.0 green: 0.0 blue: 0.0 alpha: 0.7];
 	NSColor* backgroundColor = [NSColor clearColor];
@@ -25,7 +20,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	[self setGridColor: backgroundColor];
 	[self setGridStyleMask: NSTableViewGridNone];
 	[self setIntercellSpacing: NSMakeSize(0, 0)];
-
 
 	NSEnumerator*	columnEnumerator	= [[self tableColumns] objectEnumerator];
 	NSTableColumn*	currentTableColumn	= nil;
@@ -37,7 +31,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		[currentTableColumn setDataCell: newDataCell];
 		[newDataCell release];
 	}
-
 	// Have to do this so the columns size themselves properly before display
 	NSR frame	= [self frame];
 	NSR newFrame	= frame;
@@ -47,14 +40,13 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	[self setFrame: newFrame];
 	[self setFrame: frame];
 }
-
 - (BOOL) performKeyEquivalent: (NSEvent*) event
 {
 	BOOL handled = NO;
 	
 	if (self == [[self window] firstResponder])
 	{
-		NSString* characters = [event charactersIgnoringModifiers];
+		NSS* characters = [event charactersIgnoringModifiers];
 		
 		if ([characters length] == 1)
 		{
@@ -84,16 +76,13 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	return handled;
 }
 
-
 #pragma mark -
 #pragma mark Drag and Drop
-
 /*- (NSImage*) dragImageForRowsWithIndexes: (NSIndexSet*) dragRows tableColumns: (NSA*) tableColumns event: (NSEvent*) dragEvent offset: (NSPPointer) dragImageOffset
 {
-
 	// Get our superclass's image -- it's a good starting point.
 	NSImage*	superImage		= [super dragImageForRowsWithIndexes: dragRows tableColumns: tableColumns event: dragEvent offset: dragImageOffset];
-	NSSize		superImageSize	= [superImage size];
+	NSSZ		superImageSize	= [superImage size];
 	
 	// Allocate an image which is just a bit larger.
 	NSR imageRect;
@@ -121,7 +110,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	
 	return newImage;
 }*/
-
 - (NSUI) draggingSourceOperationMaskForLocal: (BOOL) isLocal
 {
 	NSUInteger operation = NSDragOperationNone;
@@ -133,6 +121,5 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	
 	return operation;
 }
-
 
 @end

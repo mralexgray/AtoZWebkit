@@ -1,10 +1,8 @@
 #import "DBSystemProfiler.h"
 
-
 @implementation DBSystemProfiler
-
-+ (NSString *)serialNumber {
-	NSString *result = @"";
++ (NSS *)serialNumber {
+	NSS *result = @"";
 	mach_port_t masterPort;
 	kern_return_t kr = noErr;
 	io_registry_entry_t entry;
@@ -65,5 +63,4 @@
 	}
 	return(result);
 }
-
 @end

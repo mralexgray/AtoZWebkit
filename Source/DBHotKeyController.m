@@ -4,14 +4,10 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 *****************************
 */
 
-
 #import "DBHotKeyController.h"
-
 #import "DBWindowLevel.h"
 
-
 @implementation DBHotKeyController
-
 
 //-------------------------------------
 //
@@ -23,14 +19,11 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 //	At:	6:22 PM
 //
 //-------------------------------------
-
 pascal OSStatus HotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent, void* userData)
 {
 	EventHotKeyID		theHotKeyID;
 	OSStatus			theError;
-
 	theError = GetEventParameter(theEvent, kEventParamDirectObject, typeEventHotKeyID, NULL, sizeof(EventHotKeyID), NULL, &theHotKeyID );
-
 	if(theError == noErr)
 	{
 		UInt32 theEventKind = GetEventKind(theEvent);
@@ -61,10 +54,8 @@ pascal OSStatus HotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent
 			}
 		}
 	}
-
 	return theError;
 }
-
 
 //-------------------------------------
 //
@@ -76,7 +67,6 @@ pascal OSStatus HotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent
 //	At:	4:20 PM
 //
 //-------------------------------------
-
 - (id) init
 {
 	if(self = [super init])
@@ -94,13 +84,11 @@ pascal OSStatus HotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent
 		wbHotKeyID.id			= 2;
 		
 		InstallApplicationEventHandler(&HotKeyHandler, 1, &eventType, NULL, NULL);
-
 		[self loadHotKeysFromPrefs];
 	}
 	
 	return self;
 }
-
 
 //-------------------------------------
 //
@@ -112,14 +100,12 @@ pascal OSStatus HotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent
 //	At:	6:20 PM
 //
 //-------------------------------------
-
 - (void) dealloc
 {
 	[wbInvocation	release];
 	[sbInvocation	release];
 	
 }
-
 
 //-------------------------------------
 //
@@ -131,14 +117,12 @@ pascal OSStatus HotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent
 //	At:	6:40 PM
 //
 //-------------------------------------
-
 - (void) setSlideBrowseListener: (id) listener selector: (SEL) selector
 {
 	if(listener && selector)
 	{
 		NSMethodSignature*	signature;
 		NSInvocation*		invocation;
-
 		signature	= [[listener class]	instanceMethodSignatureForSelector:	selector];
 		invocation	= [NSInvocation	invocationWithMethodSignature: signature];
 		
@@ -154,7 +138,6 @@ pascal OSStatus HotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent
 	}
 }
 
-
 //-------------------------------------
 //
 //	setWebsposeListener:selector:
@@ -165,14 +148,12 @@ pascal OSStatus HotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent
 //	At:	6:40 PM
 //
 //-------------------------------------
-
 - (void) setWebsposeListener: (id) listener selector: (SEL) selector
 {
 	if(listener && selector)
 	{
 		NSMethodSignature*	signature;
 		NSInvocation*		invocation;
-
 		signature	= [[listener class]	instanceMethodSignatureForSelector:	selector];
 		invocation	= [NSInvocation	invocationWithMethodSignature: signature];
 		
@@ -188,7 +169,6 @@ pascal OSStatus HotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent
 	}
 }
 
-
 //-------------------------------------
 //
 //	getNewSlideBrowseHotKey
@@ -199,7 +179,6 @@ pascal OSStatus HotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent
 //	At:	9:06 PM
 //
 //-------------------------------------
-
 - (void) getNewSlideBrowseHotKey
 {
 	if (!mainWindow)
@@ -218,7 +197,6 @@ pascal OSStatus HotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent
 	[keysField	setKeyCode:		sbKeyCode];
 	[keysField	setModifiers:	sbModifiers];
 
-
 	/*___________ Start listening for key events ___________*/
 	
 	[NSApp beginSheet: mainWindow modalForWindow: [NSApp keyWindow] modalDelegate: self didEndSelector: nil contextInfo: nil];
@@ -230,12 +208,10 @@ pascal OSStatus HotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent
 	
 	/*___________ Stop listening for key events ___________*/
 
-
 	if(save)
 	{
 		UInt32 newKeyCode	= [keysField keyCode];
 		UInt32 newMods		= [keysField modifiers];
-
 		if(newKeyCode == wbKeyCode && newMods == wbModifiers)
 		{
 			wbKeyCode	= -1;
@@ -251,7 +227,6 @@ pascal OSStatus HotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent
 	[self registerHotKeys];
 }
 
-
 //-------------------------------------
 //
 //	getNewWebsposeHotKey
@@ -262,7 +237,6 @@ pascal OSStatus HotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent
 //	At:	10:00 PM
 //
 //-------------------------------------
-
 - (void) getNewWebsposeHotKey
 {
 	if (mainWindow == nil)
@@ -281,7 +255,6 @@ pascal OSStatus HotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent
 	[keysField	setKeyCode:		wbKeyCode];
 	[keysField	setModifiers:	wbModifiers];
 
-
 	/*___________ Start listening for key events ___________*/
 	
 	[NSApp beginSheet: mainWindow modalForWindow: [NSApp keyWindow] modalDelegate: self didEndSelector: nil contextInfo: nil];
@@ -293,12 +266,10 @@ pascal OSStatus HotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent
 	
 	/*___________ Stop listening for key events ___________*/
 
-
 	if (save)
 	{
 		UInt32 newKeyCode	= [keysField keyCode];
 		UInt32 newMods		= [keysField modifiers];
-
 		if(newKeyCode == sbKeyCode && newMods == sbModifiers)
 		{
 			sbKeyCode	= -1;
@@ -314,7 +285,6 @@ pascal OSStatus HotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent
 	[self registerHotKeys];
 }
 
-
 //-------------------------------------
 //
 //	loadHotKeysFromPrefs
@@ -325,7 +295,6 @@ pascal OSStatus HotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent
 //	At:	6:09 PM
 //
 //-------------------------------------
-
 - (void) loadHotKeysFromPrefs;
 {
 	NSUserDefaults*	userDefaults	= [NSUserDefaults standardUserDefaults];
@@ -333,7 +302,6 @@ pascal OSStatus HotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent
 	sbKeyCode						= [userDefaults integerForKey: kSlideBrowseHotKey];
 	wbModifiers						= [userDefaults integerForKey: kWebsposeModifiers];
 	sbModifiers						= [userDefaults integerForKey: kSlideBrowseModifiers];
-
 	if (wbModifiers < 0 || sbModifiers < 0)
 	{
 		NSLog(@"Modifier keys must be at least 0");
@@ -342,7 +310,6 @@ pascal OSStatus HotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent
 	[self unregisterHotKeys];
 	[self registerHotKeys];
 }
-
 
 //-------------------------------------
 //
@@ -354,7 +321,6 @@ pascal OSStatus HotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent
 //	At:	6:09 PM
 //
 //-------------------------------------
-
 - (void) saveHotKeysToPrefs;
 {
 	NSUserDefaults*	userDefaults = [NSUserDefaults standardUserDefaults];
@@ -364,7 +330,6 @@ pascal OSStatus HotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent
 	[userDefaults setInteger: wbModifiers	forKey: kWebsposeModifiers];
 	[userDefaults setInteger: sbModifiers	forKey: kSlideBrowseModifiers];
 }
-
 
 //-------------------------------------
 //
@@ -376,7 +341,6 @@ pascal OSStatus HotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent
 //	At:	6:41 PM
 //
 //-------------------------------------
-
 - (void) registerHotKeys
 {
 	[self unregisterHotKeys];
@@ -392,7 +356,6 @@ pascal OSStatus HotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent
 	}
 }
 
-
 //-------------------------------------
 //
 //	unregisterHotKeys
@@ -403,13 +366,11 @@ pascal OSStatus HotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent
 //	At:	6:41 PM
 //
 //-------------------------------------
-
 - (void) unregisterHotKeys
 {
 	UnregisterEventHotKey(wbHotKeyRef);
 	UnregisterEventHotKey(sbHotKeyRef);
 }
-
 
 //-------------------------------------
 //
@@ -421,7 +382,6 @@ pascal OSStatus HotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent
 //	At:	6:09 PM
 //
 //-------------------------------------
-
 - (void) listenForKeyEvents
 {
 	BOOL stop = NO;
@@ -456,7 +416,6 @@ pascal OSStatus HotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent
 	 }
 }
 
-
 // --------------------------------------
 //
 //	currentSBKeyString
@@ -467,10 +426,9 @@ pascal OSStatus HotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent
 //	At:	9:35 PM
 //
 // --------------------------------------
-
-- (NSString*) currentSBKeyString
+- (NSS*) currentSBKeyString
 {
-	NSString* keyString = [DBKeyStuff stringForKeyCode: sbKeyCode modifiers: sbModifiers];
+	NSS* keyString = [DBKeyStuff stringForKeyCode: sbKeyCode modifiers: sbModifiers];
 	
 	if (!keyString)
 	{
@@ -479,7 +437,6 @@ pascal OSStatus HotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent
 	
 	return keyString;
 }
-
 
 // --------------------------------------
 //
@@ -491,10 +448,9 @@ pascal OSStatus HotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent
 //	At:	9:35 PM
 //
 // --------------------------------------
-
-- (NSString*) currentWBKeyString
+- (NSS*) currentWBKeyString
 {
-	NSString* keyString = [DBKeyStuff stringForKeyCode: wbKeyCode modifiers: wbModifiers];
+	NSS* keyString = [DBKeyStuff stringForKeyCode: wbKeyCode modifiers: wbModifiers];
 	
 	if (!keyString)
 	{
@@ -503,7 +459,6 @@ pascal OSStatus HotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent
 	
 	return keyString;
 }
-
 
 // --------------------------------------
 //
@@ -515,13 +470,11 @@ pascal OSStatus HotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent
 //	At:	6:00 PM
 //
 // --------------------------------------
-
 - (IBAction) ok: (id) sender
 {
 	[NSApp stopModal];
 	save = YES;
 }
-
 
 // --------------------------------------
 //
@@ -533,12 +486,10 @@ pascal OSStatus HotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent
 //	At:	6:00 PM
 //
 // --------------------------------------
-
 - (IBAction) cancel: (id) sender
 {
 	[NSApp stopModal];
 	save = NO;
 }
-
 
 @end

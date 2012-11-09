@@ -3,21 +3,17 @@
 The DeskBrowse source code is the legal property of its developers, Joel Levin and Ian Elseth
 *****************************
 */
-
 #import "DBKeychainAccess.h"
 #import <CoreFoundation/CoreFoundation.h>
 #import <Security/Security.h>
 
-
 @implementation DBKeychainAccess
-
 
 + (DBKeychainAccess*) keychainAccess
 {
 	return [[[DBKeychainAccess alloc] init] autorelease];
 }
-
-- (BOOL) getKeychainWithName: (NSString*) name account: (NSString*) account keychainItem: (SecKeychainItemRef*) keychainItem
+- (BOOL) getKeychainWithName: (NSS*) name account: (NSS*) account keychainItem: (SecKeychainItemRef*) keychainItem
 {
 	BOOL	exists	= NO;
 	OSErr	result	= SecKeychainFindGenericPassword(NULL, [name length], [name UTF8String], [account length], [account UTF8String], 0, NULL, keychainItem);
@@ -26,8 +22,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	
 	return exists;
 }
-
-- (BOOL) addNewKeychainItemWithName: (NSString*) name account: (NSString*) account password: (NSString*) password
+- (BOOL) addNewKeychainItemWithName: (NSS*) name account: (NSS*) account password: (NSS*) password
 {
 	BOOL				added			= NO;
 	SecKeychainItemRef	keychainItem	= nil;
@@ -53,10 +48,9 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	
 	return added;
 }
-
-- (NSString*) passwordFromKeychainWithName: (NSString*) name account: (NSString*) account
+- (NSS*) passwordFromKeychainWithName: (NSS*) name account: (NSS*) account
 {
-	NSString*	password			= nil;
+	NSS*	password			= nil;
 	NSInteger			numberOfAttributes	= (name != nil) + (account != nil);
 	
 	if (numberOfAttributes > 0)
@@ -106,10 +100,9 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	
 	return password;
 }
-
-- (NSString*) passwordFromKeychainItem: (SecKeychainItemRef) keychainItem
+- (NSS*) passwordFromKeychainItem: (SecKeychainItemRef) keychainItem
 {
-	NSString* passwordString = nil;
+	NSS* passwordString = nil;
 	
 	if (keychainItem != NULL)
 	{	
@@ -140,6 +133,5 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	
 	return passwordString;
 }
-
 
 @end

@@ -3,15 +3,11 @@
 The DeskBrowse source code is the legal property of its developers, Joel Levin and Ian Elseth
 *****************************
 */
-
 #import "DBTabController.h"
-
 #import "DBTab.h"
 #import "DBTabBar.h"
 
-
 @implementation DBTabController
-
 
 - (id) initWithTabBar: (DBTabBar*) bar tabView: (NSTabView*) view
 {
@@ -46,20 +42,16 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	
 	return self;
 }
-
 - (WebView*)defaultWebView {
 	return defaultWebView;
 }
-
 - (void)setDefaultWebView:(WebView *)aWebView {
 	[defaultWebView release];
 	defaultWebView = aWebView;
 }
-
 - (DBTabBar *)tabBar {
 	return tabBar;
 }
-
 - (void) dealloc
 {
 	[AZNOTCENTER removeObserver:self];
@@ -70,10 +62,9 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	[defaultWebView release];
 	
 }
-
 - (void) tabClicked: (NSNotification*) notification
 {
-	NSDictionary*	userInfo;
+	NSD*	userInfo;
 	DBTab*			clickedTab;
 	
 	userInfo = [notification userInfo];
@@ -84,33 +75,27 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		[self selectTab: clickedTab refresh: YES];
 	}
 }
-
 - (void) tabWantsToClosed:(NSNotification *)notification {
 	DBTab *tTab = (DBTab *)[notification userInfo][@"sender"];
 	if ([tabs count] > 1) {
 		[self removeTab: tTab redraw: YES resize: YES];
 	}
 }
-
 - (void) slideWindowResized: (NSNotification*) notification
 {
 	[self updateTabSize];
 	[tabBar setNeedsDisplay: YES];
 }
-
 - (void) newTabWithWebView: (WebView*) webView select: (BOOL) selectNewTab
 {
 	if ([self canFitMoreTabs])
 	{
 		DBTab*			newTab;
 		NSTabViewItem*	newTabViewItem;
-
 		newTab			= [[DBTab alloc] initWithFrame: NSMakeRect(0, 0, 0, 0)];
 		newTabViewItem	= [[NSTabViewItem alloc] init];
-
 		[newTabViewItem	setView: webView];
 		[tabView addTabViewItem: newTabViewItem];
-
 		[tabs	addObject:	newTab];
 		[tabBar addSubview: newTab];
 		
@@ -121,7 +106,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		
 		[self	updateTabSize];
 		[tabBar setNeedsDisplay: YES];
-
 		[newTab			release];
 		[newTabViewItem release];
 	}
@@ -131,12 +115,10 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		NSBeep();
 	}
 }
-
-- (void) newTabWithWebView: (WebView*) webView select: (BOOL) selectNewTab URLString:(NSString *)URLString {
+- (void) newTabWithWebView: (WebView*) webView select: (BOOL) selectNewTab URLString:(NSS *)URLString {
 	[self newTabWithWebView:webView select:selectNewTab];
 	[(DBTab *)tabs[([tabs count] - 1)] setURLString:URLString];
 }
-
 - (void) removeTab: (DBTab*) tab redraw: (BOOL) redraw resize: (BOOL) resize
 {
 	// Eventually need to disable "Close" menu item when there is only one tab
@@ -185,7 +167,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		}
 	}
 }
-
 - (void) removeAllTabs
 {
 	DBTab*			selectedTab		= [self selectedTab];
@@ -212,7 +193,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	[self updateTabSize];
 	[tabBar setNeedsDisplay: YES];
 }
-
 - (void) updateTabSize
 {
 	CGFloat tabWidthToFit = [tabBar frame].size.width / [tabs count];
@@ -238,7 +218,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 			
 	DBTab*	currentTab;
 	NSP	newOrigin;
-	NSSize	newSize;
+	NSSZ	newSize;
 	
 	newSize	= NSMakeSize(tabWidth, 29);
 	
@@ -253,7 +233,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	
 	[tabBar setNeedsDisplay: YES];
 }
-
 - (BOOL) canFitMoreTabs
 {
 	BOOL	canFit			= YES;
@@ -270,7 +249,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	
 	return canFit;
 }
-
 - (void)selectTab:(DBTab *)aTab refresh: (BOOL) refresh {
 	DBTab*			currentTab = nil;
 	
@@ -308,7 +286,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		[tabBar setNeedsDisplay: YES];
 	}
 }
-
 - (void) selectTabRight
 {
 	NSInteger		indexOfTabToSelect;
@@ -339,7 +316,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		}
 	}
 }
-
 - (void) selectTabLeft
 {
 	NSInteger		indexOfTabToSelect;
@@ -370,7 +346,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		}
 	}
 }
-
 - (DBTab *)selectedTab {
 	DBTab		*currentTab = nil;
 	DBTab		*returnTab	= nil;
@@ -387,7 +362,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	}
 	return returnTab;
 }
-
 - (DBTab*) tabWithWebView: (WebView*) webView
 {
 	DBTab*	tabWithWebView	= nil;
@@ -405,11 +379,9 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	
 	return tabWithWebView;
 }
-
 - (NSI)tabCount {
 	return [tabs count];
 }
-
 - (void)reloadTab {
 	DBTab *sel = [self selectedTab];
 	NSInteger i;
@@ -426,7 +398,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		[wv reload:self];
 	}
 }
-
 - (void)reloadAllTabs {
 	NSInteger i;
 	WebView *wv;
@@ -435,7 +406,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		[wv reload:self];
 	}
 }
-
 - (void) frameDidChange
 {
 	[self updateTabSize];
@@ -448,5 +418,4 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		[currentTab resetTrackingRect];
 	}
 }
-
 @end

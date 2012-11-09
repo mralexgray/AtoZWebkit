@@ -4,9 +4,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 *****************************
 */
 
-
 #import <Cocoa/Cocoa.h>
-
 
 @interface DBBezelScroller : NSScroller
 {
@@ -18,5 +16,4 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	NSImage* knobSlotFiller;
 	NSImage* knobSlotBottom;
 }
-
 @end

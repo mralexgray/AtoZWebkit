@@ -3,23 +3,17 @@
 The DeskBrowse source code is the legal property of its developers, Joel Levin and Ian Elseth
 *****************************
 */
-
 #import "DBWebsposePassword.h"
-
 #import "DBKeychainAccess.h"
 
-
-static NSString* webpsosePasswordKeychainName		= @"DeskBrowse";
-static NSString* webpsosePasswordKeychainAccount	= @"Webspose";
-
+static NSS* webpsosePasswordKeychainName		= @"DeskBrowse";
+static NSS* webpsosePasswordKeychainAccount	= @"Webspose";
 @implementation DBWebsposePassword
 
-
-+ (NSString*) websposePassword
++ (NSS*) websposePassword
 {
-	NSString*		password = nil;
+	NSS*		password = nil;
 	DBKeychainAccess*	keychain = [DBKeychainAccess keychainAccess];
-
 
 	// Get password from the keychain
 	
@@ -34,16 +28,13 @@ static NSString* webpsosePasswordKeychainAccount	= @"Webspose";
 	
 	return password;
 }
-
-+ (void) setWebsposePassword: (NSString*) password
++ (void) setWebsposePassword: (NSS*) password
 {
 	DBKeychainAccess* keychain = [DBKeychainAccess keychainAccess];
-
 
 	// Save password to the keychain
 	
 	[keychain addNewKeychainItemWithName: webpsosePasswordKeychainName account: webpsosePasswordKeychainAccount password: password];
 }
-
 
 @end

@@ -3,9 +3,7 @@
 The DeskBrowse source code is the legal property of its developers, Joel Levin and Ian Elseth
 *****************************
 */
-
 #import "DBBookmarkController.h"
-
 #import "DBBookmark.h"
 #import "DBBookmarkBar.h"
 #import "DBBookmarkEditWindowController.h"
@@ -14,30 +12,21 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 #import "DeskBrowseConstants.h"
 #import "DBNewBookmarkWindowController.h"
 
-
-NSString* const kNameOfBookmarkFile				= @"Bookmarks.plist";
-NSString* const kBookmarksDidChangeNotification = @"BookmarksDidChangeNotification";
-NSString* const DBBookmarkRows					= @"DBBookmarkRows";
-NSString* const kBookmarkWindowNibName			= @"Bookmarks";
-
+NSS* const kNameOfBookmarkFile				= @"Bookmarks.plist";
+NSS* const kBookmarksDidChangeNotification = @"BookmarksDidChangeNotification";
+NSS* const DBBookmarkRows					= @"DBBookmarkRows";
+NSS* const kBookmarkWindowNibName			= @"Bookmarks";
 
 @interface NSIndexSet (SGSAdditions)
-
 - (NSA*) arrayOfIndexes;
 + (NSIndexSet*) indexSetFromArray: (NSA*) array;
-
 @end
-
 
 @interface NSMutableArray (SGSAdditions)
-
 - (NSI) moveObjectsAtIndexes: (NSIndexSet*) indexSet toIndex: (NSI) index;
-
 @end
 
-
 @implementation DBBookmarkController
-
 
 - (id) init
 {
@@ -52,7 +41,6 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 	
 	return self;
 }
-
 - (void) dealloc
 {
 	[AZNOTCENTER removeObserver: self];
@@ -63,7 +51,6 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 	[mCurrentNewBookmarkURL release];
 	
 }
-
 - (void) awakeFromNib
 {
 	[mBookmarkTableView setTarget: self];
@@ -77,14 +64,11 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 	[[self window] setFrame: [[self window] frame] display: YES];
 }
 
-
 #pragma mark -
-
 - (void) bookmarksChanged
 {
 	[AZNOTCENTER postNotificationName: kBookmarksDidChangeNotification object: self];
 }
-
 - (void)updateBookmarksMenu
 {
 	NSMenu* bookmarksRoot = [[[NSApp mainMenu] itemWithTitle:@"Bookmarks"] submenu];
@@ -107,22 +91,18 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 		[newItem setToolTip:[bookmark URLString]];
 	}
 }
-
 #pragma mark -
-
-- (void) newBookmarkWithURL: (NSURL*) URL title: (NSString*) title window: (NSWindow*) window
+- (void) newBookmarkWithURL: (NSURL*) URL title: (NSS*) title window: (NSWindow*) window
 {	
 	DBNewBookmarkWindowController* newBookmarkController = [[DBNewBookmarkWindowController alloc] initWithBookmarkController: self title: title url: URL];
 	
 	[newBookmarkController runSheetOnWindow: [self window]];
 	[newBookmarkController release];
 }
-
 - (unsigned) numberOfBookmarks
 {
 	return [mBookmarks count];
 }
-
 - (void) addBookmark: (DBBookmark*) bookmark toFront: (BOOL) toFront
 {
 	if (bookmark != nil)
@@ -140,7 +120,6 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 		[self updateBookmarksMenu];
 	}
 }
-
 - (BOOL) addBookmarks: (NSA*) bookmarks
 {
 	BOOL addedBookmarks	= NO;
@@ -161,7 +140,6 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 				break;
 			}
 		}
-
 		// If they are, add them to our array of bookmarks
 		
 		if (shouldAddBookmarks)
@@ -171,7 +149,6 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 			addedBookmarks = YES;
 		}
 	}
-
 
 	// If the bookmarks were added, reload bookmarks views and resave bookmarks
 	
@@ -185,7 +162,6 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 	
 	return addedBookmarks;
 }
-
 - (DBBookmark*) bookmarkAtIndex: (unsigned) index
 {
 	DBBookmark* bookmark = nil;
@@ -197,9 +173,7 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 	
 	return bookmark;
 }
-
 #pragma mark -
-
 
 - (void) save
 {
@@ -208,7 +182,6 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 		NSLog(@"*** Failed to save bookmarks ***");
 	}
 }
-
 - (BOOL) saveBookmarks
 {
 	NSMD*	bookmarksToWrite	= [NSMD dictionary];
@@ -224,8 +197,8 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 	bookmarksToWrite[@"Bookmarks"] = bookmarkDicts;
 	
 	BOOL			didSave						= NO;
-	NSString*		fullPathOfDeskBrowseFolder	= nil;
-	NSString*		fullBookmarkPath			= nil;
+	NSS*		fullPathOfDeskBrowseFolder	= nil;
+	NSS*		fullBookmarkPath			= nil;
 	NSFileManager*	fileManager					= nil;
 	
 	fullPathOfDeskBrowseFolder	= [kPathOfDeskBrowseFolder stringByExpandingTildeInPath];
@@ -233,7 +206,6 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 	fileManager					= [NSFileManager defaultManager];
 	
 	[fileManager createPath: fullPathOfDeskBrowseFolder];
-
 	if ([fileManager fileExistsAtPath: fullPathOfDeskBrowseFolder])
 	{
 		if (bookmarksToWrite != nil)
@@ -246,7 +218,6 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 	
 	return didSave;
 }
-
 - (void) load
 {
 	if (![self loadBookmarks])
@@ -254,12 +225,11 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 		NSLog(@"Failed to load bookmarks");
 	}
 }
-
 - (BOOL) loadBookmarks
 {
 	BOOL			didLoad						= NO;
-	NSString*		fullPathOfDeskBrowseFolder	= nil;
-	NSString*		fullBookmarkPath			= nil;
+	NSS*		fullPathOfDeskBrowseFolder	= nil;
+	NSS*		fullBookmarkPath			= nil;
 	NSFileManager*	fileManager					= nil;
 	
 	fullPathOfDeskBrowseFolder	= [kPathOfDeskBrowseFolder stringByExpandingTildeInPath];
@@ -268,17 +238,17 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 	
 	if ([fileManager fileExistsAtPath: fullPathOfDeskBrowseFolder])
 	{
-		NSDictionary*	loadedBookmarks = [NSDictionary dictionaryWithContentsOfFile: fullBookmarkPath];
+		NSD*	loadedBookmarks = [NSD dictionaryWithContentsOfFile: fullBookmarkPath];
 		BOOL			resaveBookmarks	= NO;
 		
 		if (loadedBookmarks == nil)
 		{
 			NSBundle*	mainBundle				= [NSBundle mainBundle];
-			NSString*	defaultBookmarksPath	= [mainBundle pathForResource: [kNameOfBookmarkFile stringByDeletingPathExtension] ofType: @"plist"];
+			NSS*	defaultBookmarksPath	= [mainBundle pathForResource: [kNameOfBookmarkFile stringByDeletingPathExtension] ofType: @"plist"];
 			
 			if (defaultBookmarksPath != nil)
 			{
-				loadedBookmarks = [NSDictionary dictionaryWithContentsOfFile: defaultBookmarksPath];
+				loadedBookmarks = [NSD dictionaryWithContentsOfFile: defaultBookmarksPath];
 				resaveBookmarks = YES;
 			}
 		}
@@ -287,7 +257,7 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 		{
 			NSMutableArray* arrayOfBookmarks		= loadedBookmarks[@"Bookmarks"];
 			NSEnumerator*	bookmarkDictEnumerator	= [arrayOfBookmarks objectEnumerator];
-			NSDictionary*	currentBookmarkDict		= nil;
+			NSD*	currentBookmarkDict		= nil;
 			
 			[mBookmarks release];
 			mBookmarks = [[NSMutableArray alloc] init];
@@ -321,13 +291,9 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 	return didLoad;
 }
 
-
 #pragma mark -
-
 #pragma mark Interface
-
 // Interface methods
-
 - (IBAction) loadSelectedBookmark: (id) sender
 {
 	NSInteger selectedRow = [mBookmarkTableView selectedRow];
@@ -337,7 +303,6 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 		[self loadBookmarkAtIndex: selectedRow];
 	}
 }
-
 - (IBAction) deleteSelectedBookmark: (id) sender
 {
 	NSInteger selectedRow = [mBookmarkTableView selectedRow];
@@ -351,17 +316,14 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 	[self bookmarksChanged];
 }
 
-
 #pragma mark -
-
 - (IBAction) cancel: (id) sender
 {
 	[NSApp endSheet: mNewBookmarkWindow];
 }
-
 - (IBAction) ok: (id) sender
 {
-	NSString* newTitle = [mTitleField stringValue];
+	NSS* newTitle = [mTitleField stringValue];
 	
 	if ([newTitle length] <= 0)
 	{
@@ -387,13 +349,9 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 	
 	[NSApp endSheet: mNewBookmarkWindow];
 }
-
 #pragma mark -
-
 #pragma mark View
-
 // View methods
-
 - (void) setTableView: (NSTableView*) tableView
 {
 	if (tableView != mBookmarkTableView)
@@ -407,23 +365,20 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 //		[mBookmarkTableView setDraggingSourceOperationMask: NSDragOperationAll_Obsolete forLocal: NO];
 	}
 }
-
 - (NSI) numberOfRows
 {
 	NSInteger numberOfRows = [mBookmarks count];
 	
 	return numberOfRows;
 }
-
-- (NSString*) stringForRow: (NSI) row
+- (NSS*) stringForRow: (NSI) row
 {
-	NSString* string = nil;
-
+	NSS* string = nil;
 	if ([mBookmarks count] > row)
 	{
 		DBBookmark*	bookmark	= mBookmarks[row];
-		NSString*	title		= [bookmark title];
-		NSString*	URLString	= [[bookmark URL] absoluteString];
+		NSS*	title		= [bookmark title];
+		NSS*	URLString	= [[bookmark URL] absoluteString];
 				
 		if ([title length] > 0)
 		{
@@ -437,7 +392,6 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 	
 	return string;
 }
-
 - (void) tableViewDoubleClick
 {
 	NSInteger row = [mBookmarkTableView selectedRow];
@@ -447,7 +401,6 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 		[self loadBookmarkAtIndex: row];
 	}
 }
-
 - (void) tableViewDeleteKeyPressed: (NSTableView*) tableView
 {
 	if (tableView == mBookmarkTableView)
@@ -460,7 +413,6 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 		}
 	}
 }
-
 - (void) loadBookmarkAtIndex: (NSI) index
 {		
 	if (index < [mBookmarks count])
@@ -473,7 +425,6 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 		}
 	}
 }
-
 - (void) bookmarkDelete: (NSNotification*) notification
 {
 	DBBookmark* bookmark = [notification object];
@@ -483,7 +434,6 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 		[self deleteBookmark: bookmark];
 	}
 }
-
 - (void) deleteBookmark: (DBBookmark*) bookmark
 {
 	NSInteger index = [mBookmarks indexOfObject: bookmark];
@@ -498,7 +448,6 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 		[mBookmarkTableView reloadData];
 	}
 }
-
 - (void) deleteBookmarkAtIndex: (NSI) index
 {	
 	DBBookmark* bookmark = mBookmarks[index];
@@ -509,10 +458,8 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 	}
 }
 
-
 #pragma mark -
 #pragma mark Main Window
-
 - (IBAction) openEditWindow: (id) sender
 {
 	DBBookmarkOutlineDataSource*		outlineDataSource		= [[DBBookmarkOutlineDataSource alloc] initWithBookmarkController: self];
@@ -523,25 +470,20 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 	[outlineDataSource release];
 	[bookmarkEditController release];
 }
-
 - (IBAction) closeEditWindow: (id) sender
 {
 }
 
-
 #pragma mark -
 #pragma mark Bookmark Bar
-
 - (NSA*) bookmarks
 {
 	return mBookmarks;
 }
-
 - (NSEnumerator*) bookmarkEnumerator
 {
 	return [mBookmarks objectEnumerator];
 }
-
 - (void) bookmarkDraggedFromIndex: (NSI) index toIndex: (NSI) newIndex
 {
 	DBBookmark* draggedBookmark = mBookmarks[index];
@@ -561,17 +503,13 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 	[mBookmarkTableView reloadData];
 }
 
-
 #pragma mark -
 #pragma mark Bookmark Editing Window
-
 - (void) newBookmarkFolder
 {
 }
 
-
 #pragma mark -
-
 - (id) outlineView: (NSOutlineView*) outlineView child: (NSI) index ofItem: (id) item
 {
 	id childItem = nil;
@@ -587,7 +525,6 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 	
 	return childItem;
 }
-
 - (BOOL) outlineView: (NSOutlineView*) outlineView isItemExpandable: (id) item
 {
 	BOOL isExpandable = NO;
@@ -599,7 +536,6 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 	
 	return isExpandable;
 }
-
 - (NSI) outlineView: (NSOutlineView*) outlineView numberOfChildrenOfItem: (id) item
 {
 	NSInteger numberOfChildren = 0;
@@ -618,47 +554,39 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 	
 	return numberOfChildren;
 }
-
 - (id) outlineView: (NSOutlineView*) outlineView objectValueForTableColumn: (NSTableColumn*) tableColumn byItem: (id) item
 {
 	id			value				= nil;
-	NSString*	columnIdentifier	= [tableColumn identifier];
+	NSS*	columnIdentifier	= [tableColumn identifier];
 	
 	value = [item valueForKey: columnIdentifier];
 	
 	return value;
 }
-
 - (void) outlineView: (NSOutlineView*) outlineView setObjectValue: (id) object forTableColumn: (NSTableColumn*) tableColumn byItem: (id) item
 {
-	NSString* columnIdentifier = [tableColumn identifier];
+	NSS* columnIdentifier = [tableColumn identifier];
 	
 	[item setValue: object forKey: columnIdentifier];
 }
 
-
 #pragma mark -
 #pragma mark NSTableView Data Source Methods
-
 - (NSI) numberOfRowsInTableView: (NSTableView*) tableView
 {
 	return [self numberOfRows];
 }
-
 - (id) tableView: (NSTableView*) tableView objectValueForTableColumn: (NSTableColumn*) column row: (NSI) row
 {	
 	return [self stringForRow:row];
 }
 
-
 #pragma mark -
 #pragma mark NSTableView Delegate Methods
-
 - (void) tableView: (NSTableView*) tableView willDisplayCell: (id) cell forTableColumn: (NSTableColumn*) tableColumn row: (NSI) row
 {
 	[cell setFont: [NSFont systemFontOfSize: 10.0]];
 }
-
 
 - (BOOL) tableView: (NSTableView*) tableView writeRows: (NSA*) rows toPasteboard: (NSPasteboard*) pboard
 {
@@ -676,11 +604,9 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 	
 	return [self tableView: tableView writeRowsWithIndexes: rowIndexes toPasteboard: pboard];
 }
-
 - (BOOL) tableView: (NSTableView*) tableView writeRowsWithIndexes: (NSIndexSet*) rowIndexes toPasteboard: (NSPasteboard*) pboard
 {
 	// Replaces tableView:writeRows:toPasteboard: in 10.4
-
 
 	BOOL written = NO;
 	
@@ -696,7 +622,6 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 	
 	return written;
 }
-
 
 - (NSDragOperation) tableView: (NSTableView*) tableView validateDrop: (id <NSDraggingInfo>) info proposedRow: (NSI) row proposedDropOperation: (NSTableViewDropOperation) operation
 {
@@ -715,7 +640,6 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 	
 	return NSDragOperationGeneric;
 }
-
 
 - (BOOL) tableView: (NSTableView*) tableView acceptDrop: (id <NSDraggingInfo>) info row: (NSI) dropRow dropOperation: (NSTableViewDropOperation) operation;
 {
@@ -767,15 +691,11 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 	return accepted;
 }
 
-
 @end
-
 
 @implementation NSIndexSet (SGSAdditions)
 
-
 // Creates an array of NSNumbers from the NSIndexSet
-
 - (NSA*) arrayOfIndexes
 {
 	NSMutableArray*	arrayOfIndexes	= [NSMutableArray array];
@@ -797,9 +717,7 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 	return arrayOfIndexes;
 }
 
-
 // Creates an NSIndexSet from an array of NSNumbers
-
 + (NSIndexSet*) indexSetFromArray: (NSA*) array
 {
 	NSMutableIndexSet*	indexSet		= [NSMutableIndexSet indexSet];
@@ -819,12 +737,9 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 	return indexSet;
 }
 
-
 @end
 
-
 @implementation NSMutableArray (SGSAdditions)
-
 
 - (NSI) moveObjectsAtIndexes: (NSIndexSet*) indexSet toIndex: (NSI) index
 {
@@ -855,6 +770,5 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 	
 	return returnVal;
 }
-
 
 @end

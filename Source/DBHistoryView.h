@@ -3,11 +3,8 @@
 The DeskBrowse source code is the legal property of its developers, Joel Levin and Ian Elseth
 *****************************
 */
-
 #import <Cocoa/Cocoa.h>
-
 @class DBHistoryController;
-
 
 @interface DBHistoryView : NSView
 {
@@ -21,18 +18,13 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	CGFloat						rowHeight;
 	CGFloat						topPadding;
 }
-
 - (void) setDelegate: (id) object;
-
 //
-
-- (NSString*) string: (NSString*) string withAttributes: (NSD*) attributes constrainedToWidth: (CGFloat) width;
+- (NSS*) string: (NSS*) string withAttributes: (NSD*) attributes constrainedToWidth: (CGFloat) width;
 - (void) setTextColor: (NSColor*) color;
 - (void) setTextSize: (NSI) size;
-
 //
 - (NSI) selectedRow;
 - (void) updateSelectedRow;
 - (void) reloadData;
-
 @end

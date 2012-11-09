@@ -3,7 +3,6 @@
 The DeskBrowse source code is the legal property of its developers, Joel Levin and Ian Elseth
 *****************************
 */
-
 #import <Cocoa/Cocoa.h>
 #import <WebKit/WebKit.h>
 #import "DBApplication.h"
@@ -36,27 +35,21 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	IBOutlet NSTXTF		*downloadPathField;
 	NSTBAR				*toolbar;
 	IBOutlet NSTABV		*tabView;
-	NSSize				sizeOfGeneralPane, sizeOfWebPane, sizeOfWebsposePane;
+	NSSZ				sizeOfGeneralPane, sizeOfWebPane, sizeOfWebsposePane;
 }
-
 - (IBAction) closeWindow: 			 (id) sender;
 - (IBAction) savePreferences: 		 (id) sender;
 - (IBAction) resetPreferences: 		 (id) sender;
 - (IBAction) checkForUpdates: 		 (id) sender;
-
 - (IBAction) changeSBHotKey: 		 (id) sender;
 - (IBAction) changeWBHotKey: 		 (id) sender;
-
 - (IBAction) changePassword: 		 (id) sender;
 - (IBAction) savePassword: 			 (id) sender;
 - (IBAction) cancelPassword: 		 (id) sender;
 - (IBAction) changeDownloadLocation: (id) sender;
-
 - (void) setLevel: (NSI) newLevel;
 - (void) syncViewWithUserPrefs;
-
 - (void)showGeneralPane;
 - (void)showWebPane;
 - (void)showWebsposePane;
-
 @end

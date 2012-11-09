@@ -3,19 +3,14 @@
 The DeskBrowse source code is the legal property of its developers, Joel Levin and Ian Elseth
 *****************************
 */
-
 #import "DBBookmarkEditWindowController.h"
-
 #import "DBBetterOutlineView.h"
 #import "DBBookmark.h"
 #import "DBBookmarkController.h"
 #import "DBBookmarkTableDataSource.h"
 
-
-NSString* const kBookmarkEditWindowNibName = @"BookmarkEdit";
-
+NSS* const kBookmarkEditWindowNibName = @"BookmarkEdit";
 @implementation DBBookmarkEditWindowController
-
 
 - (id) initWithOutlineDataSource: (DBBookmarkOutlineDataSource*) dataSource bookmarkController: (DBBookmarkController*) bookmarkController
 {
@@ -30,7 +25,6 @@ NSString* const kBookmarkEditWindowNibName = @"BookmarkEdit";
 	
 	return self;
 }
-
 - (void) dealloc
 {
 	[AZNOTCENTER removeObserver: self];
@@ -41,13 +35,11 @@ NSString* const kBookmarkEditWindowNibName = @"BookmarkEdit";
 		
 }
 
-
 - (IBAction) closeWindow: (id) sender
 {
 	[NSApp endSheet: [self window]];
 	[self close];
 }
-
 - (IBAction) addBookmark: (id) sender
 {
 	DBBookmark* newBookmark = [[DBBookmark alloc] initWithURL: nil title: nil];
@@ -59,7 +51,6 @@ NSString* const kBookmarkEditWindowNibName = @"BookmarkEdit";
 	[mOutlineView editFirstColumnOfSelectedRow];
 }
 
-
 - (void) close
 {
 	[NSApp endSheet: [self window]];
@@ -67,7 +58,6 @@ NSString* const kBookmarkEditWindowNibName = @"BookmarkEdit";
 	
 	[self release];
 }
-
 - (void) runSheetOnWindow: (NSWindow*) window
 {
 	[NSApp beginSheet: [self window] modalForWindow: window modalDelegate: nil didEndSelector: nil contextInfo: nil];
@@ -80,17 +70,14 @@ NSString* const kBookmarkEditWindowNibName = @"BookmarkEdit";
 	
 }
 
-
 - (void) reloadData
 {
 	[mOutlineView reloadData];
 }
 
-
 - (void) outlineView: (NSOutlineView*) outlineView willDisplayCell: (id) cell forTableColumn: (NSTableColumn*) tableColumn item: (id) item
 {
 	[cell setFont: mOutlineViewFont];
 }
-
 
 @end

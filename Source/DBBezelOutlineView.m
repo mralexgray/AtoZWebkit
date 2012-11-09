@@ -4,9 +4,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 *****************************
 */
 
-
 #import "DBBezelOutlineView.h"
-
 //@interface NSOutlineView ()
 ////{
 //// 	NSButtonCell *_outlineCell;
@@ -33,17 +31,13 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 //}
 //@end
 
-
 @implementation DBBezelOutlineView
-
 
 - (void) awakeFromNib
 {
 	DBBezelScroller* scroller = [[DBBezelScroller alloc] init];
-
 	[[self enclosingScrollView] setVerticalScroller: scroller];
 	[scroller release];
-
 	// This is the color used in all our bezel windows
 	NSColor* backgroundColor = [NSColor colorWithDeviceRed: 0.0 green: 0.0 blue: 0.0 alpha: 0.77];
 	
@@ -51,7 +45,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	[self setGridColor: backgroundColor];
 	[self setGridStyleMask: NSTableViewGridNone];
 	[self setIntercellSpacing: NSMakeSize(0, 0)];
-
 
 	NSInteger				i;
 	NSArray*		tableColumns		= [self tableColumns];
@@ -70,7 +63,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	[newOutlineCell setBackgroundColor: [NSColor redColor]];
 	[self setOutlineCell: newOutlineCell];
 	[newOutlineCell release];
-
 	// Have to do this so the columns size themselves properly before display
 	NSR frame	= [self frame];
 	NSR newFrame	= frame;
@@ -80,10 +72,9 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	[self setFrame: newFrame];
 	[self setFrame: frame];
 }
-
 - (void) keyDown: (NSEvent*) theEvent
 {
-	NSString*	characters	= [theEvent charactersIgnoringModifiers];
+	NSS*	characters	= [theEvent charactersIgnoringModifiers];
 	BOOL		handled		= NO;
 	
 	if ([characters length] == 1)
@@ -102,6 +93,5 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		[super keyDown: theEvent];
 	}
 }
-
 
 @end

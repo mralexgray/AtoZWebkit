@@ -3,59 +3,49 @@
 The DeskBrowse source code is the legal property of its developers, Joel Levin and Ian Elseth
 *****************************
 */
-
 #import "DBHTMLParser.h"
-
 
 //============================================================
 //
 //	Thank you Adium for being a great point of reference!
 //
 //============================================================
-
 // For finding links
-NSString* kAOpen			= @"A ";
-NSString* kAClose			= @"</A";
-NSString* kHREF				= @"HREF=";
-NSString* kOpenBracket		= @"<";
-NSString* kCloseBracket		= @">";
-NSString* kQuoteCharacters	= @"'\"";
-
+NSS* kAOpen			= @"A ";
+NSS* kAClose			= @"</A";
+NSS* kHREF				= @"HREF=";
+NSS* kOpenBracket		= @"<";
+NSS* kCloseBracket		= @">";
+NSS* kQuoteCharacters	= @"'\"";
 // For replacing HTML
-NSString* kHTMLCharStart	= @"&";
-NSString* kHTMLCharEnd		= @";";
-NSString* kAmpersandHTML	= @"AMP";
-NSString* kAmpersand		= @"&";
-NSString* kApostropheHTML	= @"APOS";
-NSString* kApostrophe		= @"'";
-NSString* kDashHTML			= @"MDASH";
-NSString* kDash				= @"-";
-NSString* kGreaterThanHTML	= @"GT";
-NSString* kGreaterThan		= @">";
-NSString* kLessThanHTML		= @"LT";
-NSString* kLessThan			= @"<";
-NSString* kQuoteHTML		= @"QUOT";
-NSString* kQuote			= @"\"";
-NSString* kSpaceHTML		= @"NBSP";
-NSString* kSpace			= @" ";
-
+NSS* kHTMLCharStart	= @"&";
+NSS* kHTMLCharEnd		= @";";
+NSS* kAmpersandHTML	= @"AMP";
+NSS* kAmpersand		= @"&";
+NSS* kApostropheHTML	= @"APOS";
+NSS* kApostrophe		= @"'";
+NSS* kDashHTML			= @"MDASH";
+NSS* kDash				= @"-";
+NSS* kGreaterThanHTML	= @"GT";
+NSS* kGreaterThan		= @">";
+NSS* kLessThanHTML		= @"LT";
+NSS* kLessThan			= @"<";
+NSS* kQuoteHTML		= @"QUOT";
+NSS* kQuote			= @"\"";
+NSS* kSpaceHTML		= @"NBSP";
+NSS* kSpace			= @" ";
 
 @interface DBHTMLParser (Private)
-
-- (NSString*) pReplaceHTMLCodesInString: (NSString*) HTMLString;
-
+- (NSS*) pReplaceHTMLCodesInString: (NSS*) HTMLString;
 @end
 
-
 @implementation DBHTMLParser
-
 
 + (DBHTMLParser*) HTMLParser
 {
 	return [[[DBHTMLParser alloc] init] autorelease];
 }
-
-- (NSA*) linksFromHTMLString: (NSString*) HTMLString
+- (NSA*) linksFromHTMLString: (NSS*) HTMLString
 {
 	NSMutableArray*	links				= nil;
 	NSScanner*		linkScanner			= [NSScanner scannerWithString: HTMLString];
@@ -63,10 +53,9 @@ NSString* kSpace			= @" ";
 	NSInteger				lengthOfHTMLString	= [HTMLString length];
 	NSInteger				lengthOfAOpen		= [kAOpen length];
 	NSInteger				lengthOfHREF		= [kHREF length];
-
 	while (![linkScanner isAtEnd])
 	{
-		NSString*	intoString				= nil;
+		NSS*	intoString				= nil;
 		NSInteger			scanLocation			= [linkScanner scanLocation];
 		NSInteger			lengthOfRemainingString	= lengthOfHTMLString - scanLocation;
 		
@@ -88,7 +77,7 @@ NSString* kSpace			= @" ";
 				
 				// Scan the URL into an NSString
 				
-				NSString* URLString = nil;
+				NSS* URLString = nil;
 				
 				if ([linkScanner scanUpToCharactersFromSet: quotesCharacterSet intoString: &URLString])
 				{
@@ -106,7 +95,7 @@ NSString* kSpace			= @" ";
 						
 						// Scan the title into an NSString
 						
-						NSString* title = nil;
+						NSS* title = nil;
 						
 						if ([linkScanner scanUpToString: kAClose intoString: &title])
 						{
@@ -121,7 +110,7 @@ NSString* kSpace			= @" ";
 								
 								NSArray*		objects				= @[title, URLString];
 								NSArray*		keys				= @[kLinkTitleKey, kLinkURLStringKey];
-								NSDictionary*	newLinkDictionary	= [NSDictionary dictionaryWithObjects: objects forKeys: keys];
+								NSD*	newLinkDictionary	= [NSD dictionaryWithObjects: objects forKeys: keys];
 								
 								if (links == nil)
 								{
@@ -135,7 +124,6 @@ NSString* kSpace			= @" ";
 				}
 			}
 		}
-
 		// Advance the scanner one character
 		
 		scanLocation = [linkScanner scanLocation];
@@ -148,26 +136,21 @@ NSString* kSpace			= @" ";
 	
 	return links;
 }
-
-- (NSA*) linksFromHTMLFileAtPath: (NSString*) HTMLFilePath
+- (NSA*) linksFromHTMLFileAtPath: (NSS*) HTMLFilePath
 {
-	NSString* HTMLStringFromFile = [NSString stringWithContentsOfFile: HTMLFilePath encoding: NSUTF8StringEncoding error: nil];
+	NSS* HTMLStringFromFile = [NSString stringWithContentsOfFile: HTMLFilePath encoding: NSUTF8StringEncoding error: nil];
 	
 	return [self linksFromHTMLString: HTMLStringFromFile];
 }
 
-
 @end
-
 
 @implementation DBHTMLParser (Private)
 
-
-- (NSString*) pReplaceHTMLCodesInString: (NSString*) HTMLString
+- (NSS*) pReplaceHTMLCodesInString: (NSS*) HTMLString
 {
-	NSMutableString* newString = [[HTMLString mutableCopy] autorelease];
+	NSMS* newString = [[HTMLString mutableCopy] autorelease];
 	NSRange	currentRange;
-
 
 	// Ampersand
 	while ((currentRange = [newString rangeOfString: [NSString stringWithFormat: @"%@%@%@", kHTMLCharStart, kAmpersandHTML, kHTMLCharEnd] options: NSCaseInsensitiveSearch]).location != NSNotFound)
@@ -213,6 +196,5 @@ NSString* kSpace			= @" ";
 	
 	return newString;
 }
-
 
 @end

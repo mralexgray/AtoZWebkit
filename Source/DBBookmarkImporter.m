@@ -3,91 +3,68 @@
 The DeskBrowse source code is the legal property of its developers, Joel Levin and Ian Elseth
 *****************************
 */
-
 #import "DBBookmarkImporter.h"
-
 #import "DBBookmark.h"
 #import "DBHTMLParser.h"
 #import "DBURLFormatter.h"
 
-
 // Schemes
-
-NSString* kFeedScheme								= @"feed";
-NSString* kFileScheme								= @"file";
-NSString* kHTTPScheme								= @"http";
-NSString* kHTTPSScheme								= @"https";
-
+NSS* kFeedScheme								= @"feed";
+NSS* kFileScheme								= @"file";
+NSS* kHTTPScheme								= @"http";
+NSS* kHTTPSScheme								= @"https";
 
 // Camino
-
-NSString* kPathOfCaminoBookmarksFile				= @"~/Library/Application Support/Camino/bookmarks.plist";
-
-NSString* kCaminoChildrenKey						= @"Children";
-NSString* kCaminoBookmarkURLStringKey				= @"URL";
-NSString* kCaminoBookmarkTitleKey					= @"Title";
-
+NSS* kPathOfCaminoBookmarksFile				= @"~/Library/Application Support/Camino/bookmarks.plist";
+NSS* kCaminoChildrenKey						= @"Children";
+NSS* kCaminoBookmarkURLStringKey				= @"URL";
+NSS* kCaminoBookmarkTitleKey					= @"Title";
 
 // Firefox
-
-NSString* kPathOfFirefoxV8OrLessBookmarksDirectory	= @"~/Library/Phoenix/Profiles/default";
-NSString* kPathOfFirefoxV9BookmarksDirectory		= @"~/Library/Application Support/Firefox/Profiles";
-NSString* kNameOfFirefoxBookmarksFile				= @"bookmarks.html";
-
-NSString* kPartOf9To10BookmarkDirectoryName			= @"default.";
-NSString* kPartOf10UpBookmarkDirectoryName			= @".default";
-NSString* kPartOf8OrLessBookmarkDirectoryName		= @".slt";
-
+NSS* kPathOfFirefoxV8OrLessBookmarksDirectory	= @"~/Library/Phoenix/Profiles/default";
+NSS* kPathOfFirefoxV9BookmarksDirectory		= @"~/Library/Application Support/Firefox/Profiles";
+NSS* kNameOfFirefoxBookmarksFile				= @"bookmarks.html";
+NSS* kPartOf9To10BookmarkDirectoryName			= @"default.";
+NSS* kPartOf10UpBookmarkDirectoryName			= @".default";
+NSS* kPartOf8OrLessBookmarkDirectoryName		= @".slt";
 
 // Mozilla
-
-NSString* kPathOfMozillaBookmarksDirectory			= @"~/Library/Mozilla/Profiles/default";
-NSString* kNameOfMozillaBookmarksFile				= @"bookmarks.html";
-
-NSString* kPartOfMozillaBookmarkDirectoryName		= @".slt";
-
+NSS* kPathOfMozillaBookmarksDirectory			= @"~/Library/Mozilla/Profiles/default";
+NSS* kNameOfMozillaBookmarksFile				= @"bookmarks.html";
+NSS* kPartOfMozillaBookmarkDirectoryName		= @".slt";
 
 // Safari
-
-NSString* kPathOfSafariBookmarksFile				= @"~/Library/Safari/Bookmarks.plist";
-
-NSString* kSafariWebBookmarkType					= @"WebBookmarkType";
-NSString* kSafariWebBookmarkTypeList				= @"WebBookmarkTypeList";
-NSString* kSafariWebBookmarkTypeLeaf				= @"WebBookmarkTypeLeaf";
-
-NSString* kSafariChildrenKey						= @"Children";
-NSString* kSafariBookmarkURIDictionaryKey			= @"URIDictionary";
-NSString* kSafariBookmarkURLStringKey				= @"URLString";
-NSString* kSafariBookmarkTitleKey					= @"title";
-
+NSS* kPathOfSafariBookmarksFile				= @"~/Library/Safari/Bookmarks.plist";
+NSS* kSafariWebBookmarkType					= @"WebBookmarkType";
+NSS* kSafariWebBookmarkTypeList				= @"WebBookmarkTypeList";
+NSS* kSafariWebBookmarkTypeLeaf				= @"WebBookmarkTypeLeaf";
+NSS* kSafariChildrenKey						= @"Children";
+NSS* kSafariBookmarkURIDictionaryKey			= @"URIDictionary";
+NSS* kSafariBookmarkURLStringKey				= @"URLString";
+NSS* kSafariBookmarkTitleKey					= @"title";
 
 // Shiira
-
-NSString* kPathOfShiiraBookmarksFile				= @"~/Library/Shiira/Bookmarks.plist";
-
-NSString* kShiiraChildrenKey						= @"Children";
-NSString* kShiiraBookmarkURLStringKey				= @"URLString";
-NSString* kShiiraBookmarkTitleKey					= @"Title";
-
+NSS* kPathOfShiiraBookmarksFile				= @"~/Library/Shiira/Bookmarks.plist";
+NSS* kShiiraChildrenKey						= @"Children";
+NSS* kShiiraBookmarkURLStringKey				= @"URLString";
+NSS* kShiiraBookmarkTitleKey					= @"Title";
 
 @implementation DBBookmarkImporter
-
 
 + (DBBookmarkImporter*) bookmarkImporter
 {
 	return [[[DBBookmarkImporter alloc] init] autorelease];
 }
-
 + (BOOL) isURLEquivalent: (NSURL*) URL1 toURL: (NSURL*) URL2
 {
 	BOOL		equivalent	= NO;
-	NSString*	scheme1		= [URL1 scheme];
-	NSString*	scheme2		= [URL2 scheme];
+	NSS*	scheme1		= [URL1 scheme];
+	NSS*	scheme2		= [URL2 scheme];
 	
 	if ([scheme1 caseInsensitiveCompare: scheme2] == NSOrderedSame)
 	{
-		NSString* resSpec1 = [URL1 resourceSpecifier];
-		NSString* resSpec2 = [URL2 resourceSpecifier];
+		NSS* resSpec1 = [URL1 resourceSpecifier];
+		NSS* resSpec2 = [URL2 resourceSpecifier];
 		
 		resSpec1 = [resSpec1 stringByDeletingTrailingSlash];
 		resSpec2 = [resSpec2 stringByDeletingTrailingSlash];
@@ -101,12 +78,10 @@ NSString* kShiiraBookmarkTitleKey					= @"Title";
 	return equivalent;
 }
 
-
 #pragma mark Camino
-
-- (NSString*) pathOfCaminoBookmarksFile
+- (NSS*) pathOfCaminoBookmarksFile
 {
-	NSString*		pathOfCaminoBookmarksFile	= [kPathOfCaminoBookmarksFile stringByExpandingTildeInPath];
+	NSS*		pathOfCaminoBookmarksFile	= [kPathOfCaminoBookmarksFile stringByExpandingTildeInPath];
 	NSFileManager*	fileManager					= [NSFileManager defaultManager];
 	
 	if (![fileManager fileExistsAtPath: pathOfCaminoBookmarksFile])
@@ -116,17 +91,16 @@ NSString* kShiiraBookmarkTitleKey					= @"Title";
 	
 	return pathOfCaminoBookmarksFile;
 }
-
 - (NSA*) caminoBookmarksExcludingBookmarks: (NSA*) excludedBookmarks
 {
 	NSMutableArray* caminoBookmarks				= [NSMutableArray array];
-	NSString*		pathOfCaminoBookmarksFile	= [self pathOfCaminoBookmarksFile];
+	NSS*		pathOfCaminoBookmarksFile	= [self pathOfCaminoBookmarksFile];
 	
 	excludedBookmarks = [excludedBookmarks mutableCopy];
 	
 	if (pathOfCaminoBookmarksFile != nil)
 	{
-		NSDictionary* caminoBookmarkDictionary = [NSDictionary dictionaryWithContentsOfFile: pathOfCaminoBookmarksFile];
+		NSD* caminoBookmarkDictionary = [NSD dictionaryWithContentsOfFile: pathOfCaminoBookmarksFile];
 		
 		if (caminoBookmarkDictionary != nil)
 		{
@@ -138,7 +112,6 @@ NSString* kShiiraBookmarkTitleKey					= @"Title";
 	
 	return caminoBookmarks;
 }
-
 - (void) processCaminoBookmarksFromDictionary: (NSD*) caminoDictionary intoArray: (NSMA*) bookmarkStorage excludingBookmarks: (NSA*) excludedBookmarks
 {
 	NSArray* children = caminoDictionary[kCaminoChildrenKey];
@@ -148,7 +121,7 @@ NSString* kShiiraBookmarkTitleKey					= @"Title";
 		// Loop through dictionaries in list and process them
 		
 		NSEnumerator*	childrenEnumerator	= [children objectEnumerator];
-		NSDictionary*	currentChild		= nil;
+		NSD*	currentChild		= nil;
 		
 		while ((currentChild = [childrenEnumerator nextObject]) != nil)
 		{
@@ -159,8 +132,8 @@ NSString* kShiiraBookmarkTitleKey					= @"Title";
 	{
 		// Create Bookmark from info
 		
-		NSString*		bookmarkTitle	= caminoDictionary[kCaminoBookmarkTitleKey];
-		NSString*		URLString		= caminoDictionary[kCaminoBookmarkURLStringKey];
+		NSS*		bookmarkTitle	= caminoDictionary[kCaminoBookmarkTitleKey];
+		NSS*		URLString		= caminoDictionary[kCaminoBookmarkURLStringKey];
 		
 		if (URLString != nil)
 		{
@@ -172,7 +145,7 @@ NSString* kShiiraBookmarkTitleKey					= @"Title";
 				// We're not adding URLs of the "feed" scheme. I think it's RSS, which we don't have yet.
 				//
 				BOOL		isFeedScheme	= NO;
-				NSString*	bookmarkScheme	= [bookmarkURL scheme];
+				NSS*	bookmarkScheme	= [bookmarkURL scheme];
 				
 				isFeedScheme = ([bookmarkScheme caseInsensitiveCompare: kFeedScheme] == NSOrderedSame);
 				//
@@ -212,13 +185,11 @@ NSString* kShiiraBookmarkTitleKey					= @"Title";
 	}
 }
 
-
 #pragma mark Firefox
-
-- (NSString*) pathOfFirefoxBookmarksFile
+- (NSS*) pathOfFirefoxBookmarksFile
 {
-	NSString*		pathOfFirefoxBookmarksFile		= nil;
-	NSString*		pathOfFirefoxBookmarksDirectory	= [kPathOfFirefoxV9BookmarksDirectory stringByExpandingTildeInPath];
+	NSS*		pathOfFirefoxBookmarksFile		= nil;
+	NSS*		pathOfFirefoxBookmarksDirectory	= [kPathOfFirefoxV9BookmarksDirectory stringByExpandingTildeInPath];
 	NSFileManager*	fileManager						= [NSFileManager defaultManager];
 	
 	if ([fileManager fileExistsAtPath: pathOfFirefoxBookmarksDirectory])
@@ -228,7 +199,7 @@ NSString* kShiiraBookmarkTitleKey					= @"Title";
 		
 		NSArray*		contentsOfBookmarkDirectory		= [fileManager directoryContentsAtPath: pathOfFirefoxBookmarksDirectory];
 		NSEnumerator*	bookmarksDirectoryEnumerator	= [contentsOfBookmarkDirectory objectEnumerator];
-		NSString*		currentFileName					= nil;
+		NSS*		currentFileName					= nil;
 		BOOL			foundBookmarkFolder				= NO;
 		
 		while ((currentFileName = [bookmarksDirectoryEnumerator nextObject]) != nil)
@@ -259,7 +230,7 @@ NSString* kShiiraBookmarkTitleKey					= @"Title";
 		
 		NSArray*		contentsOfBookmarkDirectory		= [fileManager directoryContentsAtPath: pathOfFirefoxBookmarksDirectory];
 		NSEnumerator*	bookmarksDirectoryEnumerator	= [contentsOfBookmarkDirectory objectEnumerator];
-		NSString*		currentFileName					= nil;
+		NSS*		currentFileName					= nil;
 		BOOL			foundBookmarkFolder				= NO;
 		
 		while ((currentFileName = [bookmarksDirectoryEnumerator nextObject]) != nil)
@@ -288,11 +259,10 @@ NSString* kShiiraBookmarkTitleKey					= @"Title";
 	
 	return pathOfFirefoxBookmarksFile;
 }
-
 - (NSA*) firefoxBookmarksExcludingBookmarks: (NSA*) excludedBookmarks
 {
 	NSArray*	firefoxBookmarks			= [NSMutableArray array];
-	NSString*	pathOfFirefoxBookmarksFile	= [self pathOfFirefoxBookmarksFile];
+	NSS*	pathOfFirefoxBookmarksFile	= [self pathOfFirefoxBookmarksFile];
 		
 	if (pathOfFirefoxBookmarksFile != nil)
 	{
@@ -302,13 +272,11 @@ NSString* kShiiraBookmarkTitleKey					= @"Title";
 	return firefoxBookmarks;
 }
 
-
 #pragma mark Mozilla
-
-- (NSString*) pathOfMozillaBookmarksFile
+- (NSS*) pathOfMozillaBookmarksFile
 {
-	NSString*		pathOfMozillaBookmarksFile		= nil;
-	NSString*		pathOfMozillaBookmarksDirectory	= [kPathOfMozillaBookmarksDirectory stringByExpandingTildeInPath];
+	NSS*		pathOfMozillaBookmarksFile		= nil;
+	NSS*		pathOfMozillaBookmarksDirectory	= [kPathOfMozillaBookmarksDirectory stringByExpandingTildeInPath];
 	NSFileManager*	fileManager						= [NSFileManager defaultManager];
 	
 	if ([fileManager fileExistsAtPath: pathOfMozillaBookmarksDirectory])
@@ -319,7 +287,7 @@ NSString* kShiiraBookmarkTitleKey					= @"Title";
 		
 		NSArray*		contentsOfBookmarkDirectory		= [fileManager directoryContentsAtPath: pathOfMozillaBookmarksDirectory];
 		NSEnumerator*	bookmarksDirectoryEnumerator	= [contentsOfBookmarkDirectory objectEnumerator];
-		NSString*		currentFileName					= nil;
+		NSS*		currentFileName					= nil;
 		BOOL			foundBookmarkFolder				= NO;
 		
 		while ((currentFileName = [bookmarksDirectoryEnumerator nextObject]) != nil)
@@ -348,11 +316,10 @@ NSString* kShiiraBookmarkTitleKey					= @"Title";
 	
 	return pathOfMozillaBookmarksFile;
 }
-
 - (NSA*) mozillaBookmarksExcludingBookmarks: (NSA*) excludedBookmarks
 {
 	NSArray*	mozillaBookmarks			= [NSMutableArray array];
-	NSString*	pathOfMozillaBookmarksFile	= [self pathOfMozillaBookmarksFile];
+	NSS*	pathOfMozillaBookmarksFile	= [self pathOfMozillaBookmarksFile];
 		
 	if (pathOfMozillaBookmarksFile != nil)
 	{
@@ -361,8 +328,7 @@ NSString* kShiiraBookmarkTitleKey					= @"Title";
 	
 	return mozillaBookmarks;
 }
-
-- (NSA*) mozillaBookmarksFromPath: (NSString*) filePath excludingBookmarks: (NSA*) excludedBookmarks
+- (NSA*) mozillaBookmarksFromPath: (NSS*) filePath excludingBookmarks: (NSA*) excludedBookmarks
 {
 	NSMutableArray* bookmarks = [NSMutableArray array];
 	
@@ -373,12 +339,12 @@ NSString* kShiiraBookmarkTitleKey					= @"Title";
 		DBHTMLParser*		parser					= [DBHTMLParser HTMLParser];
 		NSArray*		linksInFile				= [parser linksFromHTMLFileAtPath: filePath];
 		NSEnumerator*	linkEnumerator			= [linksInFile objectEnumerator];
-		NSDictionary*	currentLinkDictionary	= nil;
+		NSD*	currentLinkDictionary	= nil;
 		
 		while ((currentLinkDictionary = [linkEnumerator nextObject]) != nil)
 		{
-			NSString*	linkTitle		= currentLinkDictionary[kLinkTitleKey];
-			NSString*	linkURLString	= currentLinkDictionary[kLinkURLStringKey];
+			NSS*	linkTitle		= currentLinkDictionary[kLinkTitleKey];
+			NSS*	linkURLString	= currentLinkDictionary[kLinkURLStringKey];
 			NSURL*		bookmarkURL		= [NSURL URLWithString: linkURLString];
 			
 			if (linkTitle != nil && bookmarkURL != nil)
@@ -387,7 +353,7 @@ NSString* kShiiraBookmarkTitleKey					= @"Title";
 				// We're not adding URLs of the "feed" scheme. I think it's RSS, which we don't have yet.
 				//
 				BOOL		isFeedScheme	= NO;
-				NSString*	bookmarkScheme	= [bookmarkURL scheme];
+				NSS*	bookmarkScheme	= [bookmarkURL scheme];
 				
 				isFeedScheme = ([bookmarkScheme caseInsensitiveCompare: kFeedScheme] == NSOrderedSame);
 				//
@@ -432,12 +398,10 @@ NSString* kShiiraBookmarkTitleKey					= @"Title";
 	return bookmarks;
 }
 
-
 #pragma mark Safari
-
-- (NSString*) pathOfSafariBookmarksFile
+- (NSS*) pathOfSafariBookmarksFile
 {
-	NSString*		pathOfSafariBookmarksFile	= [kPathOfSafariBookmarksFile stringByExpandingTildeInPath];
+	NSS*		pathOfSafariBookmarksFile	= [kPathOfSafariBookmarksFile stringByExpandingTildeInPath];
 	NSFileManager*	fileManager					= [NSFileManager defaultManager];
 	
 	if (![fileManager fileExistsAtPath: pathOfSafariBookmarksFile])
@@ -447,17 +411,16 @@ NSString* kShiiraBookmarkTitleKey					= @"Title";
 	
 	return pathOfSafariBookmarksFile;
 }
-
 - (NSA*) safariBookmarksExcludingBookmarks: (NSA*) excludedBookmarks
 {	
 	NSMutableArray* safariBookmarks				= [NSMutableArray array];
-	NSString*		pathOfSafariBookmarksFile	= [self pathOfSafariBookmarksFile];
+	NSS*		pathOfSafariBookmarksFile	= [self pathOfSafariBookmarksFile];
 	
 	excludedBookmarks = [excludedBookmarks mutableCopy];
 	
 	if (pathOfSafariBookmarksFile != nil)
 	{
-		NSDictionary* safariBookmarkDictionary = [NSDictionary dictionaryWithContentsOfFile: pathOfSafariBookmarksFile];
+		NSD* safariBookmarkDictionary = [NSD dictionaryWithContentsOfFile: pathOfSafariBookmarksFile];
 		
 		if (safariBookmarkDictionary != nil)
 		{
@@ -469,10 +432,9 @@ NSString* kShiiraBookmarkTitleKey					= @"Title";
 	
 	return safariBookmarks;
 }
-
 - (void) processSafariBookmarksFromDictionary: (NSD*) safariDictionary intoArray: (NSMA*) bookmarkStorage excludingBookmarks: (NSA*) excludedBookmarks
 {
-	NSString* webBookmarkType = safariDictionary[kSafariWebBookmarkType];
+	NSS* webBookmarkType = safariDictionary[kSafariWebBookmarkType];
 	
 	if ([webBookmarkType isEqualToString: kSafariWebBookmarkTypeList])
 	{
@@ -480,7 +442,7 @@ NSString* kShiiraBookmarkTitleKey					= @"Title";
 		
 		NSArray*		children			= safariDictionary[kSafariChildrenKey];
 		NSEnumerator*	childrenEnumerator	= [children objectEnumerator];
-		NSDictionary*	currentChild		= nil;
+		NSD*	currentChild		= nil;
 		
 		while ((currentChild = [childrenEnumerator nextObject]) != nil)
 		{
@@ -491,9 +453,9 @@ NSString* kShiiraBookmarkTitleKey					= @"Title";
 	{
 		// Create Bookmark from info
 		
-		NSDictionary*	URIDictionary	= safariDictionary[kSafariBookmarkURIDictionaryKey];
-		NSString*		bookmarkTitle	= URIDictionary[kSafariBookmarkTitleKey];
-		NSString*		URLString		= safariDictionary[kSafariBookmarkURLStringKey];
+		NSD*	URIDictionary	= safariDictionary[kSafariBookmarkURIDictionaryKey];
+		NSS*		bookmarkTitle	= URIDictionary[kSafariBookmarkTitleKey];
+		NSS*		URLString		= safariDictionary[kSafariBookmarkURLStringKey];
 		
 		if (URLString != nil)
 		{
@@ -505,7 +467,7 @@ NSString* kShiiraBookmarkTitleKey					= @"Title";
 				// We're not adding URLs of the "feed" scheme. I think it's RSS, which we don't have yet.
 				//
 				BOOL		isFeedScheme	= NO;
-				NSString*	bookmarkScheme	= [bookmarkURL scheme];
+				NSS*	bookmarkScheme	= [bookmarkURL scheme];
 				
 				isFeedScheme = ([bookmarkScheme caseInsensitiveCompare: kFeedScheme] == NSOrderedSame);
 				//
@@ -545,12 +507,10 @@ NSString* kShiiraBookmarkTitleKey					= @"Title";
 	}
 }
 
-
 #pragma mark Shiira
-
-- (NSString*) pathOfShiiraBookmarksFile
+- (NSS*) pathOfShiiraBookmarksFile
 {
-	NSString*		pathOfShiiraBookmarksFile	= [kPathOfShiiraBookmarksFile stringByExpandingTildeInPath];
+	NSS*		pathOfShiiraBookmarksFile	= [kPathOfShiiraBookmarksFile stringByExpandingTildeInPath];
 	NSFileManager*	fileManager					= [NSFileManager defaultManager];
 	
 	if (![fileManager fileExistsAtPath: pathOfShiiraBookmarksFile])
@@ -560,17 +520,16 @@ NSString* kShiiraBookmarkTitleKey					= @"Title";
 	
 	return pathOfShiiraBookmarksFile;
 }
-
 - (NSA*) shiiraBookmarksExcludingBookmarks: (NSA*) excludedBookmarks
 {
 	NSMutableArray* shiiraBookmarks				= [NSMutableArray array];
-	NSString*		pathOfShiiraBookmarksFile	= [self pathOfShiiraBookmarksFile];
+	NSS*		pathOfShiiraBookmarksFile	= [self pathOfShiiraBookmarksFile];
 	
 	excludedBookmarks = [excludedBookmarks mutableCopy];
 	
 	if (pathOfShiiraBookmarksFile != nil)
 	{
-		NSDictionary* shiiraBookmarkDictionary = [NSDictionary dictionaryWithContentsOfFile: pathOfShiiraBookmarksFile];
+		NSD* shiiraBookmarkDictionary = [NSD dictionaryWithContentsOfFile: pathOfShiiraBookmarksFile];
 		
 		if (shiiraBookmarkDictionary != nil)
 		{
@@ -582,7 +541,6 @@ NSString* kShiiraBookmarkTitleKey					= @"Title";
 	
 	return shiiraBookmarks;
 }
-
 - (void) processShiiraBookmarksFromDictionary: (NSD*) shiiraDictionary intoArray: (NSMA*) bookmarkStorage excludingBookmarks: (NSA*) excludedBookmarks
 {
 	NSArray* children = shiiraDictionary[kShiiraChildrenKey];
@@ -592,7 +550,7 @@ NSString* kShiiraBookmarkTitleKey					= @"Title";
 		// Loop through dictionaries in list and process them
 		
 		NSEnumerator*	childrenEnumerator	= [children objectEnumerator];
-		NSDictionary*	currentChild		= nil;
+		NSD*	currentChild		= nil;
 		
 		while ((currentChild = [childrenEnumerator nextObject]) != nil)
 		{
@@ -603,8 +561,8 @@ NSString* kShiiraBookmarkTitleKey					= @"Title";
 	{
 		// Create Bookmark from info
 		
-		NSString*		bookmarkTitle	= shiiraDictionary[kShiiraBookmarkTitleKey];
-		NSString*		URLString		= shiiraDictionary[kShiiraBookmarkURLStringKey];
+		NSS*		bookmarkTitle	= shiiraDictionary[kShiiraBookmarkTitleKey];
+		NSS*		URLString		= shiiraDictionary[kShiiraBookmarkURLStringKey];
 		
 		if (URLString != nil)
 		{
@@ -616,7 +574,7 @@ NSString* kShiiraBookmarkTitleKey					= @"Title";
 				// We're not adding URLs of the "feed" scheme. I think it's RSS, which we don't have yet.
 				//
 				BOOL		isFeedScheme	= NO;
-				NSString*	bookmarkScheme	= [bookmarkURL scheme];
+				NSS*	bookmarkScheme	= [bookmarkURL scheme];
 				
 				isFeedScheme = ([bookmarkScheme caseInsensitiveCompare: kFeedScheme] == NSOrderedSame);
 				//
@@ -656,16 +614,13 @@ NSString* kShiiraBookmarkTitleKey					= @"Title";
 	}
 }
 
-
 @end
-
 
 @implementation NSString (SGSURLHelper)
 
-
-- (NSString*) stringByDeletingTrailingSlash
+- (NSS*) stringByDeletingTrailingSlash
 {
-	NSString* stringWithoutTrailingSlash = self;
+	NSS* stringWithoutTrailingSlash = self;
 	
 	if ([self length] > 0)
 	{
@@ -680,6 +635,5 @@ NSString* kShiiraBookmarkTitleKey					= @"Title";
 	
 	return stringWithoutTrailingSlash;
 }
-
 
 @end

@@ -3,23 +3,18 @@
 The DeskBrowse source code is the legal property of its developers, Joel Levin and Ian Elseth
 *****************************
 */
-
 #import "DBLocationTextFieldCell.h"
-
 
 @interface NSTextFieldCell (Private)
 - (void) _drawFocusRingWithFrame: (NSR) rect;
 - (NSR) _focusRingFrameForFrame: (NSR) editFrame cellFrame: (NSR) cellFrame;
 @end
 
-
 const short		kImagePadding		= 3;
-NSString* const kDefaultImageName	= @"DefaultLocationFieldIcon";
-
+NSS* const kDefaultImageName	= @"DefaultLocationFieldIcon";
 @implementation DBLocationTextFieldCell
 
-
-- (id) initTextCell: (NSString*) text
+- (id) initTextCell: (NSS*) text
 {
 	if (self = [super initTextCell: text])
 	{
@@ -28,20 +23,16 @@ NSString* const kDefaultImageName	= @"DefaultLocationFieldIcon";
 	
 	return self;
 }
-
 - (void) dealloc
 {
 	[mImage release];
 }
 
-
 #pragma mark -
-
 - (NSImage*) image
 {	
 	return mImage;
 }
-
 - (void) setImage: (NSImage*) image
 {
 	if (image != mImage)
@@ -61,21 +52,17 @@ NSString* const kDefaultImageName	= @"DefaultLocationFieldIcon";
 		[[self controlView] setKeyboardFocusRingNeedsDisplayInRect: [[self controlView] frame]];
 	}
 }
-
-- (void) setExtraSpaceOnRight: (NSSize) extraSize
+- (void) setExtraSpaceOnRight: (NSSZ) extraSize
 {
 	mSpaceOnRight = extraSize;
 	[[self controlView] setNeedsDisplay: YES];
 }
 
-
 #pragma mark -
-
 - (NSR) imageRectForFrame: (NSR) frame
 {
 	return NSMakeRect(NSMinX(frame), NSMinY(frame), NSHeight(frame), NSHeight(frame));
 }
-
 - (NSR) textRectForFrame: (NSR) frame
 {
 	NSR imageRect = [self imageRectForFrame: frame];
@@ -86,9 +73,7 @@ NSString* const kDefaultImageName	= @"DefaultLocationFieldIcon";
 	return textRect;
 }
 
-
 #pragma mark -
-
 - (void) drawImageWithFrame: (NSR) frameRect inView: (NSView*) controlView
 {
 	NSGraphicsContext* currentGraphicsContext = [NSGraphicsContext currentContext];
@@ -98,9 +83,8 @@ NSString* const kDefaultImageName	= @"DefaultLocationFieldIcon";
 	
 //	[[self image] setSize: frameRect.size];
 //	[[self image] compositeToPoint: frameRect.origin operation: NSCompositeSourceOver];
-
 	{
-		NSSize		newImageSize	= [self imageRectForFrame: frameRect].size;
+		NSSZ		newImageSize	= [self imageRectForFrame: frameRect].size;
 		NSImageRep* prettyImageRep	= [[self image] bestRepresentationForDevice: nil];
 		NSImage*	newImage		= [[NSImage alloc] initWithSize: newImageSize];
 		
@@ -115,10 +99,8 @@ NSString* const kDefaultImageName	= @"DefaultLocationFieldIcon";
 		
 		[newImage release];
 	}
-
 	[currentGraphicsContext restoreGraphicsState];
 }
-
 - (void) drawInteriorWithFrame: (NSR) frameRect inView: (NSView*) controlView
 {
 	NSR imageRect	= [self imageRectForFrame: frameRect];
@@ -145,37 +127,28 @@ NSString* const kDefaultImageName	= @"DefaultLocationFieldIcon";
 	[super drawInteriorWithFrame: textRect inView: controlView];
 }
 
-
 #pragma mark -
-
 - (void) selectWithFrame: (NSR) frame inView: (NSView*) controlView editor: (NSText*) editor delegate: (id) delegate start: (NSI) selStart length: (NSI) selLength
 {
 	 [super selectWithFrame: [self textRectForFrame: frame] inView: controlView editor: editor delegate: delegate start: selStart length: selLength];
 }
-
 - (void) editWithFrame: (NSR) frame inView: (NSView*) controlView editor: (NSText*) editor delegate: (id) delegate event: (NSEvent*) event
 {
 	 [super editWithFrame: [self textRectForFrame: frame] inView: controlView editor: editor delegate: delegate event: event];
 }
-
 - (void) resetCursorRect: (NSR) cellFrame inView: (NSView*) controlView
 {
 	[super resetCursorRect: [self textRectForFrame: cellFrame] inView: controlView];
 }
 
-
 @end
 
-
-
 @implementation DBLocationTextFieldCell (Private)
-
 
 - (void) _drawFocusRingWithFrame: (NSR) rect
 {
 	 [super _drawFocusRingWithFrame: rect];
 }
-
 - (NSR) _focusRingFrameForFrame: (NSR) editFrame cellFrame: (NSR) cellFrame
 {
 	NSR focusRingFrame		= [super _focusRingFrameForFrame: editFrame cellFrame: cellFrame];
@@ -186,6 +159,5 @@ NSString* const kDefaultImageName	= @"DefaultLocationFieldIcon";
 	
 	 return focusRingFrame;
 }
-
 
 @end

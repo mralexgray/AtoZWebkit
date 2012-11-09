@@ -3,18 +3,14 @@
 The DeskBrowse source code is the legal property of its developers, Joel Levin and Ian Elseth
 *****************************
 */
-
 #import "DBQuickDownload.h"
 
-
 @implementation DBQuickDownload
-
 - (void)awakeFromNib {
 	[progressIndicator setMinValue:0];
 	 [progressIndicator setMaxValue:1.0];
 	[self setFilename:@""];
 }
-
 - (void)setDownloading:(BOOL)downloading
 {
 	 if (isDownloading != downloading) {
@@ -38,29 +34,24 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		  }
 	 }
 }
-
-- (void)setFilename:(NSString *)aString {
+- (void)setFilename:(NSS *)aString {
 	[_filename release];
 	_filename = aString;
 }
-
-- (NSString *)filename {
+- (NSS *)filename {
 	return _filename;
 }
-
 - (void)cancel
 {
 	 [download cancel];
 	 [self setDownloading:NO];
 }
-
 - (void)open
 {	 
 	 if ([openButton state] == NSOnState) {
 		  [[NSWorkspace sharedWorkspace] openFile:[self filename]];
 	 }
 }
-
 - (IBAction)downloadOrCancel:(id)sender
 {
 	 if (isDownloading) {
@@ -81,19 +72,15 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		  }
 	 }
 }
-
 #pragma mark NSURLDownloadDelegate methods
-
 - (void)downloadDidBegin:(NSURLDownload *)download
 {
 	 [self setDownloading:YES];
 }
-
 - (NSWindow *)downloadWindowForAuthenticationSheet:(WebDownload *)download
 {
 	 //return [self window];
 }
-
 - (void)download:(NSURLDownload *)theDownload didReceiveResponse:(NSURLResponse *)response
 {
 	 expectedContentLength = [response expectedContentLength];
@@ -103,11 +90,10 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		  [progressIndicator setDoubleValue:0];
 	 }
 }
-
-- (void)download:(NSURLDownload *)theDownload decideDestinationWithSuggestedFilename:(NSString *)filename
+- (void)download:(NSURLDownload *)theDownload decideDestinationWithSuggestedFilename:(NSS *)filename
 {
 	 if ([[directoryMatrix selectedCell] tag] == 0) {
-		  NSString *path = [[NSHomeDirectory() stringByAppendingPathComponent:@"Desktop"] stringByAppendingPathComponent:filename];
+		  NSS *path = [[NSHomeDirectory() stringByAppendingPathComponent:@"Desktop"] stringByAppendingPathComponent:filename];
 		  [download setDestination:path allowOverwrite:NO];
 	 } else {
 		  NSSavePanel *sp = [NSSavePanel savePanel];
@@ -119,7 +105,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		}
 	 }
 }
-
 - (void)download:(NSURLDownload *)theDownload didReceiveDataOfLength:(unsigned)length
 {
 	 if (expectedContentLength > 0) {
@@ -127,28 +112,24 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		  [progressIndicator setDoubleValue:(double)receivedContentLength / (double)expectedContentLength];
 	 }
 }
-
-- (BOOL)download:(NSURLDownload *)download shouldDecodeSourceDataOfMIMEType:(NSString *)encodingType;
+- (BOOL)download:(NSURLDownload *)download shouldDecodeSourceDataOfMIMEType:(NSS *)encodingType;
 {
 	 return ([decodeButton state] == NSOnState);
 }
-
-- (void)download:(NSURLDownload *)download didCreateDestination:(NSString *)path
+- (void)download:(NSURLDownload *)download didCreateDestination:(NSS *)path
 {
 	 [self setFilename:path];
 }
-
 - (void)downloadDidFinish:(NSURLDownload *)theDownload
 {
 	 [self setDownloading:NO];
 	 [self open];
 }
-
 - (void)download:(NSURLDownload *)theDownload didFailWithError:(NSError *)error
 {
 	 [self setDownloading:NO];
 	
-	 NSString *errorDescription = [error localizedDescription];
+	 NSS *errorDescription = [error localizedDescription];
 	 if (!errorDescription) {
 		  errorDescription = @"An error occured during download.";
 	 }
@@ -161,5 +142,4 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	[failed runModal];
 	[URLField selectText:self];
 }
-
 @end

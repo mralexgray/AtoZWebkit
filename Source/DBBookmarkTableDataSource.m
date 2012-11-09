@@ -3,21 +3,15 @@
 The DeskBrowse source code is the legal property of its developers, Joel Levin and Ian Elseth
 *****************************
 */
-
 #import "DBBookmarkTableDataSource.h"
-
 #import "DBBookmark.h"
 #import "DBBookmarkController.h"
 
-
-NSString* const kTitleIdentifier	= @"Title";
-NSString* const kURLIdentifier		= @"URL";
-
-NSString* const kBookmarkDragType	= @"DBBookmarkDragType";
-
+NSS* const kTitleIdentifier	= @"Title";
+NSS* const kURLIdentifier		= @"URL";
+NSS* const kBookmarkDragType	= @"DBBookmarkDragType";
 
 @implementation DBBookmarkTableDataSource
-
 
 - (id) initWithBookmarkController: (DBBookmarkController*) bookmarkController
 {
@@ -28,23 +22,20 @@ NSString* const kBookmarkDragType	= @"DBBookmarkDragType";
 	
 	return self;
 }
-
 - (void) dealloc
 {
 	[mBookmarkController release];
 	
 }
 
-
 - (NSI) numberOfRowsInTableView: (NSTableView*) tableView
 {
 	return [mBookmarkController numberOfBookmarks];
 }
-
 - (id) tableView: (NSTableView*) tableView objectValueForTableColumn: (NSTableColumn*) tableColumn row: (NSI) row
 {
 	id			value				= nil;
-	NSString*	columnIdentifier	= [tableColumn identifier];
+	NSS*	columnIdentifier	= [tableColumn identifier];
 	
 	if ([columnIdentifier isEqualToString: kTitleIdentifier])
 	{
@@ -57,13 +48,9 @@ NSString* const kBookmarkDragType	= @"DBBookmarkDragType";
 	return value;
 }
 
-
 @end
 
-
-
 @implementation DBBookmarkOutlineDataSource
-
 
 - (id) initWithBookmarkController: (DBBookmarkController*) bookmarkController
 {
@@ -74,14 +61,12 @@ NSString* const kBookmarkDragType	= @"DBBookmarkDragType";
 	
 	return self;
 }
-
 - (void) dealloc
 {
 	[mBookmarkController release];
 	[mDraggingBookmarks release];
 	
 }
-
 
 - (NSI) outlineView: (NSOutlineView*) outlineView numberOfChildrenOfItem: (id) item
 {
@@ -99,14 +84,11 @@ NSString* const kBookmarkDragType	= @"DBBookmarkDragType";
 	return numberOfChildren;
 }
 
-
 // PRETTYIZE IT!
-
 - (BOOL) outlineView: (NSOutlineView*) outlineView isItemExpandable: (id) item
 {
 	return ([item respondsToSelector: @selector(subBookmarks)] && [[item subBookmarks] count] > 0);
 }
-
 
 - (id) outlineView: (NSOutlineView*) outlineView child: (NSI) index ofItem: (id) item
 {
@@ -123,11 +105,10 @@ NSString* const kBookmarkDragType	= @"DBBookmarkDragType";
 	
 	return child;
 }
-
 - (id) outlineView: (NSOutlineView*) outlineView objectValueForTableColumn: (NSTableColumn*) tableColumn byItem: (id) item
 {
 	id			value				= nil;
-	NSString*	columnIdentifier	= [tableColumn identifier];
+	NSS*	columnIdentifier	= [tableColumn identifier];
 	
 	if ([columnIdentifier isEqualToString: kTitleIdentifier])
 	{
@@ -140,10 +121,9 @@ NSString* const kBookmarkDragType	= @"DBBookmarkDragType";
 	
 	return value;
 }
-
 - (void) outlineView: (NSOutlineView*) outlineView setObjectValue: (id) object forTableColumn: (NSTableColumn*) tableColumn byItem: (id) item
 {
-	NSString* columnIdentifier = [tableColumn identifier];
+	NSS* columnIdentifier = [tableColumn identifier];
 	
 	if ([columnIdentifier isEqualToString: kTitleIdentifier])
 	{
@@ -156,7 +136,6 @@ NSString* const kBookmarkDragType	= @"DBBookmarkDragType";
 	
 	[AZNOTCENTER postNotificationName: kBookmarksDidChangeNotification object: mBookmarkController];
 }
-
 - (BOOL) outlineView: (NSOutlineView*) olv writeItems: (NSA*) items toPasteboard: (NSPasteboard*) pboard
 {
 	BOOL wroteToPasteboard = NO;
@@ -171,14 +150,12 @@ NSString* const kBookmarkDragType	= @"DBBookmarkDragType";
 	
 	return wroteToPasteboard;
 }
-
 - (NSDragOperation) outlineView: (NSOutlineView*) olv validateDrop: (id <NSDraggingInfo>) info proposedItem: (id) item proposedChildIndex: (NSI) index
 {
 	NSDragOperation operation = NSDragOperationGeneric;
 	
 	return operation;
 }
-
 - (BOOL) outlineView: (NSOutlineView*) olv acceptDrop: (id <NSDraggingInfo>) info item: (id) item childIndex: (NSI) index
 {
 	BOOL			acceptDrop		= NO;
@@ -188,7 +165,7 @@ NSString* const kBookmarkDragType	= @"DBBookmarkDragType";
 	
 	if (draggingMask == NSTableViewDropAbove)
 	{
-		//NSDictionary*	bdict		= [draggingPboard propertyListForType: kBookmarkDragType];
+		//NSD*	bdict		= [draggingPboard propertyListForType: kBookmarkDragType];
 		//DBBookmark*		newBookmark = [[DBBookmark alloc] initWithDictionary: bdict];
 		//[item addBookmark: newBookmark];
 		NSInteger i = [mDraggingBookmarks count];
@@ -215,6 +192,5 @@ NSString* const kBookmarkDragType	= @"DBBookmarkDragType";
 	
 	return acceptDrop;
 }
-
 
 @end

@@ -3,19 +3,14 @@
 The DeskBrowse source code is the legal property of its developers, Joel Levin and Ian Elseth
 *****************************
 */
-
 /* DeskBrowseController */
-
 #import <Cocoa/Cocoa.h>
 #import <WebKit/WebKit.h>
 #import <IOKit/IOKitLib.h>
-
 #import "DeskBrowseConstants.h"
 #import "ThreadWorker.h"
-
 @class DBApplication;
 @class DeskBrowseConstants;
-
 @class DBActionMenuView;
 @class DBActionMenuWindow;
 @class Authorizer;
@@ -45,7 +40,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 @class DBWindowLevel;
 @class DBStatusItemController;
 @class DBSymbolicHotKeyController;
-
 @interface DeskBrowseController : NSObject
 {
 	// main browser components
@@ -100,8 +94,8 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	DBTabController				*tabController;
 		
 	WebView*					currentWebView;
-	NSString*					currentStatus;
-	NSString*					currentTitle;
+	NSS*					currentStatus;
+	NSS*					currentTitle;
 	Authorizer*					auth;
 	
 	DBActionMenuWindow			*actionMenuWindow;
@@ -131,7 +125,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	IBOutlet NSButton*				webpsoseActionMenuButton;
 	IBOutlet DBBookmarkBar*			websposeBookmarkBar;
 }
-
 - (IBAction) websposeEnterPassword: (id) sender;
 - (IBAction) websposeCancelPassword: (id) sender;
 - (IBAction)loadURL:(id)sender; // called when enter is pushed inside the url field
@@ -161,31 +154,30 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 - (IBAction)openLocation:(id)sender;
 - (IBAction)showQDownloadWindow:(id)sender;
 - (IBAction)showDocumentation:(id)sender;
-
 - (void) setupTabView;
 - (NSWindow*) currentWindow;
 - (void)handleNotification:(NSNotification *)note;
 - (void) toggleWebspose;
 - (void) lock: (BOOL) shouldLock;
 - (void) loadURLNotification: (NSNotification*) notification;
-- (void) loadURLString: (NSString*) URLString;
+- (void) loadURLString: (NSS*) URLString;
 - (void) slideWindowResized: (NSNotification*) notification;
 - (void) syncVariablesWithUserPrefs;
-- (void)setStatusText:(NSString *)status; // used to set the current status text of the page
-- (NSString *)statusText; // returns the current status text of the page
-- (void)setTitleText:(NSString *)title; // used to set the current status text of the page
-- (NSString *)titleText; // returns the current title text of the page
+- (void)setStatusText:(NSS *)status; // used to set the current status text of the page
+- (NSS *)statusText; // returns the current status text of the page
+- (void)setTitleText:(NSS *)title; // used to set the current status text of the page
+- (NSS *)titleText; // returns the current title text of the page
 - (DBLocationTextField*) URLField;
-- (void)setURLText:(NSString *)URL; // used to set the current URL text of the page
-- (NSString *)URLText; // returns the current URL text of the page
-- (NSString*) searchFieldText;
+- (void)setURLText:(NSS *)URL; // used to set the current URL text of the page
+- (NSS *)URLText; // returns the current URL text of the page
+- (NSS*) searchFieldText;
 - (void) setFavicon: (NSImage*) favicon;
 - (void)syncLoadingStateWithStatus; // used to set the loading to the status bar text
 - (void)slideInForcingToFront: (BOOL) forceToFront; // slides the window in
 - (void)slideOut; // slides the window out
 - (void)toggleSlideBrowse; // called when the hotkey is pushed
-- (void)filterErrorMessage:(NSString *)msg forWebView: (WebView*) webView;
-- (BOOL)handleFileProtocolForPath:(NSString *)path webview:(WebView *)wv;
+- (void)filterErrorMessage:(NSS *)msg forWebView: (WebView*) webView;
+- (BOOL)handleFileProtocolForPath:(NSS *)path webview:(WebView *)wv;
 - (void)viewPageSource;
 - (void) updateButtons;
 - (WebView*) createWebView;
@@ -196,8 +188,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 - (void) handleNewTabRequest:(NSNotification *)notification;
 - (void) mouseDown: (NSEvent*) theEvent;
 - (void) keyCombinationPressed: (KeyCombination) keys;
-- (void) showErrorPageForReason:(NSString *)reason title:(NSString *)title webview:(WebView *)wv;
+- (void) showErrorPageForReason:(NSS *)reason title:(NSS *)title webview:(WebView *)wv;
 - (IBAction)reloadAllTabs:(id)sender;
 - (IBAction)clearCache:(id)sender;
-
 @end

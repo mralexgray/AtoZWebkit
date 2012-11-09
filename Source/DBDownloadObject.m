@@ -3,16 +3,12 @@
 The DeskBrowse source code is the legal property of its developers, Joel Levin and Ian Elseth
 *****************************
 */
-
 #import "DBDownloadObject.h"
 
-
-NSString* kNoStatusString	= @"";
-NSString* kCancelledString	= @"Cancelled";
-NSString* kFinishedString	= @"Finished";
-
+NSS* kNoStatusString	= @"";
+NSS* kCancelledString	= @"Cancelled";
+NSS* kFinishedString	= @"Finished";
 @implementation DBDownloadObject
-
 - (id) init
 {
 	if(self = [super init])
@@ -22,7 +18,6 @@ NSString* kFinishedString	= @"Finished";
 	
 	return self;
 }
-
 - (id) initWithURLDownload: (WebDownload*) download;
 {
 	if(self = [self init])
@@ -34,7 +29,6 @@ NSString* kFinishedString	= @"Finished";
 	
 	return self;
 }
-
 - (void) dealloc
 {
 	[mURLRequest			release];
@@ -46,20 +40,15 @@ NSString* kFinishedString	= @"Finished";
 	[mURL					release];
 	
 }
-
 #pragma mark -
 
-
 // URL download
-
 - (WebDownload*) URLDownload
 {
 	return mURLDownload;
 }
 
-
 // URL request
-
 - (void) setURLRequest: (NSURLRequest*) request
 {
 	// URLReques
@@ -82,9 +71,7 @@ NSString* kFinishedString	= @"Finished";
 	[self setDisplayName: [mFileName lastPathComponent]];
 }
 
-
 // URL response
-
 - (void) setURLResponse: (NSURLResponse*) response
 {
 	if(response != mURLResponse)
@@ -95,14 +82,11 @@ NSString* kFinishedString	= @"Finished";
 	}
 }
 
-
 // URL
-
 - (NSURL*) URL
 {
 	return mURL;
 }
-
 - (void) setURL: (NSURL*) URL
 {
 	if(URL != mURL)
@@ -113,18 +97,14 @@ NSString* kFinishedString	= @"Finished";
 	}
 }
 
-
 // File name
-
-- (NSString *) fileName
+- (NSS *) fileName
 {
 	return mFileName;
 }
 
-
 // Display name
-
-- (NSString*) displayName
+- (NSS*) displayName
 {
 	if(mDisplayName != nil)
 	{
@@ -135,8 +115,7 @@ NSString* kFinishedString	= @"Finished";
 		return [self fileName];
 	}
 }
-
-- (void) setDisplayName: (NSString*) name
+- (void) setDisplayName: (NSS*) name
 {
 	if(name != mDisplayName)
 	{
@@ -146,15 +125,12 @@ NSString* kFinishedString	= @"Finished";
 	}
 }
 
-
 // Downloaded file path
-
-- (NSString*) downloadedFilePath
+- (NSS*) downloadedFilePath
 {	
 	return mDownloadedFilePath;
 }
-
-- (void) setDownloadedFilePath: (NSString*) path
+- (void) setDownloadedFilePath: (NSS*) path
 {
 	if(path != mDownloadedFilePath)
 	{
@@ -164,21 +140,17 @@ NSString* kFinishedString	= @"Finished";
 	}
 }
 
-
 // File type
-
-- (NSString*) fileType
+- (NSS*) fileType
 {
-	NSString* fileType;
+	NSS* fileType;
 	
 	fileType = [mFileName pathExtension]; 
 	
 	return fileType;
 }
 
-
 // Icon
-
 - (NSImage*) icon
 {
 	NSImage*		icon;
@@ -190,21 +162,17 @@ NSString* kFinishedString	= @"Finished";
 	return icon;
 }
 
-
 // Progress
-
 
 - (CGFloat) bytesLoaded
 {
 	return mBytesLoaded;
 }
-
 - (void) setBytesLoaded: (CGFloat) bytes
 {
 	mBytesLoaded	= bytes;
 	mExpectedLength	= [mURLResponse expectedContentLength];
 }
-
 - (NSI) percentComplete
 {
 	NSInteger percentComplete = (mBytesLoaded / (CGFloat) mExpectedLength) * 100.0;
@@ -221,12 +189,10 @@ NSString* kFinishedString	= @"Finished";
 	return percentComplete;
 }
 
-
 // Status
-
-- (NSString*) stringStatus
+- (NSS*) stringStatus
 {
-	NSString*	stringStatus	= nil;
+	NSS*	stringStatus	= nil;
 	NSNumber*	fileSize		= nil;
 	
 	if(mStatus == kDownloadStatusDownloading)
@@ -259,23 +225,19 @@ NSString* kFinishedString	= @"Finished";
 	
 	return stringStatus;
 }
-
 - (void) cancel
 {
 	[mURLDownload cancel];
 	
 	[self setStatus: kDownloadStatusCancelled];
 }
-
 - (DBDownloadStatus) status
 {
 	return mStatus;
 }
-
 - (void) setStatus: (DBDownloadStatus) newStatus
 {
 	mStatus = newStatus;
 }
-
 
 @end

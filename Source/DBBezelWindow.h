@@ -3,11 +3,8 @@
 The DeskBrowse source code is the legal property of its developers, Joel Levin and Ian Elseth
 *****************************
 */
-
 #import <Cocoa/Cocoa.h>
-
 #import "DBLeveledWindow.h"
-
 
 @interface DBBezelWindow : DBLeveledWindow
 {
@@ -15,7 +12,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	NSView*	subview;
 	BOOL	resizing;
 	BOOL	moving;
-	NSSize	clickDistanceFromWindowEdge;
+	NSSZ	clickDistanceFromWindowEdge;
 }
-
 @end

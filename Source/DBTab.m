@@ -3,14 +3,10 @@
 The DeskBrowse source code is the legal property of its developers, Joel Levin and Ian Elseth
 *****************************
 */
-
 #import "DBTab.h"
 
 
-
-
 @implementation DBTab
-
 - (id) initWithFrame: (NSR) frame
 {
 	 if (self = [super initWithFrame: frame])
@@ -80,27 +76,22 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	
 	 return self;
 }
-
 - (void) viewDidMoveToWindow
 {
 	[self resetTrackingRect];
 }
-
 - (void) closeAll
 {
 	[AZNOTCENTER postNotificationName:@"DBCloseAllTabs" object:self];
 }
-
 - (void) reload
 {
 	[AZNOTCENTER postNotificationName:@"DBReloadTab" object:self];
 }
-
 - (void) reloadAll
 {
 	[AZNOTCENTER postNotificationName:@"DBReloadAllTabs" object:self];
 }
-
 - (void) dealloc
 {
 	[AZNOTCENTER removeObserver: self];
@@ -118,11 +109,9 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	
 }
 
-
 #pragma mark -
 #pragma mark Accessors
-
-- (void) setLabel: (NSString*) newLabel
+- (void) setLabel: (NSS*) newLabel
 {
 	if (newLabel != label)
 	{
@@ -138,12 +127,10 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		}
 	}
 }
-
-- (NSString *)label
+- (NSS *)label
 {
 	return label;
 }
-
 - (void) setSelected: (BOOL) flag
 {
 	if (flag != selected)
@@ -151,12 +138,9 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		selected = flag;
 	}
 }
-
 - (BOOL)selected {return selected; }
 
-
 #pragma mark -
-
 - (void) setFavicon: (NSImage*) newFavicon
 {
 	if (newFavicon != favicon)
@@ -165,13 +149,11 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		favicon = newFavicon;
 	}
 }
-
 - (NSImage*) favicon
 {
 	return favicon;
 }
-
-- (void) setStatus: (NSString*) newStatus
+- (void) setStatus: (NSS*) newStatus
 {
 	if (newStatus != status)
 	{
@@ -179,13 +161,11 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		status = newStatus;
 	}
 }
-
-- (NSString*) status
+- (NSS*) status
 {
 	return status;
 }
-
-- (void) setURLString: (NSString*) newURLString
+- (void) setURLString: (NSS*) newURLString
 {
 	if (newURLString != URLString)
 	{
@@ -195,13 +175,11 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		[self setToolTip: URLString];
 	}
 }
-
-- (NSString*) URLString
+- (NSS*) URLString
 {
 	return URLString;
 }
-
-- (void) setTitle: (NSString*) newTitle
+- (void) setTitle: (NSS*) newTitle
 {
 	if (newTitle != title)
 	{
@@ -209,26 +187,21 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		title = [newTitle copy];
 	}
 }
-
-- (NSString*) title
+- (NSS*) title
 {
 	return title;
 }
-
 - (void) setLoading: (BOOL) flag
 {
 	loading = flag;
 }
-
 - (BOOL) loading
 {
 	return loading;
 }
 
-
 #pragma mark -
 #pragma mark Drawing
-
 - (void) drawRect: (NSR) rect
 {
 	[self drawTabInRect: rect];
@@ -236,13 +209,11 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	[self drawLabelInRect: NSMakeRect(rect.origin.x + 20, rect.origin.y, rect.size.width - 30, rect.size.height)];
 }
 
-
 #pragma mark -
-
 - (void) drawTabInRect: (NSR) rect
 {
 	//NSR	frame				= [self frame];
-	//NSSize	size				= frame.size;
+	//NSSZ	size				= frame.size;
 	//NSP	origin				= frame.origin;
 	
 	NSColor* bgColor = [NSColor colorWithCalibratedWhite:0.75 alpha:1.0];
@@ -260,7 +231,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	[[NSGraphicsContext currentContext] restoreGraphicsState];
 	
 	/*CGFloat	newFillWidth		= size.width - ([selectedTabLeft size].width + [selectedTabRight size].width);
-
 
 	if (newFillWidth < 1) // We have to do this because if the width < 0, it won't draw later when we make it wider
 	{
@@ -307,9 +277,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 				  fraction: 1.0];*/
 }
 
-
 #pragma mark -
-
 - (void) drawCloseButtonInRect: (NSR) rect
 {
 	NSImage* closeImage = nil;
@@ -333,12 +301,10 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 				  fraction: 1.0];
 }
 
-
 - (NSR) rectForCloseButton
 {
 	NSR		closeButtonRect;
 	NSImage*	closeButtonImage = nil;
-
 
 	// Size
 	
@@ -356,7 +322,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	}
 	
 	closeButtonRect.size = [closeButtonImage size];
-
 
 	// Origin
 	
@@ -384,13 +349,12 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	
 	return closeButtonRect;
 }
-
 - (BOOL) pointInCloseButton: (NSP) point
 {
 	BOOL	pointInCloseButton	= NO;
 	NSR  closeButtonRect		= [self rectForCloseButton];
 	NSP	rectOrigin			= closeButtonRect.origin;
-	NSSize	rectSize			= closeButtonRect.size;
+	NSSZ	rectSize			= closeButtonRect.size;
 	
 	if (point.x >= rectOrigin.x && point.x <= rectOrigin.x + rectSize.width && point.y >= rectOrigin.y && point.y <= rectOrigin.y + rectSize.height)
 	{
@@ -400,9 +364,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	return pointInCloseButton;
 }
 
-
 #pragma mark -
-
 - (void) drawLabelInRect: (NSR) rect
 {
 	if (label != nil)
@@ -413,8 +375,8 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		[labelAttributes setValue: [NSFont systemFontOfSize: 11] forKey: NSFontAttributeName];
 		[labelAttributes setValue: (selected ? [NSColor blackColor] : [NSColor colorWithCalibratedWhite:0.2f alpha:1.0f]) forKey:NSForegroundColorAttributeName];
 		
-		NSString*	stringToDraw	= [label truncatedToWidth: rect.size.width withAttributes: labelAttributes];
-		//NSSize		stringSize		= [stringToDraw sizeWithAttributes: labelAttributes];
+		NSS*	stringToDraw	= [label truncatedToWidth: rect.size.width withAttributes: labelAttributes];
+		//NSSZ		stringSize		= [stringToDraw sizeWithAttributes: labelAttributes];
 		NSP		drawPoint		= NSMakePoint(rect.origin.x, rect.origin.y + drawY);
 		
 //	Use this if we want it centered
@@ -438,42 +400,33 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		[whiteShadow release];
 	}
 }
-
 #pragma mark -
 #pragma mark View Management
-
 - (void) removeFromSuperview
 {
 	 if (trackingRectTag > 0)
 	 {
 		  [self removeTrackingRect: trackingRectTag];
 	 }
-
 	 [super removeFromSuperview];
 }
-
 - (void) removeFromSuperviewWithoutNeedingDisplay
 {
 	 if (trackingRectTag > 0)
 	 {
 		  [self removeTrackingRect: trackingRectTag];
 	 }
-
 	 [super removeFromSuperviewWithoutNeedingDisplay];
 }
 
-
 #pragma mark -
 #pragma mark Event Management
-
 - (BOOL) acceptsFirstResponder
 {
 	return NO;
 }
 
-
 #pragma mark -
-
 - (void) resetTrackingRect
 {
 	if (trackingRectTag > 0)
@@ -500,9 +453,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	}
 }
 
-
 #pragma mark -
-
 - (void) mouseEntered: (NSEvent*) theEvent
 {
 	mouseOver = YES;
@@ -521,7 +472,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	[self setNeedsDisplay: YES];
 }
 
-
 - (void) mouseExited: (NSEvent*) theEvent
 {
 	mouseOver		= NO;
@@ -530,7 +480,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	
 	[self setNeedsDisplay: YES];
 }
-
 - (void) mouseDown: (NSEvent*) theEvent
 {
 	if ([theEvent type] == NSLeftMouseDown)
@@ -555,7 +504,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		}
 	}
 }
-
 - (void) mouseUp: (NSEvent*) theEvent
 {
 	if ([theEvent type] == NSLeftMouseUp)
@@ -574,10 +522,8 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	}
 }
 
-
 #pragma mark -
 #pragma mark Notifications
-
 - (void)sendCloseNotification {
 	NSMD *dic = [[NSMD alloc] init];
 	dic[@"sender"] = self;
@@ -586,11 +532,9 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 													  userInfo:dic];
 	[dic release];
 }
-
 - (void) frameDidChange: (NSNotification*) notification
 {
 	[self resetTrackingRect];
 }
-
 
 @end

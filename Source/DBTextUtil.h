@@ -3,7 +3,6 @@
 The DeskBrowse source code is the legal property of its developers, Joel Levin and Ian Elseth
 *****************************
 */
-
 /*
  -----------------------------------
  
@@ -16,14 +15,9 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
  
  -----------------------------------
  */
-
 #import <Cocoa/Cocoa.h>
 
-
 @interface DBTextUtil : NSObject {
-
 }
-
 + (BOOL)isTextUtilAvailable;
-
 @end

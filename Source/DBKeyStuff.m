@@ -3,12 +3,9 @@
 The DeskBrowse source code is the legal property of its developers, Joel Levin and Ian Elseth
 *****************************
 */
-
 #import "DBKeyStuff.h"
 #import <Carbon/Carbon.h>
-
 @implementation DBKeyStuff
-
 
 // --------------------------------------
 //
@@ -20,7 +17,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 //	At:	8:14 PM
 //
 // --------------------------------------
-
 + (unichar) characterForKeyCode: (unsigned short) keyCode
 {
 	UInt32				character	= kNullCharCode;
@@ -28,11 +24,9 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	UInt32				state		= 0;
 	const void*			keyboardLayoutData;
 	KeyboardLayoutRef	currentKeyBoardLayout;
-
 //	if(KLGetCurrentKeyboardLayout(&currentKeyBoardLayout) == noErr && KLGetKeyboardLayoutProperty(currentKeyBoardLayout, kKLKCHRData, &keyboardLayoutData) == noErr)
 //	{
 //		character = KeyTranslate(keyboardLayoutData, keyCode, &state);
-
 		switch(character)
 		{
 			case kPageUpCharCode:
@@ -77,10 +71,8 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 			}
 		}
 //	}
-
 	return character;
 }
-
 
 // --------------------------------------
 //
@@ -92,19 +84,16 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 //	At:	6:09 PM
 //
 // --------------------------------------
-
-+ (NSString*) stringForKeyCode: (unsigned short) keyCode modifiers: (NSUI) modifiers
++ (NSS*) stringForKeyCode: (unsigned short) keyCode modifiers: (NSUI) modifiers
 {
-	NSString*	result		= nil;
+	NSS*	result		= nil;
 	
-	NSString*	modString	= [self stringForModifiers: modifiers];
-	NSString*	keyString	= [self stringForKeyCode: keyCode];
-
+	NSS*	modString	= [self stringForModifiers: modifiers];
+	NSS*	keyString	= [self stringForKeyCode: keyCode];
 	result = [NSString stringWithFormat: @"%@%@", modString, keyString];
 			
 	return result;
 }
-
 
 // --------------------------------------
 //
@@ -116,10 +105,9 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 //	At:	8:14 PM
 //
 // --------------------------------------
-
-+ (NSString*) stringForKeyCode: (unsigned short) keyCode
++ (NSS*) stringForKeyCode: (unsigned short) keyCode
 {
-	NSString* stringForKey = nil;
+	NSS* stringForKey = nil;
 	
 	switch(keyCode)
 	{
@@ -444,7 +432,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	return stringForKey;
 }
 
-
 // --------------------------------------
 //
 //	stringForModifiers:
@@ -455,10 +442,9 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 //	At:	6:09 PM
 //
 // --------------------------------------
-
-+ (NSString*) stringForModifiers: (NSUI) modifiers
++ (NSS*) stringForModifiers: (NSUI) modifiers
 {
-	NSMutableString*	stringResult = [NSMutableString string];
+	NSMS*	stringResult = [NSMS string];
 	unichar				character;
 	
 	if(modifiers & NSShiftKeyMask)
@@ -487,6 +473,5 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		
 	return stringResult;
 }
-
 
 @end

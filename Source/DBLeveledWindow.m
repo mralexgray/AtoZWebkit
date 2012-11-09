@@ -3,14 +3,10 @@
 The DeskBrowse source code is the legal property of its developers, Joel Levin and Ian Elseth
 *****************************
 */
-
 #import "DBLeveledWindow.h"
-
 #import "DBWindowLevel.h"
 
-
 @implementation DBLeveledWindow
-
 
 - (id) initWithContentRect: (NSR) contentRect styleMask: (NSUI) styleMask backing: (NSBackingStoreType) backingType defer: (BOOL) flag
 {
@@ -23,16 +19,13 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	
 	return self;
 }
-
-- (void) dealloc
-{
-	[AZNOTCENTER removeObserver: self];
-	
-}
-
+//- (void) dealloc
+//{
+//	[AZNOTCENTER removeObserver: self];
+//	
+//}
 
 #pragma mark -
-
 
 - (void) setAboveMainWindowLevel: (BOOL) aboveMainWindowLevel
 {
@@ -40,7 +33,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	
 	[self windowLevelChanged: nil];
 }
-
 - (void) windowLevelChanged: (NSNotification*) notification
 {
 	NSInteger windowLevel = [DBWindowLevel windowLevel];
@@ -52,6 +44,5 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	
 	[self setLevel: windowLevel];
 }
-
 
 @end

@@ -3,12 +3,9 @@
 The DeskBrowse source code is the legal property of its developers, Joel Levin and Ian Elseth
 *****************************
 */
-
 #import "DBHotKeyTextField.h"
 
-
 @implementation DBHotKeyTextField
-
 
 // --------------------------------------
 //
@@ -20,7 +17,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 //	At:	8:40 PM
 //
 // --------------------------------------
-
 - (id) initWithCoder: (NSCoder*) coder
 {
 	if(self = [super initWithCoder: coder])
@@ -30,7 +26,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	
 	return self;
 }
-
 
 // --------------------------------------
 //
@@ -42,13 +37,11 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 //	At:	8:40 PM
 //
 // --------------------------------------
-
 - (BOOL) performKeyEquivalent: (NSEvent*) theEvent
 {
 	[self keyDown: theEvent];
 	return YES;
 }
-
 
 // --------------------------------------
 //
@@ -60,7 +53,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 //	At:	8:40 PM
 //
 // --------------------------------------
-
 - (void) keyDown: (NSEvent*) theEvent
 {
 	if([theEvent type] == NSKeyDown)
@@ -73,7 +65,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	}
 }
 
-
 // --------------------------------------
 //
 //	keyCode
@@ -84,7 +75,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 //	At:	8:38 PM
 //
 // --------------------------------------
-
 - (UInt32) keyCode
 {
 	if(![[DBKeyStuff stringForKeyCode: iKeyCode] length] > 0)
@@ -94,7 +84,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	
 	return iKeyCode;
 }
-
 
 // --------------------------------------
 //
@@ -106,12 +95,10 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 //	At:	2:05 AM
 //
 // --------------------------------------
-
 - (void) setKeyCode: (UInt32) keyCode
 {
 	iKeyCode = keyCode;
 }
-
 
 // --------------------------------------
 //
@@ -123,7 +110,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 //	At:	8:38 PM
 //
 // --------------------------------------
-
 - (UInt32) modifiers
 {
 	if(![[DBKeyStuff stringForModifiers: iModifiers] length] > 0)
@@ -133,7 +119,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	
 	return iModifiers;
 }
-
 
 // --------------------------------------
 //
@@ -145,12 +130,10 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 //	At:	2:05 AM
 //
 // --------------------------------------
-
 - (void) setModifiers: (UInt32) modifiers
 {
 	iModifiers = modifiers;
 }
-
 
 // --------------------------------------
 //
@@ -162,13 +145,11 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 //	At:	8:38 PM
 //
 // --------------------------------------
-
-- (NSString*) stringRepresentation
+- (NSS*) stringRepresentation
 {
 	stringRep = [DBKeyStuff stringForKeyCode: iKeyCode modifiers: iModifiers];
 	
 	return stringRep;
 }
-
 
 @end

@@ -3,37 +3,27 @@
 The DeskBrowse source code is the legal property of its developers, Joel Levin and Ian Elseth
 *****************************
 */
-
 #import "DBSymbolicHotKeyController.h"
-
 
 @interface SymbolicHotKeyState : NSObject
 {
 	BOOL mAllWindowsEnabled, mAllWindowsSlowEnabled, mAppWindowsEnabled, mAppWindowsSlowEnabled, mShowDesktopEnabled, mShowDesktopSlowEnabled, mShowDashboardEnabled, mShowDashboardSlowEnabled;
 }
-
 - (id) initWithCurrentState;
-
 - (void) restore;
-
 @end
 
-
-
 @implementation DBSymbolicHotKeyController
-
 
 + (id) symbolicHotKeyController
 {
 	return [[[DBSymbolicHotKeyController alloc] init] autorelease];
 }
-
 - (void) dealloc
 {
 	[mSavedHotKeyState release];
 	
 }
-
 
 - (void) disableAllHotKeys
 {
@@ -46,7 +36,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	[[SymbolicHotKey showDashboardSymbolicHotKey]			setEnabled: NO];
 	[[SymbolicHotKey showDashboardSlowSymbolicHotKey]		setEnabled: NO];
 }
-
 - (void) enableAllHotKeys
 {
 	[[SymbolicHotKey allWindowsSymbolicHotKey]				setEnabled: YES];
@@ -59,7 +48,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	[[SymbolicHotKey showDashboardSlowSymbolicHotKey]		setEnabled: YES];
 }
 
-
 - (void) saveHotKeyState
 {
 	if (mSavedHotKeyState != nil)
@@ -70,19 +58,14 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	
 	mSavedHotKeyState = [[SymbolicHotKeyState alloc] initWithCurrentState];
 }
-
 - (void) restoreHotKeyState
 {
 	[mSavedHotKeyState restore];
 }
 
-
 @end
 
-
-
 @implementation SymbolicHotKeyState
-
 
 - (id) initWithCurrentState
 {
@@ -100,7 +83,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	
 	return self;
 }
-
 - (void) restore
 {
 	[[SymbolicHotKey allWindowsSymbolicHotKey]				setEnabled: mAllWindowsEnabled];
@@ -113,10 +95,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	[[SymbolicHotKey showDashboardSlowSymbolicHotKey]		setEnabled: mShowDashboardSlowEnabled];
 }
 
-
 @end
-
-
 
 enum
 {
@@ -129,12 +108,9 @@ enum
 	kCGSWindowVousShowDashboardHotKey		= 62,	// Dashboard
 	kCGSWindowVousShowDashboardSlowHotKey	= 63	// Dashboard slow
 };
-
 extern char CGSIsSymbolicHotKeyEnabled(int32_t key);
 extern char CGSSetSymbolicHotKeyEnabled(int32_t key, unsigned char enabled);
-
 @implementation SymbolicHotKey
-
 
 - (id) initWithSymbolicHotKeyType: (SymbolicHotKeyType) symbolicHotKeyType
 {
@@ -154,53 +130,43 @@ extern char CGSSetSymbolicHotKeyEnabled(int32_t key, unsigned char enabled);
 	return self;
 }
 
-
 + (id) symbolicHotKeyWithType: (SymbolicHotKeyType) symbolicHotKeyType
 {
 	return [[[[self class] alloc] initWithSymbolicHotKeyType: symbolicHotKeyType] autorelease];
 }
 
-
 + (id) allWindowsSymbolicHotKey
 {
 	return [[self class] symbolicHotKeyWithType: SymbolicHotKeyTypeAllWindows];
 }
-
 + (id) allWindowsSlowSymbolicHotKey
 {
 	return [[self class] symbolicHotKeyWithType: SymbolicHotKeyTypeAllWindowsSlow];
 }
-
 + (id) applicationWindowsSymbolicHotKey
 {
 	return [[self class] symbolicHotKeyWithType: SymbolicHotKeyTypeApplicationWindows];
 }
-
 + (id) applicationWindowsSlowSymbolicHotKey
 {
 	return [[self class] symbolicHotKeyWithType: SymbolicHotKeyTypeApplicationWindowsSlow];
 }
-
 + (id) showDesktopSymbolicHotKey
 {
 	return [[self class] symbolicHotKeyWithType: SymbolicHotKeyTypeShowDesktop];
 }
-
 + (id) showDesktopSlowSymbolicHotKey
 {
 	return [[self class] symbolicHotKeyWithType: SymbolicHotKeyTypeShowDesktopSlow];
 }
-
 + (id) showDashboardSymbolicHotKey
 {
 	return [[self class] symbolicHotKeyWithType: SymbolicHotKeyTypeShowDashboard];
 }
-
 + (id) showDashboardSlowSymbolicHotKey
 {
 	return [[self class] symbolicHotKeyWithType: SymbolicHotKeyTypeShowDashboardSlow];
 }
-
 
 - (BOOL) enabled
 {
@@ -208,12 +174,10 @@ extern char CGSSetSymbolicHotKeyEnabled(int32_t key, unsigned char enabled);
 	
 	return enabled;
 }
-
 - (void) setEnabled: (BOOL) enabled
 {
 	CGSSetSymbolicHotKeyEnabled(mSymbolicHotKey, (unsigned char) enabled);
 }
-
 
 - (int32_t) symbolicHotKeyForType: (SymbolicHotKeyType) symbolicHotKeyType
 {
@@ -236,6 +200,5 @@ extern char CGSSetSymbolicHotKeyEnabled(int32_t key, unsigned char enabled);
 	
 	return symbolicHotKey;
 }
-
 
 @end

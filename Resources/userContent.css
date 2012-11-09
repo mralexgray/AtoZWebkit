@@ -3,13 +3,11 @@
  * Rules without !important are overruled by author rules if the
  * author sets any.  Rules with !important overrule author rules.
  */
-
 /* You can find the latest version of this ad blocking css at:
  * http://www.floppymoose.com
  * hides many ads by preventing display of images that are inside
  * links when the link HREF contans certain substrings.
  */
-
 A:link[HREF*="javascript:void"]  IMG, 
 A:link[HREF*="addata"]  IMG, 
 A:link[HREF*="ad."]  IMG, 
@@ -42,7 +40,6 @@ A:link[HREF*="realgmtix.phtml"]  IMG,
 A:link[HREF*="BurstingPipe"]  IMG,
 A:link[HREF*="ebayobjects"]  IMG,
 A:link[HREF*="tracksponsor."]  IMG { display: none ! important } 
-
 /* disable ad iframes */
 IFRAME[SRC*="addata"],
 IFRAME[SRC*="ad."],
@@ -72,9 +69,7 @@ IFRAME[SRC*="connextra."],
 IFRAME[ID*="merchandisingMERC"],
 IFRAME[SRC*="tracksponsor."]  { display: none ! important } 
 
-
 /* miscellaneous different blocking rules to block some stuff that gets through */
-
 A:link[onmouseover*="AdSolution"] IMG,
 *[class=sponsors],
 *[class=sp_links],
@@ -86,9 +81,7 @@ A:link[onmouseover*="AdSolution"] IMG,
 *[ID=contextualLinks],
 IMG[SRC*=".msads."] { display: none ! important } 
 
-
 /* turning some false positives back off */
-
 A:link[HREF*="/add"]  IMG, 
 A:link[HREF*="/adsl"] IMG,
 A:link[HREF*="thread."] IMG,
@@ -101,9 +94,7 @@ IFRAME[SRC*="load."],
 IFRAME[SRC*="loads."],
 A:link[HREF*="click.mp3"] IMG { display: inline ! important }
 
-
 /* 
  * For more examples see http://www.mozilla.org/unix/customizing.html
  */
-
 

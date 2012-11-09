@@ -4,17 +4,13 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 *****************************
 */
 
-
 #import "DBActionMenuItem.h"
 
-
 @implementation DBActionMenuItem
-
 - (id)initWithFrame:(NSR)frame {
 	 return [self initWithFrame:frame label:@""];
 }
-
-- (id)initWithFrame:(NSR)frame label:(NSString *)aLabel {
+- (id)initWithFrame:(NSR)frame label:(NSS *)aLabel {
 	self = [super initWithFrame:frame];
 	if (self) {
 		[self setLabel:aLabel];
@@ -22,15 +18,12 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	}
 	return self;
 }
-
 - (void)dealloc {
 	[label release];
 }
-
 - (BOOL)acceptsFirstResponder {
 	return YES;
 }
-
 - (void)drawRect:(NSR)rect {
 	NSMD *textStatic = [[NSMD alloc] init];
 	textStatic[NSForegroundColorAttributeName] = [NSColor colorWithDeviceWhite:1.0 alpha:1.0];
@@ -40,10 +33,8 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	
 	[textStatic release];
 }
-
 - (void)mouseEntered:(NSEvent *)theEvent {
 }
-
 - (void)mouseDown:(NSEvent *)theEvent {
 	NSMD *dic = [[NSMD alloc] init];
 	dic[@"sender"] = label;
@@ -52,14 +43,11 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 													  userInfo:dic];
 	[dic release];
 }
-
-- (void)setLabel:(NSString *)aLabel {
+- (void)setLabel:(NSS *)aLabel {
 	[label release];
 	label = aLabel;
 }
-
-- (NSString *)label {
+- (NSS *)label {
 	return label;
 }
-
 @end

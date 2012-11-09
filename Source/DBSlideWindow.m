@@ -3,19 +3,15 @@
 The DeskBrowse source code is the legal property of its developers, Joel Levin and Ian Elseth
 *****************************
 */
-
 #import "DBSlideWindow.h"
-
 @implementation DBSlideWindow
 @synthesize controller, currentDragMode, dragStartLocation;
 @synthesize snapTolerance, snapping, snapsToEdges, clickDistanceFromWindowEdge, minWidth, padding;
-
 typedef NSInteger CGSConnection, CGSWindow;
 extern CGSConnection _CGSDefaultConnection();
 extern OSStatus CGSGetWindowTags  (const CGSConnection cid, const CGSWindow wid, NSInteger *tags, NSInteger thirtyTwo);
 extern OSStatus CGSSetWindowTags  (const CGSConnection cid, const CGSWindow wid, NSInteger *tags, NSInteger thirtyTwo);
 extern OSStatus CGSClearWindowTags(const CGSConnection cid, const CGSWindow wid, NSInteger *tags, NSInteger thirtyTwo);
-
 - (void)setSticky:(BOOL)flag
 {
 	CGSConnection connectionID = _CGSDefaultConnection();
@@ -27,51 +23,51 @@ extern OSStatus CGSClearWindowTags(const CGSConnection cid, const CGSWindow wid,
 		else		CGSClearWindowTags(connectionID, winNumber, theTags, 32);
 	}
 }
-
 #pragma mark -
-
 - (id)initWithContentRect:(NSR)contentRect styleMask:(NSUI)aStyle backing:(NSBackingStoreType)bufferingType defer:(BOOL)flag
 {
-		if (!(self = [super initWithContentRect:contentRect styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:NO])) return nil;
-		[self setLevel:NSNormalWindowLevel];
-		[self setOpaque:YES];
-	[self setBackgroundColor:[NSColor redColor]];
+	if (!(self = [super initWithContentRect:contentRect styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:NO])) return nil;
+	[self setLevel:NSNormalWindowLevel];
+	[self setOpaque:YES];
+
+	NSC* c = [NSUserDefaults standardUserDefaults][kSliderBGColor] ?: RANDOMCOLOR;
+
+	[self setBackgroundColor:c];//[ leatherTintedWithColor:RANDOMCOLOR]];// blackColor]];
 	[self setAlphaValue:1.0];
 	[self setHasShadow:YES];
 	minWidth = 400.0;
 	 return self;
 }
 
-
+-(void) setBackgroundColor:(NSColor *)color
+{
+	_backgroundColor = [NSColor leatherTintedWithColor:color];
+	[NSUserDefaults standardUserDefaults][kSliderBGColor] = color;
+}
 
 #pragma mark -
-
 - (BOOL)canBecomeKeyWindow
 {
 	return YES;
 }
-
 - (BOOL) canBecomeMainWindow
 {
 	return YES;
 }
 
-
 #pragma mark -
-
 /*
  * 
  *	Mouse event handlers
  *	Since we don't have a titlebar, we handle window-dragging ourselves.
  *
  */
-
 - (void) mouseDown: (NSEvent*) theEvent
 {
 	currentDragMode		= DragModeNone;
 	 dragStartLocation	= [theEvent locationInWindow];
 	NSP origin		= [self frame].origin;
-	NSSize	size		= [self frame].size;
+	NSSZ	size		= [self frame].size;
 		
 	if (((origin.x + dragStartLocation.x) < ((origin.x + size.width) - 15) && (origin.x + dragStartLocation.x) >= origin.x) && (((origin.y + dragStartLocation.y) <= (origin.y + 70))))
 	{
@@ -117,27 +113,26 @@ extern OSStatus CGSClearWindowTags(const CGSConnection cid, const CGSWindow wid,
 		}
 	}
 }
-
 - (void)mouseDragged:(NSEvent *)theEvent
 {
 	 if ([theEvent type] == NSLeftMouseDragged) {
 		  NSP origin;
-		NSSize	size;
-		NSSize	minSize;
+		NSSZ	size;
+		NSSZ	minSize;
 		  NSP newLocation;
 		
 		NSR		screenRect			= [[self screen] frame];
 		
 		NSR		newFrameRect		= [self frame];
 		NSP		newOrigin			= [self frame].origin;
-		NSSize		newSize				= [self frame].size;
+		NSSZ		newSize				= [self frame].size;
 		
 		  origin							= [self frame].origin;
 		size							= [self frame].size;
 		minSize							= [self minSize];
 		  newLocation						= [theEvent locationInWindow];
 		
-		NSSize		distanceMouseMoved = NSMakeSize(newLocation.x - size.width + clickDistanceFromWindowEdge.width, newLocation.y - clickDistanceFromWindowEdge.height);
+		NSSZ		distanceMouseMoved = NSMakeSize(newLocation.x - size.width + clickDistanceFromWindowEdge.width, newLocation.y - clickDistanceFromWindowEdge.height);
 		
 		  
 		switch (currentDragMode)
@@ -278,7 +273,6 @@ extern OSStatus CGSClearWindowTags(const CGSConnection cid, const CGSWindow wid,
 		[self setFrame: newFrameRect display: YES];
 	 }
 }
-
 - (void) mouseUp: (NSEvent*) theEvent
 {
 	[self saveFrame];
@@ -286,9 +280,7 @@ extern OSStatus CGSClearWindowTags(const CGSConnection cid, const CGSWindow wid,
 	currentDragMode	= DragModeNone;
 }
 
-
 #pragma mark -
-
 - (void) saveFrame
 {
 	NSUserDefaults* userDefaults	= [NSUserDefaults standardUserDefaults];
@@ -300,30 +292,25 @@ extern OSStatus CGSClearWindowTags(const CGSConnection cid, const CGSWindow wid,
 	[userDefaults setValue: width	forKey:	kSlideWindowWidth];
 	[userDefaults setValue: height	forKey:	kSlideWindowHeight];
 }
-
 - (void) loadFrame
 {
 	NSUserDefaults* userDefaults	= [NSUserDefaults standardUserDefaults];
 	CGFloat			y				= [userDefaults[kSlideWindowY]		floatValue];
 	CGFloat			width			= [userDefaults[kSlideWindowWidth]	floatValue];
 	CGFloat			height			= [userDefaults[kSlideWindowHeight]	floatValue];
-
 	NSR			newFrame		= NSMakeRect(-width, y, width, height);
 	
 	[self setFrame: newFrame display: YES animate: NO];
 }
 
-
 #pragma mark -
-
 /* Accessor methods */
-
 - (void) setOnScreen: (BOOL) flag
 {
 	NSR	frame		= [self frame];
 	NSR	newFrame	= NSZeroRect;
 	NSP	origin		= frame.origin;
-	NSSize	size		= frame.size;
+	NSSZ	size		= frame.size;
 	
 	if (flag)
 	{
@@ -343,19 +330,14 @@ extern OSStatus CGSClearWindowTags(const CGSConnection cid, const CGSWindow wid,
 		[self setIsVisible: flag];
 	}
 }
-
 //- (void)setController:(id)aController {
 //	[controller release];
 //	controller = [aController retain];
 //}
 
-
 - (void)dealloc
 {
 	[controller release];
 }
-
 @end
-
-
 

@@ -3,12 +3,9 @@
 The DeskBrowse source code is the legal property of its developers, Joel Levin and Ian Elseth
 *****************************
 */
-
 #import "DBStatusItemController.h"
 
-
 @implementation DBStatusItemController
-
 - (id)initWithController:(id)controller {
 	self = [super init];
 	if (self) {
@@ -22,7 +19,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		[_item setImage:[NSImage imageNamed:@"DeskBrowse_Small"]];
 		
 		// load the archived menu and use it, fixing the bug about it not showing when no main menubar is shown
-		NSString *path = [[NSBundle mainBundle] pathForResource:@"main" ofType:@"dbmenu"];
+		NSS *path = [[NSBundle mainBundle] pathForResource:@"main" ofType:@"dbmenu"];
 		[_item setMenu:[NSKeyedUnarchiver unarchiveObjectWithFile:path]];
 		
 		[_item setHighlightMode:YES];
@@ -32,13 +29,11 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	}
 	return self;
 }
-
 - (void)dealloc {
 	[_controller release];
 	[[NSStatusBar systemStatusBar] removeStatusItem:_item];
 	[_item release];
 }
-
 - (NSMenu *)standardMenu {
 	// get the current menu
 	NSMenu *menu = [[[NSApplication sharedApplication] mainMenu] copy];
@@ -60,8 +55,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	
 //	[slide autorelease];
 //	[websp autorelease];
-
 	return menu;// autorelease];
 }
-
 @end

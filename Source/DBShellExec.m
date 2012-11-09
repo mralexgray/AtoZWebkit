@@ -3,23 +3,19 @@
 The DeskBrowse source code is the legal property of its developers, Joel Levin and Ian Elseth
 *****************************
 */
-
 #import "DBShellExec.h"
 
-
 @implementation DBShellExec
-
-+ (NSString *)executeShellCommand:(NSString *)command {
-	NSString *tmp = @(tmpnam(NULL));
++ (NSS *)executeShellCommand:(NSS *)command {
+	NSS *tmp = @(tmpnam(NULL));
 	// set up the command
-	NSString *com = [NSString stringWithFormat:@"%@ > %@", command, tmp];
+	NSS *com = [NSString stringWithFormat:@"%@ > %@", command, tmp];
 	// execute the command
 	system([com UTF8String]);
 	// get the result
-	NSString *path = [NSString stringWithFormat:@"%@", tmp];
-	NSString *result = [NSString stringWithContentsOfFile:path];
+	NSS *path = [NSString stringWithFormat:@"%@", tmp];
+	NSS *result = [NSString stringWithContentsOfFile:path];
 	[[NSFileManager defaultManager] removeFileAtPath:path handler:nil];
 	return result;
 }
-
 @end

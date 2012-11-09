@@ -4,13 +4,9 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 *****************************
 */
 
-
 #import <Cocoa/Cocoa.h>
-
 
 @interface DBBezelButtonCell : NSButtonCell
 {
-
 }
-
 @end

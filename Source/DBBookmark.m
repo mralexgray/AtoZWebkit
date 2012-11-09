@@ -3,25 +3,18 @@
 The DeskBrowse source code is the legal property of its developers, Joel Levin and Ian Elseth
 *****************************
 */
-
 #import "DBBookmark.h"
-
-
 
 #import "DBBookmarkActionCell.h"
 #import "DBBookmarkMenuCell.h"
 
-
-NSString*	kDBLoadURLNotification			= @"DBLoadURLNotification";
-NSString*	kDBDeleteBookmarkNotification	= @"DBDeleteBookmarkNotification";
-
-NSString*	kBookmarkInfoURLStringKey		= @"URLString";
-NSString*	kBookmarkInfoTitleKey			= @"TitleString";
-NSString*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
-
+NSS*	kDBLoadURLNotification			= @"DBLoadURLNotification";
+NSS*	kDBDeleteBookmarkNotification	= @"DBDeleteBookmarkNotification";
+NSS*	kBookmarkInfoURLStringKey		= @"URLString";
+NSS*	kBookmarkInfoTitleKey			= @"TitleString";
+NSS*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 
 @implementation DBBookmark
-
 
 - (id) initWithDictionary: (NSD*) dictionary
 {
@@ -35,9 +28,9 @@ NSString*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 	}
 	else
 	{
-		NSString*	urlString	= dictionary[kBookmarkInfoURLStringKey];
+		NSS*	urlString	= dictionary[kBookmarkInfoURLStringKey];
 		NSURL*		url			= nil;
-		NSString*	title		= dictionary[kBookmarkInfoTitleKey];
+		NSS*	title		= dictionary[kBookmarkInfoTitleKey];
 		
 		if (urlString != nil)
 		{
@@ -49,8 +42,7 @@ NSString*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 	
 	return self;
 }
-
-- (id) initWithURL: (NSURL*) URL title: (NSString*) title
+- (id) initWithURL: (NSURL*) URL title: (NSS*) title
 {
 	NSR newFrame = NSMakeRect(0, 0, 100, 15);
 	
@@ -62,16 +54,13 @@ NSString*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 	
 	return self;
 }
-
 - (void) dealloc
 {
 	[mURL release];
 	[mTitle release];
 	
 }
-
 #pragma mark -
-
 - (id) copyWithZone: (NSZone*) zone
 {
 	DBBookmark* copyOfSelf = [[DBBookmark alloc] init];
@@ -81,26 +70,21 @@ NSString*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 	
 	return copyOfSelf;
 }
-
 #pragma mark -
-
 - (void) load
 {
 	if (mURL != nil)
 	{
-		NSDictionary* userInfo = @{kBookmarkInfoURLStringKey: [mURL absoluteString]};
+		NSD* userInfo = @{kBookmarkInfoURLStringKey: [mURL absoluteString]};
 		
 		[AZNOTCENTER postNotificationName: kDBLoadURLNotification object: self userInfo: userInfo];
 	}
 }
-
 - (void) remove
 {
 	[AZNOTCENTER postNotificationName: kDBDeleteBookmarkNotification object: self userInfo: nil];
 }
-
 #pragma mark -
-
 - (NSMD*) dictionary
 {
 	NSMD* dictionary = nil;
@@ -119,12 +103,10 @@ NSString*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 	
 	return dictionary;
 }
-
 - (NSURL*) URL
 {
 	return mURL;
 }
-
 - (void) setURL: (NSURL*) url
 {
 	if (url != mURL)
@@ -134,24 +116,20 @@ NSString*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 		mURL = url;
 	}
 }
-
-- (NSString*) URLString
+- (NSS*) URLString
 {
 	return [mURL absoluteString];
 }
-
-- (void) setURLString: (NSString*) urlString
+- (void) setURLString: (NSS*) urlString
 {
 	[mURL release];
 	mURL = [NSURL URLWithString: urlString];
 }
-
-- (NSString*) title
+- (NSS*) title
 {
 	return mTitle;
 }
-
-- (void) setTitle: (NSString*) title
+- (void) setTitle: (NSS*) title
 {
 	if (title != mTitle)
 	{
@@ -162,16 +140,13 @@ NSString*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 	}
 }
 
-
 // -----------------------------
 //
 //	Bookmark Bar related
 //
 // -----------------------------
-
 #pragma mark -
 #pragma mark Bookmark Bar
-
 - (id <DBBookmarkBarCell>) cell
 {
 	if (mBookmarkBarCell == nil)
@@ -184,9 +159,7 @@ NSString*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 	return mBookmarkBarCell;
 }
 
-
 #pragma mark -
-
 
 - (void) setUpMenu
 {
@@ -204,18 +177,16 @@ NSString*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 	[deleteMenuItem release];
 }
 
-
 #pragma mark -
 #pragma mark Sorting
-
 - (NSComparisonResult) compare: (DBBookmark*) otherBookmark
 {
 	NSComparisonResult result = NSOrderedSame;
 	
 	if (otherBookmark != nil)
 	{
-		NSString*	stringToCompare1	= mTitle;
-		NSString*	stringToCompare2	= [otherBookmark title];
+		NSS*	stringToCompare1	= mTitle;
+		NSS*	stringToCompare2	= [otherBookmark title];
 		
 		if (stringToCompare1 == nil)
 		{
@@ -233,24 +204,20 @@ NSString*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 	return result;
 }
 
-
 @end
 
-
 #pragma mark -
-
 @implementation BookmarkFolder
-
 
 - (id) initWithDictionary: (NSD*) dictionary
 {
-	NSString* title = dictionary[kBookmarkInfoTitleKey];
+	NSS* title = dictionary[kBookmarkInfoTitleKey];
 	
 	if (self = [super initWithURL: nil title: title])
 	{
 		NSArray*		subBookmarks		= dictionary[kBookmarkInfoMoreBookmarksKey];
 		NSEnumerator*	bookmarkEnumerator	= [subBookmarks objectEnumerator];
-		NSDictionary*	currentInfoDict		= nil;
+		NSD*	currentInfoDict		= nil;
 		
 		while ((currentInfoDict = [bookmarkEnumerator nextObject]) != nil)
 		{
@@ -264,16 +231,13 @@ NSString*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 	
 	return self;
 }
-
 - (void) dealloc
 {
 	[mContainedBookmarks release];
 	
 }
 
-
 #pragma mark -
-
 - (id) copyWithZone: (NSZone*) zone
 {
 	BookmarkFolder* copyOfSelf = [[BookmarkFolder alloc] init];
@@ -285,9 +249,7 @@ NSString*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 	return copyOfSelf;
 }
 
-
 #pragma mark -
-
 - (NSMD*) dictionary
 {
 	NSMD*	dictionary		= [super dictionary];
@@ -301,7 +263,7 @@ NSString*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 		
 		while ((currentBookmark = [bookmarkEnumerator nextObject]) != nil)
 		{
-			NSDictionary* bookmarkDictionaryInfo = [currentBookmark dictionary];
+			NSD* bookmarkDictionaryInfo = [currentBookmark dictionary];
 			
 			if (bookmarkDictionaryInfo != nil)
 			{
@@ -318,22 +280,17 @@ NSString*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 	return dictionary;
 }
 
-
 #pragma mark -
-
 - (unsigned) numberOfBookmarks
 {
 	return [mContainedBookmarks count];
 }
 
-
 #pragma mark -
-
 - (NSA*) subBookmarks
 {
 	return mContainedBookmarks;
 }
-
 - (void) setSubBookmarks: (NSA*) bookmarks
 {
 	if (bookmarks != mContainedBookmarks)
@@ -344,9 +301,7 @@ NSString*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 	}
 }
 
-
 #pragma mark -
-
 - (void) addBookmark: (DBBookmark*) bookmark
 {
 	if (mContainedBookmarks == nil)
@@ -360,7 +315,6 @@ NSString*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 		[self reloadCellMenu];
 	}
 }
-
 - (void) removeBookmark: (DBBookmark*) bookmark
 {
 	if (bookmark != nil && mContainedBookmarks != nil)
@@ -369,9 +323,7 @@ NSString*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 		[self reloadCellMenu];
 	}
 }
-
 #pragma mark -
-
 
 - (id <DBBookmarkBarCell>) cell
 {
@@ -389,7 +341,6 @@ NSString*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 	
 	return mBookmarkBarCell;
 }
-
 - (void) reloadCellMenu
 {
 	NSMenu*			cellMenu			= [[NSMenu alloc] initWithTitle: @""];
@@ -412,6 +363,5 @@ NSString*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 	
 	[cellMenu release];
 }
-
 
 @end

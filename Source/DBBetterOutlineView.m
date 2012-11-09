@@ -3,12 +3,9 @@
 The DeskBrowse source code is the legal property of its developers, Joel Levin and Ian Elseth
 *****************************
 */
-
 #import "DBBetterOutlineView.h"
 
-
 @implementation DBBetterOutlineView
-
 
 //---------------------------------------------------------------
 //
@@ -18,11 +15,10 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 //		editing the next row in the same column
 //
 //---------------------------------------------------------------
-
 - (void) textDidEndEditing: (NSNotification*) notification
 {
-	NSDictionary*	userInfo		= [notification userInfo];
-	NSString*		textMovementKey = @"NSTextMovement";
+	NSD*	userInfo		= [notification userInfo];
+	NSS*		textMovementKey = @"NSTextMovement";
 	NSInteger				whyEnd			= [userInfo[textMovementKey] intValue];
 	BOOL			calledSuper		= NO;
 	
@@ -33,12 +29,10 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		{
 			NSMD* newUserInfo = [userInfo mutableCopy];
 			newUserInfo[textMovementKey] = @(NSOtherTextMovement);
-
 			newNotification = [NSNotification notificationWithName: [notification name] object: [notification object] userInfo: newUserInfo];
 			
 			[newUserInfo release];
 		}
-
 		[super textDidEndEditing: newNotification];
 		
 		calledSuper = YES;
@@ -46,13 +40,11 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		[[self window] makeFirstResponder: self];
 	}
 
-
 	 if (!calledSuper)
 	 {
 		[super textDidEndEditing: notification];
 	 }
 }
-
 - (void) editFirstColumnOfSelectedRow
 {
 	unsigned selectedRow	= [self selectedRow];
@@ -69,6 +61,5 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		}
 	}
 }
-
 
 @end

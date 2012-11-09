@@ -3,14 +3,10 @@
 The DeskBrowse source code is the legal property of its developers, Joel Levin and Ian Elseth
 *****************************
 */
-
 #import "DBViewSourceWindowController.h"
-
 static NSInteger coloring = 0;
-
 @implementation DBViewSourceWindowController
-
-- (id) initWithWindowNibName: (NSString*) windowNibName {
+- (id) initWithWindowNibName: (NSS*) windowNibName {
 	
 	if(self = [super initWithWindowNibName: windowNibName])
 	{
@@ -22,18 +18,17 @@ static NSInteger coloring = 0;
 	
 	return self;
 }
-
-- (void)dealloc {
-	[sourceCode release];
-}
-
+//- (void)dealloc {
+//	[sourceCode release];
+//}
 - (IBAction) showWindow: (id) sender
 {
 	if(sourceCode && sourceView)
 	{
-		[sourceView setFont:[NSFont fontWithName:@"Monaco" size:9.0]];
+		[AtoZ sharedInstance];
+		[sourceView setFont:[NSFont fontWithName:@"UbuntuMono-Bold" size:10]];//@"Monaco" size:9.0]];
 		[sourceView setString:sourceCode];
-		[[sourceView textStorage] setDelegate:self];
+		[[sourceView textStorage] setDelegate:(id)self];
 		
 		[status setHidden:NO];
 		[status startAnimation:nil];
@@ -48,19 +43,17 @@ static NSInteger coloring = 0;
 	
 	[super showWindow: sender];
 }
-
 //	Feel free to change the style of this method as you like, since you made the class
 - (IBAction)saveCode:(id)sender {
 	NSSavePanel* savePanel = [NSSavePanel savePanel];	
 	[savePanel beginSheetForDirectory: nil file: nil modalForWindow: [self window] modalDelegate: self didEndSelector: @selector(savePanelDidEnd:returnCode:contextInfo:) contextInfo: nil];
 }
-
 //	Feel free to change the style of this method as you like, since you made the class
 - (void) savePanelDidEnd: (NSSavePanel*) sheet returnCode: (NSI) returnCode contextInfo: (void*) contextInfo
 {
 	if (sheet != nil && returnCode == NSOKButton)
 	{
-		NSString* filePath = [sheet filename];
+		NSS* filePath = [sheet filename];
 		
 		if (filePath != nil)
 		{
@@ -68,13 +61,11 @@ static NSInteger coloring = 0;
 		}
 	}
 }
-
 - (IBAction)refreshTheSourceCode:(id)sender {
 	//
 }
-
-- (void)setSourceCode:(NSString *)aStr { 
-	[sourceCode release];
+- (void)setSourceCode:(NSS *)aStr { 
+//	[sourceCode release];
 	sourceCode = aStr;
 	
 	if(sourceCode && sourceView)
@@ -82,11 +73,9 @@ static NSInteger coloring = 0;
 		[sourceView setString:sourceCode];
 	}
 }
-
-- (NSString *)sourceCode {
+- (NSS *)sourceCode {
 	return sourceCode;
 }
-
 - (void)doColorSyntax {
 	if (coloring == 0) {
 		coloring = 1;
@@ -94,11 +83,11 @@ static NSInteger coloring = 0;
 		return;
 	}
 	
-	NSDictionary *defaultColorAtts  = @{@"color": [NSColor blueColor]};
-	 NSDictionary *commentColorAtts  = @{@"color": [NSColor grayColor]};
-	 NSDictionary *codeColorAtts	  = @{@"color": [NSColor redColor]};
-	 
-	 NSString *source = [sourceView string];
+	NSD *defaultColorAtts  	= @{@"color": [NSColor blueColor]};
+	NSD *commentColorAtts  	= @{@"color": [NSColor grayColor]};
+	NSD *codeColorAtts	  	= @{@"color": [NSColor redColor]};
+
+	 NSS *source = [sourceView string];
 	 NSScanner *scanner = [NSScanner scannerWithString: source];
 	
 	NSRange range = NSMakeRange(0, [source length]);
@@ -106,9 +95,9 @@ static NSInteger coloring = 0;
 	 [[sourceView textStorage] removeAttribute:NSForegroundColorAttributeName range:range];
 	 
 	 NSInteger ixLeft, ixRight;
-	 NSDictionary *attsToUse;
-	 NSString *tagType;
-	 NSString *tagTypeLong;
+	 NSD *attsToUse;
+	 NSS *tagType;
+	 NSS *tagTypeLong;
 	
 	 while (![scanner isAtEnd])
 	 {
@@ -164,7 +153,6 @@ static NSInteger coloring = 0;
 		[[sourceView textStorage] addAttribute:NSForegroundColorAttributeName value:attsToUse[@"color"] range:NSMakeRange(ixLeft, ixRight - ixLeft)];
 	 }
 }
-
 - (void)textStorageDidProcessEditing:(NSNotification *)notification {
 	if (coloring == 0) {
 		[status setHidden:NO];
@@ -174,15 +162,12 @@ static NSInteger coloring = 0;
 			  didEndSelector:@selector(coloringDone:)];
 	}
 }
-
-- (void)setTitle:(NSString *)title {
+- (void)setTitle:(NSS *)title {
 	[[sourceView window] setTitle:title];
 }
-
 - (void)coloringDone:(ThreadWorker *)tw {
 	coloring = 0;
 	
 	[status setHidden:YES];
 }
-
 @end
