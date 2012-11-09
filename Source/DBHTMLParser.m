@@ -62,8 +62,8 @@ NSString* kSpace			= @" ";
 	NSCharacterSet*	quotesCharacterSet	= [NSCharacterSet characterSetWithCharactersInString: kQuoteCharacters];
 	NSInteger				lengthOfHTMLString	= [HTMLString length];
 	NSInteger				lengthOfAOpen		= [kAOpen length];
-	NSInteger				lengthOfHREF		= [kHREF length];	
-	
+	NSInteger				lengthOfHREF		= [kHREF length];
+
 	while (![linkScanner isAtEnd])
 	{
 		NSString*	intoString				= nil;
@@ -135,8 +135,7 @@ NSString* kSpace			= @" ";
 				}
 			}
 		}
-		
-		
+
 		// Advance the scanner one character
 		
 		scanLocation = [linkScanner scanLocation];
@@ -168,8 +167,8 @@ NSString* kSpace			= @" ";
 {
 	NSMutableString* newString = [[HTMLString mutableCopy] autorelease];
 	NSRange	currentRange;
-	
-	
+
+
 	// Ampersand
 	while ((currentRange = [newString rangeOfString: [NSString stringWithFormat: @"%@%@%@", kHTMLCharStart, kAmpersandHTML, kHTMLCharEnd] options: NSCaseInsensitiveSearch]).location != NSNotFound)
 	{

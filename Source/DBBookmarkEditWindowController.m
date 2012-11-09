@@ -25,7 +25,7 @@ NSString* const kBookmarkEditWindowNibName = @"BookmarkEdit";
 		mBookmarkController	= bookmarkController;
 		mOutlineViewFont	= [NSFont systemFontOfSize: 10.0];
 		
-		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(reloadData) name: kBookmarksDidChangeNotification object: nil];
+		[AZNOTCENTER addObserver: self selector: @selector(reloadData) name: kBookmarksDidChangeNotification object: nil];
 	}
 	
 	return self;
@@ -33,7 +33,7 @@ NSString* const kBookmarkEditWindowNibName = @"BookmarkEdit";
 
 - (void) dealloc
 {
-	[[NSNotificationCenter defaultCenter] removeObserver: self];
+	[AZNOTCENTER removeObserver: self];
 	
 	[mOutlineDataSource release];
 	[mBookmarkController release];

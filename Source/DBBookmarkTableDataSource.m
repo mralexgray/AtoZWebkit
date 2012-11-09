@@ -154,7 +154,7 @@ NSString* const kBookmarkDragType	= @"DBBookmarkDragType";
 		[item setURLString: object];
 	}
 	
-	[[NSNotificationCenter defaultCenter] postNotificationName: kBookmarksDidChangeNotification object: mBookmarkController];
+	[AZNOTCENTER postNotificationName: kBookmarksDidChangeNotification object: mBookmarkController];
 }
 
 - (BOOL) outlineView: (NSOutlineView*) olv writeItems: (NSA*) items toPasteboard: (NSPasteboard*) pboard
@@ -203,7 +203,7 @@ NSString* const kBookmarkDragType	= @"DBBookmarkDragType";
 			[copy release];
 		}
 		
-		[[NSNotificationCenter defaultCenter] postNotificationName: kBookmarksDidChangeNotification object: mBookmarkController];
+		[AZNOTCENTER postNotificationName: kBookmarksDidChangeNotification object: mBookmarkController];
 		
 		[mDraggingBookmarks release];
 		mDraggingBookmarks	= nil;

@@ -217,8 +217,8 @@ pascal OSStatus HotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent
 	[keysField	setStringValue: [self currentSBKeyString]];
 	[keysField	setKeyCode:		sbKeyCode];
 	[keysField	setModifiers:	sbModifiers];
-	
-	
+
+
 	/*___________ Start listening for key events ___________*/
 	
 	[NSApp beginSheet: mainWindow modalForWindow: [NSApp keyWindow] modalDelegate: self didEndSelector: nil contextInfo: nil];
@@ -229,8 +229,8 @@ pascal OSStatus HotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent
 	[NSApp endSheet: mainWindow];
 	
 	/*___________ Stop listening for key events ___________*/
-	
-	
+
+
 	if(save)
 	{
 		UInt32 newKeyCode	= [keysField keyCode];
@@ -280,8 +280,8 @@ pascal OSStatus HotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent
 	[keysField	setStringValue: [self currentWBKeyString]];
 	[keysField	setKeyCode:		wbKeyCode];
 	[keysField	setModifiers:	wbModifiers];
-	
-	
+
+
 	/*___________ Start listening for key events ___________*/
 	
 	[NSApp beginSheet: mainWindow modalForWindow: [NSApp keyWindow] modalDelegate: self didEndSelector: nil contextInfo: nil];
@@ -292,8 +292,8 @@ pascal OSStatus HotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent
 	[NSApp endSheet: mainWindow];
 	
 	/*___________ Stop listening for key events ___________*/
-	
-	
+
+
 	if (save)
 	{
 		UInt32 newKeyCode	= [keysField keyCode];

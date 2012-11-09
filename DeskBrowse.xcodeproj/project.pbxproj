@@ -61,7 +61,6 @@
 		5DC2C4CB0EC2196300BD0054 /* DBBookmarkActionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C4C80EC2196300BD0054 /* DBBookmarkActionCell.m */; };
 		5DC2C4D00EC2198000BD0054 /* DBBookmarkBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C4CE0EC2198000BD0054 /* DBBookmarkBar.m */; };
 		5DC2C4D10EC2198000BD0054 /* DBBookmarkBarPopUpButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C4CF0EC2198000BD0054 /* DBBookmarkBarPopUpButton.m */; };
-		5DC2C4D40EC2198C00BD0054 /* NSBezierPathRoundRects.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C4D30EC2198C00BD0054 /* NSBezierPathRoundRects.m */; };
 		5DC2C4D70EC219A700BD0054 /* DBBookmarkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C4D50EC219A700BD0054 /* DBBookmarkController.m */; };
 		5DC2C4DA0EC219CB00BD0054 /* DBNewBookmarkWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C4D90EC219CB00BD0054 /* DBNewBookmarkWindowController.m */; };
 		5DC2C4E10EC219E000BD0054 /* DBBookmarkEditWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C4DB0EC219E000BD0054 /* DBBookmarkEditWindowController.m */; };
@@ -75,10 +74,6 @@
 		5DC2C5010EC21CDF00BD0054 /* DBSymbolicHotKeyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C5000EC21CDF00BD0054 /* DBSymbolicHotKeyController.m */; };
 		5DC2C5040EC21CE800BD0054 /* ThreadWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C5030EC21CE800BD0054 /* ThreadWorker.m */; };
 		5DC2C5070EC21CF100BD0054 /* DBShellExec.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C5060EC21CF100BD0054 /* DBShellExec.m */; };
-		5DC2C50C0EC21D0D00BD0054 /* NSStringAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C5090EC21D0D00BD0054 /* NSStringAdditions.m */; };
-		5DC2C50D0EC21D0D00BD0054 /* NSWindowFade.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C50B0EC21D0D00BD0054 /* NSWindowFade.m */; };
-		5DC2C5100EC21D1B00BD0054 /* NSFileManagerSGSAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C50F0EC21D1B00BD0054 /* NSFileManagerSGSAdditions.m */; };
-		5DC2C5130EC21D2400BD0054 /* NSDataExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C5120EC21D2400BD0054 /* NSDataExtension.m */; };
 		5DC2C5160EC21D2D00BD0054 /* DBFindController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C5150EC21D2D00BD0054 /* DBFindController.m */; };
 		5DC2C5190EC21D3600BD0054 /* DBSystemProfiler.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C5180EC21D3600BD0054 /* DBSystemProfiler.m */; };
 		5DC2C51C0EC21D3F00BD0054 /* DBURLFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C51B0EC21D3F00BD0054 /* DBURLFormatter.m */; };
@@ -305,8 +300,6 @@
 		5DC2C4CD0EC2198000BD0054 /* DBBookmarkBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBBookmarkBar.h; path = Source/DBBookmarkBar.h; sourceTree = "<group>"; };
 		5DC2C4CE0EC2198000BD0054 /* DBBookmarkBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBBookmarkBar.m; path = Source/DBBookmarkBar.m; sourceTree = "<group>"; };
 		5DC2C4CF0EC2198000BD0054 /* DBBookmarkBarPopUpButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBBookmarkBarPopUpButton.m; path = Source/DBBookmarkBarPopUpButton.m; sourceTree = "<group>"; };
-		5DC2C4D20EC2198C00BD0054 /* NSBezierPathRoundRects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSBezierPathRoundRects.h; path = Source/NSBezierPathRoundRects.h; sourceTree = "<group>"; };
-		5DC2C4D30EC2198C00BD0054 /* NSBezierPathRoundRects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSBezierPathRoundRects.m; path = Source/NSBezierPathRoundRects.m; sourceTree = "<group>"; };
 		5DC2C4D50EC219A700BD0054 /* DBBookmarkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBBookmarkController.m; path = Source/DBBookmarkController.m; sourceTree = "<group>"; };
 		5DC2C4D60EC219A700BD0054 /* DBBookmarkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBBookmarkController.h; path = Source/DBBookmarkController.h; sourceTree = "<group>"; };
 		5DC2C4D80EC219CB00BD0054 /* DBNewBookmarkWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBNewBookmarkWindowController.h; path = Source/DBNewBookmarkWindowController.h; sourceTree = "<group>"; };
@@ -333,14 +326,6 @@
 		5DC2C5030EC21CE800BD0054 /* ThreadWorker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ThreadWorker.m; path = Source/ThreadWorker.m; sourceTree = "<group>"; };
 		5DC2C5050EC21CF100BD0054 /* DBShellExec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBShellExec.h; path = Source/DBShellExec.h; sourceTree = "<group>"; };
 		5DC2C5060EC21CF100BD0054 /* DBShellExec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBShellExec.m; path = Source/DBShellExec.m; sourceTree = "<group>"; };
-		5DC2C5080EC21D0D00BD0054 /* NSStringAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSStringAdditions.h; path = Source/NSStringAdditions.h; sourceTree = "<group>"; };
-		5DC2C5090EC21D0D00BD0054 /* NSStringAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSStringAdditions.m; path = Source/NSStringAdditions.m; sourceTree = "<group>"; };
-		5DC2C50A0EC21D0D00BD0054 /* NSWindowFade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSWindowFade.h; path = Source/NSWindowFade.h; sourceTree = "<group>"; };
-		5DC2C50B0EC21D0D00BD0054 /* NSWindowFade.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSWindowFade.m; path = Source/NSWindowFade.m; sourceTree = "<group>"; };
-		5DC2C50E0EC21D1B00BD0054 /* NSFileManagerSGSAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSFileManagerSGSAdditions.h; path = Source/NSFileManagerSGSAdditions.h; sourceTree = "<group>"; };
-		5DC2C50F0EC21D1B00BD0054 /* NSFileManagerSGSAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSFileManagerSGSAdditions.m; path = Source/NSFileManagerSGSAdditions.m; sourceTree = "<group>"; };
-		5DC2C5110EC21D2400BD0054 /* NSDataExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSDataExtension.h; path = Source/NSDataExtension.h; sourceTree = "<group>"; };
-		5DC2C5120EC21D2400BD0054 /* NSDataExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSDataExtension.m; path = Source/NSDataExtension.m; sourceTree = "<group>"; };
 		5DC2C5140EC21D2D00BD0054 /* DBFindController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBFindController.h; path = Source/DBFindController.h; sourceTree = "<group>"; };
 		5DC2C5150EC21D2D00BD0054 /* DBFindController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBFindController.m; path = Source/DBFindController.m; sourceTree = "<group>"; };
 		5DC2C5170EC21D3600BD0054 /* DBSystemProfiler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBSystemProfiler.h; path = Source/DBSystemProfiler.h; sourceTree = "<group>"; };
@@ -478,8 +463,8 @@
 		5DDBD3230EC2513F00499681 /* DBActionMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBActionMenuView.h; path = Source/DBActionMenuView.h; sourceTree = "<group>"; };
 		5DDBD3240EC2513F00499681 /* DBActionMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBActionMenuView.m; path = Source/DBActionMenuView.m; sourceTree = "<group>"; };
 		5DF8EE1C07DAD75600097CCE /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = /System/Library/Frameworks/WebKit.framework; sourceTree = "<absolute>"; };
-		7B43D319164CD61700AC4D26 /* AtoZ.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AtoZ.framework; path = ../../../../../Library/Frameworks/AtoZ.framework; sourceTree = "<group>"; };
-		7B43D31D164CDB7A00AC4D26 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = ../../../../../System/Library/Frameworks/SystemConfiguration.framework; sourceTree = "<group>"; };
+		7B43D319164CD61700AC4D26 /* AtoZ.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AtoZ.framework; path = /Library/Frameworks/AtoZ.framework; sourceTree = "<absolute>"; };
+		7B43D31D164CDB7A00AC4D26 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = /System/Library/Frameworks/SystemConfiguration.framework; sourceTree = "<absolute>"; };
 		7B7A855215F8790F0071741C /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* DeskBrowse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeskBrowse.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -509,7 +494,6 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				5D0008C40EC25B78004E06F6 /* Categories */,
 				5D1F46A609DF614E00F7B99A /* AppleScript */,
 				5DC20F6009070AA700BD03FF /* Bezel Classes */,
 				5D8CEC780866402400FCB008 /* Action Menu */,
@@ -560,9 +544,6 @@
 		29B97314FDCFA39411CA2CEA /* DeskBrowse */ = {
 			isa = PBXGroup;
 			children = (
-				7B43D31D164CDB7A00AC4D26 /* SystemConfiguration.framework */,
-				7B43D319164CD61700AC4D26 /* AtoZ.framework */,
-				7B7A855215F8790F0071741C /* AppKit.framework */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -604,6 +585,9 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7B43D31D164CDB7A00AC4D26 /* SystemConfiguration.framework */,
+				7B43D319164CD61700AC4D26 /* AtoZ.framework */,
+				7B7A855215F8790F0071741C /* AppKit.framework */,
 				3CE212840974DB7200BCE121 /* libZonicKRM.a */,
 				5D0B722F096DEE860065CC84 /* CoreFoundation.framework */,
 				5D0B722A096DEE630065CC84 /* Security.framework */,
@@ -673,23 +657,6 @@
 				5DC2C4C80EC2196300BD0054 /* DBBookmarkActionCell.m */,
 			);
 			name = "Bookmark Cells";
-			sourceTree = "<group>";
-		};
-		5D0008C40EC25B78004E06F6 /* Categories */ = {
-			isa = PBXGroup;
-			children = (
-				5DC2C5080EC21D0D00BD0054 /* NSStringAdditions.h */,
-				5DC2C5090EC21D0D00BD0054 /* NSStringAdditions.m */,
-				5DC2C50A0EC21D0D00BD0054 /* NSWindowFade.h */,
-				5DC2C50B0EC21D0D00BD0054 /* NSWindowFade.m */,
-				5DC2C50E0EC21D1B00BD0054 /* NSFileManagerSGSAdditions.h */,
-				5DC2C50F0EC21D1B00BD0054 /* NSFileManagerSGSAdditions.m */,
-				5DC2C5110EC21D2400BD0054 /* NSDataExtension.h */,
-				5DC2C5120EC21D2400BD0054 /* NSDataExtension.m */,
-				5DC2C4D20EC2198C00BD0054 /* NSBezierPathRoundRects.h */,
-				5DC2C4D30EC2198C00BD0054 /* NSBezierPathRoundRects.m */,
-			);
-			name = Categories;
 			sourceTree = "<group>";
 		};
 		5D026F0B0805773F00AD72A3 /* Bookmark Classes */ = {
@@ -1230,7 +1197,6 @@
 				5DC2C4CB0EC2196300BD0054 /* DBBookmarkActionCell.m in Sources */,
 				5DC2C4D00EC2198000BD0054 /* DBBookmarkBar.m in Sources */,
 				5DC2C4D10EC2198000BD0054 /* DBBookmarkBarPopUpButton.m in Sources */,
-				5DC2C4D40EC2198C00BD0054 /* NSBezierPathRoundRects.m in Sources */,
 				5DC2C4D70EC219A700BD0054 /* DBBookmarkController.m in Sources */,
 				5DC2C4DA0EC219CB00BD0054 /* DBNewBookmarkWindowController.m in Sources */,
 				5DC2C4E10EC219E000BD0054 /* DBBookmarkEditWindowController.m in Sources */,
@@ -1244,10 +1210,6 @@
 				5DC2C5010EC21CDF00BD0054 /* DBSymbolicHotKeyController.m in Sources */,
 				5DC2C5040EC21CE800BD0054 /* ThreadWorker.m in Sources */,
 				5DC2C5070EC21CF100BD0054 /* DBShellExec.m in Sources */,
-				5DC2C50C0EC21D0D00BD0054 /* NSStringAdditions.m in Sources */,
-				5DC2C50D0EC21D0D00BD0054 /* NSWindowFade.m in Sources */,
-				5DC2C5100EC21D1B00BD0054 /* NSFileManagerSGSAdditions.m in Sources */,
-				5DC2C5130EC21D2400BD0054 /* NSDataExtension.m in Sources */,
 				5DC2C5160EC21D2D00BD0054 /* DBFindController.m in Sources */,
 				5DC2C5190EC21D3600BD0054 /* DBSystemProfiler.m in Sources */,
 				5DC2C51C0EC21D3F00BD0054 /* DBURLFormatter.m in Sources */,

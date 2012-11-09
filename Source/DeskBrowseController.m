@@ -20,8 +20,8 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 #import "DBHistoryWindowController.h"
 #import "DBHotKeyController.h"
 #import "DBLocationTextField.h"
-#import "NSFileManagerSGSAdditions.h"
-#import "NSWindowFade.h"
+//#import "NSFileManagerSGSAdditions.h"
+//#import "NSWindowFade.h"
 #import "DBPlistUtils.h"
 #import "DBPreferenceController.h"
 #import "DBQuickDownload.h"
@@ -38,18 +38,18 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 #import "DBStatusItemController.h"
 #import "DBSymbolicHotKeyController.h"
 
-#include <netdb.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-
-char *GetPrivateIP();
-char *GetPrivateIP() {
-	struct hostent *h;
-	char hostname[100];
-	gethostname(hostname, 99);
-	if ((h=gethostbyname(hostname)) == NULL) { perror("Error: "); return "(Error locating Private IP Address)"; }
-	return inet_ntoa(*((struct in_addr *)h->h_addr));
-}
+//#include <netdb.h>
+//#include <netinet/in.h>
+//#include <arpa/inet.h>
+//
+//char *GetPrivateIP();
+//char *GetPrivateIP() {
+//	struct hostent *h;
+//	char hostname[100];
+//	gethostname(hostname, 99);
+//	if ((h=gethostbyname(hostname)) == NULL) { perror("Error: "); return "(Error locating Private IP Address)"; }
+//	return inet_ntoa(*((struct in_addr *)h->h_addr));
+//}
 
 static NSURL *urlTemp 		= nil;
 static NSString *strTemp 	= nil;
@@ -68,100 +68,72 @@ static NSString *strTemp 	= nil;
 		NSBundle*				mainBundle		= [NSBundle mainBundle];
 		NSMD*	defaultPrefs	= [NSMD dictionaryWithContentsOfFile: [[mainBundle bundlePath] stringByAppendingString: kPathToDefaultPrefsFile]];
 		
-		if (defaultPrefs != nil)
-		{							
-			[userDefaults registerDefaults: defaultPrefs];
-		}
-		else
-		{
-			NSLog(@"*** DeskBrowseController: Default preferences not found ***");
-		}
-		
+		defaultPrefs ? [userDefaults registerDefaults: defaultPrefs]
+					 : NSLog(@"*** DeskBrowseController: Default preferences not found ***");
 		[NSApp initHotKeyController];
 	}
 }
 
 - (id)init
 {
-	if (self = [super init])
-	{
-		// Check to see if someone has messed with the binary
-		//
-		// I took this out of a thread, because sometimes it runs a modal window when another is up, which causes problems.
-		// It seems to be fast enough to not need a thread, anyway.
-		
-		//[self checkTampering];
-		
-		
-		// Make sure instance variables match user prefs
-		
-		[self syncVariablesWithUserPrefs];
-		
-		
-		// Set up web preferences
-		
-		WebPreferences*	webPrefs = [WebPreferences standardPreferences];
-		
-		[webPrefs setUserStyleSheetLocation:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"userContent" ofType:@"css"]]];
-		
-		
-		// Set up delegation
-		
-		[NSApp			setDelegate: (id)self];
-		[slideWindow	setDelegate: (id)self];
-		[websposeWindow setDelegate: (id)self];
-		
-		
-		// Register for notifications
-		
-		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(handleNotification:) name: @"DBNotification" object: nil];
-		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(handleNotification:) name: NSUserDefaultsDidChangeNotification object: nil];
-		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(handleNotification:) name: @"DBToggleSplitView" object: nil];
-		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(handleNotification:) name: @"DBWebSearch" object: nil];
-		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(handleNotification:) name: @"DBActionMenuItemNotification" object: nil];
-		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(tabChanged:) name: @"DBTabSelected" object: nil];
-		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(slideWindowResized:) name: @"DBSlideWindowResized" object: nil];
-		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(loadURLNotification:) name: @"DBLoadURLNotification" object: nil];
-		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(windowDidResize:) name:NSWindowDidResizeNotification  object:nil];
-		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(handleNewTabRequest:) name:@"DBNewBlankTab" object:nil];
-		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(windowDidMove:) name: NSWindowDidMoveNotification object: nil];
-		
-		
-		// Assign values to instance variables
-		
-		historyController	= [[DBHistoryController alloc] init];
-		downloadController	= [[DBDownloadController alloc] init];
-		
-		windowIsVisible		= NO;
-		actionMenuVisible	= NO;
-		stopEnabled			= NO;
-		
-		
-		// Set up action menu
-		
-		actionMenuWindow	= [[DBActionMenuWindow alloc] initWithContentRect:NSMakeRect(-4, 90, 153, 135)
-															styleMask:NSBorderlessWindowMask
-															 backing:NSBackingStoreRetained
-																defer:NO];
-																
-		actionMenu			= [[DBActionMenuView alloc] initWithFrame:NSMakeRect(0,0,153,135)];
-		
-		if (!inWebsposeMode) {
-			[actionMenuWindow setFrame: NSMakeRect([actionMenuWindow frame].origin.x, [slideWindow frame].origin.y + 47, [actionMenuWindow frame].size.width, [actionMenuWindow frame].size.height) display: YES];
-		} else {
-			[actionMenuWindow setFrame: NSMakeRect([actionMenuWindow frame].origin.x, [websposeWindow frame].origin.y + 47, [actionMenuWindow frame].size.width, [actionMenuWindow frame].size.height) display: YES];
-		}
-		[[actionMenuWindow contentView] addSubview:actionMenu];
-		[actionMenuWindow setDelegate:self];
-		[actionMenuWindow setAcceptsMouseMovedEvents: YES];
-	}
+	if (!(self = [super init])) return  nil;
+	// Check to see if someone has messed with the binary
+	// I took this out of a thread, because sometimes it runs a modal window when another is up, which causes problems.
+	// It seems to be fast enough to not need a thread, anyway.
+	// [self checkTampering];
+	// Make sure instance variables match user prefs
+	
+	[self syncVariablesWithUserPrefs];
+
+	// Set up web preferences
+	WebPreferences*	webPrefs = [WebPreferences standardPreferences];
+	[webPrefs setUserStyleSheetLocation:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"userContent" ofType:@"css"]]];
+	// Set up delegation
+	
+	[@[NSApp, slideWindow, websposeWindow] do:^(id obj) { [obj setDelegate: (id)self]; }];
+
+	// Register for notifications
+	[AZNOTCENTER addObserver: self selector: @selector(handleNotification:)  name: @"DBNotification" 				object: nil];
+	[AZNOTCENTER addObserver: self selector: @selector(handleNotification:)  name: NSUserDefaultsDidChangeNotification object: nil];
+	[AZNOTCENTER addObserver: self selector: @selector(handleNotification:)  name: @"DBToggleSplitView" 				object: nil];
+	[AZNOTCENTER addObserver: self selector: @selector(handleNotification:)  name: @"DBWebSearch" 					object: nil];
+	[AZNOTCENTER addObserver: self selector: @selector(handleNotification:)  name: @"DBActionMenuItemNotification" 	object: nil];
+	[AZNOTCENTER addObserver: self selector: @selector(tabChanged:) 		 name: @"DBTabSelected" 				   	object: nil];
+	[AZNOTCENTER addObserver: self selector: @selector(slideWindowResized:)  name: @"DBSlideWindowResized" 		   	object: nil];
+	[AZNOTCENTER addObserver: self selector: @selector(loadURLNotification:) name: @"DBLoadURLNotification" 			object: nil];
+	[AZNOTCENTER addObserver: self selector: @selector(windowDidResize:) 	 name:NSWindowDidResizeNotification  	object:nil];
+	[AZNOTCENTER addObserver: self selector: @selector(handleNewTabRequest:) name:@"DBNewBlankTab" 					object:nil];
+	[AZNOTCENTER addObserver: self selector: @selector(windowDidMove:) 		 name: NSWindowDidMoveNotification 		object: nil];
+
+	// Assign values to instance variables
+	historyController	= [[DBHistoryController alloc] init];
+	downloadController	= [[DBDownloadController alloc] init];
+
+	windowIsVisible		= NO;   actionMenuVisible	= NO;		stopEnabled			= NO;
+
+	// Set up action menu
+	actionMenuWindow	= [[DBActionMenuWindow alloc] initWithContentRect:NSMakeRect(-4, 90, 153, 135)
+																styleMask:NSBorderlessWindowMask
+																  backing:NSBackingStoreRetained defer:NO];
+
+	actionMenu			= [[DBActionMenuView alloc] initWithFrame:NSMakeRect(0,0,153,135)];
+	!inWebsposeMode ? [actionMenuWindow setFrame: NSMakeRect(	[actionMenuWindow frame].origin.x,
+																[slideWindow frame].origin.y + 47,
+																[actionMenuWindow frame].size.width,
+																[actionMenuWindow frame].size.height) display: YES]
+					: [actionMenuWindow setFrame: NSMakeRect(	[actionMenuWindow frame].origin.x,
+																[websposeWindow frame].origin.y + 47,
+																[actionMenuWindow frame].size.width,
+																[actionMenuWindow frame].size.height) display: YES];
+	[[actionMenuWindow contentView] addSubview:actionMenu];
+	[actionMenuWindow setDelegate:(id)self];
+	[actionMenuWindow setAcceptsMouseMovedEvents: YES];
+
 	
 	return self;
 }
 
-- (IBAction)showDocumentation:(id)sender {
-	[self loadURLString:@"http://deskbrowse.com/wiki/HowToUse"];
-}
+- (IBAction)showDocumentation:(id)sender {	[self loadURLString:@"http://deskbrowse.com/wiki/HowToUse"]; }
 
 - (void)awakeFromNib {
 	// first run?
@@ -181,25 +153,25 @@ static NSString *strTemp 	= nil;
 	//
 	// we do this in awakeFromNib because we need the interface to be active
 	//
-	
-	
+
+
 	// Set up bookmark bar
 	
 	bookmarkController = [[DBBookmarkController alloc] init];	
 	[bookmarkBar setBookmarkController: bookmarkController];
-	
-	
+
+
 	// Set up slide window
 	
 	[slideWindow setSticky:YES];
 	[slideWindow setController:self];
-	
-	
+
+
 	// Set window level
 	
 	[DBWindowLevel setWindowLevel: [slideWindow level]];
-	
-	
+
+
 	// Set up tab view
 	
 	[self setupTabView];
@@ -207,44 +179,40 @@ static NSString *strTemp 	= nil;
 	tabController = [[DBTabController alloc] initWithTabBar: tabBar tabView: tabView];
 	
 	[tabController setDefaultWebView: [self createWebView]];
-	
-	
+
+
 	// Clear status and title text
 	
 	[self setStatusText:@""];
 	[self setTitleText:@""];
-	
-	
+
+
 	// Set URL field's target and action
-	
-	[urlField setTarget: self];
-	[urlField setAction: @selector(loadURL:)];
-	[websposeURLField setTarget: self];
-	[websposeURLField setAction: @selector(loadURL:)];
+	[urlField 			setAction:@selector(loadURL:) withTarget:self];
+	[websposeURLField 	setAction:@selector(loadURL:) witTarget:self];
 	[websposeURLField setFont: [NSFont fontWithName: [[websposeURLField font] fontName] size: 11]];
-	
-	
+
 	// Load slide window size
-	
 	[slideWindow loadFrame];
-	
-	[back setToolTip:@"Go Back"];
-	[forward setToolTip:@"Go Forward"];
-	[stop setToolTip:@"Stop Loading"];
-	[reload setToolTip:@"Reload The Current Page"];
-	[home setToolTip:@"Go Home"];
+
+	[back 		setToolTip:@"Go Back"					];
+	[forward 	setToolTip:@"Go Forward"				];
+	[stop 		setToolTip:@"Stop Loading"				];
+	[reload 	setToolTip:@"Reload The Current Page	"	];
+	[home 		setToolTip:@"Go Home"					];
 }
 
-- (void)dealloc {
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	if (statusController) [statusController	release];
-	
+- (void)dealloc
+{
+	[AZNOTCENTER removeObserver:self];
+	statusController ?
+	[statusController 			release] : nil;
 	[loadingState				release];
 	[homePage					release];
 	[downloadController			release];
 	[historyController			release];
 	[bookmarkController			release];
-	[historyWindowController	release];
+	[historyWindowController	 	release];
 	[prefController				release];
 	[tabController				release];
 	[currentWebView				release];
@@ -391,7 +359,7 @@ static NSString *strTemp 	= nil;
 		[dic setValue:@"viewSourceResponse" forKey:@"notificationType"];
 		[dic setValue:title forKey:@"sourceTitle"];
 		[dic setValue:codeString forKey:@"sourceCode"];
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"DBSourceNotification" object:self userInfo:dic];
+		[AZNOTCENTER postNotificationName:@"DBSourceNotification" object:self userInfo:dic];
 		[dic release];
 	}
 	if ([type isEqualToString:@"saveWindowPosition"]) {
@@ -1383,8 +1351,8 @@ static NSString *strTemp 	= nil;
 	[self updateButtons];
 	
 	[self showDownloadWindow:nil];
-	
-	
+
+
 	[listener ignore];
 }
 
@@ -1664,8 +1632,8 @@ static NSString *strTemp 	= nil;
 - (void) applicationDidFinishLaunching: (NSNotification*) notification
 {
 	// ---------------------------------------------
-	// Used to be in awakeFromNib	
-	
+	// Used to be in awakeFromNib
+
 	// Set up hot-key listening
 	
 	[[NSApp hotKeyController] setSlideBrowseListener: self selector: @selector(toggleSlideBrowse)];
@@ -1702,8 +1670,8 @@ static NSString *strTemp 	= nil;
 	{
 		[[self URLField] selectText:self];
 	}
-	
-	
+
+
 	// Enter SlideBrowse or Webposé mode if the user wants to
 	
 	NSInteger browserMode	 = [userDefaults integerForKey: kBrowserMode];
@@ -1716,8 +1684,8 @@ static NSString *strTemp 	= nil;
 	{
 		[self toggleWebspose];
 	}
-	
-	
+
+
 	// Set up status item
 	
 	BOOL extra = [userDefaults boolForKey: kShowMenuExtra];

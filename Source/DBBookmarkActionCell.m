@@ -7,8 +7,8 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 #import "DBBookmarkActionCell.h"
 
 #import "DBBookmarkBarCell.h"
-#import "NSBezierPathRoundRects.h"
-#import "NSStringAdditions.h"
+
+
 
 
 @implementation DBBookmarkActionCell
@@ -204,8 +204,8 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	BOOL	mouseInFrame	= NSMouseInRect(mouseLocation, mFrame, NO);
 	
 	mTrackingRectTag = [mControlView addTrackingRect: mFrame owner: self userData: nil assumeInside: mouseInFrame];
-	
-	
+
+
 	if (mouseInFrame)
 	{
 		if (!mMouseOver || !mMouseDown)
@@ -255,8 +255,8 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 {
 	NSImage*	dragImage	= nil;
 	NSSize		imageSize	= mFrame.size;
-	
-	
+
+
 	dragImage = [[[NSImage alloc] initWithSize: imageSize] autorelease];
 	
 	[dragImage lockFocus];
@@ -264,8 +264,8 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		[self drawWithFrame: NSMakeRect(0, 0, imageSize.width, imageSize.height) inView: mControlView];
 	}
 	[dragImage unlockFocus];
-	
-	
+
+
 	return dragImage;
 }
 

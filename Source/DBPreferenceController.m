@@ -53,7 +53,7 @@ NSInteger oppositeBoolInt(NSInteger bi) {
 		}
 		else
 		{
-			[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(handleNotification:) name: NSUserDefaultsDidChangeNotification object: nil];
+			[AZNOTCENTER addObserver: self selector: @selector(handleNotification:) name: NSUserDefaultsDidChangeNotification object: nil];
 			
 //			sizeOfGeneralPane	= NSMakeSize(530, 460);
 			sizeOfGeneralPane	= NSMakeSize(530, 415);
@@ -67,7 +67,7 @@ NSInteger oppositeBoolInt(NSInteger bi) {
 
 - (void) dealloc
 {
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[AZNOTCENTER removeObserver:self];
 	[toolbar release];
 }
 

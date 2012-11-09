@@ -56,7 +56,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 }
 
 - (void)askForNewTab {
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"DBNewBlankTab"
+	[AZNOTCENTER postNotificationName:@"DBNewBlankTab"
 														object:self
 													  userInfo:nil];
 }

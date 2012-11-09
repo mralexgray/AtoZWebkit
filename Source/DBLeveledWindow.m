@@ -18,7 +18,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	{
 		[self setLevel: [DBWindowLevel windowLevel]];
 		
-		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(windowLevelChanged:) name: kWindowLevelChangedNotification object: nil];
+		[AZNOTCENTER addObserver: self selector: @selector(windowLevelChanged:) name: kWindowLevelChangedNotification object: nil];
 	}
 	
 	return self;
@@ -26,7 +26,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 
 - (void) dealloc
 {
-	[[NSNotificationCenter defaultCenter] removeObserver: self];
+	[AZNOTCENTER removeObserver: self];
 	
 }
 

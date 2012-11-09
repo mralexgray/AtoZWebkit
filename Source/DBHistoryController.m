@@ -27,7 +27,7 @@ NSString* nameOfHistoryFile = @"History.plist";
 		[WebHistory setOptionalSharedHistory: webHistory];
 		
 		// Register for WebHistory notifications
-		NSNotificationCenter* notificationCenter = [NSNotificationCenter defaultCenter];
+		NSNotificationCenter* notificationCenter = AZNOTCENTER;
 		
 		[notificationCenter addObserver: self selector: @selector(historyDidAddItems:) name: WebHistoryItemsAddedNotification object: webHistory];
 		[notificationCenter addObserver: self selector: @selector(historyDidRemoveItems:) name: WebHistoryItemsRemovedNotification object: webHistory];
@@ -204,7 +204,7 @@ NSString* nameOfHistoryFile = @"History.plist";
 		
 		userInfo[@"URLString"] = URLString;
 		
-		[[NSNotificationCenter defaultCenter] postNotificationName: @"DBLoadURLNotification" object: self userInfo: userInfo];
+		[AZNOTCENTER postNotificationName: @"DBLoadURLNotification" object: self userInfo: userInfo];
 		
 		[userInfo release];
 	}

@@ -51,8 +51,8 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	[self setGridColor: backgroundColor];
 	[self setGridStyleMask: NSTableViewGridNone];
 	[self setIntercellSpacing: NSMakeSize(0, 0)];
-	
-	
+
+
 	NSInteger				i;
 	NSArray*		tableColumns		= [self tableColumns];
 	NSTableColumn*	currentTableColumn	= nil;

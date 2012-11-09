@@ -9,7 +9,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 #import "DBDownloadObject.h"
 #import "DBBezelController.h"
 #import "DBBezelWindow.h"
-#import "NSFileManagerSGSAdditions.h"
+
 
 
 NSString* kDownloadWindowNibName			= @"Downloads";
@@ -40,7 +40,7 @@ NSString* downloadFileWrapperExtension		= @"download";
 		mTableCellFont		= [NSFont systemFontOfSize: 12.0];
 		
 		// register for notifications
-		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(handleNotification:) name: @"DBDownloadNotification" object: nil];
+		[AZNOTCENTER addObserver: self selector: @selector(handleNotification:) name: @"DBDownloadNotification" object: nil];
 		
 		// disable toolbar items
 		mAllowClearButton			= NO;
@@ -54,7 +54,7 @@ NSString* downloadFileWrapperExtension		= @"download";
 
 - (void) dealloc
 {
-	[[NSNotificationCenter defaultCenter] removeObserver: self];
+	[AZNOTCENTER removeObserver: self];
 	
 	[mDownloads release];
 	[mBezelController release];

@@ -7,7 +7,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 
 #import <Cocoa/Cocoa.h>
 
-#import "NSWindowFade.h"
+//#import "NSWindowFade.h"
 #import "DBLeveledWindow.h"
 
 

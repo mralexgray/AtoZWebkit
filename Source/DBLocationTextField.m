@@ -40,9 +40,9 @@ const short kProgressIndicatorPadding = 3;
 {
 	[self setImage: [NSImage imageNamed: @"TestImage"]];
 	
-	[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(frameDidChange:) name: NSViewFrameDidChangeNotification object: self];
-	
-	
+	[AZNOTCENTER addObserver: self selector: @selector(frameDidChange:) name: NSViewFrameDidChangeNotification object: self];
+
+
 	mProgressIndicator = [[NSProgressIndicator alloc] initWithFrame: NSZeroRect];
 	
 	[mProgressIndicator setStyle: NSProgressIndicatorSpinningStyle];

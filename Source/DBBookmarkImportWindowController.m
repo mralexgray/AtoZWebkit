@@ -125,8 +125,8 @@ NSString*	kImportingStatus		= @"Importing...";
 	NSWorkspace* workspace = [NSWorkspace sharedWorkspace];
 	
 	[popUpButton removeAllItems];
-	
-	
+
+
 	// Add Camino if it exsits
 	
 	NSString* pathOfCamino = [workspace fullPathForApplication: kNameOfCaminoApp];
@@ -141,8 +141,8 @@ NSString*	kImportingStatus		= @"Importing...";
 		[caminoIcon setSize: NSMakeSize(16, 16)];
 		[caminoMenuItem setImage: caminoIcon];
 	}
-	
-	
+
+
 	// Add Firefox if it exsits
 	
 	NSString* pathOfFirefox = [workspace fullPathForApplication: kNameOfFirefoxApp];
@@ -157,8 +157,8 @@ NSString*	kImportingStatus		= @"Importing...";
 		[firefoxIcon setSize: NSMakeSize(16, 16)];
 		[firefoxMenuItem setImage: firefoxIcon];
 	}
-	
-	
+
+
 	// Add Mozilla if it exsits
 	
 	NSString* pathOfMozilla = [workspace fullPathForApplication: kNameOfMozillaApp];
@@ -173,8 +173,8 @@ NSString*	kImportingStatus		= @"Importing...";
 		[mozillaIcon setSize: NSMakeSize(16, 16)];
 		[mozillaMenuItem setImage: mozillaIcon];
 	}
-	
-	
+
+
 	// Add Safari if it exsits
 	
 	NSString* pathOfSafari = [workspace fullPathForApplication: kNameOfSafariApp];
@@ -189,8 +189,8 @@ NSString*	kImportingStatus		= @"Importing...";
 		[safariIcon setSize: NSMakeSize(16, 16)];
 		[safariMenuItem setImage: safariIcon];
 	}
-	
-	
+
+
 	// Add Shiira if it exsits
 	
 	NSString* pathOfShiira = [workspace fullPathForApplication: kNameOfShiiraApp];

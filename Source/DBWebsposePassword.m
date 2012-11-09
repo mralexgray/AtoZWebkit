@@ -19,8 +19,8 @@ static NSString* webpsosePasswordKeychainAccount	= @"Webspose";
 {
 	NSString*		password = nil;
 	DBKeychainAccess*	keychain = [DBKeychainAccess keychainAccess];
-	
-	
+
+
 	// Get password from the keychain
 	
 	password = [keychain passwordFromKeychainWithName: webpsosePasswordKeychainName account: webpsosePasswordKeychainAccount];
@@ -38,8 +38,8 @@ static NSString* webpsosePasswordKeychainAccount	= @"Webspose";
 + (void) setWebsposePassword: (NSString*) password
 {
 	DBKeychainAccess* keychain = [DBKeychainAccess keychainAccess];
-	
-	
+
+
 	// Save password to the keychain
 	
 	[keychain addNewKeychainItemWithName: webpsosePasswordKeychainName account: webpsosePasswordKeychainAccount password: password];

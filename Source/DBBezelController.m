@@ -43,13 +43,13 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		
 		file = [[NSString alloc] initWithString:@""];
 		
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNotification:) name:@"DBNotification" object:nil];
+		[AZNOTCENTER addObserver:self selector:@selector(handleNotification:) name:@"DBNotification" object:nil];
 	}
 	return self;
 }
 
 - (void)dealloc {
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[AZNOTCENTER removeObserver:self];
 	[bezel release];
 	[file release];
 	[timer release];

@@ -6,8 +6,8 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 
 #import "DBBookmark.h"
 
-#import "NSBezierPathRoundRects.h"
-#import "NSStringAdditions.h"
+
+
 #import "DBBookmarkActionCell.h"
 #import "DBBookmarkMenuCell.h"
 
@@ -90,13 +90,13 @@ NSString*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 	{
 		NSDictionary* userInfo = @{kBookmarkInfoURLStringKey: [mURL absoluteString]};
 		
-		[[NSNotificationCenter defaultCenter] postNotificationName: kDBLoadURLNotification object: self userInfo: userInfo];
+		[AZNOTCENTER postNotificationName: kDBLoadURLNotification object: self userInfo: userInfo];
 	}
 }
 
 - (void) remove
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName: kDBDeleteBookmarkNotification object: self userInfo: nil];
+	[AZNOTCENTER postNotificationName: kDBDeleteBookmarkNotification object: self userInfo: nil];
 }
 
 #pragma mark -

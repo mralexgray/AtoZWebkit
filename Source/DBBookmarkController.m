@@ -47,7 +47,7 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 		
 		[self load];
 		
-		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(bookmarkDelete:) name: kDBDeleteBookmarkNotification object: nil];
+		[AZNOTCENTER addObserver: self selector: @selector(bookmarkDelete:) name: kDBDeleteBookmarkNotification object: nil];
 	}
 	
 	return self;
@@ -55,8 +55,8 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 
 - (void) dealloc
 {
-	[[NSNotificationCenter defaultCenter] removeObserver: self];
-	[[NSNotificationCenter defaultCenter] removeObserver: mBookmarkTableView name: kBookmarksDidChangeNotification object: nil];
+	[AZNOTCENTER removeObserver: self];
+	[AZNOTCENTER removeObserver: mBookmarkTableView name: kBookmarksDidChangeNotification object: nil];
 	
 	[mBookmarks release];
 	[mBookmarkTableView release];
@@ -72,7 +72,7 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 	[mBookmarkTableView registerForDraggedTypes: @[DBBookmarkRows]];
 	[mBookmarkTableView setDraggingSourceOperationMask: NSTableViewDropAbove forLocal: YES];
 	
-	[[NSNotificationCenter defaultCenter] addObserver: mBookmarkTableView selector: @selector(reloadData) name: kBookmarksDidChangeNotification object: nil];
+	[AZNOTCENTER addObserver: mBookmarkTableView selector: @selector(reloadData) name: kBookmarksDidChangeNotification object: nil];
 	
 	[[self window] setFrame: [[self window] frame] display: YES];
 }
@@ -82,7 +82,7 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 
 - (void) bookmarksChanged
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName: kBookmarksDidChangeNotification object: self];
+	[AZNOTCENTER postNotificationName: kBookmarksDidChangeNotification object: self];
 }
 
 - (void)updateBookmarksMenu
@@ -161,8 +161,7 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 				break;
 			}
 		}
-		
-		
+
 		// If they are, add them to our array of bookmarks
 		
 		if (shouldAddBookmarks)
@@ -172,8 +171,8 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 			addedBookmarks = YES;
 		}
 	}
-	
-	
+
+
 	// If the bookmarks were added, reload bookmarks views and resave bookmarks
 	
 	if (addedBookmarks)
@@ -681,8 +680,8 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 - (BOOL) tableView: (NSTableView*) tableView writeRowsWithIndexes: (NSIndexSet*) rowIndexes toPasteboard: (NSPasteboard*) pboard
 {
 	// Replaces tableView:writeRows:toPasteboard: in 10.4
-	
-	
+
+
 	BOOL written = NO;
 	
 	if (tableView == mBookmarkTableView)

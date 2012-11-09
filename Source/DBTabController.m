@@ -17,14 +17,14 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 {
 	if (self = [super init])
 	{
-		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(tabClicked:) name: @"DBTabClicked" object: nil];
-		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(tabWantsToClosed:) name:@"DBTabWantsToBeClosed" object: nil];
-		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(slideWindowResized:) name:@"DBSlideWindowResized" object: nil];
-		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(removeAllTabs) name:@"DBCloseAllTabs" object: nil];
-		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(reloadTab) name:@"DBReloadTab" object: nil];
-		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(reloadAllTabs) name:@"DBReloadAllTabs" object: nil];
-		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(frameDidChange) name: NSViewFrameDidChangeNotification object: bar];
-		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(frameDidChange) name: NSViewBoundsDidChangeNotification object: bar];
+		[AZNOTCENTER addObserver: self selector: @selector(tabClicked:) name: @"DBTabClicked" object: nil];
+		[AZNOTCENTER addObserver: self selector: @selector(tabWantsToClosed:) name:@"DBTabWantsToBeClosed" object: nil];
+		[AZNOTCENTER addObserver: self selector: @selector(slideWindowResized:) name:@"DBSlideWindowResized" object: nil];
+		[AZNOTCENTER addObserver: self selector: @selector(removeAllTabs) name:@"DBCloseAllTabs" object: nil];
+		[AZNOTCENTER addObserver: self selector: @selector(reloadTab) name:@"DBReloadTab" object: nil];
+		[AZNOTCENTER addObserver: self selector: @selector(reloadAllTabs) name:@"DBReloadAllTabs" object: nil];
+		[AZNOTCENTER addObserver: self selector: @selector(frameDidChange) name: NSViewFrameDidChangeNotification object: bar];
+		[AZNOTCENTER addObserver: self selector: @selector(frameDidChange) name: NSViewBoundsDidChangeNotification object: bar];
 															
 		tabs		= [[NSMutableArray alloc] init];
 		tabView		= view;
@@ -62,7 +62,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 
 - (void) dealloc
 {
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[AZNOTCENTER removeObserver:self];
 	
 	[tabs		release];
 	[tabView	release];
@@ -291,7 +291,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 				NSMD *dic = [[NSMD alloc] init];
 				dic[@"WebView"] = [[tabView tabViewItemAtIndex: i] view];
 				dic[@"Tab"] = tabs[i];
-				[[NSNotificationCenter defaultCenter] postNotificationName:@"DBTabSelected"
+				[AZNOTCENTER postNotificationName:@"DBTabSelected"
 																	object:nil
 																  userInfo:dic];
 				[dic release];

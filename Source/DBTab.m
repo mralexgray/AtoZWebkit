@@ -6,7 +6,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 
 #import "DBTab.h"
 
-#import "NSStringAdditions.h"
+
 
 
 @implementation DBTab
@@ -37,8 +37,8 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		
 		[self setLabel: @"Untitled"];
 		
-		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(frameDidChange:) name: NSViewFrameDidChangeNotification object: self];
-		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(frameDidChange:) name: NSViewBoundsDidChangeNotification object: self];
+		[AZNOTCENTER addObserver: self selector: @selector(frameDidChange:) name: NSViewFrameDidChangeNotification object: self];
+		[AZNOTCENTER addObserver: self selector: @selector(frameDidChange:) name: NSViewBoundsDidChangeNotification object: self];
 		[self setPostsFrameChangedNotifications: YES];
 		[self setPostsBoundsChangedNotifications: YES];
 				
@@ -88,22 +88,22 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 
 - (void) closeAll
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"DBCloseAllTabs" object:self];
+	[AZNOTCENTER postNotificationName:@"DBCloseAllTabs" object:self];
 }
 
 - (void) reload
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"DBReloadTab" object:self];
+	[AZNOTCENTER postNotificationName:@"DBReloadTab" object:self];
 }
 
 - (void) reloadAll
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"DBReloadAllTabs" object:self];
+	[AZNOTCENTER postNotificationName:@"DBReloadAllTabs" object:self];
 }
 
 - (void) dealloc
 {
-	[[NSNotificationCenter defaultCenter] removeObserver: self];
+	[AZNOTCENTER removeObserver: self];
 	
 	if (trackingRectTag > 0)
 	{
@@ -260,8 +260,8 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	[[NSGraphicsContext currentContext] restoreGraphicsState];
 	
 	/*CGFloat	newFillWidth		= size.width - ([selectedTabLeft size].width + [selectedTabRight size].width);
-	
-	
+
+
 	if (newFillWidth < 1) // We have to do this because if the width < 0, it won't draw later when we make it wider
 	{
 		newFillWidth = 1;
@@ -338,8 +338,8 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 {
 	NSR		closeButtonRect;
 	NSImage*	closeButtonImage = nil;
-	
-	
+
+
 	// Size
 	
 	if (mouseOverClose)
@@ -356,8 +356,8 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	}
 	
 	closeButtonRect.size = [closeButtonImage size];
-	
-	
+
+
 	// Origin
 	
 	NSR	bounds			= [self bounds];
@@ -548,7 +548,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 			NSMD *dic = [[NSMD alloc] init];
 			[dic setValue: self forKey: @"clickedTab"];
 			
-			[[NSNotificationCenter defaultCenter] postNotificationName: @"DBTabClicked"
+			[AZNOTCENTER postNotificationName: @"DBTabClicked"
 																object: self
 															  userInfo: dic];
 			[dic release];
@@ -581,7 +581,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 - (void)sendCloseNotification {
 	NSMD *dic = [[NSMD alloc] init];
 	dic[@"sender"] = self;
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"DBTabWantsToBeClosed"
+	[AZNOTCENTER postNotificationName:@"DBTabWantsToBeClosed"
 														object:self
 													  userInfo:dic];
 	[dic release];

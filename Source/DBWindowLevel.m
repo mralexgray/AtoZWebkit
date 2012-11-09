@@ -17,7 +17,7 @@ static NSInteger sWindowLevel;
 {
 	level != sWindowLevel ? ^{
 		sWindowLevel = level;
-		[[NSNotificationCenter defaultCenter] postNotificationName: kWindowLevelChangedNotification object: nil];
+		[AZNOTCENTER postNotificationName: kWindowLevelChangedNotification object: nil];
 	}() : nil;
 }
 

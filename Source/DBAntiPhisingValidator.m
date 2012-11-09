@@ -12,7 +12,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 
 - (IBAction)menuHandler:(id)sender {
 	NSDictionary *dic = @{@"URLString": @"http://www.antiphishing.org/consumer_recs.html"};
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"DBLoadURLNotification"
+	[AZNOTCENTER postNotificationName:@"DBLoadURLNotification"
 														object:self
 													  userInfo:dic];
 }

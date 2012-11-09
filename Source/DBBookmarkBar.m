@@ -43,9 +43,9 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 		mBookmarkCells		= [[NSMutableArray alloc] init];
 		mBackgroundColor	= [NSColor colorWithDeviceRed: 0.35 green: 0.35 blue: 0.35 alpha: 1.0];
 		
-		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(reloadData) name: kBookmarksDidChangeNotification object: nil];
-		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(frameDidChange:) name: NSViewFrameDidChangeNotification object: self];
-		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(frameDidChange:) name: NSViewBoundsDidChangeNotification object: self];
+		[AZNOTCENTER addObserver: self selector: @selector(reloadData) name: kBookmarksDidChangeNotification object: nil];
+		[AZNOTCENTER addObserver: self selector: @selector(frameDidChange:) name: NSViewFrameDidChangeNotification object: self];
+		[AZNOTCENTER addObserver: self selector: @selector(frameDidChange:) name: NSViewBoundsDidChangeNotification object: self];
 		
 		[self setPostsFrameChangedNotifications: YES];
 		[self setPostsBoundsChangedNotifications: YES];
@@ -65,7 +65,7 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 
 - (void) dealloc
 {
-	[[NSNotificationCenter defaultCenter] removeObserver: self];
+	[AZNOTCENTER removeObserver: self];
 	
 	[mBookmarkController release];
 	[mBackgroundColor release];
@@ -238,8 +238,7 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 		
 		[pboard declareTypes: @[DBBookmarkCellPboardType] owner: self];
 		[pboard setPropertyList: numberIndexOfCell forType: DBBookmarkCellPboardType];
-		
-		
+
 		NSImage* dragImage = [clickedCell dragImage];
 		
 		if (dragImage != nil)
@@ -515,8 +514,7 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 		
 		newCellFrame.origin.x	= NSMaxX(lastCellFrame) + kDistanceBetweenBookmarks;
 		newCellFrame.size.width = cellFrame.size.width;
-		
-		
+
 		[currentCell setFrame: newCellFrame];
 		
 		if (currentCellIndex == numberOfCells - 1)
@@ -530,8 +528,7 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 				[self addPopUpButton];
 			}
 		}
-		
-		
+
 		lastCellFrame = newCellFrame;
 		currentCellIndex++;
 	}

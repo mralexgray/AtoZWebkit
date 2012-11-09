@@ -16,8 +16,8 @@ extern NSString* kDBDeleteBookmarkNotification;
 {
 	NSURL*		mURL;
 	NSString*	mTitle;
-	
-	
+
+
 	// Bookmark bar
 	
 	id <DBBookmarkBarCell>	mBookmarkBarCell;

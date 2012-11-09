@@ -47,7 +47,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 - (void)mouseDown:(NSEvent *)theEvent {
 	NSMD *dic = [[NSMD alloc] init];
 	dic[@"sender"] = label;
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"DBActionMenuItemNotification"
+	[AZNOTCENTER postNotificationName:@"DBActionMenuItemNotification"
 														object:self
 													  userInfo:dic];
 	[dic release];

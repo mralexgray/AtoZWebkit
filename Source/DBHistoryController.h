@@ -10,7 +10,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 #import "DeskBrowseConstants.h"
 #import	"DBHistoryView.h"
 //#import	"DBKeyStuff.h"
-#import "NSFileManagerSGSAdditions.h"
+
 
 
 @interface DBHistoryController : NSObject

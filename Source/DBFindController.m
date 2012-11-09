@@ -31,7 +31,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		dic[@"backwards"] = @0;
 	}
 	
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"DBWebSearch"
+	[AZNOTCENTER postNotificationName:@"DBWebSearch"
 														object:self
 													  userInfo:dic];
 	[dic release];
@@ -49,7 +49,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		dic[@"backwards"] = @1;
 	}
 	
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"DBWebSearch"
+	[AZNOTCENTER postNotificationName:@"DBWebSearch"
 														object:self
 													  userInfo:dic];
 	[dic release];
@@ -62,7 +62,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		// (this was written to allow for finding in the view source window)
 		return;
 	}
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"DBToggleSplitView"
+	[AZNOTCENTER postNotificationName:@"DBToggleSplitView"
 														object:self];
 	// switch the finding control visibility 
 	if (![controller inWebspose]) {

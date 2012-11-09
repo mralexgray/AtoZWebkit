@@ -7,8 +7,8 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 #import "DBBookmarkBarPopUpButton.h"
 #import "DBBookmarkBar.h"
 
-#import "NSBezierPathRoundRects.h"
-#import "NSStringAdditions.h"
+
+
 
 
 @implementation DBBookmarkBarPopUpButton

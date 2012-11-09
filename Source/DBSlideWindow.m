@@ -306,8 +306,8 @@ extern OSStatus CGSClearWindowTags(const CGSConnection cid, const CGSWindow wid,
 	NSUserDefaults* userDefaults	= [NSUserDefaults standardUserDefaults];
 	CGFloat			y				= [userDefaults[kSlideWindowY]		floatValue];
 	CGFloat			width			= [userDefaults[kSlideWindowWidth]	floatValue];
-	CGFloat			height			= [userDefaults[kSlideWindowHeight]	floatValue];	
-	
+	CGFloat			height			= [userDefaults[kSlideWindowHeight]	floatValue];
+
 	NSR			newFrame		= NSMakeRect(-width, y, width, height);
 	
 	[self setFrame: newFrame display: YES animate: NO];

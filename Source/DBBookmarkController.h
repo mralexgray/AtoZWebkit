@@ -4,9 +4,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 *****************************
 */
 
-#import <Cocoa/Cocoa.h>
 
-#import "NSFileManagerSGSAdditions.h"
 
 @class DBBookmark;
 @class DBBookmarkBar;
@@ -22,12 +20,12 @@ extern NSString* const DBBookmarkRows;
 @interface DBBookmarkController : NSWindowController
 {
 	NSMutableArray*			mBookmarks;
-	
-	
+
+
 	// Interface related
 	
-	IBOutlet NSTableView*	mBookmarkTableView;	
-	
+	IBOutlet NSTableView*	mBookmarkTableView;
+
 	// New bookmark window
 	
 	IBOutlet NSPanel*		mNewBookmarkWindow;

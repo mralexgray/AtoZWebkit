@@ -4,11 +4,11 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 *****************************
 */
 
-#import <Cocoa/Cocoa.h>
+
 #import <Carbon/Carbon.h>
 
 #import "DeskBrowseConstants.h"
-#import "NSFileManagerSGSAdditions.h"
+
 #import "DBHotKeyTextField.h"
 #import "DBKeyStuff.h"
 
@@ -31,23 +31,23 @@ NSInvocation*	sbInvocation;	//
 	UInt32			sbModifiers;
 	UInt32			sbHotKeyIdentifier;
 	EventHotKeyRef	sbHotKeyRef;
-	
-	
+
+
 	// ----- Websposé Variables ----- \\
 	
 	UInt32			wbKeyCode;
 	UInt32			wbModifiers;
 	EventHotKeyRef	wbHotKeyRef;
 	UInt32			wbHotKeyIdentifier;
-	
-	
+
+
 	// ----- Independent Variables -----\\
 	
 	EventTypeSpec	eventType;
 	BOOL			keepListening;
 	BOOL			save;
-	
-	
+
+
 	// ----- Interface Outlets -----\\
 	
 	IBOutlet NSWindow*			mainWindow;
