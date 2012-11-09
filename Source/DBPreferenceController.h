@@ -14,21 +14,21 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 
 @interface DBPreferenceController : NSWindowController
 {
-	IBOutlet id				showMenuBarAndDock;
-	IBOutlet id				showMenuExtra;
-	IBOutlet id				selectNewTabs;
-	IBOutlet id				checkForUpdates;
+	IBOutlet NSButton*				showMenuBarAndDock;
+	IBOutlet NSButton*				showMenuExtra;
+	IBOutlet NSButton*				selectNewTabs;
+	IBOutlet NSButton*				checkForUpdates;
 	IBOutlet id				checkForUpdatesIndicator;
-	IBOutlet id				homePage;
-	IBOutlet id				loadHomePageOnLaunch;
-	IBOutlet id				browserMode;
-	IBOutlet id				allowJavaScript;
-	IBOutlet id				allowJava;
-	IBOutlet id				allowImages;
-	IBOutlet id				allowAnimatedImages;
-	IBOutlet id				allowPluginMedia;
-	IBOutlet id				blockPopupWindows;
-	IBOutlet id				blockWebAds;
+	IBOutlet id						homePage;
+	IBOutlet NSButton*				loadHomePageOnLaunch;
+	IBOutlet NSPopUpButton*				browserMode;
+	IBOutlet NSButton*				allowJavaScript;
+	IBOutlet NSButton*				allowJava;
+	IBOutlet NSButton*				allowImages;
+	IBOutlet NSButton*				allowAnimatedImages;
+	IBOutlet NSButton*				allowPluginMedia;
+	IBOutlet NSButton*				blockPopupWindows;
+	IBOutlet NSButton*				blockWebAds;
 	
 	IBOutlet id				sbHotKeyField;
 	IBOutlet id				wbHotKeyField;

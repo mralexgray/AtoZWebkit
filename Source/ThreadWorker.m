@@ -182,11 +182,12 @@
  */
 - (void)startThread:(NSArray *)callingPortArray
 {
-	 NSAutoreleasePool *pool;
-	 
+//	 NSAutoreleasePool *pool;
+
 	 // Thread startup maintenance
-	 pool = [[NSAutoreleasePool alloc] init];
-	 
+//	 pool = [[NSAutoreleasePool alloc] init];
+	@autoreleasepool {
+		
 	 // Set up connections on new thread
 	 _port1 = callingPortArray[0];
 	 _port2 = callingPortArray[1];
@@ -216,8 +217,8 @@
 		  NSLog(@"isRunning: %d, _endRunLoop: %d", isRunning, _endRunLoop );
 	 } while ( isRunning && !_endRunLoop);	
 
-	 
-	 [pool release];
+	 }
+//	 [pool release];
 }	// end startThread
 
 

@@ -61,8 +61,9 @@ NSString*	kImportingStatus		= @"Importing...";
 
 - (void) importBookmarksFromSelectedBrowserInNewThread
 {
-	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
-	
+//	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
+	@autoreleasepool {
+
 	BOOL		sortBookmarks			= [mSortBookmarksButton state];
 	NSString*	nameOfSelectedBrowser	= [mOtherBrowsersPopUpButton titleOfSelectedItem];
 	
@@ -116,8 +117,8 @@ NSString*	kImportingStatus		= @"Importing...";
 	[mStatusTextField lockFocus];
 	[mStatusTextField setStringValue: kDoneImportingStatus];
 	[mStatusTextField unlockFocus];
-	
-	[pool release];
+	}
+//	[pool release];
 }
 
 - (void) populatePopUpButtonWithOtherBrowsers: (NSPopUpButton*) popUpButton

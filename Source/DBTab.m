@@ -129,13 +129,13 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	{
 		if (newLabel != nil && [newLabel length] > 0)
 		{
-			[label release];
+//			[label release];
 			label = [newLabel copy];
 		}
 		else
 		{
-			[label release];
-			label = [[NSString stringWithString: @"Untitled"] retain];
+//			[label release];
+			label = @"Untitled";//[[NSString stringWithString: @"Untitled"] retain];
 		}
 	}
 }

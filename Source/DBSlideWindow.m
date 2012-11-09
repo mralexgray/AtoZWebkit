@@ -344,10 +344,10 @@ extern OSStatus CGSClearWindowTags(const CGSConnection cid, const CGSWindow wid,
 	}
 }
 
-- (void)setController:(id)aController {
-	[controller release];
-	controller = [aController retain];
-}
+//- (void)setController:(id)aController {
+//	[controller release];
+//	controller = [aController retain];
+//}
 
 
 - (void)dealloc

@@ -255,7 +255,7 @@ NSInteger oppositeBoolInt(NSInteger bi) {
 	NSUserDefaults*	defaults	= [NSUserDefaults standardUserDefaults];
 	WebPreferences*	preferences	= [WebPreferences standardPreferences];
 	
-	[DBPlistUtils setIsBackgroundApp:				[showMenuBarAndDock state]];
+	[DBPlistUtils setIsBackgroundApp:			[showMenuBarAndDock state]];
 	[defaults setBool:							[showMenuExtra state]				forKey: kShowMenuExtra];
 	[defaults setBool:							[selectNewTabs state]				forKey: kSelectNewTabs];
 	[defaults setBool:							[checkForUpdates state]				forKey: kCheckForUpdates];
@@ -296,7 +296,7 @@ NSInteger oppositeBoolInt(NSInteger bi) {
 		[browserMode selectItemAtIndex: [[defaultPrefs valueForKey: kBrowserMode] intValue]];
 		//[hotkey setIntValue:			[[defaultPrefs valueForKey: kHotkey] intValue]];
 		[allowJavaScript setState:		[[defaultPrefs valueForKey: kAllowJavaScript] boolValue]];
-		[allowJava setState:			[[defaultPrefs valueForKey: kAllowJava] boolValue]];
+		[allowJava setState:				[[defaultPrefs valueForKey: kAllowJava] boolValue]];
 		[allowImages setState:			[[defaultPrefs valueForKey: kAllowImages] boolValue]];
 		[allowAnimatedImages setState:	[[defaultPrefs valueForKey: kAllowAnimatedImages] boolValue]];
 		[allowPluginMedia setState:		[[defaultPrefs valueForKey: kAllowPluginMedia] boolValue]];

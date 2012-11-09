@@ -12,11 +12,11 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 #import "DBBezelButtonCell.h"
 
 
-//@interface NSOutlineView (SGSAdditions)
+@interface NSOutlineView (SGSAdditions)
 //@property (strong, nonatomic) NSButtonCell* outlineCell;
-////- (void) setOutlineCell: (NSButtonCell*) newCell;
+- (void) setOutlineCell: (NSButtonCell*) newCell;
 //
-//@end
+@end
 
 @interface DBBezelOutlineView : NSOutlineView
 {

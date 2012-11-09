@@ -8,23 +8,23 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 #import "DBBezelOutlineView.h"
 
 //
-//@implementation NSOutlineView (SGSAdditions)
+@implementation NSOutlineView (SGSAdditions)
 //@dynamic outlineCell;
-//- (void) setOutlineCell: (NSButtonCell*) newCell
-//{
-//	if (newCell	 != _outlineCell)
-//	{
+- (void) setOutlineCell: (NSButtonCell*) newCell
+{
+	if (newCell	 != _outlineCell)
+	{
 ////		[newCell  retain];
 ////		[_outlineCell release];
 //
-//		_outlineCell = newCell;
-//	}
-//}
+		_outlineCell = newCell;
+	}
+}
 //
 //- (NSButtonCell*) outlineCell {
 //	return _outlineCell;
 //}
-//@end
+@end
 
 
 @implementation DBBezelOutlineView
