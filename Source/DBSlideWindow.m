@@ -304,9 +304,9 @@ extern OSStatus CGSClearWindowTags(const CGSConnection cid, const CGSWindow wid,
 - (void) loadFrame
 {
 	NSUserDefaults* userDefaults	= [NSUserDefaults standardUserDefaults];
-	CGFloat			y				= [[userDefaults objectForKey: kSlideWindowY]		floatValue];
-	CGFloat			width			= [[userDefaults objectForKey: kSlideWindowWidth]	floatValue];
-	CGFloat			height			= [[userDefaults objectForKey: kSlideWindowHeight]	floatValue];	
+	CGFloat			y				= [userDefaults[kSlideWindowY]		floatValue];
+	CGFloat			width			= [userDefaults[kSlideWindowWidth]	floatValue];
+	CGFloat			height			= [userDefaults[kSlideWindowHeight]	floatValue];	
 	
 	NSRect			newFrame		= NSMakeRect(-width, y, width, height);
 	

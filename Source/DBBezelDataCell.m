@@ -22,8 +22,8 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 
 - (void) drawInteriorWithFrame: (NSRect) cellFrame inView: (NSView*) controlView
 {
-//	NSMutableDictionary *attrs = [NSMutableDictionary dictionaryWithDictionary:[[self attributedStringValue] attributesAtIndex:0 effectiveRange:NULL]];
-	NSMutableDictionary *attrs = [NSMutableDictionary dictionary];
+//	NSMD *attrs = [NSMD dictionaryWithDictionary:[[self attributedStringValue] attributesAtIndex:0 effectiveRange:NULL]];
+	NSMD *attrs = [NSMD dictionary];
 
 	if ([self isHighlighted])
 	{

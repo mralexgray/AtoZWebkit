@@ -20,7 +20,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 }
 
 - (IBAction)findText:(id)sender {
-	NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+	NSMD *dic = [[NSMD alloc] init];
 	if (![controller inWebspose]) {
 		dic[@"searchString"] = [findField stringValue];
 		dic[@"caseSensitive"] = @([caseSensitive state]);
@@ -38,7 +38,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 }
 
 - (IBAction)findPreviousText:(id)sender {
-	NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+	NSMD *dic = [[NSMD alloc] init];
 	if (![controller inWebspose]) {
 		dic[@"searchString"] = [findField stringValue];
 		dic[@"caseSensitive"] = @([caseSensitive state]);

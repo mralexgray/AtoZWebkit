@@ -259,10 +259,10 @@ NSInteger oppositeBoolInt(NSInteger bi) {
 	[defaults setBool:							[showMenuExtra state]				forKey: kShowMenuExtra];
 	[defaults setBool:							[selectNewTabs state]				forKey: kSelectNewTabs];
 	[defaults setBool:							[checkForUpdates state]				forKey: kCheckForUpdates];
-	[defaults setObject:						[homePage stringValue]				forKey: kHomePage];
+	defaults[kHomePage] = [homePage stringValue];
 	[defaults setBool:							[loadHomePageOnLaunch state]		forKey: kLoadHomePageOnLaunch];
 	[defaults setInteger:						[browserMode indexOfSelectedItem]	forKey: kBrowserMode];
-	[defaults setObject:						[[downloadPathField stringValue] stringByAbbreviatingWithTildeInPath] forKey: kDownloadLocation];
+	defaults[kDownloadLocation] = [[downloadPathField stringValue] stringByAbbreviatingWithTildeInPath];
 	[preferences setJavaScriptEnabled:			[allowJavaScript state]];
 	[preferences setJavaEnabled:				[allowJava state]];
 	[preferences setLoadsImagesAutomatically:	[allowImages state]];
@@ -463,7 +463,7 @@ NSInteger oppositeBoolInt(NSInteger bi) {
 	[showMenuExtra setState:		[defaults boolForKey:		kShowMenuExtra]];
 	[selectNewTabs setState:		[defaults boolForKey:		kSelectNewTabs]];
 	[checkForUpdates setState:		[defaults boolForKey:		kCheckForUpdates]];
-	[homePage setStringValue:		[defaults objectForKey:		kHomePage]];
+	[homePage setStringValue:		defaults[kHomePage]];
 	[loadHomePageOnLaunch setState:	[defaults boolForKey:		kLoadHomePageOnLaunch]];
 	[browserMode selectItemAtIndex:	[defaults integerForKey:	kBrowserMode]];
 	[allowJavaScript setState:		[preferences isJavaScriptEnabled]];
@@ -477,7 +477,7 @@ NSInteger oppositeBoolInt(NSInteger bi) {
 	[sbHotKeyField setStringValue: [[NSApp hotKeyController] currentSBKeyString]];
 	[wbHotKeyField setStringValue: [[NSApp hotKeyController] currentWBKeyString]];
 	
-	[downloadPathField setStringValue: [defaults objectForKey: kDownloadLocation]];
+	[downloadPathField setStringValue: defaults[kDownloadLocation]];
 	
 }
 

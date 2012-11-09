@@ -47,33 +47,26 @@ char *GetPrivateIP() {
 	struct hostent *h;
 	char hostname[100];
 	gethostname(hostname, 99);
-	if ((h=gethostbyname(hostname)) == NULL) {
-		  perror("Error: ");
-		  return "(Error locating Private IP Address)";
-	 }
-	 return inet_ntoa(*((struct in_addr *)h->h_addr));
+	if ((h=gethostbyname(hostname)) == NULL) { perror("Error: "); return "(Error locating Private IP Address)"; }
+	return inet_ntoa(*((struct in_addr *)h->h_addr));
 }
 
-static NSURL *urlTemp = nil;
-static NSString *strTemp = nil;
-
+static NSURL *urlTemp 		= nil;
+static NSString *strTemp 	= nil;
 
 @implementation DeskBrowseController
-
 
 + (void) initialize
 {
 	// This is called before any other method in this class.
-	// Register the user defaults here so they are set
-	// when they are requested. If there are no defaults
-	// set when someone requests them, these are the ones
-	// that they will receive.
+	// Register the user defaults here so they are set when they are requested. If there are no defaults
+	// set when someone requests them, these are the ones that they will receive.
 	
 	if (self == [DeskBrowseController class])
 	{
 		NSUserDefaults*			userDefaults	= [NSUserDefaults standardUserDefaults];
 		NSBundle*				mainBundle		= [NSBundle mainBundle];
-		NSMutableDictionary*	defaultPrefs	= [NSMutableDictionary dictionaryWithContentsOfFile: [[mainBundle bundlePath] stringByAppendingString: kPathToDefaultPrefsFile]];
+		NSMD*	defaultPrefs	= [NSMD dictionaryWithContentsOfFile: [[mainBundle bundlePath] stringByAppendingString: kPathToDefaultPrefsFile]];
 		
 		if (defaultPrefs != nil)
 		{							
@@ -390,7 +383,7 @@ static NSString *strTemp = nil;
 		[self loadURL:nil];
 	}
 	if ([type isEqualToString:@"viewSourceRequest"]) {
-		NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+		NSMD *dic = [[NSMD alloc] init];
 		NSString *codeString = [[[[currentWebView mainFrame] dataSource] representation] documentSource];
 		NSString *title = [[[currentWebView mainFrame] dataSource] pageTitle];
 		if (!title) {
@@ -779,7 +772,7 @@ static NSString *strTemp = nil;
 	
 	userDefaults		= [[NSUserDefaults standardUserDefaults] retain];
 	
-	homePage			= [[userDefaults objectForKey: kHomePage] retain];
+	homePage			= [userDefaults[kHomePage] retain];
 	
 	BOOL showMenuExtra	= [userDefaults boolForKey: kShowMenuExtra];
 	if (showMenuExtra) {
@@ -1051,23 +1044,16 @@ static NSString *strTemp = nil;
 	}
 }
 
-- (IBAction)stopLoading:(id)sender {
-	[currentWebView stopLoading:sender];
-}
+- (IBAction)stopLoading:(id)sender { [currentWebView stopLoading:sender]; }
 
-- (IBAction) selectTabRight: (id) sender
+- (IBAction) selectTabRight: (id) sender {	[tabController selectTabRight]; }
+
+- (IBAction) selectTabLeft: (id) sender {	[tabController selectTabLeft]; }
+
+- (IBAction)googleSearch:(id)sender
 {
-	[tabController selectTabRight];
-}
 
-- (IBAction) selectTabLeft: (id) sender
-{
-	[tabController selectTabLeft];
-}
-
-- (IBAction)googleSearch:(id)sender {
 	NSString* searchString = [self searchFieldText];
-	
 	[searchField			setStringValue: searchString];
 	[websposeSearchField	setStringValue: searchString];
 	
@@ -1084,20 +1070,12 @@ static NSString *strTemp = nil;
 
 - (IBAction)back:(id)sender
 {
-	if([currentWebView canGoBack])
-	{
-		[currentWebView goBack];
-		[self updateButtons];
-	}
+	if([currentWebView canGoBack])	{ 	[currentWebView goBack]; [self updateButtons];  }
 }
 
 - (IBAction)forward:(id)sender
 {
-	if([currentWebView canGoForward])
-	{
-		[currentWebView goForward];
-		[self updateButtons];
-	}
+	if([currentWebView canGoForward])	{ [currentWebView goForward]; [self updateButtons]; }
 }
 
 - (IBAction)reload:(id)sender
@@ -1120,7 +1098,6 @@ static NSString *strTemp = nil;
 			URL = nil;
 			pURL = nil;
 		}
-		
 		if(URL || pURL)
 		{
 			[currentWebView reload: sender];
@@ -1131,11 +1108,7 @@ static NSString *strTemp = nil;
 			if(tab)
 			{
 				NSString* URLString = [tab URLString];
-				
-				if(URLString)
-				{
-					[self loadURLString: URLString];
-				}
+				if(URLString) [self loadURLString: URLString];
 			}
 		}
 	}
@@ -1143,21 +1116,15 @@ static NSString *strTemp = nil;
 
 - (IBAction)goHome:(id)sender {
 	// load the home page
-	NSString *hp = (NSString *)[[NSUserDefaults standardUserDefaults] objectForKey:kHomePage];
+	NSString *hp = (NSString *)[NSUserDefaults standardUserDefaults][kHomePage];
 	[self loadURLString: hp];
 }
 
-- (IBAction)makeTextLarger:(id)sender {
-	[currentWebView makeTextLarger:sender];
-}
+- (IBAction)makeTextLarger:(id)sender { 	[currentWebView makeTextLarger:sender]; 	}
 
-- (IBAction)makeTextSmaller:(id)sender {
-	[currentWebView makeTextSmaller:sender];
-}
+- (IBAction)makeTextSmaller:(id)sender { 	[currentWebView makeTextSmaller:sender]; 	}
 
-- (IBAction)showQDownloadWindow:(id)sender {
-	[quickDownloadWindow makeKeyAndOrderFront:self];
-}
+- (IBAction)showQDownloadWindow:(id)sender{	[quickDownloadWindow makeKeyAndOrderFront:self]; }
 
 - (void)toggleSlideBrowse {
 	if(!inWebsposeMode)
@@ -1166,24 +1133,18 @@ static NSString *strTemp = nil;
 			// window is off the screen
 			[self slideInForcingToFront: YES]; // slide in
 			[currentWebView setHostWindow:slideWindow];
-		} else if (windowIsVisible) {
-			// window is on the screen
-			[self slideOut]; // slide out
-		}
+		} else if (windowIsVisible)  			[self slideOut];			// window is on the screen // slide out
 	}
 }
 
-- (void)slideInForcingToFront: (BOOL) forceToFront {
+- (void)slideInForcingToFront: (BOOL) forceToFront
+{
 	[NSApp activateIgnoringOtherApps: forceToFront];
 	[slideWindow setOnScreen: YES];
 	windowIsVisible = YES; // make our window visible variable YES
 }
 
-- (void)slideOut {
-	[slideWindow setOnScreen: NO];
-	
-	windowIsVisible = NO;
-}
+- (void)slideOut { 	[slideWindow setOnScreen: NO];   windowIsVisible = NO;	}
 
 - (void)filterErrorMessage:(NSString *)msg forWebView: (WebView*) webView
 {
@@ -1219,13 +1180,8 @@ static NSString *strTemp = nil;
 	if(keyWindow)
 	{
 		if(keyWindow == slideWindow || keyWindow == websposeWindow)
-		{
 			[tabController removeTab: [tabController selectedTab] redraw: YES resize: YES];
-		}
-		else
-		{
-			[keyWindow close];
-		}
+		else 			[keyWindow close];
 	}
 }
 
@@ -1238,21 +1194,12 @@ static NSString *strTemp = nil;
 	WebView*		newView		= [self createWebView];
 	NSUserDefaults* defaults	= [NSUserDefaults standardUserDefaults];
 	
-	if([defaults boolForKey: kSelectNewTabs])
-	{
-		[tabController newTabWithWebView: newView select: YES];
-	}
-	else
-	{
-		[tabController newTabWithWebView: newView select: NO];
-	}
+	[defaults boolForKey: kSelectNewTabs] ? [tabController newTabWithWebView: newView select: YES] :[tabController newTabWithWebView: newView select: NO];
+
 }
 
 - (IBAction)openLocation:(id)sender {
-	if ([urlField isHidden]) {
-		[searchField setHidden:NO];
-		[urlField setHidden:NO];
-	}
+	if ([urlField isHidden]) { [searchField setHidden:NO];		[urlField setHidden:NO]; }
 	[[self URLField] selectText:self];
 }
 
@@ -1948,8 +1895,8 @@ static NSString *strTemp = nil;
 	}
 }
  
-- (void)webView:(WebView *)sender
-didStartProvisionalLoadForFrame:(WebFrame *)frame {
+- (void)webView:(WebView *)sender didStartProvisionalLoadForFrame:(WebFrame *)frame
+{
 	DBTab* tab = [tabController tabWithWebView: sender];
 	NSString *urlString = [[[[frame provisionalDataSource] request] URL] absoluteString];
 	

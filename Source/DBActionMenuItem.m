@@ -33,7 +33,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 }
 
 - (void)drawRect:(NSRect)rect {
-	NSMutableDictionary *textStatic = [[NSMutableDictionary alloc] init];
+	NSMD *textStatic = [[NSMD alloc] init];
 	textStatic[NSForegroundColorAttributeName] = [NSColor colorWithDeviceWhite:1.0 alpha:1.0];
 	textStatic[NSFontAttributeName] = [NSFont systemFontOfSize:12];
 	
@@ -46,7 +46,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 }
 
 - (void)mouseDown:(NSEvent *)theEvent {
-	NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+	NSMD *dic = [[NSMD alloc] init];
 	dic[@"sender"] = label;
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"DBActionMenuItemNotification"
 														object:self

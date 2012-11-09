@@ -17,7 +17,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	NSColor*				finishedTextColor;
 	NSInteger						textSize;
 	NSInteger						selectedRow;
-	NSMutableDictionary*	textAttributes;
+	NSMD*	textAttributes;
 	CGFloat						rowHeight;
 	CGFloat						topPadding;
 }

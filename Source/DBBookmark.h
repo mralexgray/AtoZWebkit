@@ -33,7 +33,7 @@ extern NSString* kDBDeleteBookmarkNotification;
 - (id) initWithURL: (NSURL*) URL title: (NSString*) title;
 - (void) load;
 - (void) remove;
-- (NSMutableDictionary*) dictionary;
+- (NSMD*) dictionary;
 
 - (NSURL*) URL;
 - (void) setURL: (NSURL*) URL;

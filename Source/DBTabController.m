@@ -289,7 +289,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 				[[[tabView tabViewItemAtIndex: i] view] setNeedsDisplay: YES];
 				
 				// Send notification
-				NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+				NSMD *dic = [[NSMD alloc] init];
 				dic[@"WebView"] = [[tabView tabViewItemAtIndex: i] view];
 				dic[@"Tab"] = tabs[i];
 				[[NSNotificationCenter defaultCenter] postNotificationName:@"DBTabSelected"

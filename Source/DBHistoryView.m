@@ -25,7 +25,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		finishedTextColor		= [[NSColor colorWithDeviceRed: 0.8 green: 0.8 blue: 0.8 alpha: 0.5] retain];
 		
 		textSize				= 10;
-		textAttributes			= [[NSMutableDictionary alloc] init];
+		textAttributes			= [[NSMD alloc] init];
 		
 		rowHeight				= 18;
 		topPadding				= 30;

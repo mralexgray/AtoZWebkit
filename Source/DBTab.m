@@ -408,7 +408,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 {
 	if (label != nil)
 	{
-		NSMutableDictionary*	labelAttributes = [NSMutableDictionary dictionary];
+		NSMD*	labelAttributes = [NSMD dictionary];
 		CGFloat					drawY			= 5;
 		
 		[labelAttributes setValue: [NSFont systemFontOfSize: 11] forKey: NSFontAttributeName];
@@ -546,7 +546,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		}
 		else
 		{
-			NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+			NSMD *dic = [[NSMD alloc] init];
 			[dic setValue: self forKey: @"clickedTab"];
 			
 			[[NSNotificationCenter defaultCenter] postNotificationName: @"DBTabClicked"
@@ -580,7 +580,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 #pragma mark Notifications
 
 - (void)sendCloseNotification {
-	NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+	NSMD *dic = [[NSMD alloc] init];
 	dic[@"sender"] = self;
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"DBTabWantsToBeClosed"
 														object:self

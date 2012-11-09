@@ -213,7 +213,7 @@ NSString* const kBookmarkWindowNibName			= @"Bookmarks";
 
 - (BOOL) saveBookmarks
 {
-	NSMutableDictionary*	bookmarksToWrite	= [NSMutableDictionary dictionary];
+	NSMD*	bookmarksToWrite	= [NSMD dictionary];
 	NSMutableArray*			bookmarkDicts		= [NSMutableArray array];
 	NSEnumerator*			bookmarkEnumerator	= [mBookmarks objectEnumerator];
 	DBBookmark*				currentBookmark		= nil;

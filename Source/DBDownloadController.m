@@ -258,7 +258,7 @@ NSString* downloadFileWrapperExtension		= @"download";
 	
 	DBDownloadObject*	object				= [self objectWithDownload: download];
 	NSFileManager*	fileManager			= [NSFileManager defaultManager];
-	NSString*		saveLocation		= [[[NSUserDefaults standardUserDefaults] objectForKey: kDownloadLocation] stringByExpandingTildeInPath];
+	NSString*		saveLocation		= [[NSUserDefaults standardUserDefaults][kDownloadLocation] stringByExpandingTildeInPath];
 	NSString*		 fileWrapperPath		= nil;
 	
 	if (![fileManager fileExistsAtPath: saveLocation])

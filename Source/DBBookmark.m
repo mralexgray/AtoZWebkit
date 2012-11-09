@@ -102,13 +102,13 @@ NSString*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 
 #pragma mark -
 
-- (NSMutableDictionary*) dictionary
+- (NSMD*) dictionary
 {
-	NSMutableDictionary* dictionary = nil;
+	NSMD* dictionary = nil;
 	
 	if (mTitle != nil)
 	{
-		dictionary = [NSMutableDictionary dictionary];
+		dictionary = [NSMD dictionary];
 		
 		dictionary[kBookmarkInfoTitleKey] = mTitle;
 		
@@ -291,9 +291,9 @@ NSString*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 
 #pragma mark -
 
-- (NSMutableDictionary*) dictionary
+- (NSMD*) dictionary
 {
-	NSMutableDictionary*	dictionary		= [super dictionary];
+	NSMD*	dictionary		= [super dictionary];
 	NSMutableArray*			subBookmarks	= nil;
 	
 	if (dictionary != nil && mContainedBookmarks != nil)

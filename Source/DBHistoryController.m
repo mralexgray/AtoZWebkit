@@ -201,7 +201,7 @@ NSString* nameOfHistoryFile = @"History.plist";
 	{
 		WebHistoryItem*			itemToLoad	= [self itemAtIndex: selectedRow - 1];
 		NSString*				URLString	= [itemToLoad URLString];
-		NSMutableDictionary*	userInfo	= [[NSMutableDictionary alloc] init];
+		NSMD*	userInfo	= [[NSMD alloc] init];
 		
 		userInfo[@"URLString"] = URLString;
 		
