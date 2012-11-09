@@ -1,0 +1,107 @@
+10
+
+dir
+13
+http://svn.joeldev.com/deskbrowse/English.lproj
+http://svn.joeldev.com/deskbrowse
+
+
+
+2008-11-20T02:43:37.976831Z
+11
+joel
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+c4edcdc4-0c2d-4c0c-a55d-62e22721e47c
+
+MainMenu.nib
+dir
+
+RegisterDeskBrowse~.nib
+dir
+
+BookmarkEdit.nib
+dir
+
+NewBookmark.nib
+dir
+
+ImportBookmarks.nib
+dir
+
+Webspose~.nib
+dir
+
+Bookmarks.nib
+dir
+
+InfoPlist.strings
+file
+
+
+
+
+2012-01-06T17:05:05.000000Z
+e5fc4c145944a2692e1f5cf0a8a378f0
+2008-11-13T01:22:13.766279Z
+8
+joel
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+326
+
+ViewSource~.nib
+dir
+
+Downloads.nib
+dir
+
+Source.nib
+dir
+
+Preferences.nib
+dir
+
+History.nib
+dir
+
+Websposé~.nib
+dir
+
+HotKey.nib
+dir
+
+ChangeHotkey~.nib
+dir
+

@@ -1,0 +1,52 @@
+/*
+*****************************
+The DeskBrowse source code is the legal property of its developers, Joel Levin and Ian Elseth
+*****************************
+*/
+
+#import <Cocoa/Cocoa.h>
+#import <WebKit/WebKit.h>
+
+#import "DeskBrowseConstants.h"
+#import	"DBHistoryView.h"
+#import	"DBKeyStuff.h"
+#import "NSFileManagerSGSAdditions.h"
+
+
+@interface DBHistoryController : NSObject
+{
+	id			view;
+	WebHistory*	webHistory;
+	NSInteger			numberOfDaysToDisplay;
+}
+
+- (void) setView: (id) newView;
+
+// Save/Load
+- (void) loadHistoryFile;
+- (void) saveHistoryFile;
+
+// Notifications
+- (void) historyDidAddItems: (NSNotification*) notification;
+- (void) historyDidRemoveItems: (NSNotification*) notification;
+- (void) historyDidRemoveAllItems: (NSNotification*) notification;
+
+// UI
+- (void) clearHistory;
+- (void) loadSelected;
+- (void) removeSelected;
+
+// History View
+- (NSInteger) numberOfDates;
+- (NSInteger) numberOfItemsForDate: (NSCalendarDate*) date;
+- (NSInteger) numberOfRows;
+- (BOOL) isDateAtIndex: (NSInteger) index;
+- (NSCalendarDate*) dateAtIndex: (NSInteger) index;
+- (id) itemAtIndex: (NSInteger) index;
+- (id) objectForDate: (NSCalendarDate*) date index: (NSInteger) index;
+- (void) rowClicked: (NSInteger) row;
+
+- (NSMenu *)menuForHistory;
+
+@end
+
