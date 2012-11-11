@@ -39,7 +39,8 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	NSR		textFrame	= NSMakeRect(	frame.origin.x + padding.width, frame.origin.y + padding.height,
 										frame.size.width - padding.width * 2, frame.size.height - padding.height * 2);
 
-	NSD*	stringAttributes		= @{ @"NSColor": WHITE, NSFontAttributeName : mTextFont };
+	NSD*	stringAttributes		= [NSDictionary dictionaryWithObjectsAndKeys:WHITE, @"NSColor",mTextFont, NSFontAttributeName,nil];
+//	 : mTextFont };
 	NSS*	drawText			= [mText truncatedToWidth: textFrame.size.width withAttributes: stringAttributes];
 //	NSSZ	stringSize			= [drawText sizeWithAttributes: stringAttributes];
 
@@ -49,8 +50,8 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 //		textFrame.origin.x	= textFrame.origin.x + extraWidth / 2;
 //	}
 //	textFrame.size.height = stringSize.height;
-//	[drawText drawInRect: textFrame withAttributes: stringAttributes];
-	[drawText drawInRect:textFrame withFontNamed:[AtoZ randomFontName] andColor:WHITE];
+	[drawText drawInRect: textFrame withAttributes: stringAttributes];
+//	[drawText drawInRect:textFrame withFontNamed:[AtoZ randomFontName] andColor:WHITE];
 
 }
 

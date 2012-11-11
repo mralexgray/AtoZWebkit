@@ -409,10 +409,13 @@ NSInteger oppositeBoolInt(NSInteger bi) {
 {
 	NSUserDefaults*	defaults	= [NSUserDefaults standardUserDefaults];
 	WebPreferences*	preferences = [WebPreferences standardPreferences];
+
 	
 	[showMenuBarAndDock setState:	stateFromBool([DBPlistUtils isBackgroundApp])];
-	[showMenuExtra setState:		[defaults boolForKey:		kShowMenuExtra]];
-	[selectNewTabs setState:		[defaults boolForKey:		kSelectNewTabs]];
+
+	self.bgColor		=		defaults[kSliderBGColor];
+	[showMenuExtra setState:			[defaults boolForKey:		kShowMenuExtra]];
+	[selectNewTabs setState:			[defaults boolForKey:		kSelectNewTabs]];
 	[checkForUpdates setState:		[defaults boolForKey:		kCheckForUpdates]];
 	[homePage setStringValue:		defaults[kHomePage]];
 	[loadHomePageOnLaunch setState:	[defaults boolForKey:		kLoadHomePageOnLaunch]];

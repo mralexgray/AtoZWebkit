@@ -37,6 +37,9 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	IBOutlet NSTABV		*tabView;
 	NSSZ				sizeOfGeneralPane, sizeOfWebPane, sizeOfWebsposePane;
 }
+
+@property (strong) NSColor *bgColor;
+
 - (IBAction) closeWindow: 			 (id) sender;
 - (IBAction) savePreferences: 		 (id) sender;
 - (IBAction) resetPreferences: 		 (id) sender;

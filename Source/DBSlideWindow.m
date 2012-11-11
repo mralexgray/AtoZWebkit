@@ -30,7 +30,7 @@ extern OSStatus CGSClearWindowTags(const CGSConnection cid, const CGSWindow wid,
 	[self setLevel:NSNormalWindowLevel];
 	[self setOpaque:YES];
 
-	NSC* c = [NSUserDefaults standardUserDefaults][kSliderBGColor] ?: RANDOMCOLOR;
+	NSC* c = [[NSUserDefaults standardUserDefaults]colorForKey:kSliderBGColor] ?: RANDOMCOLOR;
 
 	[self setBackgroundColor:c];//[ leatherTintedWithColor:RANDOMCOLOR]];// blackColor]];
 	[self setAlphaValue:1.0];
@@ -38,11 +38,21 @@ extern OSStatus CGSClearWindowTags(const CGSConnection cid, const CGSWindow wid,
 	minWidth = 400.0;
 	 return self;
 }
+- (void) awakeFromNib
+{
+//	NSIMG * e = [_dragImageViewTopRight image].copy;
+
+	[[_dragImageViewTopRight image]setFlipped:YES];// = [NSIMG swatchWithColor:RED size:AZSizeFromDimension(25)];///	e = [e rotated:90];
+//	[_dragImageViewTopRight setImage:e];//[[NSImage systemImages]scaledToMax:15]];
+	//	[_dragImageViewTopRight setNeedsDisplay:YES];
+
+}
 
 -(void) setBackgroundColor:(NSColor *)color
 {
 	_backgroundColor = [NSColor leatherTintedWithColor:color];
-	[NSUserDefaults standardUserDefaults][kSliderBGColor] = color;
+	[[NSUserDefaults standardUserDefaults] setColor:_backgroundColor  forKey:kSliderBGColor];
+	[self display];
 }
 
 #pragma mark -

@@ -378,8 +378,8 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 {
 //	[mBackgroundColor set];
 //	[[NSColor whiteColor] set];
-	[GRAY3 set];
-	NSRFill(rect);
+//	[GRAY3 set];
+//	NSRFill(rect);
 //	NSImage* image = [NSImage imageNamed: @"bb-top-bookmark-stretch"];
 //	[image drawInRect: rect fromRect: NSMakeRect(0, 0, [image size].width, [image size].height) operation: NSCompositeCopy fraction: 1.0];
 }

@@ -976,7 +976,9 @@ static NSS *strTemp 	= nil;
 	[self loadURLString: hp];
 }
 - (IBAction)makeTextLarger:(id)sender { 	[currentWebView makeTextLarger:sender]; 	}
+
 - (IBAction)makeTextSmaller:(id)sender { 	[currentWebView makeTextSmaller:sender]; 	}
+
 - (IBAction)showQDownloadWindow:(id)sender{	[quickDownloadWindow makeKeyAndOrderFront:self]; }
 - (void)toggleSlideBrowse {
 	if(!inWebsposeMode)
@@ -1362,10 +1364,17 @@ static NSS *strTemp 	= nil;
 			[tabController newTabWithWebView: newWebView select: NO URLString: [homePageURL absoluteString]];
 			
 			DBTab* newTab = [tabController tabWithWebView: newWebView];
-			
+			[[newWebView preferences] setDefaultFontSize:14];
+			[[newWebView preferences] setStandardFontFamily:@"Ubuntu Mono Bold"];
+			[[newWebView preferences] setDefaultFixedFontSize:14];
+			[[newWebView preferences] setFixedFontFamily:@"Ubuntu Mono Bold"];
+			[[newWebView preferences] setMinimumFontSize:14];
+			[[newWebView preferences] setSerifFontFamily:@"Ubuntu Mono Bold"];
 			if (newTab != nil)
 			{	
 				[[newWebView mainFrame] loadRequest: homePageURLRequest];
+				[[[[newWebView mainFrame] frameView] documentView] scaleUnitSquareToSize:NSMakeSize(4, 4)];
+				//			[[[[webView mainFrame] frameView] documentView] setNeedsDisplay:YES];
 			}
 		}
 		else

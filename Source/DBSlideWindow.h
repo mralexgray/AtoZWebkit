@@ -26,6 +26,8 @@ typedef enum
 @property (ASS, NATOM)	NSSZ		clickDistanceFromWindowEdge;
 @property (ASS, NATOM)	DBDragMode	currentDragMode;
 @property (unsafe_unretained)	id			controller;
+@property (assign)	IBOutlet NSImageView *dragImageViewTopRight;
+
 - (void) saveFrame;
 - (void) loadFrame;
 	/* Accessor methods */

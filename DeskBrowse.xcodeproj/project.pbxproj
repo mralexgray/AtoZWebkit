@@ -198,6 +198,7 @@
 		7B43D31C164CDACD00AC4D26 /* DBKeyStuff.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C4380EC214EA00BD0054 /* DBKeyStuff.m */; };
 		7B43D31E164CDB7B00AC4D26 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B43D31D164CDB7A00AC4D26 /* SystemConfiguration.framework */; };
 		7B7A855315F8790F0071741C /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B7A855215F8790F0071741C /* AppKit.framework */; };
+		7BFCBD38164DF5A100859A93 /* DBHotKeyTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C43C0EC2150100BD0054 /* DBHotKeyTextField.m */; };
 		8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* MainMenu.nib */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -1237,6 +1238,7 @@
 				5D16F7550ED2643400052573 /* DBWhiteView.m in Sources */,
 				7B43D31B164CDAB500AC4D26 /* DBHotKeyController.m in Sources */,
 				7B43D31C164CDACD00AC4D26 /* DBKeyStuff.m in Sources */,
+				7BFCBD38164DF5A100859A93 /* DBHotKeyTextField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

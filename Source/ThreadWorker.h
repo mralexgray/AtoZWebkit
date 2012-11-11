@@ -239,7 +239,7 @@ didEndSelector:(SEL)didEndSelector;
  @abstract Make sure we clean up after ourselves.
  @discussion Make sure we clean up after ourselves.
  */
-- (void) dealloc;
+//- (void) dealloc;
 
 
 /*!

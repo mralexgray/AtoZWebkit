@@ -43,7 +43,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 #pragma mark -
 - (void) sendActionToTarget
 {
-	[[self target] performSelectorWithoutWarnings:[self action] withObject: self];
+	[[self target] performSelector:[self action] withObject: self];
 }
 
 #pragma mark -
