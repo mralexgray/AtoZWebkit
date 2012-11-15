@@ -6,6 +6,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 
 #import "DBHotKeyController.h"
 #import "DBWindowLevel.h"
+#import <Carbon/Carbon.h>
 
 @implementation DBHotKeyController
 

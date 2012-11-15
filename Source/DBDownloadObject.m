@@ -40,7 +40,6 @@ NSS* kFinishedString	= @"Finished";
 	[mURL					release];
 	
 }
-#pragma mark -
 
 // URL download
 - (WebDownload*) URLDownload

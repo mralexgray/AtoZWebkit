@@ -23,7 +23,6 @@ extern OSStatus CGSClearWindowTags(const CGSConnection cid, const CGSWindow wid,
 		else		CGSClearWindowTags(connectionID, winNumber, theTags, 32);
 	}
 }
-#pragma mark -
 - (id)initWithContentRect:(NSR)contentRect styleMask:(NSUI)aStyle backing:(NSBackingStoreType)bufferingType defer:(BOOL)flag
 {
 	if (!(self = [super initWithContentRect:contentRect styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:NO])) return nil;
@@ -55,7 +54,6 @@ extern OSStatus CGSClearWindowTags(const CGSConnection cid, const CGSWindow wid,
 	[self display];
 }
 
-#pragma mark -
 - (BOOL)canBecomeKeyWindow
 {
 	return YES;
@@ -65,7 +63,6 @@ extern OSStatus CGSClearWindowTags(const CGSConnection cid, const CGSWindow wid,
 	return YES;
 }
 
-#pragma mark -
 /*
  * 
  *	Mouse event handlers
@@ -290,7 +287,6 @@ extern OSStatus CGSClearWindowTags(const CGSConnection cid, const CGSWindow wid,
 	currentDragMode	= DragModeNone;
 }
 
-#pragma mark -
 - (void) saveFrame
 {
 	NSUserDefaults* userDefaults	= [NSUserDefaults standardUserDefaults];
@@ -313,7 +309,6 @@ extern OSStatus CGSClearWindowTags(const CGSConnection cid, const CGSWindow wid,
 	[self setFrame: newFrame display: YES animate: NO];
 }
 
-#pragma mark -
 /* Accessor methods */
 - (void) setOnScreen: (BOOL) flag
 {

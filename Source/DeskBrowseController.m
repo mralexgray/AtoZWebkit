@@ -87,6 +87,9 @@ static NSS *strTemp 	= nil;
 	[slideWindow setDelegate: (id)self];
 	[websposeWindow setDelegate: (id)self];
 
+	menuWindow = [AZMenuBarWindow new];
+	[menuWindow display];
+
 
 	// Register for notifications
 	[AZNOTCENTER addObserver: self selector: @selector(handleNotification:)  name: @"DBNotification" 				object: nil];
@@ -96,6 +99,10 @@ static NSS *strTemp 	= nil;
 	[AZNOTCENTER addObserver: self selector: @selector(handleNotification:)  name: @"DBActionMenuItemNotification" 	object: nil];
 	[AZNOTCENTER addObserver: self selector: @selector(tabChanged:) 		 name: @"DBTabSelected" 				   	object: nil];
 	[AZNOTCENTER addObserver: self selector: @selector(slideWindowResized:)  name: @"DBSlideWindowResized" 		   	object: nil];
+
+	[AZNOTCENTER addObserver: self selector: @selector(toggleSlideBrowse)  name: kClickedOnTabRibbon 			   	object: nil];
+
+
 	[AZNOTCENTER addObserver: self selector: @selector(loadURLNotification:) name: @"DBLoadURLNotification" 			object: nil];
 	[AZNOTCENTER addObserver: self selector: @selector(windowDidResize:) 	 name:NSWindowDidResizeNotification  	object:nil];
 	[AZNOTCENTER addObserver: self selector: @selector(handleNewTabRequest:) name:@"DBNewBlankTab" 					object:nil];
@@ -125,6 +132,31 @@ static NSS *strTemp 	= nil;
 	[[actionMenuWindow contentView] addSubview:actionMenu];
 	[actionMenuWindow setDelegate:(id)self];
 	[actionMenuWindow setAcceptsMouseMovedEvents: YES];
+
+
+
+	windowControlWindow	= [[DBActionMenuWindow alloc] initWithContentRect:[self windowControlWindowFrame]
+																styleMask:NSBorderlessWindowMask
+															   	  backing:NSBackingStoreRetained defer:NO];
+
+
+	windowControlView = [[DBActionMenuView alloc] initWithFrame:AZRectFromSize([self windowControlWindowFrame].size)];
+//	!inWebsposeMode ?
+//	[windowControlWindow setFrame: NSMakeRect(	[windowControlWindow frame].origin.x,
+//															 [slideWindow frame].origin.y + 47,
+//															 [windowControlWindow frame].size.width,
+//															 [windowControlWindow frame].size.height) display: YES]
+//	: [windowControlWindow setFrame: NSMakeRect(	[windowControlWindow frame].origin.x,
+//											 [websposeWindow frame].origin.y + 47,
+//											 [windowControlWindow frame].size.width,
+//											 [windowControlWindow frame].size.height) display: YES];
+	[[windowControlWindow contentView] addSubview:windowControlView];
+	[windowControlWindow setDelegate:(id)self];
+	[windowControlWindow setAcceptsMouseMovedEvents: YES];
+
+
+	self.calculator = [[AZCalculatorController alloc]init];//WithNibName:@"Calculator" bundle:[NSBundle bundleForClass:[AZCalculatorController class]]];// alloc] initWithWindowNibName:@"calculator"];
+
 	
 	return self;
 }
@@ -179,6 +211,11 @@ static NSS *strTemp 	= nil;
 	[stop 		setToolTip:@"Stop Loading"				];
 	[reload 	setToolTip:@"Reload The Current Page	"	];
 	[home 		setToolTip:@"Go Home"					];
+
+	AZLOG(self.calculator);
+	AZLOG(self.calculator.window.propertiesPlease);
+	[self.calculator showWindow:nil];
+
 }
 //- (void)dealloc
 //{
@@ -200,7 +237,6 @@ static NSS *strTemp 	= nil;
 //	[symbolicHotKeyController	release];
 //	
 //}
-#pragma mark -
 - (void) setupTabView
 {
 	NSTabViewItem*	firstTab	= [tabView tabViewItemAtIndex: 0];
@@ -350,6 +386,34 @@ static NSS *strTemp 	= nil;
 	
 	[[webViewToLoadURL mainFrame] loadRequest: URLRequest];
 }
+
+-(NSR) windowControlWindowFrame
+{
+	NSR frame = [slideWindow frame];
+	frame.origin.x 		+= frame.size.width;
+	frame.origin.y 		+= (frame.size.height / 2);
+	frame.size.height 	-= (frame.size.height / 2);
+	frame.size.width 	= 50;
+	return frame;
+}
+- (IBAction)toggleWindowControls:(id)sender;
+{
+	if (windowControlWindowVisible)
+	{
+		[windowControlWindow fadeOut];
+		windowControlWindowVisible = NO;
+	} else {		// Action menu is not visible
+//		if (inWebsposeMode) 		[windowControlWindow setFrame: NSMakeRect([actionMenuWindow frame].origin.x, [websposeWindow frame].origin.y + 15, [actionMenuWindow frame].size.width, [actionMenuWindow frame].size.height) display: YES];
+//	else
+		[windowControlWindow setFrame:[self windowControlWindowFrame] display: YES];
+		[windowControlWindow orderFront: self];
+		[windowControlWindow fadeIn];
+		windowControlWindowVisible = YES;
+	}
+}
+
+
+
 - (IBAction)toggleActionMenu:(id)sender {
 	if (actionMenuVisible)
 	{
@@ -697,7 +761,6 @@ static NSS *strTemp 	= nil;
 		loadingState = statusText; // set the loading state to the status text
 	}
 }
-#pragma mark -
 #pragma mark IBActions
 - (IBAction)loadURL:(id)sender {
 	//DBTab*			tab		= [tabController tabWithWebView: currentWebView];
@@ -1258,7 +1321,6 @@ static NSS *strTemp 	= nil;
 	return actionMenuVisible;
 }
 
-#pragma mark -
 #pragma mark NSWindow Delegate Methods
 - (void) windowDidMove: (NSNotification*) aNotification
 {
@@ -1275,7 +1337,6 @@ static NSS *strTemp 	= nil;
 	}
 }
 
-#pragma mark -
 #pragma mark NSApplication Delegate Methods
 - (void) mouseDown: (NSEvent*) theEvent
 {
@@ -1334,7 +1395,6 @@ static NSS *strTemp 	= nil;
 	}
 }
 
-#pragma mark -
 - (void)applicationWillFinishLaunching:(NSNotification*)notification
 {	
 	[[NSAppleEventManager sharedAppleEventManager] setEventHandler:self andSelector:@selector(openURL:withReplyEvent:) forEventClass:'GURL' andEventID:'GURL'];
@@ -1418,7 +1478,6 @@ static NSS *strTemp 	= nil;
 	// ---------------------------------------------
 }
 
-#pragma mark -
 - (BOOL)application:(NSApplication *)theApplication openFile:(NSS *)filename {/*
 	NSURL *furl = [NSURL fileURLWithPath:filename];
 	[[currentWebView mainFrame] loadRequest:[NSURLRequest requestWithURL:furl]];
@@ -1505,7 +1564,6 @@ static NSS *strTemp 	= nil;
 	[NSApp replyToOpenOrPrint:NSApplicationDelegateReplySuccess];*/
 }
 
-#pragma mark -
 - (void) applicationWillResignActive: (NSNotification*) aNotification
 {
 	if (actionMenuVisible)
@@ -1528,7 +1586,6 @@ static NSS *strTemp 	= nil;
 	[bookmarkController save];
 }
 
-#pragma mark -
 #pragma mark WebKit
 - (void) showErrorPageForReason:(NSS *)reason title:(NSS *)title webview:(WebView *)wv {
 	// load the template html file

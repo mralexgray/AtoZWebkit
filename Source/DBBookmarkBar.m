@@ -67,7 +67,6 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 	[self drawCellsInRect: rect];
 }
 
-#pragma mark -
 
 - (void) setBookmarkController: (DBBookmarkController*) bookmarkController
 {
@@ -180,7 +179,6 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 	[self setFrame: NSMakeRect(position.x, position.y, frame.size.width, frame.size.height)];
 }
 
-#pragma mark -
 - (void) mouseDown: (NSEvent*) event
 {
 	NSP						clickPoint	= [self convertPoint: [event locationInWindow] fromView: nil];
@@ -217,7 +215,6 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 	}
 }
 
-#pragma mark -
 - (NSA*) menuItemsForPopUpButton: (NSPopUpButton*) popUpButton
 {
 	NSMutableArray*				menuItems		= [NSMutableArray array];
@@ -253,7 +250,6 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 }
 
 @end
-#pragma mark -
 
 @implementation DBBookmarkBar (DraggingDesitination)
 
@@ -316,7 +312,6 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 	[self setNeedsDisplay: YES];
 }
 
-#pragma mark -
 - (BOOL) prepareForDragOperation: (id <NSDraggingInfo>) sender
 {
 	return YES;
@@ -352,7 +347,6 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 }
 
 @end
-#pragma mark -
 
 @implementation DBBookmarkBar (Private)
 
@@ -373,7 +367,6 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 	return maxRightEdge;
 }
 
-#pragma mark -
 - (void) drawBackgroundInRect: (NSR) rect
 {
 //	[mBackgroundColor set];
@@ -431,7 +424,6 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 	NSRFill(rect);
 }
 
-#pragma mark -
 - (void) arrangeDBBookmarkBarCells
 {
 	[self adjustPopUpButtonPosition];
@@ -471,7 +463,6 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 	}
 }
 
-#pragma mark -
 - (void) setUpPopUpButton
 {
 	NSR popUpButtonFrame		= NSMakeRect(0, 3, 51, 15);

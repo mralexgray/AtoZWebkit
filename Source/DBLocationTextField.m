@@ -26,7 +26,6 @@ const short kProgressIndicatorPadding = 3;
 	return [DBLocationTextFieldCell class];
 }
 
-#pragma mark -
 - (void) awakeFromNib
 {
 	[self setImage: [NSImage imageNamed: @"TestImage"]];
@@ -45,13 +44,11 @@ const short kProgressIndicatorPadding = 3;
 	[mProgressIndicator release];
 }
 
-#pragma mark -
 - (BOOL) isFlipped
 {
 	return YES;
 }
 
-#pragma mark -
 - (NSR) progressIndicatorRectForFrame: (NSR) frame
 {
 	return NSMakeRect(NSWidth(frame) - NSHeight(frame), 0, NSHeight(frame), NSHeight(frame));
@@ -74,7 +71,6 @@ const short kProgressIndicatorPadding = 3;
 	[[self cell] setImage: image];
 }
 
-#pragma mark -
 - (void) frameDidChange: (NSNotification*) notification
 {
 	NSR spinnerRect = [self progressIndicatorRectForFrame: [self frame]];

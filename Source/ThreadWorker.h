@@ -96,7 +96,9 @@
  </pre>
  */
 @interface ThreadWorker : NSObject
-//{
+{
+	NSConditionLock *_cancelled;
+}
 @property (NATOM, STRNG)	id target;	//              _target;            // The object whose selector will be called
 @property (NATOM, ASS)		SEL selector;//              _selector;          // The selector that will be called in another thread
 @property (NATOM, STRNG)	id argument;//               _argument;          // The argument that will be passed to the selector
@@ -104,7 +106,7 @@
 @property (NATOM, STRNG)	NSConnection  *callingConnection;//  *_callingConnection; // Connection used to safely communicate between threads
 @property (NATOM, STRNG)	NSPort  *port1, *port2;//        *_port1;
 //	NSPort          *_port2;
-@property (NATOM, STRNG)	NSConditionLock *cancelled;//*_cancelled;
+//@property (NATOM, STRNG)	NSConditionLock *cancelled;//*_cancelled;
 @property (NATOM, ASS)		BOOL	endRunLoop;//	        _endRunLoop;
 //}
 

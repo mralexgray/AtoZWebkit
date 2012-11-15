@@ -82,7 +82,6 @@ NSInteger oppositeBoolInt(NSInteger bi) {
 	
 	[toolbar setSelectedItemIdentifier:@"com.sgs.prefswindow.toolbar.general"];
 }
-#pragma mark -
 - (void)showGeneralPane {
 	[tabView selectTabViewItemAtIndex:3];
 	
@@ -128,7 +127,6 @@ NSInteger oppositeBoolInt(NSInteger bi) {
 	[tabView selectTabViewItemAtIndex:2];
 	[[self window] display];
 }
-#pragma mark -
 // -----------------------------------
 //
 // NSToolbar delegate methods
@@ -180,7 +178,6 @@ NSInteger oppositeBoolInt(NSInteger bi) {
 	
 	return identifiers;
 }
-#pragma mark -
 
 // -----------------------------------
 //
@@ -193,7 +190,6 @@ NSInteger oppositeBoolInt(NSInteger bi) {
 	{
 	}
 }
-#pragma mark -
 
 // -----------------------------------
 //
@@ -207,7 +203,6 @@ NSInteger oppositeBoolInt(NSInteger bi) {
 	
 	[super showWindow: sender];
 }
-#pragma mark -
 
 // -----------------------------------
 //
@@ -363,7 +358,6 @@ NSInteger oppositeBoolInt(NSInteger bi) {
 {
 	[NSApp endSheet: changePasswordWindow];
 }
-#pragma mark -
 
 // -----------------------------------
 //

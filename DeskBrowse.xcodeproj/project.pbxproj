@@ -16,7 +16,6 @@
 		3CF8EE7F089ACB57007E7678 /* Bookmarks.nib in Resources */ = {isa = PBXBuildFile; fileRef = 3CF8EE7B089ACB57007E7678 /* Bookmarks.nib */; };
 		3CF8EE80089ACB57007E7678 /* NewBookmark.nib in Resources */ = {isa = PBXBuildFile; fileRef = 3CF8EE7D089ACB57007E7678 /* NewBookmark.nib */; };
 		5D0B722B096DEE630065CC84 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D0B722A096DEE630065CC84 /* Security.framework */; };
-		5D0B7230096DEE860065CC84 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D0B722F096DEE860065CC84 /* CoreFoundation.framework */; };
 		5D16F7550ED2643400052573 /* DBWhiteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D16F7530ED2643400052573 /* DBWhiteView.m */; };
 		5D321166084A6B0800E3C21B /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D321165084A6B0800E3C21B /* ApplicationServices.framework */; };
 		5D3424B3081026B700AC24F4 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D3424B2081026B700AC24F4 /* IOKit.framework */; };
@@ -193,7 +192,8 @@
 		5DC2C6C70EC22C8B00BD0054 /* DBSlideWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C6C60EC22C8B00BD0054 /* DBSlideWindow.m */; };
 		5DDBD3250EC2513F00499681 /* DBActionMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DDBD3240EC2513F00499681 /* DBActionMenuView.m */; };
 		5DF8EE1D07DAD75600097CCE /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF8EE1C07DAD75600097CCE /* WebKit.framework */; };
-		7B43D31A164CD61700AC4D26 /* AtoZ.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B43D319164CD61700AC4D26 /* AtoZ.framework */; };
+		7B0E728D1654E07500A1A613 /* AtoZ.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B43D319164CD61700AC4D26 /* AtoZ.framework */; };
+		7B32D73D1650C080009540EB /* Calculator.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B32D73C1650C080009540EB /* Calculator.xib */; };
 		7B43D31B164CDAB500AC4D26 /* DBHotKeyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C43E0EC2150100BD0054 /* DBHotKeyController.m */; };
 		7B43D31C164CDACD00AC4D26 /* DBKeyStuff.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C4380EC214EA00BD0054 /* DBKeyStuff.m */; };
 		7B43D31E164CDB7B00AC4D26 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B43D31D164CDB7A00AC4D26 /* SystemConfiguration.framework */; };
@@ -464,6 +464,8 @@
 		5DDBD3230EC2513F00499681 /* DBActionMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBActionMenuView.h; path = Source/DBActionMenuView.h; sourceTree = "<group>"; };
 		5DDBD3240EC2513F00499681 /* DBActionMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBActionMenuView.m; path = Source/DBActionMenuView.m; sourceTree = "<group>"; };
 		5DF8EE1C07DAD75600097CCE /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = /System/Library/Frameworks/WebKit.framework; sourceTree = "<absolute>"; };
+		7B0E728B1654E05300A1A613 /* AtoZ.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AtoZ.framework; path = ../../../../../Users/localadmin/Library/Developer/Xcode/DerivedData/build/Products/Release/AtoZ.framework; sourceTree = "<group>"; };
+		7B32D73C1650C080009540EB /* Calculator.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Calculator.xib; path = ../AtoZ/Classes/Calculator.xib; sourceTree = "<group>"; };
 		7B43D319164CD61700AC4D26 /* AtoZ.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AtoZ.framework; path = /Library/Frameworks/AtoZ.framework; sourceTree = "<absolute>"; };
 		7B43D31D164CDB7A00AC4D26 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = /System/Library/Frameworks/SystemConfiguration.framework; sourceTree = "<absolute>"; };
 		7B7A855215F8790F0071741C /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -478,16 +480,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B43D31E164CDB7B00AC4D26 /* SystemConfiguration.framework in Frameworks */,
-				7B43D31A164CD61700AC4D26 /* AtoZ.framework in Frameworks */,
-				7B7A855315F8790F0071741C /* AppKit.framework in Frameworks */,
+				7B0E728D1654E07500A1A613 /* AtoZ.framework in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
+				7B43D31E164CDB7B00AC4D26 /* SystemConfiguration.framework in Frameworks */,
+				7B7A855315F8790F0071741C /* AppKit.framework in Frameworks */,
 				5DF8EE1D07DAD75600097CCE /* WebKit.framework in Frameworks */,
 				5D94505507E2711B00F7CC66 /* Carbon.framework in Frameworks */,
 				5D3424B3081026B700AC24F4 /* IOKit.framework in Frameworks */,
 				5D321166084A6B0800E3C21B /* ApplicationServices.framework in Frameworks */,
 				5D0B722B096DEE630065CC84 /* Security.framework in Frameworks */,
-				5D0B7230096DEE860065CC84 /* CoreFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -547,6 +548,7 @@
 		29B97314FDCFA39411CA2CEA /* DeskBrowse */ = {
 			isa = PBXGroup;
 			children = (
+				7B0E728B1654E05300A1A613 /* AtoZ.framework */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -960,6 +962,7 @@
 		5DC2C68D0EC22AEA00BD0054 /* nibs */ = {
 			isa = PBXGroup;
 			children = (
+				7B32D73C1650C080009540EB /* Calculator.xib */,
 				29B97318FDCFA39411CA2CEA /* MainMenu.nib */,
 				3C308E4E0816EFF100C0A7E4 /* Preferences.nib */,
 				3C5E442508356C0A00E8F180 /* Downloads.nib */,
@@ -1156,6 +1159,7 @@
 				5DC2C6870EC22A5D00BD0054 /* SearchEngines.plist in Resources */,
 				5DC2C6890EC22A6400BD0054 /* c in Resources */,
 				5DC2C68C0EC22A7100BD0054 /* ImportBookmarks.nib in Resources */,
+				7B32D73D1650C080009540EB /* Calculator.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1344,11 +1348,11 @@
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/localadmin/Desktop/Build/Products/Debug/**",
 					"/Library/Frameworks/**",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = DeskBrowse_Prefix.pch;
@@ -1358,8 +1362,13 @@
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-frameworks",
+					AtoZ,
+				);
 				PRODUCT_NAME = DeskBrowse;
-				SDKROOT = macosx;
+				SDKROOT = "";
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = NO;
 			};
@@ -1373,10 +1382,10 @@
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/localadmin/Desktop/Build/Products/Debug/**",
 					"/Library/Frameworks/**",
 				);
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = DeskBrowse_Prefix.pch;
 				GCC_VERSION = "";
@@ -1385,8 +1394,13 @@
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-frameworks",
+					AtoZ,
+				);
 				PRODUCT_NAME = DeskBrowse;
-				SDKROOT = macosx;
+				SDKROOT = "";
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = NO;
 			};
@@ -1399,10 +1413,10 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/localadmin/Desktop/Build/Products/Debug/**",
 					"/Library/Frameworks/**",
 				);
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = DeskBrowse_Prefix.pch;
 				GCC_VERSION = "";
@@ -1411,8 +1425,13 @@
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-frameworks",
+					AtoZ,
+				);
 				PRODUCT_NAME = DeskBrowse;
-				SDKROOT = macosx;
+				SDKROOT = "";
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = NO;
 			};

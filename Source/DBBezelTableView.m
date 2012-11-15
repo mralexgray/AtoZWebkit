@@ -76,7 +76,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	return handled;
 }
 
-#pragma mark -
 #pragma mark Drag and Drop
 /*- (NSImage*) dragImageForRowsWithIndexes: (NSIndexSet*) dragRows tableColumns: (NSA*) tableColumns event: (NSEvent*) dragEvent offset: (NSPPointer) dragImageOffset
 {

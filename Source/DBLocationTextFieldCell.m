@@ -28,7 +28,6 @@ NSS* const kDefaultImageName	= @"DefaultLocationFieldIcon";
 	[mImage release];
 }
 
-#pragma mark -
 - (NSImage*) image
 {	
 	return mImage;
@@ -58,7 +57,6 @@ NSS* const kDefaultImageName	= @"DefaultLocationFieldIcon";
 	[[self controlView] setNeedsDisplay: YES];
 }
 
-#pragma mark -
 - (NSR) imageRectForFrame: (NSR) frame
 {
 	return NSMakeRect(NSMinX(frame), NSMinY(frame), NSHeight(frame), NSHeight(frame));
@@ -73,20 +71,20 @@ NSS* const kDefaultImageName	= @"DefaultLocationFieldIcon";
 	return textRect;
 }
 
-#pragma mark -
 - (void) drawImageWithFrame: (NSR) frameRect inView: (NSView*) controlView
 {
-	NSGraphicsContext* currentGraphicsContext = [NSGraphicsContext currentContext];
-	
-	[currentGraphicsContext saveGraphicsState];
-	[currentGraphicsContext setImageInterpolation: NSImageInterpolationNone];
-	
+	[NSGraphicsContext state:^{
+
+//
+//	[currentGraphicsContext saveGraphicsState];
+//	[currentGraphicsContext setImageInterpolation: NSImageInterpolationNone];
+
 //	[[self image] setSize: frameRect.size];
 //	[[self image] compositeToPoint: frameRect.origin operation: NSCompositeSourceOver];
-	{
+//	{
 		NSSZ		newImageSize	= [self imageRectForFrame: frameRect].size;
 		NSImageRep* prettyImageRep	= [[self image] bestRepresentationForDevice: nil];
-		NSImage*	newImage		= [[NSImage alloc] initWithSize: newImageSize];
+		NSImage*	newImage			= [[NSImage alloc] initWithSize: newImageSize];
 		
 		[newImage lockFocus];
 		
@@ -95,11 +93,11 @@ NSS* const kDefaultImageName	= @"DefaultLocationFieldIcon";
 		
 		[newImage unlockFocus];
 		
-		[newImage compositeToPoint: frameRect.origin operation: NSCompositeSourceOver];
+		[newImage drawAtPoint:frameRect.origin fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1];
 		
-		[newImage release];
-	}
-	[currentGraphicsContext restoreGraphicsState];
+//		[newImage release];
+	}];
+//	[currentGraphicsContext restoreGraphicsState];
 }
 - (void) drawInteriorWithFrame: (NSR) frameRect inView: (NSView*) controlView
 {
@@ -127,7 +125,6 @@ NSS* const kDefaultImageName	= @"DefaultLocationFieldIcon";
 	[super drawInteriorWithFrame: textRect inView: controlView];
 }
 
-#pragma mark -
 - (void) selectWithFrame: (NSR) frame inView: (NSView*) controlView editor: (NSText*) editor delegate: (id) delegate start: (NSI) selStart length: (NSI) selLength
 {
 	 [super selectWithFrame: [self textRectForFrame: frame] inView: controlView editor: editor delegate: delegate start: selStart length: selLength];

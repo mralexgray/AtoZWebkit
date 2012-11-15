@@ -60,7 +60,6 @@ NSS*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 	[mTitle release];
 	
 }
-#pragma mark -
 - (id) copyWithZone: (NSZone*) zone
 {
 	DBBookmark* copyOfSelf = [[DBBookmark alloc] init];
@@ -70,7 +69,6 @@ NSS*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 	
 	return copyOfSelf;
 }
-#pragma mark -
 - (void) load
 {
 	if (mURL != nil)
@@ -84,7 +82,6 @@ NSS*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 {
 	[AZNOTCENTER postNotificationName: kDBDeleteBookmarkNotification object: self userInfo: nil];
 }
-#pragma mark -
 - (NSMD*) dictionary
 {
 	NSMD* dictionary = nil;
@@ -145,7 +142,6 @@ NSS*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 //	Bookmark Bar related
 //
 // -----------------------------
-#pragma mark -
 #pragma mark Bookmark Bar
 - (id <DBBookmarkBarCell>) cell
 {
@@ -159,7 +155,6 @@ NSS*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 	return mBookmarkBarCell;
 }
 
-#pragma mark -
 
 - (void) setUpMenu
 {
@@ -177,7 +172,6 @@ NSS*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 	[deleteMenuItem release];
 }
 
-#pragma mark -
 #pragma mark Sorting
 - (NSComparisonResult) compare: (DBBookmark*) otherBookmark
 {
@@ -206,7 +200,6 @@ NSS*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 
 @end
 
-#pragma mark -
 @implementation BookmarkFolder
 
 - (id) initWithDictionary: (NSD*) dictionary
@@ -237,7 +230,6 @@ NSS*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 	
 }
 
-#pragma mark -
 - (id) copyWithZone: (NSZone*) zone
 {
 	BookmarkFolder* copyOfSelf = [[BookmarkFolder alloc] init];
@@ -249,7 +241,6 @@ NSS*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 	return copyOfSelf;
 }
 
-#pragma mark -
 - (NSMD*) dictionary
 {
 	NSMD*	dictionary		= [super dictionary];
@@ -280,13 +271,11 @@ NSS*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 	return dictionary;
 }
 
-#pragma mark -
 - (unsigned) numberOfBookmarks
 {
 	return [mContainedBookmarks count];
 }
 
-#pragma mark -
 - (NSA*) subBookmarks
 {
 	return mContainedBookmarks;
@@ -301,7 +290,6 @@ NSS*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 	}
 }
 
-#pragma mark -
 - (void) addBookmark: (DBBookmark*) bookmark
 {
 	if (mContainedBookmarks == nil)
@@ -323,7 +311,6 @@ NSS*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 		[self reloadCellMenu];
 	}
 }
-#pragma mark -
 
 - (id <DBBookmarkBarCell>) cell
 {

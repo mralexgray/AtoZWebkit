@@ -34,7 +34,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	
 }
 
-#pragma mark -
 - (void) setFrame: (NSR) frame
 {
 	mFrame = frame;
@@ -46,7 +45,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	return mFrame;
 }
 
-#pragma mark -
 - (NSR) textFrameForFrame: (NSR) frame
 {
 	NSR textFrame = NSMakeRect(frame.origin.x + DBPaddingOnSidesOfTextFrame, frame.origin.y, frame.size.width - DBPaddingOnSidesOfTextFrame * 2, frame.size.height);
@@ -58,7 +56,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	return [NSD dictionaryWithObjects: @[[NSColor blackColor], [self font]] forKeys: @[@"NSColor", NSFontAttributeName]];
 }
 
-#pragma mark -
 - (void) drawBackgroundInFrame: (NSR) frame
 {
 	NSColor* backgroundColor = mDefaultColor;
@@ -131,7 +128,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	[self drawArrow: arrowRect];
 }
 
-#pragma mark -
 - (void) mouseDown: (NSEvent*) event
 {
 	mMouseDown = YES;
@@ -154,7 +150,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	}
 }
 
-#pragma mark -
 - (void) mouseEntered: (NSEvent*) event
 {
 	mMouseOver = YES;
@@ -196,7 +191,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	}
 }
 
-#pragma mark -
 - (NSS*) stringValue
 {
 	return mStringValue;
@@ -226,7 +220,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	[super setMenu: menu];
 }
 
-#pragma mark -
 - (NSImage*) dragImage
 {
 	NSImage*	dragImage	= nil;

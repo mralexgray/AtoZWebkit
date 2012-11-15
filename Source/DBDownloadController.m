@@ -59,7 +59,6 @@ NSS* downloadFileWrapperExtension		= @"download";
 	[mDownloadTableView setDoubleAction: @selector(tableViewDoubleClick)];
 }
 
-#pragma mark -
 #pragma mark Interface
 - (IBAction) clearDownloads: (id) sender
 {
@@ -170,9 +169,7 @@ NSS* downloadFileWrapperExtension		= @"download";
 {
 	return mNumloads;
 }
-#pragma mark -
 #pragma mark NSTableView Methods
-#pragma mark -
 - (void) tableViewDoubleClick
 {
 	NSInteger row = [mDownloadTableView selectedRow];
@@ -183,7 +180,6 @@ NSS* downloadFileWrapperExtension		= @"download";
 	}
 }
 
-#pragma mark -
 
 - (NSI) numberOfRowsInTableView: (NSTableView*) tableView
 {	
@@ -205,12 +201,10 @@ NSS* downloadFileWrapperExtension		= @"download";
 	
 	return value;
 }
-#pragma mark -
 - (void) tableView: (NSTableView*) tableView willDisplayCell: (id) cell forTableColumn: (NSTableColumn*) tableColumn row: (NSI) row
 {
 	[(NSCell*)cell setFont: [NSFont systemFontOfSize: 10.0]];
 }
-#pragma mark -
 #pragma mark NSURLDownload Delegate Methods
 
 // -----------------------------------
@@ -378,7 +372,6 @@ NSS* downloadFileWrapperExtension		= @"download";
 	//
 }
 
-#pragma mark -
 #pragma mark Other Methods
 // -----------------------------------
 //
@@ -446,7 +439,7 @@ NSS* downloadFileWrapperExtension		= @"download";
 	
 	if (mNumloads > 0)
 	{
-		NSS* alertMessage = [NSString stringWithFormat: @"%i", mNumloads];
+		NSS* alertMessage = [NSString stringWithFormat: @"%li", mNumloads];
 		
 		if (mNumloads == 1)
 		{

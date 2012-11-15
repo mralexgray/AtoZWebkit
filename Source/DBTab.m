@@ -109,7 +109,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	
 }
 
-#pragma mark -
 #pragma mark Accessors
 - (void) setLabel: (NSS*) newLabel
 {
@@ -140,7 +139,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 }
 - (BOOL)selected {return selected; }
 
-#pragma mark -
 - (void) setFavicon: (NSImage*) newFavicon
 {
 	if (newFavicon != favicon)
@@ -200,7 +198,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	return loading;
 }
 
-#pragma mark -
 #pragma mark Drawing
 - (void) drawRect: (NSR) rect
 {
@@ -209,7 +206,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	[self drawLabelInRect: NSMakeRect(rect.origin.x + 20, rect.origin.y, rect.size.width - 30, rect.size.height)];
 }
 
-#pragma mark -
 - (void) drawTabInRect: (NSR) rect
 {
 	//NSR	frame				= [self frame];
@@ -277,7 +273,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 				  fraction: 1.0];*/
 }
 
-#pragma mark -
 - (void) drawCloseButtonInRect: (NSR) rect
 {
 	NSImage* closeImage = nil;
@@ -364,7 +359,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	return pointInCloseButton;
 }
 
-#pragma mark -
 - (void) drawLabelInRect: (NSR) rect
 {
 	if (label != nil)
@@ -400,7 +394,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		[whiteShadow release];
 	}
 }
-#pragma mark -
 #pragma mark View Management
 - (void) removeFromSuperview
 {
@@ -419,14 +412,12 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	 [super removeFromSuperviewWithoutNeedingDisplay];
 }
 
-#pragma mark -
 #pragma mark Event Management
 - (BOOL) acceptsFirstResponder
 {
 	return NO;
 }
 
-#pragma mark -
 - (void) resetTrackingRect
 {
 	if (trackingRectTag > 0)
@@ -453,7 +444,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	}
 }
 
-#pragma mark -
 - (void) mouseEntered: (NSEvent*) theEvent
 {
 	mouseOver = YES;
@@ -522,7 +512,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	}
 }
 
-#pragma mark -
 #pragma mark Notifications
 - (void)sendCloseNotification {
 	NSMD *dic = [[NSMD alloc] init];

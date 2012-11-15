@@ -64,7 +64,6 @@ NSS* const kBookmarkWindowNibName			= @"Bookmarks";
 	[[self window] setFrame: [[self window] frame] display: YES];
 }
 
-#pragma mark -
 - (void) bookmarksChanged
 {
 	[AZNOTCENTER postNotificationName: kBookmarksDidChangeNotification object: self];
@@ -91,7 +90,6 @@ NSS* const kBookmarkWindowNibName			= @"Bookmarks";
 		[newItem setToolTip:[bookmark URLString]];
 	}
 }
-#pragma mark -
 - (void) newBookmarkWithURL: (NSURL*) URL title: (NSS*) title window: (NSWindow*) window
 {	
 	DBNewBookmarkWindowController* newBookmarkController = [[DBNewBookmarkWindowController alloc] initWithBookmarkController: self title: title url: URL];
@@ -173,7 +171,6 @@ NSS* const kBookmarkWindowNibName			= @"Bookmarks";
 	
 	return bookmark;
 }
-#pragma mark -
 
 - (void) save
 {
@@ -291,7 +288,6 @@ NSS* const kBookmarkWindowNibName			= @"Bookmarks";
 	return didLoad;
 }
 
-#pragma mark -
 #pragma mark Interface
 // Interface methods
 - (IBAction) loadSelectedBookmark: (id) sender
@@ -316,7 +312,6 @@ NSS* const kBookmarkWindowNibName			= @"Bookmarks";
 	[self bookmarksChanged];
 }
 
-#pragma mark -
 - (IBAction) cancel: (id) sender
 {
 	[NSApp endSheet: mNewBookmarkWindow];
@@ -349,7 +344,6 @@ NSS* const kBookmarkWindowNibName			= @"Bookmarks";
 	
 	[NSApp endSheet: mNewBookmarkWindow];
 }
-#pragma mark -
 #pragma mark View
 // View methods
 - (void) setTableView: (NSTableView*) tableView
@@ -458,7 +452,6 @@ NSS* const kBookmarkWindowNibName			= @"Bookmarks";
 	}
 }
 
-#pragma mark -
 #pragma mark Main Window
 - (IBAction) openEditWindow: (id) sender
 {
@@ -474,7 +467,6 @@ NSS* const kBookmarkWindowNibName			= @"Bookmarks";
 {
 }
 
-#pragma mark -
 #pragma mark Bookmark Bar
 - (NSA*) bookmarks
 {
@@ -503,13 +495,11 @@ NSS* const kBookmarkWindowNibName			= @"Bookmarks";
 	[mBookmarkTableView reloadData];
 }
 
-#pragma mark -
 #pragma mark Bookmark Editing Window
 - (void) newBookmarkFolder
 {
 }
 
-#pragma mark -
 - (id) outlineView: (NSOutlineView*) outlineView child: (NSI) index ofItem: (id) item
 {
 	id childItem = nil;
@@ -570,7 +560,6 @@ NSS* const kBookmarkWindowNibName			= @"Bookmarks";
 	[item setValue: object forKey: columnIdentifier];
 }
 
-#pragma mark -
 #pragma mark NSTableView Data Source Methods
 - (NSI) numberOfRowsInTableView: (NSTableView*) tableView
 {
@@ -581,7 +570,6 @@ NSS* const kBookmarkWindowNibName			= @"Bookmarks";
 	return [self stringForRow:row];
 }
 
-#pragma mark -
 #pragma mark NSTableView Delegate Methods
 - (void) tableView: (NSTableView*) tableView willDisplayCell: (id) cell forTableColumn: (NSTableColumn*) tableColumn row: (NSI) row
 {
