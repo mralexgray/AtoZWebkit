@@ -77,7 +77,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	
 	BOOL spinnerEnabled, stopEnabled, reloadEnabled;
 	
-	AZMenuBarWindow*			menuWindow;
+	AZSemiResponderWindow*			menuWindow;
 	DBActionMenuWindow			*windowControlWindow;
 	DBActionMenuView*			windowControlView;
 

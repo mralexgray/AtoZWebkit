@@ -87,7 +87,7 @@ static NSS *strTemp 	= nil;
 	[slideWindow setDelegate: (id)self];
 	[websposeWindow setDelegate: (id)self];
 
-	menuWindow = [AZMenuBarWindow new];
+	menuWindow = [AZSemiResponderWindow new];
 	[menuWindow display];
 
 
