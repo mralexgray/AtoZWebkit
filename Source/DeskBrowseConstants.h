@@ -36,10 +36,12 @@ extern  NSS*	kDownloadLocation;
 extern  NSS*	kFirstRun;
 extern	NSS*	kPathToDefaultPrefsFile;
 extern  CGFloat		kCurrentVersionNumber;
-typedef enum _KeyCombination
-{
+
+typedef NS_ENUM(NSUInteger, KeyCombination) {
+//typedef enum _KeyCombination {
 	kCommandRightArrow,
 	kCommandLeftArrow,
 	kCommandShiftRightArrow,
 	kCommandShiftLeftArrow,
-} KeyCombination;
+};
+// KeyCombination;

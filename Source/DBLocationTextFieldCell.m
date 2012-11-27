@@ -10,7 +10,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 - (NSR) _focusRingFrameForFrame: (NSR) editFrame cellFrame: (NSR) cellFrame;
 @end
 
-const short		kImagePadding		= 3;
+const short		kImagePadding		= 1;
 NSS* const kDefaultImageName	= @"DefaultLocationFieldIcon";
 @implementation DBLocationTextFieldCell
 

@@ -17,7 +17,11 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		history		= [[DBActionMenuItem alloc] initWithFrame:NSMakeRect(15,74,100,14) label:@"History"];
 		bookmarks	= [[DBActionMenuItem alloc] initWithFrame:NSMakeRect(15,90,100,14) label:@"Bookmarks"];
 		well		= [[AtoZColorWell    alloc] initWithFrame:NSMakeRect(15,104,100,14)];
-//		[well setAction:@selector(postNotificationNameOnMainThread:object:) withTarget:[[self.superviews lastObject] window]];
+		NSControlActionBlock block = ^(id inSender) { [[ NSNotificationCenter defaultCenter] postNotificationName:nAZColorWellChanged object:((AtoZColorWell*)inSender).selectedCell]; };
+
+		[well setActionBlock:block];
+//		(NSControlActionBlock)actionBlock
+//		 @selector(postNotificationNameOnMainThread:object:) withTarget:[[self.superviews lastObject] window]];
 		[self addSubview:webspose];
 		[self addSubview:downloads];
 		[self addSubview:history];

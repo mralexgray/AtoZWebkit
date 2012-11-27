@@ -31,7 +31,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 #import "WebKitEx.h"
 #import "DBWebsposePassword.h"
 #import "DBWebsposeWindow.h"
-#import "DBWindowLevel.h"
+//#import "DBWindowLevel.h"
 #import "DBStatusItemController.h"
 #import "DBSymbolicHotKeyController.h"
 //#include <netdb.h>
@@ -63,7 +63,7 @@ static NSS *strTemp 	= nil;
 		
 		defaultPrefs ? [userDefaults registerDefaults: defaultPrefs]
 					 : NSLog(@"*** DeskBrowseController: Default preferences not found ***");
-		[NSApp initHotKeyController];
+//		[NSApp initHotKeyController];
 	}
 }
 - (id)init
@@ -100,7 +100,7 @@ static NSS *strTemp 	= nil;
 	[AZNOTCENTER addObserver: self selector: @selector(tabChanged:) 		 name: @"DBTabSelected" 				   	object: nil];
 	[AZNOTCENTER addObserver: self selector: @selector(slideWindowResized:)  name: @"DBSlideWindowResized" 		   	object: nil];
 
-	[AZNOTCENTER addObserver: self selector: @selector(toggleSlideBrowse)  name: kClickedOnTabRibbon 			   	object: nil];
+//	[AZNOTCENTER addObserver: self selector: @selector(toggleSlideBrowse)  name: kClickedOnTabRibbon 			   	object: nil];
 
 
 	[AZNOTCENTER addObserver: self selector: @selector(loadURLNotification:) name: @"DBLoadURLNotification" 			object: nil];
@@ -269,8 +269,9 @@ static NSS *strTemp 	= nil;
 		return;
 	}
 	if ( areSame(name, nAZColorWellChanged) ) {
-
-			[slideWindow setBackgroundColor:[note object]];
+			AZLOG(@"AZColorWellchanged!");
+			AZLOG(note.object);
+			[slideWindow setBackgroundColor:note.object];
 	}
 
 	if ([name isEqualToString:@"DBToggleSplitView"]) {
@@ -412,8 +413,10 @@ static NSS *strTemp 	= nil;
 	}
 }
 
-
-
+- (IBAction)makeMobile:(id)sender
+{
+	[currentWebView makeMobile];
+}
 - (IBAction)toggleActionMenu:(id)sender {
 	if (actionMenuVisible)
 	{
@@ -589,13 +592,13 @@ static NSS *strTemp 	= nil;
 {
 	 if (shouldLock) // LOCK
 	 {
-		  if (symbolicHotKeyController == nil)
-		  {
-				symbolicHotKeyController = [[DBSymbolicHotKeyController alloc] init];
-		  }
-		  
-		  [symbolicHotKeyController saveHotKeyState];
-		  
+//		  if (symbolicHotKeyController == nil)
+//		  {
+//				symbolicHotKeyController = [[DBSymbolicHotKeyController alloc] init];
+//		  }
+//		  
+//		  [symbolicHotKeyController saveHotKeyState];
+
 		  
 		  // Disable Force-Quit, Application switch, and hide menubar and dock
 		  SetSystemUIMode(kUIModeAllHidden, kUIOptionDisableForceQuit | kUIOptionDisableSessionTerminate | kUIOptionDisableProcessSwitch | kUIOptionDisableAppleMenu);
@@ -617,8 +620,8 @@ static NSS *strTemp 	= nil;
 		  SetSystemUIMode(kUIModeNormal, 0);
 		  
 		  
-		  [symbolicHotKeyController restoreHotKeyState];
-		  
+//		  [symbolicHotKeyController restoreHotKeyState];
+
 		  
 		  // Enable hide and quit
 		  NSMenu*		  mainMenu		  = [NSApp mainMenu];
@@ -1395,19 +1398,98 @@ static NSS *strTemp 	= nil;
 	}
 }
 
++ (double)latitudeRangeForLocation:(CLLocation *)aLocation
+{
+	const double M = 6367000.0; // approximate average meridional radius of curvature of earth
+	const double metersToLatitude = 1.0 / ((M_PI / 180.0) * M);
+	const double accuracyToWindowScale = 2.0;
+
+	return aLocation.horizontalAccuracy * metersToLatitude * accuracyToWindowScale;
+}
+
++ (double)longitudeRangeForLocation:(CLLocation *)aLocation
+{
+	double latitudeRange =
+	[self latitudeRangeForLocation:aLocation];
+
+	return latitudeRange * cos(aLocation.coordinate.latitude * M_PI / 180.0);
+}
+
+- (IBAction)openInDefaultBrowser:(id)sender
+{
+	CLLocation *currentLocation = locationManager.location;
+
+	NSURL *externalBrowserURL = [NSURL URLWithString:[NSString stringWithFormat:
+													  @"http://maps.google.com/maps?ll=%f,%f&amp;spn=%f,%f",
+													  currentLocation.coordinate.latitude,
+													  currentLocation.coordinate.longitude,
+													  [[self class]latitudeRangeForLocation:currentLocation],
+													  [[self class]longitudeRangeForLocation:currentLocation]]];
+
+	[[NSWorkspace sharedWorkspace] openURL:externalBrowserURL];
+}
+
+- (void)locationManager:(CLLocationManager *)manager
+	didUpdateToLocation:(CLLocation *)newLocation
+		   fromLocation:(CLLocation *)oldLocation
+{
+	// Ignore updates where nothing we care about changed
+	if (newLocation.coordinate.longitude == oldLocation.coordinate.longitude &&
+		newLocation.coordinate.latitude == oldLocation.coordinate.latitude &&
+		newLocation.horizontalAccuracy == oldLocation.horizontalAccuracy)
+	{
+		return;
+	}
+
+	// Load the HTML for displaying the Google map from a file and replace the
+	// format placeholders with our location data
+//	NSString *htmlString = [NSString stringWithFormat:@"<!DOCTYPE html \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\"><html xmlns=\"http://www.w3.org/1999/xhtml\"><head><title>Google Map</title></head>	<body><iframe width=\"100%%\" height=\"96%%\" frameborder=\"0\" scrolling=\"no\" marginheight=\"0\" marginwidth=\"0\"
+//							src="http://maps.google.com/maps?ie=UTF8&amp;ll=%f,%f&amp;spn=%f,%f&amp;t=h&amp;z=16&amp;output=embed\"></iframe></body></html>",
+//							newLocation.coordinate.latitude,
+//							newLocation.coordinate.longitude,
+//							[WhereIsMyMacAppDelegate latitudeRangeForLocation:newLocation],
+//							[WhereIsMyMacAppDelegate longitudeRangeForLocation:newLocation]];
+//
+	// Load the HTML in the WebView and set the labels
+//	[[currentWebView mainFrame] loadHTMLString:htmlString baseURL:nil];
+//	[locationLabel setStringValue:[NSString stringWithFormat:@"%f, %f",
+//								   newLocation.coordinate.latitude, newLocation.coordinate.longitude]];
+//	[accuracyLabel setStringValue:[NSString stringWithFormat:@"%f",
+//								   newLocation.horizontalAccuracy]];
+}
+
+- (void)locationManager:(CLLocationManager *)manager
+	   didFailWithError:(NSError *)error
+{
+	[[currentWebView mainFrame]
+	 loadHTMLString:
+	 [NSString stringWithFormat:
+	  NSLocalizedString(@"Location manager failed with error: %@", nil),
+	  [error localizedDescription]]
+	 baseURL:nil];
+//	[locationLabel setStringValue:@""];
+//	[accuracyLabel setStringValue:@""];
+}
+
+
 - (void)applicationWillFinishLaunching:(NSNotification*)notification
 {	
 	[[NSAppleEventManager sharedAppleEventManager] setEventHandler:self andSelector:@selector(openURL:withReplyEvent:) forEventClass:'GURL' andEventID:'GURL'];
 }
 - (void) applicationDidFinishLaunching: (NSNotification*) notification
 {
+
+	locationManager = [[CLLocationManager alloc] init];
+	locationManager.delegate = self;
+	[locationManager startUpdatingLocation];
+
 	// ---------------------------------------------
 	// Used to be in awakeFromNib
 	// Set up hot-key listening
 	
-	[[NSApp hotKeyController] setSlideBrowseListener: self selector: @selector(toggleSlideBrowse)];
-	[[NSApp hotKeyController] setWebsposeListener: self selector: @selector(toggleWebspose)];
-	
+//	[[NSApp hotKeyController] setSlideBrowseListener: self selector: @selector(toggleSlideBrowse)];
+//	[[NSApp hotKeyController] setWebsposeListener: self selector: @selector(toggleWebspose)];
+
 	// Load homepage if the user wants to, select the URL field text otherwise
 	
 	NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
@@ -1584,6 +1666,9 @@ static NSS *strTemp 	= nil;
 - (void) applicationWillTerminate: (NSNotification*) aNotification
 {
 	[bookmarkController save];
+	[locationManager stopUpdatingLocation];
+	[locationManager release];
+
 }
 
 #pragma mark WebKit

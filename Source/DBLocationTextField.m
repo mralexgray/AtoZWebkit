@@ -68,7 +68,7 @@ const short kProgressIndicatorPadding = 3;
 }
 - (void) setImage: (NSImage*) image
 {
-	[[self cell] setImage: image];
+	[[self cell] setImage: [image scaledToMax:AZMinDim(self.frame.size)]];
 }
 
 - (void) frameDidChange: (NSNotification*) notification

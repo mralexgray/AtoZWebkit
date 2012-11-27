@@ -1,12 +1,12 @@
-	/*
-*****************************
-The DeskBrowse source code is the legal property of its developers, Joel Levin and Ian Elseth
-*****************************
-*/
+
 #import "DBSlideWindow.h"
+
 @implementation DBSlideWindow
-@synthesize controller, currentDragMode, dragStartLocation;
-@synthesize snapTolerance, snapping, snapsToEdges, clickDistanceFromWindowEdge, minWidth, padding;
+
+@synthesize controller, currentDragMode, dragStartLocation,
+			snapTolerance, snapping, snapsToEdges,
+			clickDistanceFromWindowEdge, minWidth, padding;
+
 typedef NSInteger CGSConnection, CGSWindow;
 extern CGSConnection _CGSDefaultConnection();
 extern OSStatus CGSGetWindowTags  (const CGSConnection cid, const CGSWindow wid, NSInteger *tags, NSInteger thirtyTwo);
@@ -27,33 +27,41 @@ extern OSStatus CGSClearWindowTags(const CGSConnection cid, const CGSWindow wid,
 {
 	if (!(self = [super initWithContentRect:contentRect styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:NO])) return nil;
 	[self setLevel:NSNormalWindowLevel];
-	[self setOpaque:YES];
+	[self setOpaque:NO];
+////[BLKVIEW viewWithFrame:contentRect opaque:YES drawnUsingBlock:^(BNRBlockView *view, NSRect dirtyRect) {
+//		view.arMASK = NSSIZEABLE;
+//		NSRectFillWithColor(view.bounds, RED);
+//	}]];
+//	NSC* c =  [[NSUserDefaults standardUserDefaults]colorForKey:kSliderBGColor] ?: RANDOMCOLOR;
 
-	NSC* c = [[NSUserDefaults standardUserDefaults]colorForKey:kSliderBGColor] ?: RANDOMCOLOR;
-
-	[self setBackgroundColor:c];//[ leatherTintedWithColor:RANDOMCOLOR]];// blackColor]];
+	[self setBackgroundColor:CLEAR];//[ leatherTintedWithColor:RANDOMCOLOR]];// blackColor]];
 	[self setAlphaValue:1.0];
 	[self setHasShadow:YES];
-	minWidth = 400.0;
+	minWidth = 200.0;
 	 return self;
 }
 - (void) awakeFromNib
 {
 //	NSIMG * e = [_dragImageViewTopRight image].copy;
+//	[self.contentView addSubview:[BLKVIEW viewWithFrame:self.frame opaque:YES drawnUsingBlock:^(BNRBlockView *view, NSRect dirtyRect) {
+//		view.arMASK = NSSIZEABLE;
+//		NSRectFillWithColor(view.bounds, ORANGE);
+//	}]];
 
-	[[_dragImageViewTopRight image]setFlipped:YES];// = [NSIMG swatchWithColor:RED size:AZSizeFromDimension(25)];///	e = [e rotated:90];
+//[[AZFoamView alloc]initWithFrame:self.frame]];
+//	[[_dragImageViewTopRight image]setFlipped:YES];// = [NSIMG swatchWithColor:RED size:AZSizeFromDimension(25)];///	e = [e rotated:90];
 //	[_dragImageViewTopRight setImage:e];//[[NSImage systemImages]scaledToMax:15]];
 	//	[_dragImageViewTopRight setNeedsDisplay:YES];
 
 }
 
--(void) setBackgroundColor:(NSColor *)color
-{
-	_backgroundColor = [NSColor leatherTintedWithColor:color];
-	[[NSUserDefaults standardUserDefaults] setColor:_backgroundColor  forKey:kSliderBGColor];
-	[self display];
-}
-
+//-(void) setBackgroundColor:(NSColor *)color
+//{
+//	_backgroundColor = [NSColor leatherTintedWithColor:color];
+//	[[NSUserDefaults standardUserDefaults] setColor:_backgroundColor  forKey:kSliderBGColor];
+//	[self display];
+//}
+//
 - (BOOL)canBecomeKeyWindow
 {
 	return YES;
@@ -72,14 +80,13 @@ extern OSStatus CGSClearWindowTags(const CGSConnection cid, const CGSWindow wid,
 - (void) mouseDown: (NSEvent*) theEvent
 {
 	currentDragMode		= DragModeNone;
-	 dragStartLocation	= [theEvent locationInWindow];
+	dragStartLocation	= [theEvent locationInWindow];
 	NSP origin		= [self frame].origin;
 	NSSZ	size		= [self frame].size;
 		
 	if (((origin.x + dragStartLocation.x) < ((origin.x + size.width) - 15) && (origin.x + dragStartLocation.x) >= origin.x) && (((origin.y + dragStartLocation.y) <= (origin.y + 70))))
 	{
 		// Moving
-		
 		currentDragMode = DragModeMove;
 	}
 	else if (origin.y + dragStartLocation.y >= (origin.y + size.height) - 8)
@@ -87,15 +94,10 @@ extern OSStatus CGSClearWindowTags(const CGSConnection cid, const CGSWindow wid,
 		if (origin.x + dragStartLocation.x >= (origin.x + size.width) - 8)
 		{
 			// Resizing from top right
-			
 			currentDragMode						= DragModeResizeFromTopRight;
 			clickDistanceFromWindowEdge.width	= (origin.x + size.width) - (origin.x + dragStartLocation.x);
 			clickDistanceFromWindowEdge.height	= (origin.y + size.height) - (origin.y + dragStartLocation.y);
-		}
-		else
-		{
-			// Resizing from top
-			
+		}	else		{	// Resizing from top
 			currentDragMode						= DragModeResizeFromTop;
 			clickDistanceFromWindowEdge.height	= (origin.y + size.height) - (origin.y + dragStartLocation.y);
 		}
@@ -105,7 +107,6 @@ extern OSStatus CGSClearWindowTags(const CGSConnection cid, const CGSWindow wid,
 		if (origin.x + dragStartLocation.x >= (origin.x + size.width) - 8)
 		{
 			// Resizing from right
-			
 			currentDragMode						= DragModeResizeFromRight;
 			clickDistanceFromWindowEdge.width	= (origin.x + size.width) - (origin.x + dragStartLocation.x);
 		}

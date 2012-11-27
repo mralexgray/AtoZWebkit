@@ -22,7 +22,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 - (void) dealloc
 {
 	[mSavedHotKeyState release];
-	
+	[super dealloc];
 }
 
 - (void) disableAllHotKeys

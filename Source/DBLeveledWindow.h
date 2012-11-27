@@ -4,7 +4,17 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 *****************************
 */
 #import <Cocoa/Cocoa.h>
-@class DBWindowLevel;
+
+
+static NSS* kWindowLevelChangedNotification = @"WindowLevelChanged";
+#pragma unused(kWindowLevelChangedNotification)
+
+@interface DBWindowLevel : NSObject
+
++ (NSI) windowLevel;
++ (void) setWindowLevel: (NSI) level;
+@end
+
 @interface DBLeveledWindow : NSWindow
 {
 	BOOL mAboveMainWindowLevel;

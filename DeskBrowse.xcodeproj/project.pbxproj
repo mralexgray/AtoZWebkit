@@ -24,7 +24,6 @@
 		5DC2C4330EC214AE00BD0054 /* DBLoadCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C4320EC214AE00BD0054 /* DBLoadCommand.m */; };
 		5DC2C4370EC214DA00BD0054 /* DeskBrowseConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C4360EC214DA00BD0054 /* DeskBrowseConstants.m */; };
 		5DC2C44E0EC2152500BD0054 /* DBApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C44B0EC2152500BD0054 /* DBApplication.m */; };
-		5DC2C45B0EC2158800BD0054 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 5DC2C4560EC2158800BD0054 /* Credits.rtf */; };
 		5DC2C45D0EC2158800BD0054 /* main.dbmenu in Resources */ = {isa = PBXBuildFile; fileRef = 5DC2C4580EC2158800BD0054 /* main.dbmenu */; };
 		5DC2C4670EC215F500BD0054 /* DefaultLocationFieldIcon.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 5DC2C4640EC215F500BD0054 /* DefaultLocationFieldIcon.tiff */; };
 		5DC2C4680EC215F500BD0054 /* Generic.icns in Resources */ = {isa = PBXBuildFile; fileRef = 5DC2C4650EC215F500BD0054 /* Generic.icns */; };
@@ -34,7 +33,6 @@
 		5DC2C46F0EC2161F00BD0054 /* textfield-right.png in Resources */ = {isa = PBXBuildFile; fileRef = 5DC2C46C0EC2161F00BD0054 /* textfield-right.png */; };
 		5DC2C4710EC2163700BD0054 /* list_down.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 5DC2C4700EC2163700BD0054 /* list_down.tiff */; };
 		5DC2C4740EC2165900BD0054 /* Bookmarks.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5DC2C4720EC2165900BD0054 /* Bookmarks.plist */; };
-		5DC2C4750EC2165900BD0054 /* DeskBrowse 1.0 Beta Docs.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 5DC2C4730EC2165900BD0054 /* DeskBrowse 1.0 Beta Docs.pdf */; };
 		5DC2C4780EC2168200BD0054 /* error_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 5DC2C4760EC2168200BD0054 /* error_bg.png */; };
 		5DC2C4790EC2168200BD0054 /* error.html in Resources */ = {isa = PBXBuildFile; fileRef = 5DC2C4770EC2168200BD0054 /* error.html */; };
 		5DC2C4970EC2188A00BD0054 /* DBBezelButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C48A0EC2188A00BD0054 /* DBBezelButtonCell.m */; };
@@ -70,11 +68,9 @@
 		5DC2C4F20EC21C9A00BD0054 /* DBDownloadController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C4EE0EC21C9A00BD0054 /* DBDownloadController.m */; };
 		5DC2C4F70EC21CB300BD0054 /* DBPlistUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C4F40EC21CB300BD0054 /* DBPlistUtils.m */; };
 		5DC2C4F80EC21CB300BD0054 /* DBPreferenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C4F60EC21CB300BD0054 /* DBPreferenceController.m */; };
-		5DC2C5010EC21CDF00BD0054 /* DBSymbolicHotKeyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C5000EC21CDF00BD0054 /* DBSymbolicHotKeyController.m */; };
 		5DC2C5040EC21CE800BD0054 /* ThreadWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C5030EC21CE800BD0054 /* ThreadWorker.m */; };
 		5DC2C5070EC21CF100BD0054 /* DBShellExec.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C5060EC21CF100BD0054 /* DBShellExec.m */; };
 		5DC2C5160EC21D2D00BD0054 /* DBFindController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C5150EC21D2D00BD0054 /* DBFindController.m */; };
-		5DC2C5190EC21D3600BD0054 /* DBSystemProfiler.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C5180EC21D3600BD0054 /* DBSystemProfiler.m */; };
 		5DC2C51C0EC21D3F00BD0054 /* DBURLFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C51B0EC21D3F00BD0054 /* DBURLFormatter.m */; };
 		5DC2C51F0EC21D4800BD0054 /* DBViewSourceWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C51E0EC21D4800BD0054 /* DBViewSourceWindowController.m */; };
 		5DC2C5220EC21D5100BD0054 /* DBQuickDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C5210EC21D5100BD0054 /* DBQuickDownload.m */; };
@@ -183,22 +179,29 @@
 		5DC2C6830EC22A4F00BD0054 /* userContent.css in Resources */ = {isa = PBXBuildFile; fileRef = 5DC2C6820EC22A4F00BD0054 /* userContent.css */; };
 		5DC2C6850EC22A5800BD0054 /* com.SGS-Software.DeskBrowse.DefaultPreferences.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5DC2C6840EC22A5800BD0054 /* com.SGS-Software.DeskBrowse.DefaultPreferences.plist */; };
 		5DC2C6870EC22A5D00BD0054 /* SearchEngines.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5DC2C6860EC22A5D00BD0054 /* SearchEngines.plist */; };
-		5DC2C6890EC22A6400BD0054 /* c in Resources */ = {isa = PBXBuildFile; fileRef = 5DC2C6880EC22A6400BD0054 /* c */; };
 		5DC2C68C0EC22A7100BD0054 /* ImportBookmarks.nib in Resources */ = {isa = PBXBuildFile; fileRef = 5DC2C68A0EC22A7100BD0054 /* ImportBookmarks.nib */; };
 		5DC2C6A50EC22BE700BD0054 /* DBBookmark.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C6A30EC22BE700BD0054 /* DBBookmark.m */; };
-		5DC2C6AF0EC22C0500BD0054 /* DBWindowLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C6AE0EC22C0500BD0054 /* DBWindowLevel.m */; };
 		5DC2C6B20EC22C1100BD0054 /* DBLeveledWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C6B10EC22C1100BD0054 /* DBLeveledWindow.m */; };
 		5DC2C6BF0EC22C7C00BD0054 /* DBWebsposeWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C6BE0EC22C7C00BD0054 /* DBWebsposeWindow.m */; };
 		5DC2C6C70EC22C8B00BD0054 /* DBSlideWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C6C60EC22C8B00BD0054 /* DBSlideWindow.m */; };
 		5DDBD3250EC2513F00499681 /* DBActionMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DDBD3240EC2513F00499681 /* DBActionMenuView.m */; };
 		5DF8EE1D07DAD75600097CCE /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF8EE1C07DAD75600097CCE /* WebKit.framework */; };
-		7B0E728D1654E07500A1A613 /* AtoZ.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B43D319164CD61700AC4D26 /* AtoZ.framework */; };
 		7B32D73D1650C080009540EB /* Calculator.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B32D73C1650C080009540EB /* Calculator.xib */; };
-		7B43D31B164CDAB500AC4D26 /* DBHotKeyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C43E0EC2150100BD0054 /* DBHotKeyController.m */; };
-		7B43D31C164CDACD00AC4D26 /* DBKeyStuff.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C4380EC214EA00BD0054 /* DBKeyStuff.m */; };
 		7B43D31E164CDB7B00AC4D26 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B43D31D164CDB7A00AC4D26 /* SystemConfiguration.framework */; };
+		7B636633165FAA53008F3D27 /* PMOverlayBottom.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B636628165FAA53008F3D27 /* PMOverlayBottom.png */; };
+		7B636634165FAA53008F3D27 /* PMOverlayBottomLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B636629165FAA53008F3D27 /* PMOverlayBottomLeft.png */; };
+		7B636635165FAA53008F3D27 /* PMOverlayBottomRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B63662A165FAA53008F3D27 /* PMOverlayBottomRight.png */; };
+		7B636636165FAA53008F3D27 /* PMOverlayCenter.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B63662B165FAA53008F3D27 /* PMOverlayCenter.png */; };
+		7B636637165FAA53008F3D27 /* PMOverlayFull.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B63662C165FAA53008F3D27 /* PMOverlayFull.png */; };
+		7B636638165FAA53008F3D27 /* PMOverlayLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B63662D165FAA53008F3D27 /* PMOverlayLeft.png */; };
+		7B636639165FAA53008F3D27 /* PMOverlayOriginal.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B63662E165FAA53008F3D27 /* PMOverlayOriginal.png */; };
+		7B63663A165FAA53008F3D27 /* PMOverlayRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B63662F165FAA53008F3D27 /* PMOverlayRight.png */; };
+		7B63663B165FAA53008F3D27 /* PMOverlayTop.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B636630165FAA53008F3D27 /* PMOverlayTop.png */; };
+		7B63663C165FAA53008F3D27 /* PMOverlayTopLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B636631165FAA53008F3D27 /* PMOverlayTopLeft.png */; };
+		7B63663D165FAA53008F3D27 /* PMOverlayTopRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B636632165FAA53008F3D27 /* PMOverlayTopRight.png */; };
+		7B636641165FB1FA008F3D27 /* TheTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B63663F165FB1FA008F3D27 /* TheTab.m */; };
+		7B7142A71662AA5600B7661A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B7142A61662AA5600B7661A /* CoreLocation.framework */; };
 		7B7A855315F8790F0071741C /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B7A855215F8790F0071741C /* AppKit.framework */; };
-		7BFCBD38164DF5A100859A93 /* DBHotKeyTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C43C0EC2150100BD0054 /* DBHotKeyTextField.m */; };
 		8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* MainMenu.nib */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -329,8 +332,6 @@
 		5DC2C5060EC21CF100BD0054 /* DBShellExec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBShellExec.m; path = Source/DBShellExec.m; sourceTree = "<group>"; };
 		5DC2C5140EC21D2D00BD0054 /* DBFindController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBFindController.h; path = Source/DBFindController.h; sourceTree = "<group>"; };
 		5DC2C5150EC21D2D00BD0054 /* DBFindController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBFindController.m; path = Source/DBFindController.m; sourceTree = "<group>"; };
-		5DC2C5170EC21D3600BD0054 /* DBSystemProfiler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBSystemProfiler.h; path = Source/DBSystemProfiler.h; sourceTree = "<group>"; };
-		5DC2C5180EC21D3600BD0054 /* DBSystemProfiler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBSystemProfiler.m; path = Source/DBSystemProfiler.m; sourceTree = "<group>"; };
 		5DC2C51A0EC21D3F00BD0054 /* DBURLFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBURLFormatter.h; path = Source/DBURLFormatter.h; sourceTree = "<group>"; };
 		5DC2C51B0EC21D3F00BD0054 /* DBURLFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBURLFormatter.m; path = Source/DBURLFormatter.m; sourceTree = "<group>"; };
 		5DC2C51D0EC21D4800BD0054 /* DBViewSourceWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBViewSourceWindowController.h; path = Source/DBViewSourceWindowController.h; sourceTree = "<group>"; };
@@ -453,8 +454,6 @@
 		5DC2C68B0EC22A7100BD0054 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/ImportBookmarks.nib; sourceTree = "<group>"; };
 		5DC2C6A30EC22BE700BD0054 /* DBBookmark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBBookmark.m; path = Source/DBBookmark.m; sourceTree = "<group>"; };
 		5DC2C6A40EC22BE700BD0054 /* DBBookmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBBookmark.h; path = Source/DBBookmark.h; sourceTree = "<group>"; };
-		5DC2C6AD0EC22C0500BD0054 /* DBWindowLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBWindowLevel.h; path = Source/DBWindowLevel.h; sourceTree = "<group>"; };
-		5DC2C6AE0EC22C0500BD0054 /* DBWindowLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBWindowLevel.m; path = Source/DBWindowLevel.m; sourceTree = "<group>"; };
 		5DC2C6B00EC22C1100BD0054 /* DBLeveledWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBLeveledWindow.h; path = Source/DBLeveledWindow.h; sourceTree = "<group>"; };
 		5DC2C6B10EC22C1100BD0054 /* DBLeveledWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBLeveledWindow.m; path = Source/DBLeveledWindow.m; sourceTree = "<group>"; };
 		5DC2C6BD0EC22C7C00BD0054 /* DBWebsposeWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBWebsposeWindow.h; path = Source/DBWebsposeWindow.h; sourceTree = "<group>"; };
@@ -464,10 +463,23 @@
 		5DDBD3230EC2513F00499681 /* DBActionMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBActionMenuView.h; path = Source/DBActionMenuView.h; sourceTree = "<group>"; };
 		5DDBD3240EC2513F00499681 /* DBActionMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBActionMenuView.m; path = Source/DBActionMenuView.m; sourceTree = "<group>"; };
 		5DF8EE1C07DAD75600097CCE /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = /System/Library/Frameworks/WebKit.framework; sourceTree = "<absolute>"; };
-		7B0E728B1654E05300A1A613 /* AtoZ.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AtoZ.framework; path = ../../../../../Users/localadmin/Library/Developer/Xcode/DerivedData/build/Products/Release/AtoZ.framework; sourceTree = "<group>"; };
 		7B32D73C1650C080009540EB /* Calculator.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Calculator.xib; path = ../AtoZ/Classes/Calculator.xib; sourceTree = "<group>"; };
 		7B43D319164CD61700AC4D26 /* AtoZ.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AtoZ.framework; path = /Library/Frameworks/AtoZ.framework; sourceTree = "<absolute>"; };
 		7B43D31D164CDB7A00AC4D26 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = /System/Library/Frameworks/SystemConfiguration.framework; sourceTree = "<absolute>"; };
+		7B636628165FAA53008F3D27 /* PMOverlayBottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PMOverlayBottom.png; path = Resources/Images/PMOverlayBottom.png; sourceTree = "<group>"; };
+		7B636629165FAA53008F3D27 /* PMOverlayBottomLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PMOverlayBottomLeft.png; path = Resources/Images/PMOverlayBottomLeft.png; sourceTree = "<group>"; };
+		7B63662A165FAA53008F3D27 /* PMOverlayBottomRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PMOverlayBottomRight.png; path = Resources/Images/PMOverlayBottomRight.png; sourceTree = "<group>"; };
+		7B63662B165FAA53008F3D27 /* PMOverlayCenter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PMOverlayCenter.png; path = Resources/Images/PMOverlayCenter.png; sourceTree = "<group>"; };
+		7B63662C165FAA53008F3D27 /* PMOverlayFull.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PMOverlayFull.png; path = Resources/Images/PMOverlayFull.png; sourceTree = "<group>"; };
+		7B63662D165FAA53008F3D27 /* PMOverlayLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PMOverlayLeft.png; path = Resources/Images/PMOverlayLeft.png; sourceTree = "<group>"; };
+		7B63662E165FAA53008F3D27 /* PMOverlayOriginal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PMOverlayOriginal.png; path = Resources/Images/PMOverlayOriginal.png; sourceTree = "<group>"; };
+		7B63662F165FAA53008F3D27 /* PMOverlayRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PMOverlayRight.png; path = Resources/Images/PMOverlayRight.png; sourceTree = "<group>"; };
+		7B636630165FAA53008F3D27 /* PMOverlayTop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PMOverlayTop.png; path = Resources/Images/PMOverlayTop.png; sourceTree = "<group>"; };
+		7B636631165FAA53008F3D27 /* PMOverlayTopLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PMOverlayTopLeft.png; path = Resources/Images/PMOverlayTopLeft.png; sourceTree = "<group>"; };
+		7B636632165FAA53008F3D27 /* PMOverlayTopRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PMOverlayTopRight.png; path = Resources/Images/PMOverlayTopRight.png; sourceTree = "<group>"; };
+		7B63663E165FB1FA008F3D27 /* TheTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; path = TheTab.h; sourceTree = "<group>"; };
+		7B63663F165FB1FA008F3D27 /* TheTab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheTab.m; sourceTree = "<group>"; };
+		7B7142A61662AA5600B7661A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = ../../../../../System/Library/Frameworks/CoreLocation.framework; sourceTree = "<group>"; };
 		7B7A855215F8790F0071741C /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		7BFCBD2A164D773300859A93 /* ThreadWorkerOld.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ThreadWorkerOld.m; path = Source/ThreadWorkerOld.m; sourceTree = "<group>"; };
 		7BFCBD2B164D774200859A93 /* ThreadWorkerOld.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.objj.h; name = ThreadWorkerOld.h; path = Source/ThreadWorkerOld.h; sourceTree = "<group>"; };
@@ -480,7 +492,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B0E728D1654E07500A1A613 /* AtoZ.framework in Frameworks */,
+				7B7142A71662AA5600B7661A /* CoreLocation.framework in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				7B43D31E164CDB7B00AC4D26 /* SystemConfiguration.framework in Frameworks */,
 				7B7A855315F8790F0071741C /* AppKit.framework in Frameworks */,
@@ -548,7 +560,7 @@
 		29B97314FDCFA39411CA2CEA /* DeskBrowse */ = {
 			isa = PBXGroup;
 			children = (
-				7B0E728B1654E05300A1A613 /* AtoZ.framework */,
+				7B7142A61662AA5600B7661A /* CoreLocation.framework */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -840,14 +852,7 @@
 				5DB09910095A58DF007345BF /* AntiPhising */,
 				3C4AC744097071FD007F2254 /* Websposé Password */,
 				5DD20AE0094E792B00AC54B7 /* StatusItem */,
-				5DC2C4390EC214EA00BD0054 /* DBKeyStuff.h */,
-				5DC2C4380EC214EA00BD0054 /* DBKeyStuff.m */,
-				5DC2C43D0EC2150100BD0054 /* DBHotKeyController.h */,
-				5DC2C43E0EC2150100BD0054 /* DBHotKeyController.m */,
-				5DC2C43B0EC2150100BD0054 /* DBHotKeyTextField.h */,
-				5DC2C43C0EC2150100BD0054 /* DBHotKeyTextField.m */,
-				5DC2C4FF0EC21CDF00BD0054 /* DBSymbolicHotKeyController.h */,
-				5DC2C5000EC21CDF00BD0054 /* DBSymbolicHotKeyController.m */,
+				7B448ABB165F688E00988DBC /* DBHotKey */,
 				5DC2C5020EC21CE800BD0054 /* ThreadWorker.h */,
 				7BFCBD2B164D774200859A93 /* ThreadWorkerOld.h */,
 				5DC2C5030EC21CE800BD0054 /* ThreadWorker.m */,
@@ -856,8 +861,6 @@
 				5DC2C5060EC21CF100BD0054 /* DBShellExec.m */,
 				5DC2C5140EC21D2D00BD0054 /* DBFindController.h */,
 				5DC2C5150EC21D2D00BD0054 /* DBFindController.m */,
-				5DC2C5170EC21D3600BD0054 /* DBSystemProfiler.h */,
-				5DC2C5180EC21D3600BD0054 /* DBSystemProfiler.m */,
 				5DC2C51A0EC21D3F00BD0054 /* DBURLFormatter.h */,
 				5DC2C51B0EC21D3F00BD0054 /* DBURLFormatter.m */,
 				5DC2C51D0EC21D4800BD0054 /* DBViewSourceWindowController.h */,
@@ -870,8 +873,6 @@
 				5DC2C5270EC21D6A00BD0054 /* DBLocationTextField.m */,
 				5DC2C5280EC21D6A00BD0054 /* DBLocationTextFieldCell.h */,
 				5DC2C5290EC21D6A00BD0054 /* DBLocationTextFieldCell.m */,
-				5DC2C6AD0EC22C0500BD0054 /* DBWindowLevel.h */,
-				5DC2C6AE0EC22C0500BD0054 /* DBWindowLevel.m */,
 				5DC2C6B00EC22C1100BD0054 /* DBLeveledWindow.h */,
 				5DC2C6B10EC22C1100BD0054 /* DBLeveledWindow.m */,
 				5DC2C6BD0EC22C7C00BD0054 /* DBWebsposeWindow.h */,
@@ -880,6 +881,8 @@
 				5DC2C6C60EC22C8B00BD0054 /* DBSlideWindow.m */,
 				5D16F7540ED2643400052573 /* DBWhiteView.h */,
 				5D16F7530ED2643400052573 /* DBWhiteView.m */,
+				7B63663E165FB1FA008F3D27 /* TheTab.h */,
+				7B63663F165FB1FA008F3D27 /* TheTab.m */,
 			);
 			name = "Other Classes";
 			sourceTree = "<group>";
@@ -954,6 +957,7 @@
 				5DC2C5F00EC21FBA00BD0054 /* actvfill.png */,
 				5DC2C5F40EC21FC900BD0054 /* disleft.png */,
 				5DC2C5F50EC21FC900BD0054 /* disfill.png */,
+				7B636626165FAA41008F3D27 /* Directionals */,
 				5DC2C5F60EC21FC900BD0054 /* disright.png */,
 			);
 			name = images;
@@ -986,6 +990,39 @@
 			name = StatusItem;
 			sourceTree = "<group>";
 		};
+		7B448ABB165F688E00988DBC /* DBHotKey */ = {
+			isa = PBXGroup;
+			children = (
+				5DC2C4390EC214EA00BD0054 /* DBKeyStuff.h */,
+				5DC2C4380EC214EA00BD0054 /* DBKeyStuff.m */,
+				5DC2C43D0EC2150100BD0054 /* DBHotKeyController.h */,
+				5DC2C43E0EC2150100BD0054 /* DBHotKeyController.m */,
+				5DC2C43B0EC2150100BD0054 /* DBHotKeyTextField.h */,
+				5DC2C43C0EC2150100BD0054 /* DBHotKeyTextField.m */,
+				5DC2C4FF0EC21CDF00BD0054 /* DBSymbolicHotKeyController.h */,
+				5DC2C5000EC21CDF00BD0054 /* DBSymbolicHotKeyController.m */,
+			);
+			name = DBHotKey;
+			sourceTree = "<group>";
+		};
+		7B636626165FAA41008F3D27 /* Directionals */ = {
+			isa = PBXGroup;
+			children = (
+				7B636628165FAA53008F3D27 /* PMOverlayBottom.png */,
+				7B636629165FAA53008F3D27 /* PMOverlayBottomLeft.png */,
+				7B63662A165FAA53008F3D27 /* PMOverlayBottomRight.png */,
+				7B63662B165FAA53008F3D27 /* PMOverlayCenter.png */,
+				7B63662C165FAA53008F3D27 /* PMOverlayFull.png */,
+				7B63662D165FAA53008F3D27 /* PMOverlayLeft.png */,
+				7B63662E165FAA53008F3D27 /* PMOverlayOriginal.png */,
+				7B63662F165FAA53008F3D27 /* PMOverlayRight.png */,
+				7B636630165FAA53008F3D27 /* PMOverlayTop.png */,
+				7B636631165FAA53008F3D27 /* PMOverlayTopLeft.png */,
+				7B636632165FAA53008F3D27 /* PMOverlayTopRight.png */,
+			);
+			name = Directionals;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -996,7 +1033,6 @@
 				8D1107290486CEB800E47090 /* Resources */,
 				8D11072C0486CEB800E47090 /* Sources */,
 				8D11072E0486CEB800E47090 /* Frameworks */,
-				5D1F469609DF5DB500F7B99A /* Rez */,
 			);
 			buildRules = (
 			);
@@ -1047,7 +1083,6 @@
 				3CF8EE7F089ACB57007E7678 /* Bookmarks.nib in Resources */,
 				3CF8EE80089ACB57007E7678 /* NewBookmark.nib in Resources */,
 				3C1BEB1A0A06F7FF00DC330E /* BookmarkEdit.nib in Resources */,
-				5DC2C45B0EC2158800BD0054 /* Credits.rtf in Resources */,
 				5DC2C45D0EC2158800BD0054 /* main.dbmenu in Resources */,
 				5DC2C4670EC215F500BD0054 /* DefaultLocationFieldIcon.tiff in Resources */,
 				5DC2C4680EC215F500BD0054 /* Generic.icns in Resources */,
@@ -1057,7 +1092,6 @@
 				5DC2C46F0EC2161F00BD0054 /* textfield-right.png in Resources */,
 				5DC2C4710EC2163700BD0054 /* list_down.tiff in Resources */,
 				5DC2C4740EC2165900BD0054 /* Bookmarks.plist in Resources */,
-				5DC2C4750EC2165900BD0054 /* DeskBrowse 1.0 Beta Docs.pdf in Resources */,
 				5DC2C4780EC2168200BD0054 /* error_bg.png in Resources */,
 				5DC2C4790EC2168200BD0054 /* error.html in Resources */,
 				5DC2C5480EC21DF400BD0054 /* downloadComplete.png in Resources */,
@@ -1157,23 +1191,23 @@
 				5DC2C6830EC22A4F00BD0054 /* userContent.css in Resources */,
 				5DC2C6850EC22A5800BD0054 /* com.SGS-Software.DeskBrowse.DefaultPreferences.plist in Resources */,
 				5DC2C6870EC22A5D00BD0054 /* SearchEngines.plist in Resources */,
-				5DC2C6890EC22A6400BD0054 /* c in Resources */,
 				5DC2C68C0EC22A7100BD0054 /* ImportBookmarks.nib in Resources */,
 				7B32D73D1650C080009540EB /* Calculator.xib in Resources */,
+				7B636633165FAA53008F3D27 /* PMOverlayBottom.png in Resources */,
+				7B636634165FAA53008F3D27 /* PMOverlayBottomLeft.png in Resources */,
+				7B636635165FAA53008F3D27 /* PMOverlayBottomRight.png in Resources */,
+				7B636636165FAA53008F3D27 /* PMOverlayCenter.png in Resources */,
+				7B636637165FAA53008F3D27 /* PMOverlayFull.png in Resources */,
+				7B636638165FAA53008F3D27 /* PMOverlayLeft.png in Resources */,
+				7B636639165FAA53008F3D27 /* PMOverlayOriginal.png in Resources */,
+				7B63663A165FAA53008F3D27 /* PMOverlayRight.png in Resources */,
+				7B63663B165FAA53008F3D27 /* PMOverlayTop.png in Resources */,
+				7B63663C165FAA53008F3D27 /* PMOverlayTopLeft.png in Resources */,
+				7B63663D165FAA53008F3D27 /* PMOverlayTopRight.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXRezBuildPhase section */
-		5D1F469609DF5DB500F7B99A /* Rez */ = {
-			isa = PBXRezBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXRezBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8D11072C0486CEB800E47090 /* Sources */ = {
@@ -1216,11 +1250,9 @@
 				5DC2C4F20EC21C9A00BD0054 /* DBDownloadController.m in Sources */,
 				5DC2C4F70EC21CB300BD0054 /* DBPlistUtils.m in Sources */,
 				5DC2C4F80EC21CB300BD0054 /* DBPreferenceController.m in Sources */,
-				5DC2C5010EC21CDF00BD0054 /* DBSymbolicHotKeyController.m in Sources */,
 				5DC2C5040EC21CE800BD0054 /* ThreadWorker.m in Sources */,
 				5DC2C5070EC21CF100BD0054 /* DBShellExec.m in Sources */,
 				5DC2C5160EC21D2D00BD0054 /* DBFindController.m in Sources */,
-				5DC2C5190EC21D3600BD0054 /* DBSystemProfiler.m in Sources */,
 				5DC2C51C0EC21D3F00BD0054 /* DBURLFormatter.m in Sources */,
 				5DC2C51F0EC21D4800BD0054 /* DBViewSourceWindowController.m in Sources */,
 				5DC2C5220EC21D5100BD0054 /* DBQuickDownload.m in Sources */,
@@ -1233,16 +1265,13 @@
 				5DC2C5380EC21D9900BD0054 /* DBStatusItemController.m in Sources */,
 				5DC2C53A0EC21DAB00BD0054 /* main.m in Sources */,
 				5DC2C6A50EC22BE700BD0054 /* DBBookmark.m in Sources */,
-				5DC2C6AF0EC22C0500BD0054 /* DBWindowLevel.m in Sources */,
 				5DC2C6B20EC22C1100BD0054 /* DBLeveledWindow.m in Sources */,
 				5DC2C6BF0EC22C7C00BD0054 /* DBWebsposeWindow.m in Sources */,
 				5DC2C6C70EC22C8B00BD0054 /* DBSlideWindow.m in Sources */,
 				5DDBD3250EC2513F00499681 /* DBActionMenuView.m in Sources */,
 				5D885FFF0EC257E800075D99 /* DeskBrowseController.m in Sources */,
 				5D16F7550ED2643400052573 /* DBWhiteView.m in Sources */,
-				7B43D31B164CDAB500AC4D26 /* DBHotKeyController.m in Sources */,
-				7B43D31C164CDACD00AC4D26 /* DBKeyStuff.m in Sources */,
-				7BFCBD38164DF5A100859A93 /* DBHotKeyTextField.m in Sources */,
+				7B636641165FB1FA008F3D27 /* TheTab.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1364,7 +1393,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
-					"-frameworks",
+					"-framework",
 					AtoZ,
 				);
 				PRODUCT_NAME = DeskBrowse;
@@ -1396,7 +1425,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
-					"-frameworks",
+					"-framework",
 					AtoZ,
 				);
 				PRODUCT_NAME = DeskBrowse;
@@ -1427,7 +1456,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
-					"-frameworks",
+					"-framework",
 					AtoZ,
 				);
 				PRODUCT_NAME = DeskBrowse;

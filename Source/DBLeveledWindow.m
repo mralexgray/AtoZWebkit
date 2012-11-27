@@ -4,7 +4,25 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 *****************************
 */
 #import "DBLeveledWindow.h"
-#import "DBWindowLevel.h"
+//#import "DBWindowLevel.h"
+
+
+static NSInteger _windowLevel;
+
+@implementation DBWindowLevel
+
++ (NSI) windowLevel {	return _windowLevel; }
+
++ (void) setWindowLevel: (NSI) windowLevel
+{
+	_windowLevel = _windowLevel != windowLevel ? ^{
+		[AZNOTCENTER postNotificationName: kWindowLevelChangedNotification object: nil];
+		return windowLevel;
+	}() : _windowLevel;
+}
+
+@end
+
 
 @implementation DBLeveledWindow
 

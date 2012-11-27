@@ -292,22 +292,22 @@ NSInteger oppositeBoolInt(NSInteger bi) {
 //	changeSBHotKey:
 //
 // --------------------------------------
-- (IBAction) changeSBHotKey: (id) sender
-{
-	[[NSApp hotKeyController] getNewSlideBrowseHotKey];
-	[self syncViewWithUserPrefs];
-}
+//- (IBAction) changeSBHotKey: (id) sender
+//{
+//	[[NSApp hotKeyController] getNewSlideBrowseHotKey];
+//	[self syncViewWithUserPrefs];
+//}
 
 // --------------------------------------
 //
 //	changeWBHotKey:
 //
 // --------------------------------------
-- (IBAction) changeWBHotKey: (id) sender
-{
-	[[NSApp hotKeyController] getNewWebsposeHotKey];
-	[self syncViewWithUserPrefs];
-}
+//- (IBAction) changeWBHotKey: (id) sender
+//{
+//	[[NSApp hotKeyController] getNewWebsposeHotKey];
+//	[self syncViewWithUserPrefs];
+//}
 
 // -----------------------------------
 //
@@ -422,9 +422,9 @@ NSInteger oppositeBoolInt(NSInteger bi) {
 	[blockPopupWindows setState:	oppositeBoolInt([preferences javaScriptCanOpenWindowsAutomatically])];
 	[blockWebAds setState:			[preferences userStyleSheetEnabled]];
 	
-	[sbHotKeyField setStringValue: [[NSApp hotKeyController] currentSBKeyString]];
-	[wbHotKeyField setStringValue: [[NSApp hotKeyController] currentWBKeyString]];
-	
+//	[sbHotKeyField setStringValue: [[NSApp hotKeyController] currentSBKeyString]];
+//	[wbHotKeyField setStringValue: [[NSApp hotKeyController] currentWBKeyString]];
+
 	[downloadPathField setStringValue: defaults[kDownloadLocation]];
 	
 }

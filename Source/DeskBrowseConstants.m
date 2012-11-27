@@ -35,4 +35,5 @@ NSS*	kBlockWebAds			= @"blockWebAds";
 NSS*	kDownloadLocation		= @"downloadLocation";
 NSS*	kFirstRun				= @"firstRun";
 NSS*	kPathToDefaultPrefsFile	= @"/Contents/Resources/com.SGS-Software.DeskBrowse.DefaultPreferences.plist";
+
 CGFloat		kCurrentVersionNumber	= 1.4;
