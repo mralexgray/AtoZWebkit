@@ -13,10 +13,11 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	NSMutableArray*	tabs;
 	NSTabView*		tabView;
 	DBTabBar*			tabBar;
-	WebView*		defaultWebView;
-	
+
 	CGFloat			tabWidth;
 }
+@property (nonatomic, strong) 	WebView*		defaultWebView;
+
 - (id) initWithTabBar: (DBTabBar*) bar tabView: (NSTabView*) view;
 - (void) tabClicked: (NSNotification*) notification;
 - (void) tabWantsToClosed:(NSNotification *)notification;

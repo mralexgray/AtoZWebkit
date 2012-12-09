@@ -9,7 +9,9 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 #import "DBBookmarkController.h"
 #import "DBBookmarkBarPopUpButton.h"
 
-const CGFloat kDistanceBetweenBookmarks = 5;
+//const CGFloat kDistanceBetweenBookmarks = 5;
+
+
 @interface DBBookmarkBar (Private)
 - (CGFloat) maxRightEdgeForCells;
 - (void) drawBackgroundInRect: (NSR) rect;
@@ -27,74 +29,59 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 @implementation DBBookmarkBar
 - (id) initWithFrame: (NSR) frame
 {
-	 if (self = [super initWithFrame: frame])
-	{
-		mBookmarkCells		= [[NSMutableArray alloc] init];
-		mBackgroundColor	= [NSColor colorWithDeviceRed: 0.35 green: 0.35 blue: 0.35 alpha: 1.0];
-		
-		[AZNOTCENTER addObserver: self selector: @selector(reloadData) name: kBookmarksDidChangeNotification object: nil];
-		[AZNOTCENTER addObserver: self selector: @selector(frameDidChange:) name: NSViewFrameDidChangeNotification object: self];
-		[AZNOTCENTER addObserver: self selector: @selector(frameDidChange:) name: NSViewBoundsDidChangeNotification object: self];
-		
-		[self setPostsFrameChangedNotifications: YES];
-		[self setPostsBoundsChangedNotifications: YES];
-		
-		[self registerForDraggedTypes: @[DBBookmarkCellPboardType]];
-	}
-	
+    if (self != [super initWithFrame:frame]) return nil;
+	[self awakeFromNib];
 	return self;
 }
 - (void) awakeFromNib
 {
 	[self setUpPopUpButton];
-	
-	mLastFrame = [self frame];
+
+	_bookmarkPadding = 5;
+	_bookmarkCells	= [[NSMutableArray alloc] init];
+	_bookmarksBGC	= [NSColor colorWithDeviceRed: 0.35 green: 0.35 blue: 0.35 alpha: 1.0];
+
+	[AZNOTCENTER addObserver: self selector: @selector(reloadData) name: kBookmarksDidChangeNotification object: nil];
+	[AZNOTCENTER addObserver: self selector: @selector(frameDidChange:) name: NSViewFrameDidChangeNotification object: self];
+	[AZNOTCENTER addObserver: self selector: @selector(frameDidChange:) name: NSViewBoundsDidChangeNotification object: self];
+
+	[self setPostsFrameChangedNotifications: YES];
+	[self setPostsBoundsChangedNotifications: YES];
+
+//	[self registerForDraggedTypes: @[DBBookmarkCellPboardType]];
+	self.lastFrame = self.frame;
 }
-//- (void) dealloc
-//{
-//	[AZNOTCENTER removeObserver: self];
-//	
-//	[mBookmarkController release];
-//	[mBackgroundColor release];
-//	[mExtraBookmarksPopUpButton	release];
-//	[mBookmarkCells release];
-//	
-//}
 
 - (void) drawRect: (NSR) rect
 {
-	[self drawBackgroundInRect: [self bounds]];//rect];
+	[self drawBackgroundInRect:self.bounds];
 	[self drawCellsInRect: rect];
 }
 
 
 - (void) setBookmarkController: (DBBookmarkController*) bookmarkController
 {
-	if (bookmarkController != _mBookmarkController)
-	{
-		_mBookmarkController = bookmarkController;
-		[self reloadData];
-	}
+	BOOL notSame = bookmarkController != _bookmarkController;
+	_bookmarkController = notSame ? bookmarkController : _bookmarkController;
+	!notSame ?: [self reloadData];
 }
+
 - (void) frameDidChange: (NSNotification*) notification
 {
-	NSR frame = [self frame];
-	
-	if (frame.size.width != mLastFrame.size.width)
-	{
+	NSR frame = self.frame;
+	if (frame.size.width != _lastFrame.size.width)
 		[self arrangeDBBookmarkBarCells];
-	}
-	
-	mLastFrame = frame;
+	self.lastFrame = frame;
 }
+
 - (void) reloadData
 {
 	[self removeAllBookmarksFromPopUpButton];	
-	[mBookmarkCells removeAllObjects];
+	[self.bookmarkCells removeAllObjects];
 	
 	CGFloat			maxRightEdge		= [self maxRightEdgeForCells];
 	
-	NSEnumerator*	bookmarkEnumerator	= [_mBookmarkController bookmarkEnumerator];
+	NSEnumerator*	bookmarkEnumerator	= [self.bookmarkController bookmarkEnumerator];
 	DBBookmark*		currentBookmark		= nil;
 	
 	while ((currentBookmark = [bookmarkEnumerator nextObject]) != nil)
@@ -103,17 +90,13 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 		
 		if (DBBookmarkBarCell != nil)
 		{
-			[mBookmarkCells addObject: DBBookmarkBarCell];
-			
+			[self.bookmarkCells addObject: DBBookmarkBarCell];
 			if (maxRightEdge > NSMaxX([DBBookmarkBarCell frame]))
-			{
 				[self addBookmarkCellToPopUpButton: DBBookmarkBarCell];
-			}
 		}
 	}
 	
 	[self arrangeDBBookmarkBarCells];
-		
 	[self setNeedsDisplay: YES];
 }
 - (id <DBBookmarkBarCell>) bookmarkCellAtPoint: (NSP) point
@@ -122,75 +105,63 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 	
 	CGFloat					maxRightEdge	= [self maxRightEdgeForCells];
 	
-	NSEnumerator*			cellEnumerator	= [mBookmarkCells objectEnumerator];
+	NSEnumerator*			cellEnumerator	= [self.bookmarkCells objectEnumerator];
 	id <DBBookmarkBarCell>	currentCell		= nil;
 	
 	while ((currentCell = [cellEnumerator nextObject]) != nil)
 	{
-		NSR cellFrame = [currentCell frame];
-		
+		NSR cellFrame = currentCell.frame;
 		if (NSMaxX(cellFrame) < maxRightEdge)
 		{
-			if (NSPInRect(point, [currentCell frame]))
+			if (NSPointInRect(point, currentCell.frame))
 			{
 				bookmarkCell = currentCell;
 				break;
 			}
 		}
-		else
-		{
-			break;
-		}
+		else			break;
 	}
-	
 	return bookmarkCell;
 }
 - (unsigned) indexClosestToPoint: (NSP) point
 {
 	unsigned returnIndex = 0;
+	CGF	maxRightEdge		= [self maxRightEdgeForCells];
+	NSR	lastCellFrame		= NSZeroRect;
 	
-	CGFloat						maxRightEdge		= [self maxRightEdgeForCells];
-	NSR						lastCellFrame		= NSZeroRect;
-	
-	NSEnumerator*				cellEnumerator		= [mBookmarkCells objectEnumerator];
-	id <DBBookmarkBarCell>	currentCell			= nil;
+	NSEnumerator*				cellEnumerator		= [self.bookmarkCells objectEnumerator];
+	id <DBBookmarkBarCell>		currentCell			= nil;
 	unsigned					currentCellIndex	= 0;
 	
 	while ((currentCell = [cellEnumerator nextObject]) != nil)
 	{
-		NSR cellFrame = [currentCell frame];
-		
+		NSR cellFrame = currentCell.frame;
 		if (NSMaxX(cellFrame) > maxRightEdge || (point.x < NSMidX(cellFrame) && point.x > NSMidX(lastCellFrame)))
 		{
 			returnIndex = currentCellIndex;
 			break;
 		}
-		
 		lastCellFrame = cellFrame;
-		
 		currentCellIndex++;
 	}
-	
 	return returnIndex;
 }
 - (void) setVisiblePosition: (NSP) position
 {
-	NSR frame = [self frame];
+	NSR frame = self.frame;
 	[self setFrame: NSMakeRect(position.x, position.y, frame.size.width, frame.size.height)];
 }
 
 - (void) mouseDown: (NSEvent*) event
 {
-	NSP						clickPoint	= [self convertPoint: [event locationInWindow] fromView: nil];
+	NSP						clickPoint	= [self convertPoint: event.locationInWindow fromView: nil];
 	id <DBBookmarkBarCell>	clickedCell = [self bookmarkCellAtPoint: clickPoint];
-	
 	[clickedCell mouseDown: event];
 }
 - (void) mouseUp: (NSEvent*) event
 {
-	NSP						clickPoint	= [self convertPoint: [event locationInWindow] fromView: nil];
+	NSP						clickPoint	= [self convertPoint: event.locationInWindow fromView: nil];
 	id <DBBookmarkBarCell>	clickedCell = [self bookmarkCellAtPoint: clickPoint];
-	
 	[clickedCell mouseUp: event];
 }
 - (void) mouseDragged: (NSEvent*) event
@@ -201,17 +172,13 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 	
 	if (clickedCell != nil)
 	{
-		NSInteger			indexOfCellInArray	= [mBookmarkCells indexOfObject: clickedCell];
-		NSNumber*	numberIndexOfCell	= @(indexOfCellInArray);
-		
-		[pboard declareTypes: @[DBBookmarkCellPboardType] owner: self];
-		[pboard setPropertyList: numberIndexOfCell forType: DBBookmarkCellPboardType];
+		NSI	indexOfCellInArray	= [self.bookmarkCells indexOfObject: clickedCell];
+		NSN *numberIndexOfCell	= @(indexOfCellInArray);
+//		[pboard declareTypes: @[DBBookmarkCellPboardType] owner: self];
+//		[pboard setPropertyList: numberIndexOfCell forType: DBBookmarkCellPboardType];
 		NSImage* dragImage = [clickedCell dragImage];
-		
 		if (dragImage != nil)
-		{
 			[self dragImage: [clickedCell dragImage] at: [clickedCell frame].origin offset: NSZeroSize event: event pasteboard: pboard source: self slideBack: YES];
-		}
 	}
 }
 
@@ -222,7 +189,7 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 	
 	CGFloat						maxRightEdge	= [self maxRightEdgeForCells];
 	
-	NSEnumerator*				cellEnumerator	= [mBookmarkCells objectEnumerator];
+	NSEnumerator*				cellEnumerator	= [self.bookmarkCells objectEnumerator];
 	id <DBBookmarkBarCell>	currentCell		= nil;
 	
 	while ((currentCell = [cellEnumerator nextObject]) != nil)
@@ -230,22 +197,15 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 		if (!fillNow)
 		{
 			if (NSMaxX([currentCell frame]) >= maxRightEdge)
-			{
 				fillNow = YES;
-			}
 		}
-		
 		if (fillNow)
 		{
 			NSMenuItem* cellMenuItem = [currentCell menuItem];
-			
 			if (cellMenuItem != nil)
-			{
 				[menuItems addObject: cellMenuItem];
-			}
 		}
 	}
-	
 	return menuItems;
 }
 
@@ -271,7 +231,7 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 		if (draggedCell != nil)
 		{
 			returnOperation	= NSDragOperationGeneric;
-			mDragging		= YES;
+			self.dragging		= YES;
 			
 			[self setNeedsDisplay: YES];
 		}
@@ -293,10 +253,10 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 		{
 			NSP mouseLocation = [[self window] convertScreenToBase: [NSEvent mouseLocation]];
 			
-			if (mouseLocation.x != mLastMouseX)
+			if (mouseLocation.x != self.lastMouseX)
 			{
-				mDragging		= YES;
-				mLastMouseX		= mouseLocation.x;
+				self.dragging		= YES;
+				self.lastMouseX		= mouseLocation.x;
 				returnOperation	= NSDragOperationGeneric;
 				
 				[self setNeedsDisplay: YES];
@@ -308,7 +268,7 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 }
 - (void) draggingExited: (id <NSDraggingInfo>) sender
 {
-	mDragging = NO;
+	self.dragging = NO;
 	[self setNeedsDisplay: YES];
 }
 
@@ -325,7 +285,7 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 	
 	if (indexOfDraggedBookmark != nil)
 	{
-		mDragging			= NO;
+		self.dragging			= NO;
 		perform				= YES;
 		
 		unsigned fromIndex	= [indexOfDraggedBookmark intValue];
@@ -333,7 +293,7 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 		
 		if (fromIndex != toIndex)
 		{
-			[_mBookmarkController bookmarkDraggedFromIndex: fromIndex toIndex: toIndex];
+			[self.bookmarkController bookmarkDraggedFromIndex: fromIndex toIndex: toIndex];
 			
 			[self reloadData];
 		}
@@ -350,55 +310,45 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 
 @implementation DBBookmarkBar (Private)
 
-- (CGFloat) maxRightEdgeForCells
+- (CGF) maxRightEdgeForCells
 {
-	CGFloat	maxRightEdge	=  0;
-	NSR	frameRect		= [self frame];
-	
-	if ([mExtraBookmarksPopUpButton superview] == self)
-	{
-		maxRightEdge = frameRect.size.width - [mExtraBookmarksPopUpButton frame].size.width - kDistanceBetweenBookmarks;
-	}
-	else
-	{
-		maxRightEdge = frameRect.size.width - kDistanceBetweenBookmarks;
-	}
-	
-	return maxRightEdge;
+	CGF	maxRightEdge	=  0;
+	NSR	frameRect		= self.frame;
+	return maxRightEdge = [self.extraBookmarksPopUpButton superview] == self
+						? frameRect.size.width - [self.extraBookmarksPopUpButton frame].size.width - self.bookmarkPadding  //kDistanceBetweenBookmarks;
+						: frameRect.size.width - self.bookmarkPadding;// kDistanceBetweenBookmarks;
 }
 
 - (void) drawBackgroundInRect: (NSR) rect
 {
-//	[mBackgroundColor set];
+	[self.bookmarksBGC ?: WHITE set];
 //	[[NSColor whiteColor] set];
 //	[GRAY3 set];
-//	NSRFill(rect);
-//	NSImage* image = [NSImage imageNamed: @"bb-top-bookmark-stretch"];
-//	[image drawInRect: rect fromRect: NSMakeRect(0, 0, [image size].width, [image size].height) operation: NSCompositeCopy fraction: 1.0];
+	NSRFill(rect);
+	NSImage* image = [NSImage imageNamed: @"bb-top-bookmark-stretch"];
+	[image drawInRect: rect fromRect: NSMakeRect(0, 0, [image size].width, [image size].height) operation: NSCompositeCopy fraction: 1.0];
 }
 - (void) drawCellsInRect: (NSR) rect
 {
-	NSP					mouseLocation		= [[self window] convertScreenToBase: [NSEvent mouseLocation]];//[self convertPoint: [[[NSApp mainWindow] currentEvent] locationInWindow] fromView: nil];
-	NSR					frameRect			= [self frame];
+	NSP					mouseLocation		= [self.window convertScreenToBase: NSEvent.mouseLocation];//[self convertPoint: [[[NSApp mainWindow] currentEvent] locationInWindow] fromView: nil];
+	NSR					frameRect			= self.frame;
 	//NSR					frameMinusPadding	= NSMakeRect(frameRect.origin.x - kDistanceBetweenBookmarks, frameRect.origin.y, frameRect.size.width - (2 * kDistanceBetweenBookmarks), frameRect.size.height);
 	
 	CGFloat					maxRightEdge		= [self maxRightEdgeForCells];
 	NSR					lastCellFrame		= NSZeroRect;
 	
-	NSEnumerator*			cellEnumerator		= [mBookmarkCells objectEnumerator];
+	NSEnumerator*			cellEnumerator		= [self.bookmarkCells objectEnumerator];
 	id <DBBookmarkBarCell>	currentCell			= nil;
 	
 	while ((currentCell = [cellEnumerator nextObject]) != nil)
 	{
 		NSR cellFrame = [currentCell frame];
-		
-		if (mDragging)
+		if (self.dragging)
 		{
 			if (mouseLocation.x < NSMidX(cellFrame) && mouseLocation.x > NSMidX(lastCellFrame))
 			{
-				CGFloat	positionOfIndicator		= NSMaxX(lastCellFrame) + (NSMinX(cellFrame) - NSMaxX(lastCellFrame)) / 2;
+				CGF	positionOfIndicator		= NSMaxX(lastCellFrame) + (NSMinX(cellFrame) - NSMaxX(lastCellFrame)) / 2;
 				NSR	rectForDragIndicator	= NSMakeRect(positionOfIndicator, 0, 1, NSHeight(frameRect) - 2);
-				
 				[self drawDragIndicatorInRect: rectForDragIndicator];
 			}
 		}
@@ -406,22 +356,16 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 		if (NSMaxX(cellFrame) < maxRightEdge)
 		{
 			if (NSIntersectsRect(rect, cellFrame))
-			{
 				[currentCell drawWithFrame: cellFrame inView: self];
-			}
 		}
-		else
-		{
-			break;
-		}
-		
+		else break;
+
 		lastCellFrame = cellFrame;
 	}
 }
 - (void) drawDragIndicatorInRect: (NSR) rect
 {
-	[[NSColor lightGrayColor] set];
-	NSRFill(rect);
+	NSRectFillWithColor(rect, GRAY5);
 }
 
 - (void) arrangeDBBookmarkBarCells
@@ -432,9 +376,9 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 	//NSR					frameMinusPadding			= NSMakeRect(frameRect.origin.x - kDistanceBetweenBookmarks, frameRect.origin.y, frameRect.size.width - (2 * kDistanceBetweenBookmarks), frameRect.size.height);
 	
 	unsigned				currentCellIndex			= 0;
-	unsigned				numberOfCells				= [mBookmarkCells count];
+	unsigned				numberOfCells				= self.bookmarkCells.count;
 	
-	NSEnumerator*			DBBookmarkBarCellEnumerator	= [mBookmarkCells objectEnumerator];
+	NSEnumerator*			DBBookmarkBarCellEnumerator	= [self.bookmarkCells objectEnumerator];
 	id <DBBookmarkBarCell>	currentCell					= nil;
 	NSR					lastCellFrame				= NSMakeRect(0, 3, 0, 16);
 	
@@ -443,20 +387,15 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 		NSR	cellFrame		= [currentCell frame];
 		NSR	newCellFrame	= lastCellFrame;
 		
-		newCellFrame.origin.x	= NSMaxX(lastCellFrame) + kDistanceBetweenBookmarks;
+		newCellFrame.origin.x	= NSMaxX(lastCellFrame) + self.bookmarkPadding;// kDistanceBetweenBookmarks;
 		newCellFrame.size.width = cellFrame.size.width;
 		[currentCell setFrame: newCellFrame];
 		
 		if (currentCellIndex == numberOfCells - 1)
 		{
-			if (NSMaxX(newCellFrame) < (frameRect.size.width - kDistanceBetweenBookmarks))
-			{
-				[self removePopUpButton];
-			}
-			else
-			{
-				[self addPopUpButton];
-			}
+			if (NSMaxX(newCellFrame) < (frameRect.size.width - self.bookmarkPadding))// kDistanceBetweenBookmarks))
+					[self removePopUpButton];
+			else	[self addPopUpButton];
 		}
 		lastCellFrame = newCellFrame;
 		currentCellIndex++;
@@ -466,24 +405,22 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 - (void) setUpPopUpButton
 {
 	NSR popUpButtonFrame		= NSMakeRect(0, 3, 51, 15);
-	mExtraBookmarksPopUpButton	= [[DBBookmarkBarPopUpButton alloc] initWithFrame: popUpButtonFrame];
-	
+	self.extraBookmarksPopUpButton	= [DBBookmarkBarPopUpButton.alloc initWithFrame: popUpButtonFrame];
 	[self adjustPopUpButtonPosition];
 }
 - (void) adjustPopUpButtonPosition
 {
-	NSR frame	= [mExtraBookmarksPopUpButton frame];
-	frame.origin.x	= NSWidth([self frame]) - NSWidth(frame) - kDistanceBetweenBookmarks;
-	
-	[mExtraBookmarksPopUpButton setFrame: frame];
+	NSR frame	= [self.extraBookmarksPopUpButton frame];
+	frame.origin.x	= NSWidth([self frame]) - NSWidth(frame) - self.bookmarkPadding;//kDistanceBetweenBookmarks;
+	[self.extraBookmarksPopUpButton setFrame: frame];
 }
 - (void) removeAllBookmarksFromPopUpButton
 {
-	[mExtraBookmarksPopUpButton removeAllItems];
+	[self.extraBookmarksPopUpButton removeAllItems];
 }
 - (void) addBookmarkCellToPopUpButton: (id <DBBookmarkBarCell>) DBBookmarkBarCell
 {
-	NSMenu*		menu		= [mExtraBookmarksPopUpButton menu];
+	NSMenu*		menu		= [self.extraBookmarksPopUpButton menu];
 	NSMenuItem*	menuItem	= [DBBookmarkBarCell menuItem];
 	
 	if (menuItem != nil)
@@ -494,16 +431,16 @@ const CGFloat kDistanceBetweenBookmarks = 5;
 }
 - (void) removePopUpButton
 {
-	if ([mExtraBookmarksPopUpButton superview] == self)
+	if ([self.extraBookmarksPopUpButton superview] == self)
 	{
-		[mExtraBookmarksPopUpButton removeFromSuperview];
+		[self.extraBookmarksPopUpButton removeFromSuperview];
 	}
 }
 - (void) addPopUpButton
 {
-	if ([mExtraBookmarksPopUpButton superview] != self)
+	if ([self.extraBookmarksPopUpButton superview] != self)
 	{
-		[self addSubview: mExtraBookmarksPopUpButton];
+		[self addSubview: self.extraBookmarksPopUpButton];
 	}
 }
 

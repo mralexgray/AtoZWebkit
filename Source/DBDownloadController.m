@@ -48,10 +48,10 @@ NSS* downloadFileWrapperExtension		= @"download";
 {
 	[AZNOTCENTER removeObserver: self];
 	
-	[mDownloads release];
-	[mBezelController release];
-	[mTableCellFont release];
-	
+//	[mDownloads release];
+//	[mBezelController release];
+//	[mTableCellFont release];
+
 }
 - (void) awakeFromNib
 {
@@ -246,7 +246,7 @@ NSS* downloadFileWrapperExtension		= @"download";
 		[object setDisplayName: fileName];
 	}
 	
-	[fileWrapper release];
+//	[fileWrapper release];
 }
 - (void) download: (NSURLDownload*) download didCancelAuthenticationChallenge: (NSURLAuthenticationChallenge*) challenge
 {
@@ -402,9 +402,9 @@ NSS* downloadFileWrapperExtension		= @"download";
 	
 	[mDownloads addObject: downloadObject];
 	
-	[download release];
-	[downloadObject release];
-	
+//	[download release];
+//	[downloadObject release];
+
 	mNumloads++;
 	
 	[mDownloadTableView reloadData];
@@ -421,9 +421,9 @@ NSS* downloadFileWrapperExtension		= @"download";
 		
 		[mDownloads addObject: downloadObject];
 		
-		[download release];
-		[downloadObject release];
-		
+//		[download release];
+//		[downloadObject release];
+
 		mNumloads++;
 		
 		[mDownloadTableView reloadData];

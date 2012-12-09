@@ -33,17 +33,17 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	
 	return self;
 }
-- (void) dealloc
-{
-	[topOfKnob		release];
-	[middleOfKnob	release];
-	[bottomOfKnob	release];
-		
-	[knobSlotTop	release];
-	[knobSlotFiller	release];
-	[knobSlotBottom	release];
-	
-}
+//- (void) dealloc
+//{
+//	[topOfKnob		release];
+//	[middleOfKnob	release];
+//	[bottomOfKnob	release];
+//		
+//	[knobSlotTop	release];
+//	[knobSlotFiller	release];
+//	[knobSlotBottom	release];
+//	
+//}
 
 - (void) drawRect: (NSR) rect
 {

@@ -27,12 +27,14 @@ static BOOL		tabImagesInitialized;
 	NSTrackingRectTag	trackingRectTag;
 	
 	// WebView information
-	NSImage*	favicon;
-	NSS*	status;
 	NSS*	URLString;
 	NSS*	title;
 	BOOL		loading;
 }
+@property (nonatomic, strong) NSS*	status;
+@property (nonatomic, strong) NSImage*	favicon;
+
+
 - (void) drawTabInRect: (NSR) rect;
 - (void) drawCloseButtonInRect: (NSR) rect;
 - (NSR) rectForCloseButton;

@@ -28,11 +28,10 @@ NSS* const kBookmarkEditWindowNibName = @"BookmarkEdit";
 - (void) dealloc
 {
 	[AZNOTCENTER removeObserver: self];
-	
-	[mOutlineDataSource release];
-	[mBookmarkController release];
-	[mOutlineViewFont release];
-		
+//	[mOutlineDataSource release];
+//	[mBookmarkController release];
+//	[mOutlineViewFont release];
+
 }
 
 - (IBAction) closeWindow: (id) sender
@@ -45,8 +44,8 @@ NSS* const kBookmarkEditWindowNibName = @"BookmarkEdit";
 	DBBookmark* newBookmark = [[DBBookmark alloc] initWithURL: nil title: nil];
 	
 	[mBookmarkController addBookmark: newBookmark toFront: YES];
-	[newBookmark release];
-	
+//	[newBookmark release];
+
 	[mOutlineView selectRow: 0 byExtendingSelection: NO];
 	[mOutlineView editFirstColumnOfSelectedRow];
 }
@@ -56,7 +55,7 @@ NSS* const kBookmarkEditWindowNibName = @"BookmarkEdit";
 	[NSApp endSheet: [self window]];
 	[super close];
 	
-	[self release];
+//	[self release];
 }
 - (void) runSheetOnWindow: (NSWindow*) window
 {

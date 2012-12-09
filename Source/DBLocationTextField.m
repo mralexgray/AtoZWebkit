@@ -39,10 +39,10 @@ const short kProgressIndicatorPadding = 3;
 	
 	[self addSubview: mProgressIndicator];
 }
-- (void) dealloc
-{
-	[mProgressIndicator release];
-}
+//- (void) dealloc
+//{
+//	[mProgressIndicator release];
+//}
 
 - (BOOL) isFlipped
 {

@@ -31,10 +31,7 @@ NSS*	kImportingStatus		= @"Importing...";
 	
 	return self;
 }
-- (void)dealloc
-{
-	[mBookmarkController release];
-}
+//- (void)dealloc {	[mBookmarkController release]; }
 - (void) showWindow: (id) sender
 {	
 	[self populatePopUpButtonWithOtherBrowsers: mOtherBrowsersPopUpButton];

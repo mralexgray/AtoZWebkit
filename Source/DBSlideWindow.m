@@ -3,57 +3,66 @@
 
 @implementation DBSlideWindow
 
-@synthesize controller, currentDragMode, dragStartLocation,
-			snapTolerance, snapping, snapsToEdges,
-			clickDistanceFromWindowEdge, minWidth, padding;
+@synthesize controller, 	currentDragMode, 	dragStartLocation,
+			snapTolerance, 	snapping, 			snapsToEdges,
+			minWidth,		padding,			clickDistanceFromWindowEdge;
 
-typedef NSInteger CGSConnection, CGSWindow;
+typedef NSI CGSConnection, CGSWindow;
 extern CGSConnection _CGSDefaultConnection();
-extern OSStatus CGSGetWindowTags  (const CGSConnection cid, const CGSWindow wid, NSInteger *tags, NSInteger thirtyTwo);
-extern OSStatus CGSSetWindowTags  (const CGSConnection cid, const CGSWindow wid, NSInteger *tags, NSInteger thirtyTwo);
-extern OSStatus CGSClearWindowTags(const CGSConnection cid, const CGSWindow wid, NSInteger *tags, NSInteger thirtyTwo);
+extern OSStatus CGSGetWindowTags   ( const CGSConnection cid, const CGSWindow wid, NSInteger *tags, NSInteger thirtyTwo);
+extern OSStatus CGSSetWindowTags   ( const CGSConnection cid, const CGSWindow wid, NSInteger *tags, NSInteger thirtyTwo);
+extern OSStatus CGSClearWindowTags ( const CGSConnection cid, const CGSWindow wid, NSInteger *tags, NSInteger thirtyTwo);
+
 - (void)setSticky:(BOOL)flag
 {
-	CGSConnection connectionID = _CGSDefaultConnection();
-	CGSWindow winNumber = [self windowNumber];
+	CGSConnection connectionID  = _CGSDefaultConnection();
+	CGSWindow winNumber 	    = self.windowNumber;
 	NSInteger allTags[0];
-	NSInteger theTags[2] = {0x0002, 0};
+	NSInteger theTags[2] 		= {0x0002, 0};
 	if(!CGSGetWindowTags(connectionID, winNumber, allTags, 32)) {
-		if (flag)	CGSSetWindowTags(connectionID, winNumber, theTags, 32);
-		else		CGSClearWindowTags(connectionID, winNumber, theTags, 32);
-	}
+		flag	?	CGSSetWindowTags   ( connectionID, winNumber, theTags, 32)
+				:	CGSClearWindowTags ( connectionID, winNumber, theTags, 32); }
 }
+
 - (id)initWithContentRect:(NSR)contentRect styleMask:(NSUI)aStyle backing:(NSBackingStoreType)bufferingType defer:(BOOL)flag
 {
 	if (!(self = [super initWithContentRect:contentRect styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:NO])) return nil;
-	[self setLevel:NSNormalWindowLevel];
-	[self setOpaque:NO];
+	self.level  	= NSNormalWindowLevel;
+	self.opaque 	= NO;
+	self.alphaValue	= 1;
+	self.hasShadow  = YES;
+	self.minWidth = 200.0;
+	return self;
+}
+
+- (BOOL) canBecomeKeyWindow		{	return YES;		}
+- (BOOL) canBecomeMainWindow		{	return YES;		}
+
+-(void) performActionFromSegmentLabel:(id)sender {
+	NSSegmentedControl *segs = sender;
+	NSI theSeg = segs.selectedSegment;
+
+	NSR theR = theSeg == 1 ? quadrant(AZScreenFrameUnderMenu(), AZTopLeftQuad): AZScreenFrameUnderMenu();
+	[self setFrame:theR display:YES animate:YES];
+}
+//- (void) awakeFromNib	{}
 ////[BLKVIEW viewWithFrame:contentRect opaque:YES drawnUsingBlock:^(BNRBlockView *view, NSRect dirtyRect) {
 //		view.arMASK = NSSIZEABLE;
 //		NSRectFillWithColor(view.bounds, RED);
 //	}]];
 //	NSC* c =  [[NSUserDefaults standardUserDefaults]colorForKey:kSliderBGColor] ?: RANDOMCOLOR;
 
-	[self setBackgroundColor:CLEAR];//[ leatherTintedWithColor:RANDOMCOLOR]];// blackColor]];
-	[self setAlphaValue:1.0];
-	[self setHasShadow:YES];
-	minWidth = 200.0;
-	 return self;
-}
-- (void) awakeFromNib
-{
+//	[self setBackgroundColor:CLEAR];//[ leatherTintedWithColor:RANDOMCOLOR]];// blackColor]];
+
 //	NSIMG * e = [_dragImageViewTopRight image].copy;
 //	[self.contentView addSubview:[BLKVIEW viewWithFrame:self.frame opaque:YES drawnUsingBlock:^(BNRBlockView *view, NSRect dirtyRect) {
 //		view.arMASK = NSSIZEABLE;
 //		NSRectFillWithColor(view.bounds, ORANGE);
 //	}]];
-
 //[[AZFoamView alloc]initWithFrame:self.frame]];
 //	[[_dragImageViewTopRight image]setFlipped:YES];// = [NSIMG swatchWithColor:RED size:AZSizeFromDimension(25)];///	e = [e rotated:90];
 //	[_dragImageViewTopRight setImage:e];//[[NSImage systemImages]scaledToMax:15]];
 	//	[_dragImageViewTopRight setNeedsDisplay:YES];
-
-}
 
 //-(void) setBackgroundColor:(NSColor *)color
 //{
@@ -62,27 +71,16 @@ extern OSStatus CGSClearWindowTags(const CGSConnection cid, const CGSWindow wid,
 //	[self display];
 //}
 //
-- (BOOL)canBecomeKeyWindow
-{
-	return YES;
-}
-- (BOOL) canBecomeMainWindow
-{
-	return YES;
-}
 
-/*
- * 
- *	Mouse event handlers
- *	Since we don't have a titlebar, we handle window-dragging ourselves.
- *
- */
+/*	Mouse event handlers
+ *	Since we don't have a titlebar, we handle window-dragging ourselves.	*/
+
 - (void) mouseDown: (NSEvent*) theEvent
 {
 	currentDragMode		= DragModeNone;
 	dragStartLocation	= [theEvent locationInWindow];
-	NSP origin		= [self frame].origin;
-	NSSZ	size		= [self frame].size;
+	NSP origin			= self.frame.origin;
+	NSSZ	size		= self.frame.size;
 		
 	if (((origin.x + dragStartLocation.x) < ((origin.x + size.width) - 15) && (origin.x + dragStartLocation.x) >= origin.x) && (((origin.y + dragStartLocation.y) <= (origin.y + 70))))
 	{
@@ -341,9 +339,9 @@ extern OSStatus CGSClearWindowTags(const CGSConnection cid, const CGSWindow wid,
 //	controller = [aController retain];
 //}
 
-- (void)dealloc
-{
-	[controller release];
-}
+//- (void)dealloc
+//{
+//	[controller release];
+//}
 @end
 

@@ -67,11 +67,11 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		[self		setMenu:tabMenu];
 		
 		// clean up
-		[tabMenu	release];
-		[close		release];
-		[closeAll	release];
-		[reload		release];
-		[reloadAll	release];
+//		[tabMenu	release];
+//		[close		release];
+//		[closeAll	release];
+//		[reload		release];
+//		[reloadAll	release];
 	 }
 	
 	 return self;
@@ -101,12 +101,12 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		[self removeTrackingRect: trackingRectTag];
 	}
 	
-	[label		release];
-	[favicon	release];
-	[status		release];
-	[URLString	release];
-	[title		release];
-	
+//	[label		release];
+//	[favicon	release];
+//	[status		release];
+//	[URLString	release];
+//	[title		release];
+
 }
 
 #pragma mark Accessors
@@ -139,37 +139,37 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 }
 - (BOOL)selected {return selected; }
 
-- (void) setFavicon: (NSImage*) newFavicon
-{
-	if (newFavicon != favicon)
-	{
-		[favicon release];
-		favicon = newFavicon;
-	}
-}
-- (NSImage*) favicon
-{
-	return favicon;
-}
-- (void) setStatus: (NSS*) newStatus
-{
-	if (newStatus != status)
-	{
-		[status release];
-		status = newStatus;
-	}
-}
-- (NSS*) status
-{
-	return status;
-}
+//- (void) setFavicon: (NSImage*) newFavicon
+//{
+//	if (newFavicon != favicon)
+//	{
+//		[favicon release];
+//		favicon = newFavicon;
+//	}
+//}
+//- (NSImage*) favicon
+//{
+//	return favicon;
+//}
+//- (void) setStatus: (NSS*) newStatus
+//{
+//	if (newStatus != status)
+//	{
+//		[status release];
+//		status = newStatus;
+//	}
+//}
+//- (NSS*) status
+//{
+//	return status;
+//}
 - (void) setURLString: (NSS*) newURLString
 {
 	if (newURLString != URLString)
 	{
-		[URLString release];
+//		[URLString release];
 		URLString = [newURLString copy];
-		
+
 		[self setToolTip: URLString];
 	}
 }
@@ -181,7 +181,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 {
 	if (newTitle != title)
 	{
-		[title release];
+//		[title release];
 		title = [newTitle copy];
 	}
 }
@@ -391,7 +391,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 			[stringToDraw drawAtPoint: drawPoint withAttributes: labelAttributes];
 		}
 		
-		[whiteShadow release];
+//		[whiteShadow release];
 	}
 }
 #pragma mark View Management
@@ -490,7 +490,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 			[AZNOTCENTER postNotificationName: @"DBTabClicked"
 																object: self
 															  userInfo: dic];
-			[dic release];
+//			[dic release];
 		}
 	}
 }
@@ -519,7 +519,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	[AZNOTCENTER postNotificationName:@"DBTabWantsToBeClosed"
 														object:self
 													  userInfo:dic];
-	[dic release];
+//	[dic release];
 }
 - (void) frameDidChange: (NSNotification*) notification
 {

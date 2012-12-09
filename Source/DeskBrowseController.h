@@ -184,6 +184,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 
 - (IBAction) makeMobile:		(id)sender;
 
-@property (nonatomic, retain)  AZCalculatorController		*calculator;
+@property (nonatomic, strong)  AZCalculatorController		*calculator;
 
 @end

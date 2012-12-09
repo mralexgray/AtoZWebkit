@@ -49,6 +49,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	[touch setArguments:@[[[NSBundle mainBundle] bundlePath]]];
 	[touch launch];
 	[touch waitUntilExit];
-	[touch release];
+//	[touch release];
 }
 @end

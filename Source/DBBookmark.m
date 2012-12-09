@@ -22,8 +22,8 @@ NSS*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 	
 	if (subBookmarks != nil)
 	{
-		[self release];
-		
+//		[self release];
+
 		self = [[BookmarkFolder alloc] initWithDictionary: dictionary];
 	}
 	else
@@ -54,12 +54,11 @@ NSS*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 	
 	return self;
 }
-- (void) dealloc
-{
-	[mURL release];
-	[mTitle release];
-	
-}
+//- (void) dealloc
+//{
+//	[mURL release];
+//	[mTitle release];
+//}
 - (id) copyWithZone: (NSZone*) zone
 {
 	DBBookmark* copyOfSelf = [[DBBookmark alloc] init];
@@ -108,8 +107,8 @@ NSS*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 {
 	if (url != mURL)
 	{
-		[mURL release];
-		
+//		[mURL release];
+
 		mURL = url;
 	}
 }
@@ -119,7 +118,7 @@ NSS*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 }
 - (void) setURLString: (NSS*) urlString
 {
-	[mURL release];
+//	[mURL release];
 	mURL = [NSURL URLWithString: urlString];
 }
 - (NSS*) title
@@ -130,7 +129,7 @@ NSS*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 {
 	if (title != mTitle)
 	{
-		[mTitle release];
+//		[mTitle release];
 		mTitle = [title copy];
 		
 		[mBookmarkBarCell setStringValue: mTitle];
@@ -167,9 +166,9 @@ NSS*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 	
 	[self setMenu: bookmarkMenu];
 	
-	[bookmarkMenu release];
-	[loadMenuItem release];
-	[deleteMenuItem release];
+//	[bookmarkMenu release];
+//	[loadMenuItem release];
+//	[deleteMenuItem release];
 }
 
 #pragma mark Sorting
@@ -218,17 +217,16 @@ NSS*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 			
 			[self addBookmark: newBookmark];
 			
-			[newBookmark release];
+//			[newBookmark release];
 		}
 	}
 	
 	return self;
 }
-- (void) dealloc
-{
-	[mContainedBookmarks release];
-	
-}
+//- (void) dealloc
+//{
+//	[mContainedBookmarks release];
+//}
 
 - (id) copyWithZone: (NSZone*) zone
 {
@@ -284,8 +282,8 @@ NSS*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 {
 	if (bookmarks != mContainedBookmarks)
 	{
-		[mContainedBookmarks release];
-		
+//		[mContainedBookmarks release];
+
 		mContainedBookmarks = [bookmarks mutableCopy];
 	}
 }
@@ -348,7 +346,7 @@ NSS*	kBookmarkInfoMoreBookmarksKey	= @"Bookmarks";
 	
 	[mBookmarkBarCell setMenu: cellMenu];
 	
-	[cellMenu release];
+//	[cellMenu release];
 }
 
 @end

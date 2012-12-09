@@ -9,19 +9,10 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 @interface DBBookmarkMenuCell : NSPopUpButtonCell <DBBookmarkBarCell>
 {
 	NSView*				mControlView;
-	
-	NSS*			mStringValue;
-	
-	NSColor*			mDefaultColor;
-	NSColor*			mMouseOverColor;
-	NSColor*			mMouseDownColor;
-	
+	NSS*				mStringValue;
+	NSColor*			mDefaultColor, *mMouseOverColor, *mMouseDownColor;
 	NSTrackingRectTag	mTrackingRectTag;
-	
-	BOOL				mMouseOver;
-	BOOL				mMouseDown;
-	BOOL				mPopUpMenuVisible;
-	
-	NSR				mFrame;
+	BOOL				mMouseOver, mMouseDown, mPopUpMenuVisible;
+	NSR					mFrame;
 }
 @end

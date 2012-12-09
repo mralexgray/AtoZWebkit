@@ -11,7 +11,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 {
 	DBBezelScroller* scroller = [[DBBezelScroller alloc] init];
 	[[self enclosingScrollView] setVerticalScroller: scroller];
-	[scroller release];
+//	[scroller release];
 	// This is the color used in all our bezel windows
 	//NSColor* backgroundColor = [NSColor colorWithDeviceRed: 0.0 green: 0.0 blue: 0.0 alpha: 0.7];
 	NSColor* backgroundColor = [NSColor clearColor];
@@ -29,7 +29,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		DBBezelDataCell* newDataCell = [[DBBezelDataCell alloc] init];
 		
 		[currentTableColumn setDataCell: newDataCell];
-		[newDataCell release];
+//		[newDataCell release];
 	}
 	// Have to do this so the columns size themselves properly before display
 	NSR frame	= [self frame];

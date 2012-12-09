@@ -21,20 +21,20 @@ NSS* const kNewBookmarkWindowNibName = @"NewBookmark";
 	
 	return self;
 }
-- (void) dealloc
-{
-	[mBookmarkController release];
-	[mBookmarkURL release];
-	[mBookmarkTitle release];
-	
-}
+//- (void) dealloc
+//{
+//	[mBookmarkController release];
+//	[mBookmarkURL release];
+//	[mBookmarkTitle release];
+//	
+//}
 
 - (void) close
 {
 	[NSApp endSheet: [self window]];
 	[super close];
 	
-	[self release];
+//	[self release];
 }
 
 - (void) runSheetOnWindow: (NSWindow*) window
@@ -67,7 +67,7 @@ NSS* const kNewBookmarkWindowNibName = @"NewBookmark";
 		
 		[mBookmarkController addBookmark: newBookmark toFront: YES];
 		
-		[newBookmark release];
+//		[newBookmark release];
 	}
 	
 	[self close];

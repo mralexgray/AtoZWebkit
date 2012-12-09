@@ -42,25 +42,18 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 //}
 - (void) sendActionToTarget
 {
-	[[self target] performSelector:[self action] withObject: self];
+	[self.target performSelector:self.action withObject: self];
 }
 
 - (void) setFrame: (NSR) frame
 {
-	mFrame = frame;
-	
+	_frame = frame;
 	[self resetTrackingRect];
-}
-- (NSR) frame
-{
-	return mFrame;
 }
 
 - (NSR) textFrameForFrame: (NSR) frame
 {
-	NSR textFrame = NSMakeRect(frame.origin.x + DBPaddingOnSidesOfTextFrame, frame.origin.y + 1, frame.size.width - DBPaddingOnSidesOfTextFrame * 2, frame.size.height);
-	
-	return textFrame;
+	return  NSMakeRect(frame.origin.x + DBPaddingOnSidesOfTextFrame, frame.origin.y + 1, frame.size.width - DBPaddingOnSidesOfTextFrame * 2, frame.size.height);
 }
 - (NSD*) textAttributes
 {
@@ -71,20 +64,12 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 
 - (void) drawBackgroundInFrame: (NSR) frame
 {
-	NSColor* backgroundColor = mDefaultColor;
-		
-	if (mMouseDown)
-	{
-		backgroundColor = mMouseDownColor;
-	}
-	else if (mMouseOver)
-	{
-		backgroundColor = mMouseOverColor;
-	}
-	
-	[backgroundColor set];
+	NSC* bgCo = mMouseDown ? mMouseDownColor
+			  : mMouseOver ? mMouseOverColor : mDefaultColor;
+	[bgCo set];
 	[NSBezierPath fillRoundRectInRect: frame radius: 15];
 }
+
 - (void) drawTextInFrame: (NSR) frame
 {
 	NSR			textFrame			= [self textFrameForFrame: frame];
@@ -113,19 +98,19 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	
 	[drawText drawInRect: textFrame withAttributes: stringAttributes];
 	
-	[whiteShadow release];
+//	[whiteShadow release];
 }
 - (void) drawWithFrame: (NSR) cellFrame inView: (NSView*) controlView
 {
 	if (controlView != mControlView)
 	{
-		[mControlView release];
-		
+//		[mControlView release];
+
 		mControlView = controlView;
 		
 		[self resetTrackingRect];
 	}
-	else if (mTrackingRectTag == 0)
+	else if (self.mTrackingRectTag == 0)
 	{
 		[self resetTrackingRect];
 	}
@@ -138,8 +123,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 - (void) mouseDown: (NSEvent*) event
 {
 	mMouseDown = YES;
-	
-	[mControlView setNeedsDisplayInRect: mFrame];
+	[mControlView setNeedsDisplayInRect: self.frame];
 }
 - (void) mouseUp: (NSEvent*) event
 {
@@ -147,33 +131,33 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	
 	[self sendActionToTarget];
 	
-	[mControlView setNeedsDisplayInRect: mFrame];
+	[mControlView setNeedsDisplayInRect: self.frame];
 }
 
 - (void) mouseEntered: (NSEvent*) event
 {
 	mMouseOver = YES;
 	
-	[mControlView setNeedsDisplayInRect: mFrame];
+	[mControlView setNeedsDisplayInRect: self.frame];
 }
 - (void) mouseExited: (NSEvent*) event
 {
 	mMouseOver	= NO;
 	mMouseDown	= NO;
 	
-	[mControlView setNeedsDisplayInRect: mFrame];
+	[mControlView setNeedsDisplayInRect: self.frame];
 }
 - (void) resetTrackingRect
 {
-	if (mTrackingRectTag > 0)
+	if (self.mTrackingRectTag > 0)
 	{
-		[mControlView removeTrackingRect: mTrackingRectTag];
+		[mControlView removeTrackingRect: self.mTrackingRectTag];
 	}
 	
-	NSP mouseLocation	= [[mControlView window] mouseLocationOutsideOfEventStream];
-	BOOL	mouseInFrame	= NSMouseInRect(mouseLocation, mFrame, NO);
+	NSP mouseLocation	= [mControlView.window mouseLocationOutsideOfEventStream];
+	BOOL	mouseInFrame	= NSMouseInRect(mouseLocation, self.frame, NO);
 	
-	mTrackingRectTag = [mControlView addTrackingRect: mFrame owner: self userData: nil assumeInside: mouseInFrame];
+	self.mTrackingRectTag = [mControlView addTrackingRect: self.frame owner: self userData: nil assumeInside: mouseInFrame];
 
 	if (mouseInFrame)
 	{
@@ -200,7 +184,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	
 	[super setStringValue: stringValue];
 	
-	NSR			frame				= mFrame;
+	NSR			frame				= self.frame;
 	NSD*	stringAttributes	= [self textAttributes];
 	NSSZ			stringSize			= [[self stringValue] sizeWithAttributes: stringAttributes];
 	CGFloat			desiredWidth		= stringSize.width + DBPaddingOnSidesOfTextFrame * 2;
@@ -216,9 +200,9 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 - (NSImage*) dragImage
 {
 	NSImage*	dragImage	= nil;
-	NSSZ		imageSize	= mFrame.size;
+	NSSZ		imageSize	= self.frame.size;
 
-	dragImage = [[[NSImage alloc] initWithSize: imageSize] autorelease];
+	dragImage = [NSImage.alloc initWithSize: imageSize];// autorelease];
 	
 	[dragImage lockFocus];
 	{

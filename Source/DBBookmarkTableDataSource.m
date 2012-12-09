@@ -22,11 +22,7 @@ NSS* const kBookmarkDragType	= @"DBBookmarkDragType";
 	
 	return self;
 }
-- (void) dealloc
-{
-	[mBookmarkController release];
-	
-}
+//- (void) dealloc {	[mBookmarkController release]; }
 
 - (NSI) numberOfRowsInTableView: (NSTableView*) tableView
 {
@@ -61,12 +57,12 @@ NSS* const kBookmarkDragType	= @"DBBookmarkDragType";
 	
 	return self;
 }
-- (void) dealloc
-{
-	[mBookmarkController release];
-	[mDraggingBookmarks release];
-	
-}
+//- (void) dealloc
+//{
+//	[mBookmarkController release];
+//	[mDraggingBookmarks release];
+//	
+//}
 
 - (NSI) outlineView: (NSOutlineView*) outlineView numberOfChildrenOfItem: (id) item
 {
@@ -177,12 +173,12 @@ NSS* const kBookmarkDragType	= @"DBBookmarkDragType";
 			NSLog(@"%li", [mDraggingBookmarks count]);
 			NSLog(@"%@ vs %@", bookmark, copy);
 			[item addBookmark: copy];
-			[copy release];
+//			[copy release];
 		}
 		
 		[AZNOTCENTER postNotificationName: kBookmarksDidChangeNotification object: mBookmarkController];
 		
-		[mDraggingBookmarks release];
+//		[mDraggingBookmarks release];
 		mDraggingBookmarks	= nil;
 		
 		acceptDrop = YES;

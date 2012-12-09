@@ -4,6 +4,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 *****************************
 */
 /* SlideWindow */
+
 #import <Cocoa/Cocoa.h>
 #import <ApplicationServices/ApplicationServices.h>
 #import "DeskBrowseConstants.h"
@@ -28,8 +29,10 @@ typedef NS_ENUM(NSUI, DBDragMode) //enum
 @property (ASS, NATOM)	CGFloat		padding, minWidth;
 @property (ASS, NATOM)	NSSZ		clickDistanceFromWindowEdge;
 @property (ASS, NATOM)	DBDragMode	currentDragMode;
+
 @property (unsafe_unretained)	id			controller;
-@property (assign)	IBOutlet NSImageView *dragImageViewTopRight;
+@property (weak)	IBOutlet NSImageView *dragImageViewTopRight;
+
 
 - (void) saveFrame;
 - (void) loadFrame;

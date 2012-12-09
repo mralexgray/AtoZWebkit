@@ -59,7 +59,7 @@ NSInteger oppositeBoolInt(NSInteger bi) {
 - (void) dealloc
 {
 	[AZNOTCENTER removeObserver:self];
-	[toolbar release];
+//	[toolbar release];
 }
 - (void) awakeFromNib
 {	
@@ -136,7 +136,7 @@ NSInteger oppositeBoolInt(NSInteger bi) {
 	 itemForItemIdentifier: (NSS*) identifier 
  willBeInsertedIntoToolbar: (BOOL) willBeInserted {
 	
-	NSToolbarItem* toolbarItem = [[[NSToolbarItem alloc] initWithItemIdentifier: identifier] autorelease];
+	NSToolbarItem* toolbarItem = [NSToolbarItem.alloc initWithItemIdentifier: identifier];// autorelease];
 	
 	if ([identifier isEqualToString:@"com.sgs.prefswindow.toolbar.general"]) {
 		[toolbarItem setLabel:@"General"];

@@ -24,15 +24,15 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	
 	return self;
 }
-- (void) dealloc
-{
-	[mControlView release];
-	[mStringValue release];
-	[mDefaultColor release];
-	[mMouseOverColor release];
-	[mMouseDownColor release];
-	
-}
+//- (void) dealloc
+//{
+//	[mControlView release];
+//	[mStringValue release];
+//	[mDefaultColor release];
+//	[mMouseOverColor release];
+//	[mMouseDownColor release];
+//	
+//}
 
 - (void) setFrame: (NSR) frame
 {
@@ -110,10 +110,10 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 {
 	if (controlView != mControlView)
 	{
-		[mControlView release];
-		
+//		[mControlView release];
+
 		mControlView = controlView;
-		
+
 		[self resetTrackingRect];
 	}
 	else if (mTrackingRectTag == 0)
@@ -203,7 +203,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	
 	if (stringValue != mStringValue)
 	{
-		[mStringValue release];
+//		[mStringValue release];
 		mStringValue = [stringValue copy];
 		
 		NSR			frame				= mFrame;
@@ -225,7 +225,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	NSImage*	dragImage	= nil;
 	NSSZ		imageSize	= mFrame.size;
 
-	dragImage = [[[NSImage alloc] initWithSize: imageSize] autorelease];
+	dragImage = [NSImage.alloc initWithSize: imageSize];// autorelease];
 	
 	[dragImage lockFocus];
 	{
@@ -238,7 +238,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 - (NSMenuItem*) menuItem
 {
 	NSS*	menuItemTitle	= (mStringValue == nil) ? @"" : mStringValue;
-	NSMenuItem* menuItem		= [[[NSMenuItem alloc] initWithTitle: menuItemTitle action: [self action] keyEquivalent: @""] autorelease];
+	NSMenuItem* menuItem		= [NSMenuItem.alloc initWithTitle: menuItemTitle action: self.action keyEquivalent: @""];// autorelease];
 	
 	[menuItem setSubmenu: [self menu]];
 	

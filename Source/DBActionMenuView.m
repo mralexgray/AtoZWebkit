@@ -43,11 +43,11 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 //					operation:NSCompositeSourceOver
 //					 fraction:opacity];
 }
-- (void)dealloc {
-	[webspose release];
-	[downloads release];
-	[history release];
-	[bookmarks release];
-	[bgImage release];
-}
+//- (void)dealloc {
+//	[webspose release];
+//	[downloads release];
+//	[history release];
+//	[bookmarks release];
+//	[bgImage release];
+//}
 @end

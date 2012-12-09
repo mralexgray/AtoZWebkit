@@ -18,10 +18,10 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	
 	return self;
 }
-- (void) dealloc
-{
-	[historyController release];
-}
+//- (void) dealloc
+//{
+//	[historyController release];
+//}
 - (void) awakeFromNib
 {
 	[historyController	setView:		historyView];
@@ -29,8 +29,8 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	
 	DBBezelScroller* scroller = [[DBBezelScroller alloc] init];
 	[scrollView setVerticalScroller: scroller];
-	[scroller	release];
-		
+//	[scroller	release];
+
 	[historyView reloadData];
 	
 	// TODO: scroll the history view up to the top... i really hate how it starts at the bottom

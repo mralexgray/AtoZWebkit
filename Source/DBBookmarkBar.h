@@ -10,21 +10,19 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 @class DBBookmarkController;
 @class DBBookmarkBarPopUpButton;
 
-
 @interface DBBookmarkBar : NSView
-{
-	NSColor*				mBackgroundColor;
-	DBBookmarkBarPopUpButton*	mExtraBookmarksPopUpButton;
-	
-	NSMutableArray*			mBookmarkCells;
-	
-	BOOL					mDragging;
-	CGFloat					mLastMouseX;
-	NSR					mLastFrame;
-}
-@property (strong, NATOM) DBBookmarkController*		mBookmarkController;
 
-- (void) setBookmarkController: (DBBookmarkController*) bookmarkController;
+@property (STRNG, NATOM) DBBookmarkController		*bookmarkController;
+@property (STRNG, NATOM) DBBookmarkBarPopUpButton	*extraBookmarksPopUpButton;
+@property (STRNG, NATOM) NSC  *bookmarksBGC;
+@property (STRNG, NATOM) NSMA *bookmarkCells;
+@property (NATOM)		 BOOL  dragging;
+@property (NATOM)	     CGF   lastMouseX;
+@property (NATOM)	 	 NSR   lastFrame;
+
+@property (NATOM)	     CGF   bookmarkPadding;
+
+//- (void) setBookmarkController: (DBBookmarkController*) bookmarkController;
 - (void) reloadData;
 - (void) setVisiblePosition: (NSP) position;
 - (NSA*) menuItemsForPopUpButton: (NSPopUpButton*) popUpButton;

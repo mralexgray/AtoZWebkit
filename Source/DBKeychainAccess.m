@@ -11,7 +11,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 
 + (DBKeychainAccess*) keychainAccess
 {
-	return [[[DBKeychainAccess alloc] init] autorelease];
+	return DBKeychainAccess.new;// alloc] init] autorelease];
 }
 - (BOOL) getKeychainWithName: (NSS*) name account: (NSS*) account keychainItem: (SecKeychainItemRef*) keychainItem
 {

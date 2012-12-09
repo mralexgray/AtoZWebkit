@@ -28,14 +28,14 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 				[downloadCancelButton setKeyEquivalent:@"\r"];
 				[downloadCancelButton setKeyEquivalentModifierMask:0];
 				[downloadCancelButton setTitle:@"Download"];
-				[download release];
+//				[download release];
 				download = nil;
 				receivedContentLength = 0;
 		  }
 	 }
 }
 - (void)setFilename:(NSS *)aString {
-	[_filename release];
+//	[_filename release];
 	_filename = aString;
 }
 - (NSS *)filename {

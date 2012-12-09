@@ -170,8 +170,7 @@ might then look like this:
 	 import <Cocoa/Cocoa.h>
 	 import "ThreadWorker.h"
  </pre>
-Enjoy.
- */
+Enjoy.	*/
 + (ThreadWorker *)
 	 workOn:(id)target 
 	 withSelector:(SEL)selector 

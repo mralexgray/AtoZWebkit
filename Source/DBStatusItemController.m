@@ -30,9 +30,9 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	return self;
 }
 - (void)dealloc {
-	[_controller release];
+//	[_controller release];
 	[[NSStatusBar systemStatusBar] removeStatusItem:_item];
-	[_item release];
+//	[_item release];
 }
 - (NSMenu *)standardMenu {
 	// get the current menu

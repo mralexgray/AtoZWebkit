@@ -9,8 +9,7 @@
  * @param didEndSelector Optional selector to call on target when the
  *		  thread (and your work) is done.
  * @discussion
- * Only legitimate initialization routine.
- */
+ * Only legitimate initialization routine.	*/
 - (ThreadWorker *)  initWithTarget:(id)target 
 						  selector:(SEL)selector 
 						  argument:(id)argument
@@ -19,15 +18,13 @@
 /*!
  * @method startThread:callingPortArray:
  * @discussion
- * This is the method that is first detached in another thread.
- */
+ * This is the method that is first detached in another thread.	*/
 - (void) startThread:(NSArray *)callingPortArray;
 
 /*!
  * @method runPrimaryTask:
  * @discussion
- * First method run in newly-created NSRunLoop.
- */
+ * First method run in newly-created NSRunLoop.	*/
 -(void)runPrimaryTask:(id)notUsed;
 	 
 @end // PrivateAPI
@@ -37,8 +34,7 @@
 
 /*!
  * This is a public class method that you call 
- * to kick off a task in a new thread.
- */
+ * to kick off a task in a new thread.	*/
 + (ThreadWorker *) workOn:(id)target 
 						 withSelector:(SEL)selector 
 						 withObject:(id)argument
@@ -80,8 +76,7 @@
 
 
 /*!
- * Private init method that establishes instance variables.
- */
+ * Private init method that establishes instance variables.	*/
 - (ThreadWorker *) initWithTarget:(id)target 
 						 selector:(SEL)selector 
 						 argument:(id)argument
@@ -100,8 +95,7 @@
 }	// end initWithTarget
 
 /*!
- * When deallocating, release instance variables.
- */
+ * When deallocating, release instance variables.	*/
 - (void)dealloc
 {
 	 // Release instance variables
@@ -126,8 +120,7 @@
 
 
 /*!
- * Marks thread as cancelled but cannot actually cause thread to quit.
- */
+ * Marks thread as cancelled but cannot actually cause thread to quit.	*/
 -(void)markAsCancelled
 {
 	 // Get lock if we're currently NOT cancelled
@@ -137,8 +130,7 @@
 
 
 /*!
- * Indicates whether or not thread is cancelled.
- */
+ * Indicates whether or not thread is cancelled.	*/
 -(BOOL)cancelled
 {
 	 return [_cancelled condition];
@@ -148,8 +140,7 @@
 /*!
  * Private method that is called in a detached thread.
  * It sets up the thread maintenance - primarily the
- * auto release pool - and calls the user's method.
- */
+ * auto release pool - and calls the user's method.	*/
 - (void)startThread:(NSArray *)callingPortArray
 {
 //	 NSAutoreleasePool *pool;
@@ -190,8 +181,7 @@
 
 /*!
  * Private method that is the first method run in the
- * newly-created NSRunLoop.
- */
+ * newly-created NSRunLoop.	*/
 -(void)runPrimaryTask:(id)notUsed
 {
 	 id userInfo;
@@ -218,8 +208,7 @@
 
 /*!
  * Just a little note to say, "Good job, Rob!" to
- * the original author of this Public Domain software.
- */
+ * the original author of this Public Domain software.	*/
 + (NSS *)description
 {	return @"ThreadWorker v0.7. Public Domain. Original author: Robert Harder, rob@iharder.net. Keep up-to-date at http://iHarder.net";
 }	// end description

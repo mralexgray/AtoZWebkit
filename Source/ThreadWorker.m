@@ -11,8 +11,7 @@
  * @param didEndSelector Optional selector to call on target when the
  *        thread (and your work) is done.
  * @discussion
- * Only legitimate initialization routine.
- */
+ * Only legitimate initialization routine.	*/
 - (ThreadWorker *)  initWithTarget:(id)target
 						  selector:(SEL)selector
 						  argument:(id)argument
@@ -22,16 +21,14 @@
 /*!
  * @method startThread:callingPortArray:
  * @discussion
- * This is the method that is first detached in another thread.
- */
+ * This is the method that is first detached in another thread.	*/
 - (void) startThread:(NSArray *)callingPortArray;
 
 
 /*!
  * @method runPrimaryTask:
  * @discussion
- * First method run in newly-created NSRunLoop.
- */
+ * First method run in newly-created NSRunLoop.	*/
 -(void)runPrimaryTask:(id)notUsed;
 
 
@@ -43,8 +40,7 @@
 
 /*!
  * This is a public class method that you call
- * to kick off a task in a new thread.
- */
+ * to kick off a task in a new thread.	*/
 + (ThreadWorker *) workOn:(id)target
 			 withSelector:(SEL)selector
 			   withObject:(id)argument
@@ -64,11 +60,11 @@
     }   // end if: error
 
     // Create an instance of ThreadWorker
-    tw = [[[ThreadWorker alloc]
+    tw = [[ThreadWorker alloc]
 		   initWithTarget:target
 		   selector:selector
 		   argument:argument
-		   didEndSelector:didEndSelector] autorelease];
+		   didEndSelector:didEndSelector];// autorelease];
 
     if( !tw )
         return nil;
@@ -87,8 +83,7 @@
 }   // end workOn
 
 /*!
- * Private init method that establishes instance variables.
- */
+ * Private init method that establishes instance variables.	*/
 - (ThreadWorker *) initWithTarget:(id)target
 						 selector:(SEL)selector
 						 argument:(id)argument
@@ -113,8 +108,7 @@
 
 
 /*!
- * When deallocating, release instance variables.
- */
+ * When deallocating, release instance variables.	*/
 - (void)dealloc
 {
     // Release instance variables
@@ -123,19 +117,13 @@
 //    [_cancelled         release];
 
     // Clear instance variables - Probably unnecessary.
-    _target            = nil;
-    _argument          = nil;
-    _callingConnection = nil;
-    _port1             = nil;
-    _port2             = nil;
     _cancelled         = nil;
 
 //    [super dealloc];
 }
 
 /*!
- * Marks thread as cancelled but cannot actually cause thread to quit.
- */
+ * Marks thread as cancelled but cannot actually cause thread to quit.	*/
 -(void)markAsCancelled
 {
     // Get lock if we're currently NOT cancelled
@@ -144,8 +132,7 @@
 }	// end markAsCancelled
 
 /*!
- * Indicates whether or not thread is cancelled.
- */
+ * Indicates whether or not thread is cancelled.	*/
 -(BOOL)cancelled
 {
     return [_cancelled condition];
@@ -154,8 +141,7 @@
 /*!
  * Private method that is called in a detached thread.
  * It sets up the thread maintenance - primarily the
- * auto release pool - and calls the user's method.
- */
+ * auto release pool - and calls the user's method.	*/
 - (void)startThread:(NSArray *)callingPortArray
 {
 //    NSAutoreleasePool *pool;
@@ -195,8 +181,7 @@
 
 /*!
  * Private method that is the first method run in the
- * newly-created NSRunLoop.
- */
+ * newly-created NSRunLoop.	*/
 -(void)runPrimaryTask:(id)notUsed
 {
     id userInfo;

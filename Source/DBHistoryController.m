@@ -31,15 +31,15 @@ NSS* nameOfHistoryFile = @"History.plist";
 	
 	return self;
 }
-- (void) dealloc
-{
-	[webHistory release];
-	[view release];
-	
-}
+//- (void) dealloc
+//{
+//	[webHistory release];
+//	[view release];
+//	
+//}
 - (void) setView: (id) newView
 {
-	[view release];
+//	[view release];
 	view = newView;
 	[view setNeedsDisplay: YES];
 }
@@ -186,7 +186,7 @@ NSS* nameOfHistoryFile = @"History.plist";
 		
 		[AZNOTCENTER postNotificationName: @"DBLoadURLNotification" object: self userInfo: userInfo];
 		
-		[userInfo release];
+//		[userInfo release];
 	}
 }
 - (void) removeSelected
@@ -225,7 +225,7 @@ NSS* nameOfHistoryFile = @"History.plist";
 }
 - (NSMenu*) menuForHistory
 {
-	NSMenu*			historyMenu		= [[[NSMenu alloc] initWithTitle: @"Back"] autorelease];
+	NSMenu*			historyMenu		= [[NSMenu alloc] initWithTitle: @"Back"];// autorelease];
 	NSArray*		lastVisitedDays = [webHistory orderedLastVisitedDays];
 	
 	if ([lastVisitedDays count] > 0)
@@ -250,7 +250,7 @@ NSS* nameOfHistoryFile = @"History.plist";
 			
 			[historyMenu addItem: menuItemForSite];
 			
-			[menuItemForSite release];
+//			[menuItemForSite release];
 		}
 	}
 	
@@ -337,8 +337,8 @@ NSS* nameOfHistoryFile = @"History.plist";
 		}
 	}
 	
-	[dateIndexes release];
-		
+//	[dateIndexes release];
+
 	return isDate;
 }
 

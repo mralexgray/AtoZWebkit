@@ -37,18 +37,18 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		[self	updateTabSize];
 		[tabBar setNeedsDisplay: YES];
 		
-		[newTab	release];
+//		[newTab	release];
 	}
 	
 	return self;
 }
-- (WebView*)defaultWebView {
-	return defaultWebView;
-}
-- (void)setDefaultWebView:(WebView *)aWebView {
-	[defaultWebView release];
-	defaultWebView = aWebView;
-}
+//- (WebView*)defaultWebView {
+//	return defaultWebView;
+//}
+//- (void)setDefaultWebView:(WebView *)aWebView {
+////	[defaultWebView release];
+//	defaultWebView = aWebView;
+//}
 - (DBTabBar *)tabBar {
 	return tabBar;
 }
@@ -56,11 +56,11 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 {
 	[AZNOTCENTER removeObserver:self];
 	
-	[tabs		release];
-	[tabView	release];
-	[tabBar		release];
-	[defaultWebView release];
-	
+//	[tabs		release];
+//	[tabView	release];
+//	[tabBar		release];
+//	[defaultWebView release];
+
 }
 - (void) tabClicked: (NSNotification*) notification
 {
@@ -106,8 +106,8 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		
 		[self	updateTabSize];
 		[tabBar setNeedsDisplay: YES];
-		[newTab			release];
-		[newTabViewItem release];
+//		[newTab			release];
+//		[newTabViewItem release];
 	}
 	else
 	{
@@ -189,7 +189,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		[self removeTab: currentTab redraw: NO resize: NO];
 	}
 	
-	[tabsToRemove release];
+//	[tabsToRemove release];
 	[self updateTabSize];
 	[tabBar setNeedsDisplay: YES];
 }
@@ -272,7 +272,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 				[AZNOTCENTER postNotificationName:@"DBTabSelected"
 																	object:nil
 																  userInfo:dic];
-				[dic release];
+//				[dic release];
 			}
 			else
 			{

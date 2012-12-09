@@ -31,7 +31,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 			newUserInfo[textMovementKey] = @(NSOtherTextMovement);
 			newNotification = [NSNotification notificationWithName: [notification name] object: [notification object] userInfo: newUserInfo];
 			
-			[newUserInfo release];
+//			[newUserInfo release];
 		}
 		[super textDidEndEditing: newNotification];
 		

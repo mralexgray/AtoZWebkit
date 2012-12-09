@@ -23,10 +23,6 @@ NSS* const kDefaultImageName	= @"DefaultLocationFieldIcon";
 	
 	return self;
 }
-- (void) dealloc
-{
-	[mImage release];
-}
 
 - (NSImage*) image
 {	
@@ -36,8 +32,8 @@ NSS* const kDefaultImageName	= @"DefaultLocationFieldIcon";
 {
 	if (image != mImage)
 	{
-		[mImage release];
-		
+//		[mImage release];
+
 		mImage = image;
 		
 		if (mImage == nil)

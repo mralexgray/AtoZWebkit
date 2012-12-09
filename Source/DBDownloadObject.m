@@ -29,17 +29,17 @@ NSS* kFinishedString	= @"Finished";
 	
 	return self;
 }
-- (void) dealloc
-{
-	[mURLRequest			release];
-	[mURLDownload			release];
-	[mURLResponse			release];
-	[mFileName				release];
-	[mDownloadedFilePath	release];
-	[mDisplayName			release];
-	[mURL					release];
-	
-}
+//- (void) dealloc
+//{
+//	[mURLRequest			release];
+//	[mURLDownload			release];
+//	[mURLResponse			release];
+//	[mFileName				release];
+//	[mDownloadedFilePath	release];
+//	[mDisplayName			release];
+//	[mURL					release];
+//	
+//}
 
 // URL download
 - (WebDownload*) URLDownload
@@ -54,8 +54,8 @@ NSS* kFinishedString	= @"Finished";
 	
 	if(request != mURLRequest)
 	{
-		[mURLRequest	release];
-		
+//		[mURLRequest	release];
+
 		mURLRequest = request;
 	}
 	
@@ -63,7 +63,7 @@ NSS* kFinishedString	= @"Finished";
 	[self setURL: [request URL]];
 	
 	// File name
-	[mFileName release];
+//	[mFileName release];
 	mFileName = [[[mURL absoluteString] lastPathComponent] stringByReplacingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
 	
 	// Display name
@@ -75,8 +75,8 @@ NSS* kFinishedString	= @"Finished";
 {
 	if(response != mURLResponse)
 	{
-		[mURLResponse	release];
-		
+//		[mURLResponse	release];
+
 		mURLResponse = response;
 	}
 }
@@ -90,8 +90,8 @@ NSS* kFinishedString	= @"Finished";
 {
 	if(URL != mURL)
 	{
-		[mURL	release];
-		
+//		[mURL	release];
+
 		mURL = URL;
 	}
 }
@@ -118,8 +118,8 @@ NSS* kFinishedString	= @"Finished";
 {
 	if(name != mDisplayName)
 	{
-		[mDisplayName	release];
-		
+//		[mDisplayName	release];
+
 		mDisplayName = name;
 	}
 }
@@ -133,8 +133,8 @@ NSS* kFinishedString	= @"Finished";
 {
 	if(path != mDownloadedFilePath)
 	{
-		[mDownloadedFilePath	release];
-		
+//		[mDownloadedFilePath	release];
+
 		mDownloadedFilePath = path;
 	}
 }

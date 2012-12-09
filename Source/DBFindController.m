@@ -30,7 +30,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	[AZNOTCENTER postNotificationName:@"DBWebSearch"
 														object:self
 													  userInfo:dic];
-	[dic release];
+//	[dic release];
 }
 - (IBAction)findPreviousText:(id)sender {
 	NSMD *dic = [[NSMD alloc] init];
@@ -47,7 +47,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	[AZNOTCENTER postNotificationName:@"DBWebSearch"
 														object:self
 													  userInfo:dic];
-	[dic release];
+//	[dic release];
 }
 - (IBAction)toggleFinding:(id)sender {
 	NSS *_title = [[NSApp keyWindow] title];

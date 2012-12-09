@@ -53,7 +53,7 @@ NSS* kShiiraBookmarkTitleKey					= @"Title";
 
 + (DBBookmarkImporter*) bookmarkImporter
 {
-	return [[[DBBookmarkImporter alloc] init] autorelease];
+	return DBBookmarkImporter.new;// alloc] init] autorelease];
 }
 + (BOOL) isURLEquivalent: (NSURL*) URL1 toURL: (NSURL*) URL2
 {
@@ -108,8 +108,8 @@ NSS* kShiiraBookmarkTitleKey					= @"Title";
 		}
 	}
 	
-	[excludedBookmarks release];
-	
+//	[excludedBookmarks release];
+
 	return caminoBookmarks;
 }
 - (void) processCaminoBookmarksFromDictionary: (NSD*) caminoDictionary intoArray: (NSMA*) bookmarkStorage excludingBookmarks: (NSA*) excludedBookmarks
@@ -176,7 +176,7 @@ NSS* kShiiraBookmarkTitleKey					= @"Title";
 							[(NSMA*)excludedBookmarks addObject: newBookmark];
 						}
 						
-						[newBookmark release];
+//						[newBookmark release];
 						newBookmark = nil;
 					}
 				}
@@ -384,7 +384,7 @@ NSS* kShiiraBookmarkTitleKey					= @"Title";
 							[(NSMA*)excludedBookmarks addObject: newBookmark];
 						}
 						
-						[newBookmark release];
+//						[newBookmark release];
 						newBookmark = nil;
 					}
 				}
@@ -393,8 +393,8 @@ NSS* kShiiraBookmarkTitleKey					= @"Title";
 		}
 	}
 	
-	[excludedBookmarks release];
-	
+//	[excludedBookmarks release];
+
 	return bookmarks;
 }
 
@@ -428,8 +428,8 @@ NSS* kShiiraBookmarkTitleKey					= @"Title";
 		}
 	}
 	
-	[excludedBookmarks release];
-	
+//	[excludedBookmarks release];
+
 	return safariBookmarks;
 }
 - (void) processSafariBookmarksFromDictionary: (NSD*) safariDictionary intoArray: (NSMA*) bookmarkStorage excludingBookmarks: (NSA*) excludedBookmarks
@@ -498,7 +498,7 @@ NSS* kShiiraBookmarkTitleKey					= @"Title";
 							[(NSMA*)excludedBookmarks addObject: newBookmark];
 						}
 						
-						[newBookmark release];
+//						[newBookmark release];
 						newBookmark = nil;
 					}
 				}
@@ -537,8 +537,8 @@ NSS* kShiiraBookmarkTitleKey					= @"Title";
 		}
 	}
 	
-	[excludedBookmarks release];
-	
+//	[excludedBookmarks release];
+
 	return shiiraBookmarks;
 }
 - (void) processShiiraBookmarksFromDictionary: (NSD*) shiiraDictionary intoArray: (NSMA*) bookmarkStorage excludingBookmarks: (NSA*) excludedBookmarks
@@ -605,7 +605,7 @@ NSS* kShiiraBookmarkTitleKey					= @"Title";
 							[(NSMA*)excludedBookmarks addObject: newBookmark];
 						}
 						
-						[newBookmark release];
+//						[newBookmark release];
 						newBookmark = nil;
 					}
 				}

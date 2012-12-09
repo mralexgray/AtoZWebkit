@@ -46,10 +46,10 @@ NSS* const kBookmarkWindowNibName			= @"Bookmarks";
 	[AZNOTCENTER removeObserver: self];
 	[AZNOTCENTER removeObserver: mBookmarkTableView name: kBookmarksDidChangeNotification object: nil];
 	
-	[mBookmarks release];
-	[mBookmarkTableView release];
-	[mCurrentNewBookmarkURL release];
-	
+//	[mBookmarks release];
+//	[mBookmarkTableView release];
+//	[mCurrentNewBookmarkURL release];
+
 }
 - (void) awakeFromNib
 {
@@ -95,7 +95,7 @@ NSS* const kBookmarkWindowNibName			= @"Bookmarks";
 	DBNewBookmarkWindowController* newBookmarkController = [[DBNewBookmarkWindowController alloc] initWithBookmarkController: self title: title url: URL];
 	
 	[newBookmarkController runSheetOnWindow: [self window]];
-	[newBookmarkController release];
+//	[newBookmarkController release];
 }
 - (unsigned) numberOfBookmarks
 {
@@ -256,7 +256,7 @@ NSS* const kBookmarkWindowNibName			= @"Bookmarks";
 			NSEnumerator*	bookmarkDictEnumerator	= [arrayOfBookmarks objectEnumerator];
 			NSD*	currentBookmarkDict		= nil;
 			
-			[mBookmarks release];
+//			[mBookmarks release];
 			mBookmarks = [[NSMutableArray alloc] init];
 			
 			while ((currentBookmarkDict = [bookmarkDictEnumerator nextObject]) != nil)
@@ -266,7 +266,7 @@ NSS* const kBookmarkWindowNibName			= @"Bookmarks";
 				if (newBookmark != nil)
 				{
 					[mBookmarks addObject: newBookmark];
-					[newBookmark release];
+//					[newBookmark release];
 				}
 			}
 			
@@ -331,9 +331,9 @@ NSS* const kBookmarkWindowNibName			= @"Bookmarks";
 		DBBookmark* newBookmark = [[DBBookmark alloc] initWithURL: mCurrentNewBookmarkURL title: newTitle];
 		
 		[mBookmarks insertObject: newBookmark atIndex: 0];
-		[newBookmark release];
-		
-		[mCurrentNewBookmarkURL release];
+//		[newBookmark release];
+
+//		[mCurrentNewBookmarkURL release];
 		mCurrentNewBookmarkURL = nil;
 		
 		[mBookmarkTableView reloadData];
@@ -460,8 +460,8 @@ NSS* const kBookmarkWindowNibName			= @"Bookmarks";
 	
 	[bookmarkEditController runSheetOnWindow: [self window]];
 	
-	[outlineDataSource release];
-	[bookmarkEditController release];
+//	[outlineDataSource release];
+//	[bookmarkEditController release];
 }
 - (IBAction) closeEditWindow: (id) sender
 {
@@ -489,8 +489,8 @@ NSS* const kBookmarkWindowNibName			= @"Bookmarks";
 			
 	[mBookmarks insertObject: draggedBookmark atIndex: newIndex];
 	
-	[draggedBookmark release];
-	
+//	[draggedBookmark release];
+
 	[self bookmarksChanged];
 	[mBookmarkTableView reloadData];
 }

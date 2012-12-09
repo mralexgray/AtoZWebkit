@@ -45,22 +45,22 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 ////-------------------------------------------------
 //		dealloc
 ////-------------------------------------------------
-- (void) dealloc
-{
-	[delegate			release];
-	[textColor			release];
-	[selectedTextColor	release];
-	[finishedTextColor	release];
-	[textAttributes		release];
-	
-}
+//- (void) dealloc
+//{
+//	[delegate			release];
+//	[textColor			release];
+//	[selectedTextColor	release];
+//	[finishedTextColor	release];
+//	[textAttributes		release];
+//	
+//}
 
 ////-------------------------------------------------
 //		setDelegate:
 ////-------------------------------------------------
 - (void) setDelegate: (id) object
 {
-	[delegate release];
+//	[delegate release];
 	delegate = object;
 	[self setNeedsDisplay: YES];
 }
@@ -164,7 +164,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 ////-------------------------------------------------
 - (void) setTextColor: (NSColor*) color
 {
-	[textColor release];
+//	[textColor release];
 	textColor = color;
 	
 	[textAttributes setValue: textColor forKey: NSForegroundColorAttributeName];

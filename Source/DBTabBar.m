@@ -22,18 +22,18 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		[cmenu addItem:newTab];
 		
 		[self setMenu:cmenu];
-		
-		[newTab release];
-		[cmenu release];
+//		
+//		[newTab release];
+//		[cmenu release];
 	 }
 	
 	 return self;
 }
-- (void) dealloc
-{
-	[tabBarImage release];
-	
-}
+//- (void) dealloc
+//{
+//	[tabBarImage release];
+//	
+//}
 - (void) drawRect: (NSR) rect
 {
 	 NSR imageRect;

@@ -1,13 +1,11 @@
 /*
  * This file can be used to apply a style to all web pages you view
  * Rules without !important are overruled by author rules if the
- * author sets any.  Rules with !important overrule author rules.
- */
+ * author sets any.  Rules with !important overrule author rules.	*/
 /* You can find the latest version of this ad blocking css at:
  * http://www.floppymoose.com
  * hides many ads by preventing display of images that are inside
- * links when the link HREF contans certain substrings.
- */
+ * links when the link HREF contans certain substrings.	*/
 A:link[HREF*="javascript:void"]  IMG, 
 A:link[HREF*="addata"]  IMG, 
 A:link[HREF*="ad."]  IMG, 
@@ -95,6 +93,5 @@ IFRAME[SRC*="loads."],
 A:link[HREF*="click.mp3"] IMG { display: inline ! important }
 
 /* 
- * For more examples see http://www.mozilla.org/unix/customizing.html
- */
+ * For more examples see http://www.mozilla.org/unix/customizing.html	*/
 

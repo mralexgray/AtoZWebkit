@@ -43,7 +43,7 @@ NSS* kSpace			= @" ";
 
 + (DBHTMLParser*) HTMLParser
 {
-	return [[[DBHTMLParser alloc] init] autorelease];
+	return DBHTMLParser.new;// alloc] init] autorelease];
 }
 - (NSA*) linksFromHTMLString: (NSS*) HTMLString
 {
@@ -149,7 +149,7 @@ NSS* kSpace			= @" ";
 
 - (NSS*) pReplaceHTMLCodesInString: (NSS*) HTMLString
 {
-	NSMS* newString = [[HTMLString mutableCopy] autorelease];
+	NSMS* newString = HTMLString.mutableCopy;//] autorelease];
 	NSRange	currentRange;
 
 	// Ampersand

@@ -356,7 +356,7 @@ static NSS *strTemp 	= nil;
 		[dic setValue:title forKey:@"sourceTitle"];
 		[dic setValue:codeString forKey:@"sourceCode"];
 		[AZNOTCENTER postNotificationName:@"DBSourceNotification" object:self userInfo:dic];
-		[dic release];
+//		[dic release];
 	}
 	if ([type isEqualToString:@"saveWindowPosition"]) {
 		[[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithFloat:([slideWindow frame].origin.y)] forKey:@"slideWindowY"];
@@ -678,8 +678,8 @@ static NSS *strTemp 	= nil;
 {
 	if (status != currentStatus)
 	{
-		[currentStatus	release];
-		
+//		[currentStatus	release];
+
 		currentStatus = status;
 	}
 		
@@ -693,8 +693,8 @@ static NSS *strTemp 	= nil;
 {
 	if(title != currentTitle)
 	{
-		[currentTitle	release];
-		
+//		[currentTitle	release];
+
 		currentTitle = title;
 	}
 	
@@ -749,18 +749,18 @@ static NSS *strTemp 	= nil;
 		}
 	} else {
 		if (statusController) {
-			[statusController release];
+//			[statusController release];
 			statusController = nil;
 		}
 	}
 	
-	[userDefaults release];
+//	[userDefaults release];
 }
 - (void)syncLoadingStateWithStatus {
 	NSS* statusText = [self statusText];
 	if(loadingState != statusText)
 	{
-		[loadingState release];
+//		[loadingState release];
 		loadingState = statusText; // set the loading state to the status text
 	}
 }
@@ -1144,8 +1144,7 @@ static NSS *strTemp 	= nil;
  *****************************************************************************************************
  *****************************************************************************************************
  *****************************************************************************************************
- 
- */
+ 	*/
 - (void)webView:(WebView *)sender
 		decidePolicyForNavigationAction:(NSD *)info
 		request:(NSURLRequest *)request
@@ -1220,7 +1219,7 @@ static NSS *strTemp 	= nil;
 */
 - (WebView*) createWebView
 {
-	WebView*		newWebView	= [[[WebView alloc] initWithFrame: [tabView frame]] autorelease];
+	WebView*		newWebView	= [WebView.alloc initWithFrame:tabView.frame];// autorelease];
 	WebPreferences*	webPrefs	= [WebPreferences standardPreferences];
 	[webPrefs setAutosaves: YES];
 	
@@ -1551,7 +1550,7 @@ static NSS *strTemp 	= nil;
 		}
 	} else {
 		if (statusController) {
-			[statusController release];
+//			[statusController release];
 			statusController = nil;
 		}
 	}
@@ -1667,7 +1666,7 @@ static NSS *strTemp 	= nil;
 {
 	[bookmarkController save];
 	[locationManager stopUpdatingLocation];
-	[locationManager release];
+//	[locationManager release];
 
 }
 
@@ -2280,8 +2279,8 @@ static NSS *strTemp 	= nil;
 		if (!image && !frame) {
 			[items insertObject:[NSMenuItem separatorItem] atIndex:4];
 		}
-		[book release];
-		
+//		[book release];
+
 		//if (!image && !frame) {
 		//			[items removeLastObject];
 		//		}
@@ -2307,7 +2306,7 @@ static NSS *strTemp 	= nil;
 												  keyEquivalent:@""];
 		[items addObject:copyLoc];
 		
-		[copyLoc release];
+//		[copyLoc release];
 	}
 	if (frame) {
 		NSMenuItem *menuItem = [[NSMenuItem alloc] initWithTitle:@"View Page Source" action:@selector(viewPageSource) keyEquivalent:@""];
@@ -2318,10 +2317,10 @@ static NSS *strTemp 	= nil;
 		} else {
 			//[items removeLastObject];
 		}
-		[menuItem release];
+//		[menuItem release];
 	}
 	
-	return [items autorelease];
+	return items;// autorelease];
 }
 - (void)downloadDidBegin:(NSURLDownload *)download {
 	NSURLRequest *req = [download request];

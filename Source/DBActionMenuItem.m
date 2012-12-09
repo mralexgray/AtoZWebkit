@@ -18,9 +18,9 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	}
 	return self;
 }
-- (void)dealloc {
-	[label release];
-}
+//- (void)dealloc {
+//	[label release];
+//}
 - (BOOL)acceptsFirstResponder {
 	return YES;
 }
@@ -31,7 +31,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	
 	 [label drawInRect:rect withAttributes:textStatic];
 	
-	[textStatic release];
+//	[textStatic release];
 }
 - (void)mouseEntered:(NSEvent *)theEvent {
 }
@@ -41,10 +41,10 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	[AZNOTCENTER postNotificationName:@"DBActionMenuItemNotification"
 														object:self
 													  userInfo:dic];
-	[dic release];
+//	[dic release];
 }
 - (void)setLabel:(NSS *)aLabel {
-	[label release];
+//	[label release];
 	label = aLabel;
 }
 - (NSS *)label {

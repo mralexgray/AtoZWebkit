@@ -93,8 +93,7 @@
  back to the main, i.e. calling, thread from the secondary thread.
 
  0.1 - Initial release.
- </pre>
- */
+ </pre>	*/
 @interface ThreadWorker : NSObject
 {
 	NSConditionLock *_cancelled;
@@ -197,8 +196,7 @@
  import "ThreadWorker.h"
  </pre>
  Enjoy.
-
- */
+	*/
 + (ThreadWorker *)
 workOn:(id)target
 withSelector:(SEL)selector
@@ -222,16 +220,14 @@ didEndSelector:(SEL)didEndSelector;
  ...
  }
  }
- </pre>
- */
+ </pre>	*/
 -(void)markAsCancelled;
 
 
 /*!
  @method cancelled
  @abstract Returns whether or not someone has tried to cancel the thread.
- @discussion Returns whether or not someone has tried to cancel the thread.
- */
+ @discussion Returns whether or not someone has tried to cancel the thread.	*/
 -(BOOL)cancelled;
 
 
@@ -239,8 +235,7 @@ didEndSelector:(SEL)didEndSelector;
 /*!
  @method dealloc
  @abstract Make sure we clean up after ourselves.
- @discussion Make sure we clean up after ourselves.
- */
+ @discussion Make sure we clean up after ourselves.	*/
 //- (void) dealloc;
 
 
@@ -249,8 +244,7 @@ didEndSelector:(SEL)didEndSelector;
  @abstract Just a little note to say, "Good job, Rob!"
  @discussion
  Just a little note to say, "Good job, Rob!" to
- the original author of this Public Domain software.
- */
+ the original author of this Public Domain software.	*/
 + (NSString *)description;
 
 
