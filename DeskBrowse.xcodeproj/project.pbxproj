@@ -464,7 +464,6 @@
 		5DDBD3240EC2513F00499681 /* DBActionMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBActionMenuView.m; path = Source/DBActionMenuView.m; sourceTree = "<group>"; };
 		5DF8EE1C07DAD75600097CCE /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = /System/Library/Frameworks/WebKit.framework; sourceTree = "<absolute>"; };
 		7B32D73C1650C080009540EB /* Calculator.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Calculator.xib; path = ../AtoZ/Classes/Calculator.xib; sourceTree = "<group>"; };
-		7B43D319164CD61700AC4D26 /* AtoZ.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AtoZ.framework; path = /Library/Frameworks/AtoZ.framework; sourceTree = "<absolute>"; };
 		7B43D31D164CDB7A00AC4D26 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = /System/Library/Frameworks/SystemConfiguration.framework; sourceTree = "<absolute>"; };
 		7B636628165FAA53008F3D27 /* PMOverlayBottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PMOverlayBottom.png; path = Resources/Images/PMOverlayBottom.png; sourceTree = "<group>"; };
 		7B636629165FAA53008F3D27 /* PMOverlayBottomLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PMOverlayBottomLeft.png; path = Resources/Images/PMOverlayBottomLeft.png; sourceTree = "<group>"; };
@@ -603,7 +602,6 @@
 			isa = PBXGroup;
 			children = (
 				7B43D31D164CDB7A00AC4D26 /* SystemConfiguration.framework */,
-				7B43D319164CD61700AC4D26 /* AtoZ.framework */,
 				7B7A855215F8790F0071741C /* AppKit.framework */,
 				3CE212840974DB7200BCE121 /* libZonicKRM.a */,
 				5D0B722F096DEE860065CC84 /* CoreFoundation.framework */,
