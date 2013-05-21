@@ -11,26 +11,19 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 
 - (id) init
 {
-	if (self = [super init])
-	{
-		mDefaultColor	= RANDOMCOLOR;
-		mMouseOverColor = [NSColor colorWithDeviceRed: 0.7 green: 0.7 blue: 0.7 alpha: 0.5];
-		mMouseDownColor	= [NSColor colorWithDeviceRed: 0.55 green: 0.55 blue: 0.55 alpha: 0.5];
-		
-		[self setFont: [NSFont fontWithName:@"Ivolkswagen-DemiBold" size:12]];
-		[self sendActionOn: 0];
-	}
-	
+	if (self != [super init]) return nil;
+	mDefaultColor	= RANDOMCOLOR;
+	mMouseOverColor = [NSColor colorWithDeviceRed: 0.7 green: 0.7 blue: 0.7 alpha: 0.5];
+	mMouseDownColor	= [NSColor colorWithDeviceRed: 0.55 green: 0.55 blue: 0.55 alpha: 0.5];
+	[self setFont: [NSFont fontWithName:@"Ivolkswagen-DemiBold" size:12]];
+	[self sendActionOn: 0];
 	return self;
 }
 - (id) initWithTarget: (id) target action: (SEL) action
 {
-	if (self = [self init])
-	{
-		[self setTarget: target];
-		[self setAction: action];
-	}
-	
+	if (self != [self init]) return nil;
+	[self setTarget: target];
+	[self setAction: action];
 	return self;
 }
 //- (void)dealloc
