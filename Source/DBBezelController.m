@@ -56,18 +56,18 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 //	
 //}
 - (void)handleNotification:(NSNotification *)note {
-	NSS *type = ((NSS *)[note userInfo][@"notificationType"]);
+	NSS *type = ((NSS*) [note userInfo][@"notificationType"]);
 	if ([type isEqualToString:@"showBezelForFile"]) {
-		NSS *tFile = ((NSS *)[note userInfo][@"filename"]);
+		NSS *tFile = ((NSS*) [note userInfo][@"filename"]);
 		[self showBezelForFile:tFile];
 //		[tFile release];
 	}
 }
-- (void)setDownloadFile:(NSS *)filename {
+- (void)setDownloadFile:(NSS*) filename {
 //	[file release];
 	file = filename;
 }
-- (NSS *)downloadFile {
+- (NSS*) downloadFile {
 	return file;
 }
 - (void)showBezel {
@@ -78,7 +78,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	[bezel invalidateShadow];
 	timer = [NSTimer scheduledTimerWithTimeInterval:0.005 target:self selector:@selector(fadeInWindow:) userInfo:nil repeats:YES];
 }
-- (void)showBezelForFile:(NSS *)filename {
+- (void)showBezelForFile:(NSS*) filename {
 	[self setDownloadFile:filename];
 	[self showBezel];
 }

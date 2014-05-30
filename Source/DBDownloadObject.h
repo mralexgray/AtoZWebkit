@@ -50,7 +50,7 @@ extern NSS* kFinishedString;
 - (CGFloat) bytesLoaded;
 - (void) setBytesLoaded: (CGFloat) bytes;
 - (NSI) percentComplete;
-- (NSS *)stringStatus;
+- (NSS*) stringStatus;
 - (void) cancel;
 - (DBDownloadStatus) status;
 - (void) setStatus: (DBDownloadStatus) newStatus;

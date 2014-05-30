@@ -8,7 +8,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 /*- (id)init {
 	[self initWithStringURL:@""];
 }
-- (id)initWithStringURL:(NSS *)url {
+- (id)initWithStringURL:(NSS*) url {
 	self = [super init];
 	if (self) {
 		oldurl = [url retain];
@@ -20,7 +20,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	[super dealloc];
 }*/
 // method for actually doing the formatting
-+ (NSS *)formatAndReturnStringWithString: (NSS*) URLString {
++ (NSS*) formatAndReturnStringWithString: (NSS*) URLString {
 	NSS *newURL = URLString;
 	
 	// is it localhost?
@@ -87,12 +87,12 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 }
 // accessor methods for the string to format
 /*
-- (void)setStringURL:(NSS *)url {
+- (void)setStringURL:(NSS*) url {
 	[url retain];
 	[oldurl release];
 	oldurl = url;
 }
-- (NSS *)stringURL {
+- (NSS*) stringURL {
 	return oldurl;
 }*/
 @end

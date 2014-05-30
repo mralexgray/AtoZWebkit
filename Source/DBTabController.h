@@ -23,7 +23,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 - (void) tabWantsToClosed:(NSNotification *)notification;
 - (void) slideWindowResized: (NSNotification*) notification;
 - (void) newTabWithWebView: (WebView*) webView select: (BOOL) selectNewTab;
-- (void) newTabWithWebView: (WebView*) webView select: (BOOL) selectNewTab URLString:(NSS *)URLString;
+- (void) newTabWithWebView: (WebView*) webView select: (BOOL) selectNewTab URLString:(NSS*) URLString;
 - (void) removeTab: (DBTab*) tab redraw: (BOOL) redraw resize: (BOOL) resize;
 - (void) removeAllTabs;
 - (void) updateTabSize;

@@ -64,7 +64,7 @@ static NSInteger coloring = 0;
 - (IBAction)refreshTheSourceCode:(id)sender {
 	//
 }
-- (void)setSourceCode:(NSS *)aStr { 
+- (void)setSourceCode:(NSS*) aStr { 
 //	[sourceCode release];
 	sourceCode = aStr;
 	
@@ -73,7 +73,7 @@ static NSInteger coloring = 0;
 		[sourceView setString:sourceCode];
 	}
 }
-- (NSS *)sourceCode {
+- (NSS*) sourceCode {
 	return sourceCode;
 }
 - (void)doColorSyntax {
@@ -162,7 +162,7 @@ static NSInteger coloring = 0;
 			  didEndSelector:@selector(coloringDone:)];
 	}
 }
-- (void)setTitle:(NSS *)title {
+- (void)setTitle:(NSS*) title {
 	[[sourceView window] setTitle:title];
 }
 - (void)coloringDone:(ThreadWorker *)tw {

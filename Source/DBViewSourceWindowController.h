@@ -13,9 +13,9 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 }
 - (IBAction)saveCode:(id)sender;
 - (IBAction)refreshTheSourceCode:(id)sender;
-- (void)setSourceCode:(NSS *)aStr;
-- (NSS *)sourceCode;
-- (void)setTitle:(NSS *)title;
+- (void)setSourceCode:(NSS*) aStr;
+- (NSS*) sourceCode;
+- (void)setTitle:(NSS*) title;
 - (void)doColorSyntax;
 - (void)coloringDone:(ThreadWorker *)tw;
 @end

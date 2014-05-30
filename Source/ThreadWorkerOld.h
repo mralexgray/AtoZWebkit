@@ -218,7 +218,7 @@ Enjoy.	*/
 	  Just a little note to say, "Good job, Rob!" to
 	  the original author of this Public Domain software.
 	  */
-+ (NSS *)description;
++ (NSS*) description;
 
 
 @end

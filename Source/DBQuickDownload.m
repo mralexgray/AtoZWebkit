@@ -34,11 +34,11 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		  }
 	 }
 }
-- (void)setFilename:(NSS *)aString {
+- (void)setFilename:(NSS*) aString {
 //	[_filename release];
 	_filename = aString;
 }
-- (NSS *)filename {
+- (NSS*) filename {
 	return _filename;
 }
 - (void)cancel
@@ -90,7 +90,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		  [progressIndicator setDoubleValue:0];
 	 }
 }
-- (void)download:(NSURLDownload *)theDownload decideDestinationWithSuggestedFilename:(NSS *)filename
+- (void)download:(NSURLDownload *)theDownload decideDestinationWithSuggestedFilename:(NSS*) filename
 {
 	 if ([[directoryMatrix selectedCell] tag] == 0) {
 		  NSS *path = [[NSHomeDirectory() stringByAppendingPathComponent:@"Desktop"] stringByAppendingPathComponent:filename];
@@ -112,11 +112,11 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		  [progressIndicator setDoubleValue:(double)receivedContentLength / (double)expectedContentLength];
 	 }
 }
-- (BOOL)download:(NSURLDownload *)download shouldDecodeSourceDataOfMIMEType:(NSS *)encodingType;
+- (BOOL)download:(NSURLDownload *)download shouldDecodeSourceDataOfMIMEType:(NSS*) encodingType;
 {
 	 return ([decodeButton state] == NSOnState);
 }
-- (void)download:(NSURLDownload *)download didCreateDestination:(NSS *)path
+- (void)download:(NSURLDownload *)download didCreateDestination:(NSS*) path
 {
 	 [self setFilename:path];
 }

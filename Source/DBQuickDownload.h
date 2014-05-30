@@ -25,6 +25,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	NSS *_filename;
 }
 - (IBAction)downloadOrCancel:(id)sender;
-- (void)setFilename:(NSS *)aString;
-- (NSS *)filename;
+- (void)setFilename:(NSS*) aString;
+- (NSS*) filename;
 @end

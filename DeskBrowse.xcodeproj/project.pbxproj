@@ -15,12 +15,8 @@
 		3C90416F083DA3760065A15E /* History.nib in Resources */ = {isa = PBXBuildFile; fileRef = 3C90416D083DA3760065A15E /* History.nib */; };
 		3CF8EE7F089ACB57007E7678 /* Bookmarks.nib in Resources */ = {isa = PBXBuildFile; fileRef = 3CF8EE7B089ACB57007E7678 /* Bookmarks.nib */; };
 		3CF8EE80089ACB57007E7678 /* NewBookmark.nib in Resources */ = {isa = PBXBuildFile; fileRef = 3CF8EE7D089ACB57007E7678 /* NewBookmark.nib */; };
-		5D0B722B096DEE630065CC84 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D0B722A096DEE630065CC84 /* Security.framework */; };
 		5D16F7550ED2643400052573 /* DBWhiteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D16F7530ED2643400052573 /* DBWhiteView.m */; };
-		5D321166084A6B0800E3C21B /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D321165084A6B0800E3C21B /* ApplicationServices.framework */; };
-		5D3424B3081026B700AC24F4 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D3424B2081026B700AC24F4 /* IOKit.framework */; };
 		5D885FFF0EC257E800075D99 /* DeskBrowseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D885FFD0EC257E800075D99 /* DeskBrowseController.m */; };
-		5D94505507E2711B00F7CC66 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D94505407E2711B00F7CC66 /* Carbon.framework */; };
 		5DC2C4330EC214AE00BD0054 /* DBLoadCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C4320EC214AE00BD0054 /* DBLoadCommand.m */; };
 		5DC2C4370EC214DA00BD0054 /* DeskBrowseConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C4360EC214DA00BD0054 /* DeskBrowseConstants.m */; };
 		5DC2C44E0EC2152500BD0054 /* DBApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C44B0EC2152500BD0054 /* DBApplication.m */; };
@@ -185,9 +181,7 @@
 		5DC2C6BF0EC22C7C00BD0054 /* DBWebsposeWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C6BE0EC22C7C00BD0054 /* DBWebsposeWindow.m */; };
 		5DC2C6C70EC22C8B00BD0054 /* DBSlideWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC2C6C60EC22C8B00BD0054 /* DBSlideWindow.m */; };
 		5DDBD3250EC2513F00499681 /* DBActionMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DDBD3240EC2513F00499681 /* DBActionMenuView.m */; };
-		5DF8EE1D07DAD75600097CCE /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF8EE1C07DAD75600097CCE /* WebKit.framework */; };
 		7B32D73D1650C080009540EB /* Calculator.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B32D73C1650C080009540EB /* Calculator.xib */; };
-		7B43D31E164CDB7B00AC4D26 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B43D31D164CDB7A00AC4D26 /* SystemConfiguration.framework */; };
 		7B636633165FAA53008F3D27 /* PMOverlayBottom.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B636628165FAA53008F3D27 /* PMOverlayBottom.png */; };
 		7B636634165FAA53008F3D27 /* PMOverlayBottomLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B636629165FAA53008F3D27 /* PMOverlayBottomLeft.png */; };
 		7B636635165FAA53008F3D27 /* PMOverlayBottomRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B63662A165FAA53008F3D27 /* PMOverlayBottomRight.png */; };
@@ -200,19 +194,13 @@
 		7B63663C165FAA53008F3D27 /* PMOverlayTopLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B636631165FAA53008F3D27 /* PMOverlayTopLeft.png */; };
 		7B63663D165FAA53008F3D27 /* PMOverlayTopRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B636632165FAA53008F3D27 /* PMOverlayTopRight.png */; };
 		7B636641165FB1FA008F3D27 /* TheTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B63663F165FB1FA008F3D27 /* TheTab.m */; };
-		7B7142A71662AA5600B7661A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B7142A61662AA5600B7661A /* CoreLocation.framework */; };
-		7B7A855315F8790F0071741C /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B7A855215F8790F0071741C /* AppKit.framework */; };
 		8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* MainMenu.nib */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
-		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		29B97319FDCFA39411CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
-		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
-		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32CA4F630368D1EE00C91783 /* DeskBrowse_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeskBrowse_Prefix.pch; sourceTree = "<group>"; };
 		3C17E6E10851414900D65194 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/HotKey.nib; sourceTree = "<group>"; };
 		3C1BEB190A06F7FF00DC330E /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/BookmarkEdit.nib; sourceTree = "<group>"; };
@@ -220,18 +208,12 @@
 		3C5E442608356C0A00E8F180 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Downloads.nib; sourceTree = "<group>"; };
 		3C5E447908356FBA00E8F180 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Source.nib; sourceTree = "<group>"; };
 		3C90416E083DA3760065A15E /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/History.nib; sourceTree = "<group>"; };
-		3CE212840974DB7200BCE121 /* libZonicKRM.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libZonicKRM.a; sourceTree = "<group>"; };
 		3CF8EE7C089ACB57007E7678 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Bookmarks.nib; sourceTree = "<group>"; };
 		3CF8EE7E089ACB57007E7678 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/NewBookmark.nib; sourceTree = "<group>"; };
-		5D0B722A096DEE630065CC84 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
-		5D0B722F096DEE860065CC84 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = /System/Library/Frameworks/CoreFoundation.framework; sourceTree = "<absolute>"; };
 		5D16F7530ED2643400052573 /* DBWhiteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBWhiteView.m; path = Source/DBWhiteView.m; sourceTree = "<group>"; };
 		5D16F7540ED2643400052573 /* DBWhiteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; name = DBWhiteView.h; path = Source/DBWhiteView.h; sourceTree = "<group>"; };
-		5D321165084A6B0800E3C21B /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
-		5D3424B2081026B700AC24F4 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
 		5D885FFD0EC257E800075D99 /* DeskBrowseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeskBrowseController.m; path = Source/DeskBrowseController.m; sourceTree = "<group>"; };
 		5D885FFE0EC257E800075D99 /* DeskBrowseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeskBrowseController.h; path = Source/DeskBrowseController.h; sourceTree = "<group>"; };
-		5D94505407E2711B00F7CC66 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		5DC2C4310EC214AE00BD0054 /* DBLoadCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBLoadCommand.h; path = Source/DBLoadCommand.h; sourceTree = "<group>"; };
 		5DC2C4320EC214AE00BD0054 /* DBLoadCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBLoadCommand.m; path = Source/DBLoadCommand.m; sourceTree = "<group>"; };
 		5DC2C4340EC214BF00BD0054 /* WebKitEx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebKitEx.h; path = Source/WebKitEx.h; sourceTree = "<group>"; };
@@ -462,9 +444,7 @@
 		5DC2C6C60EC22C8B00BD0054 /* DBSlideWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBSlideWindow.m; path = Source/DBSlideWindow.m; sourceTree = "<group>"; };
 		5DDBD3230EC2513F00499681 /* DBActionMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBActionMenuView.h; path = Source/DBActionMenuView.h; sourceTree = "<group>"; };
 		5DDBD3240EC2513F00499681 /* DBActionMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBActionMenuView.m; path = Source/DBActionMenuView.m; sourceTree = "<group>"; };
-		5DF8EE1C07DAD75600097CCE /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = /System/Library/Frameworks/WebKit.framework; sourceTree = "<absolute>"; };
 		7B32D73C1650C080009540EB /* Calculator.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Calculator.xib; path = ../AtoZ/Classes/Calculator.xib; sourceTree = "<group>"; };
-		7B43D31D164CDB7A00AC4D26 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = /System/Library/Frameworks/SystemConfiguration.framework; sourceTree = "<absolute>"; };
 		7B636628165FAA53008F3D27 /* PMOverlayBottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PMOverlayBottom.png; path = Resources/Images/PMOverlayBottom.png; sourceTree = "<group>"; };
 		7B636629165FAA53008F3D27 /* PMOverlayBottomLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PMOverlayBottomLeft.png; path = Resources/Images/PMOverlayBottomLeft.png; sourceTree = "<group>"; };
 		7B63662A165FAA53008F3D27 /* PMOverlayBottomRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PMOverlayBottomRight.png; path = Resources/Images/PMOverlayBottomRight.png; sourceTree = "<group>"; };
@@ -478,8 +458,6 @@
 		7B636632165FAA53008F3D27 /* PMOverlayTopRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PMOverlayTopRight.png; path = Resources/Images/PMOverlayTopRight.png; sourceTree = "<group>"; };
 		7B63663E165FB1FA008F3D27 /* TheTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; path = TheTab.h; sourceTree = "<group>"; };
 		7B63663F165FB1FA008F3D27 /* TheTab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheTab.m; sourceTree = "<group>"; };
-		7B7142A61662AA5600B7661A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = ../../../../../System/Library/Frameworks/CoreLocation.framework; sourceTree = "<group>"; };
-		7B7A855215F8790F0071741C /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		7BFCBD2A164D773300859A93 /* ThreadWorkerOld.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ThreadWorkerOld.m; path = Source/ThreadWorkerOld.m; sourceTree = "<group>"; };
 		7BFCBD2B164D774200859A93 /* ThreadWorkerOld.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.objj.h; name = ThreadWorkerOld.h; path = Source/ThreadWorkerOld.h; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -491,15 +469,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B7142A71662AA5600B7661A /* CoreLocation.framework in Frameworks */,
-				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
-				7B43D31E164CDB7B00AC4D26 /* SystemConfiguration.framework in Frameworks */,
-				7B7A855315F8790F0071741C /* AppKit.framework in Frameworks */,
-				5DF8EE1D07DAD75600097CCE /* WebKit.framework in Frameworks */,
-				5D94505507E2711B00F7CC66 /* Carbon.framework in Frameworks */,
-				5D3424B3081026B700AC24F4 /* IOKit.framework in Frameworks */,
-				5D321166084A6B0800E3C21B /* ApplicationServices.framework in Frameworks */,
-				5D0B722B096DEE630065CC84 /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -509,7 +478,6 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				5D1F46A609DF614E00F7B99A /* AppleScript */,
 				5DC20F6009070AA700BD03FF /* Bezel Classes */,
 				5D8CEC780866402400FCB008 /* Action Menu */,
 				5DB228F20822ED5C0000AB62 /* Tab Classes */,
@@ -520,32 +488,13 @@
 				5DB60D300808830E00520E28 /* Other Classes */,
 				5DC2C4340EC214BF00BD0054 /* WebKitEx.h */,
 				5DC2C44A0EC2152500BD0054 /* DBApplication.h */,
-				5DC2C44B0EC2152500BD0054 /* DBApplication.m */,
 				5DC2C4350EC214DA00BD0054 /* DeskBrowseConstants.h */,
 				5DC2C4360EC214DA00BD0054 /* DeskBrowseConstants.m */,
+				5DC2C44B0EC2152500BD0054 /* DBApplication.m */,
 				5D885FFE0EC257E800075D99 /* DeskBrowseController.h */,
 				5D885FFD0EC257E800075D99 /* DeskBrowseController.m */,
 			);
 			name = Classes;
-			sourceTree = "<group>";
-		};
-		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				5DF8EE1C07DAD75600097CCE /* WebKit.framework */,
-				5D94505407E2711B00F7CC66 /* Carbon.framework */,
-				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
-			);
-			name = "Linked Frameworks";
-			sourceTree = "<group>";
-		};
-		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
-				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
-			);
-			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
@@ -559,11 +508,9 @@
 		29B97314FDCFA39411CA2CEA /* DeskBrowse */ = {
 			isa = PBXGroup;
 			children = (
-				7B7142A61662AA5600B7661A /* CoreLocation.framework */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
-				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
 			name = DeskBrowse;
@@ -598,22 +545,6 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
-		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				7B43D31D164CDB7A00AC4D26 /* SystemConfiguration.framework */,
-				7B7A855215F8790F0071741C /* AppKit.framework */,
-				3CE212840974DB7200BCE121 /* libZonicKRM.a */,
-				5D0B722F096DEE860065CC84 /* CoreFoundation.framework */,
-				5D0B722A096DEE630065CC84 /* Security.framework */,
-				5D321165084A6B0800E3C21B /* ApplicationServices.framework */,
-				5D3424B2081026B700AC24F4 /* IOKit.framework */,
-				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
-				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		3C4AC65A09706B58007F2254 /* Importing */ = {
 			isa = PBXGroup;
 			children = (
@@ -627,7 +558,7 @@
 			name = Importing;
 			sourceTree = "<group>";
 		};
-		3C4AC744097071FD007F2254 /* Websposé Password */ = {
+		3C4AC744097071FD007F2254 /* Websposé Password */ = {
 			isa = PBXGroup;
 			children = (
 				5DC2C5310EC21D8B00BD0054 /* DBKeychainAccess.h */,
@@ -847,8 +778,9 @@
 		5DB60D300808830E00520E28 /* Other Classes */ = {
 			isa = PBXGroup;
 			children = (
+				5D1F46A609DF614E00F7B99A /* AppleScript */,
 				5DB09910095A58DF007345BF /* AntiPhising */,
-				3C4AC744097071FD007F2254 /* Websposé Password */,
+				3C4AC744097071FD007F2254 /* Websposé Password */,
 				5DD20AE0094E792B00AC54B7 /* StatusItem */,
 				7B448ABB165F688E00988DBC /* DBHotKey */,
 				5DC2C5020EC21CE800BD0054 /* ThreadWorker.h */,
@@ -1048,7 +980,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0510;
 			};
 			buildConfigurationList = 3CE7192A09833E5500734EDF /* Build configuration list for PBXProject "DeskBrowse" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1375,7 +1307,7 @@
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Library/Frameworks/**",
+					"$(HOME)/Library/Frameworks",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -1393,9 +1325,31 @@
 				OTHER_LDFLAGS = (
 					"-framework",
 					AtoZ,
+					"-framework",
+					Foundation,
+					"-framework",
+					WebKit,
+					"-framework",
+					Carbon,
+					"-framework",
+					Cocoa,
+					"-framework",
+					SystemConfiguration,
+					"-framework",
+					AppKit,
+					"-framework",
+					CoreFoundation,
+					"-framework",
+					Security,
+					"-framework",
+					ApplicationServices,
+					"-framework",
+					IOKit,
+					"-framework",
+					CoreLocation,
 				);
 				PRODUCT_NAME = DeskBrowse;
-				SDKROOT = "";
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = NO;
 			};
@@ -1409,7 +1363,7 @@
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Library/Frameworks/**",
+					"$(HOME)/Library/Frameworks",
 				);
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
@@ -1425,9 +1379,31 @@
 				OTHER_LDFLAGS = (
 					"-framework",
 					AtoZ,
+					"-framework",
+					Foundation,
+					"-framework",
+					WebKit,
+					"-framework",
+					Carbon,
+					"-framework",
+					Cocoa,
+					"-framework",
+					SystemConfiguration,
+					"-framework",
+					AppKit,
+					"-framework",
+					CoreFoundation,
+					"-framework",
+					Security,
+					"-framework",
+					ApplicationServices,
+					"-framework",
+					IOKit,
+					"-framework",
+					CoreLocation,
 				);
 				PRODUCT_NAME = DeskBrowse;
-				SDKROOT = "";
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = NO;
 			};
@@ -1440,7 +1416,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Library/Frameworks/**",
+					"$(HOME)/Library/Frameworks",
 				);
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
@@ -1456,9 +1432,31 @@
 				OTHER_LDFLAGS = (
 					"-framework",
 					AtoZ,
+					"-framework",
+					Foundation,
+					"-framework",
+					WebKit,
+					"-framework",
+					Carbon,
+					"-framework",
+					Cocoa,
+					"-framework",
+					SystemConfiguration,
+					"-framework",
+					AppKit,
+					"-framework",
+					CoreFoundation,
+					"-framework",
+					Security,
+					"-framework",
+					ApplicationServices,
+					"-framework",
+					IOKit,
+					"-framework",
+					CoreLocation,
 				);
 				PRODUCT_NAME = DeskBrowse;
-				SDKROOT = "";
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = NO;
 			};
@@ -1467,9 +1465,9 @@
 		3CE7192B09833E5500734EDF /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_MODULES = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				SDKROOT = macosx;
 			};
@@ -1478,8 +1476,8 @@
 		3CE7192C09833E5500734EDF /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				CLANG_ENABLE_MODULES = YES;
+				GCC_VERSION = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				SDKROOT = macosx;
 			};
@@ -1488,8 +1486,8 @@
 		3CE7192D09833E5500734EDF /* Default */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				CLANG_ENABLE_MODULES = YES;
+				GCC_VERSION = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				SDKROOT = macosx;
 			};

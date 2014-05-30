@@ -10,7 +10,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 - (id)initWithFrame:(NSR)frame {
 	 return [self initWithFrame:frame label:@""];
 }
-- (id)initWithFrame:(NSR)frame label:(NSS *)aLabel {
+- (id)initWithFrame:(NSR)frame label:(NSS*) aLabel {
 	self = [super initWithFrame:frame];
 	if (self) {
 		[self setLabel:aLabel];
@@ -43,11 +43,11 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 													  userInfo:dic];
 //	[dic release];
 }
-- (void)setLabel:(NSS *)aLabel {
+- (void)setLabel:(NSS*) aLabel {
 //	[label release];
 	label = aLabel;
 }
-- (NSS *)label {
+- (NSS*) label {
 	return label;
 }
 @end

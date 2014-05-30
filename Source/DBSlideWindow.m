@@ -42,7 +42,7 @@ extern OSStatus CGSClearWindowTags ( const CGSConnection cid, const CGSWindow wi
 	NSSegmentedControl *segs = sender;
 	NSI theSeg = segs.selectedSegment;
 
-	NSR theR = theSeg == 1 ? quadrant(AZScreenFrameUnderMenu(), AZTopLeftQuad): AZScreenFrameUnderMenu();
+	NSR theR = theSeg == 1 ? quadrant(AZScreenFrameUnderMenu(), AZQuadTopRight): AZScreenFrameUnderMenu();
 	[self setFrame:theR display:YES animate:YES];
 }
 //- (void) awakeFromNib	{}

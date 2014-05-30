@@ -6,5 +6,5 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 #import <Cocoa/Cocoa.h>
 
 @interface DBShellExec : NSObject {}
-+ (NSS *)executeShellCommand:(NSS *)command;
++ (NSS*) executeShellCommand:(NSS*) command;
 @end

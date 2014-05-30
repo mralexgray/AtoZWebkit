@@ -19,7 +19,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		well		= [[AtoZColorWell    alloc] initWithFrame:NSMakeRect(15,104,100,14)];
 		NSControlActionBlock block = ^(id inSender) { [[ NSNotificationCenter defaultCenter] postNotificationName:nAZColorWellChanged object:((AtoZColorWell*)inSender).selectedCell]; };
 
-		[well setActionBlock:block];
+//		[well setActionBlock:block];
 //		(NSControlActionBlock)actionBlock
 //		 @selector(postNotificationNameOnMainThread:object:) withTarget:[[self.superviews lastObject] window]];
 		[self addSubview:webspose];

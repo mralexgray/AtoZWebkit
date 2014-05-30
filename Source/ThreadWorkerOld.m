@@ -209,7 +209,7 @@
 /*!
  * Just a little note to say, "Good job, Rob!" to
  * the original author of this Public Domain software.	*/
-+ (NSS *)description
++ (NSS*) description
 {	return @"ThreadWorker v0.7. Public Domain. Original author: Robert Harder, rob@iharder.net. Keep up-to-date at http://iHarder.net";
 }	// end description
 

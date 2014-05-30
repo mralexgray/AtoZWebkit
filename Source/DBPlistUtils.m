@@ -40,7 +40,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		return NO;
 	}
 }
-+ (NSS *)plistFilePath {
++ (NSS*) plistFilePath {
 	return [NSString stringWithFormat:@"%@/Contents/Info.plist", [[NSBundle mainBundle] bundlePath]];
 }
 + (void)updateApp {

@@ -260,8 +260,8 @@ static NSS *strTemp 	= nil;
 
 - (void)handleNotification:(NSNotification *)note
 {
-	NSS *type = ((NSS *)[note userInfo][@"notificationType"]);
-	NSS *name = ((NSS *)[note name]);
+	NSS *type = ((NSS*) [note userInfo][@"notificationType"]);
+	NSS *name = ((NSS*) [note name]);
 	
 	if(name == NSUserDefaultsDidChangeNotification)
 	{
@@ -328,7 +328,7 @@ static NSS *strTemp 	= nil;
 		if(actionMenuVisible) [self toggleActionMenu: nil];
 	}
 	if ([type isEqualToString:@"loadURL"]) {
-		NSS *targetURL = ((NSS *)[note userInfo][@"targetURL"]);
+		NSS *targetURL = ((NSS*) [note userInfo][@"targetURL"]);
 		[currentWebView stopLoading:self];
 		if (!windowIsVisible) {
 			[self slideInForcingToFront: YES];
@@ -674,7 +674,7 @@ static NSS *strTemp 	= nil;
 	[self setStatusText:	[self statusText]];
 	[self setTitleText:		[self titleText]];
 }
-- (void)setStatusText:(NSS *)status
+- (void)setStatusText:(NSS*) status
 {
 	if (status != currentStatus)
 	{
@@ -686,10 +686,10 @@ static NSS *strTemp 	= nil;
 	[statusField			setStringValue: currentStatus];
 	[websposeStatusField	setStringValue: currentStatus];
 }
-- (NSS *)statusText {
+- (NSS*) statusText {
 	return currentStatus;
 }
-- (void)setTitleText:(NSS *)title
+- (void)setTitleText:(NSS*) title
 {
 	if(title != currentTitle)
 	{
@@ -701,14 +701,14 @@ static NSS *strTemp 	= nil;
 	[titleField			setStringValue: currentTitle];
 	[websposeTitleField	setStringValue: currentTitle];
 }
-- (NSS *)titleText {
+- (NSS*) titleText {
 	return currentTitle;
 }
 - (DBLocationTextField*) URLField
 {
 	return inWebsposeMode ? websposeURLField : urlField;
 }
-- (void)setURLText:(NSS *)url
+- (void)setURLText:(NSS*) url
 {
 	if(url == nil)
 	{
@@ -721,7 +721,7 @@ static NSS *strTemp 	= nil;
 		[websposeURLField	setStringValue: url];
 	}
 }
-- (NSS *)URLText {
+- (NSS*) URLText {
 	return [[self URLField] stringValue];
 }
 - (NSS*) searchFieldText
@@ -1038,7 +1038,7 @@ static NSS *strTemp 	= nil;
 }
 - (IBAction)goHome:(id)sender {
 	// load the home page
-	NSS *hp = (NSS *)[NSUserDefaults standardUserDefaults][kHomePage];
+	NSS *hp = (NSS*) [NSUserDefaults standardUserDefaults][kHomePage];
 	[self loadURLString: hp];
 }
 - (IBAction)makeTextLarger:(id)sender { 	[currentWebView makeTextLarger:sender]; 	}
@@ -1063,7 +1063,7 @@ static NSS *strTemp 	= nil;
 	windowIsVisible = YES; // make our window visible variable YES
 }
 - (void)slideOut { 	[slideWindow setOnScreen: NO];   windowIsVisible = NO;	}
-- (void)filterErrorMessage:(NSS *)msg forWebView: (WebView*) webView
+- (void)filterErrorMessage:(NSS*) msg forWebView: (WebView*) webView
 {
 //	Tab* tab = [tabController tabWithWebView: webView];
 //	
@@ -1559,7 +1559,7 @@ static NSS *strTemp 	= nil;
 	// ---------------------------------------------
 }
 
-- (BOOL)application:(NSApplication *)theApplication openFile:(NSS *)filename {/*
+- (BOOL)application:(NSApplication *)theApplication openFile:(NSS*) filename {/*
 	NSURL *furl = [NSURL fileURLWithPath:filename];
 	[[currentWebView mainFrame] loadRequest:[NSURLRequest requestWithURL:furl]];
 	if (!inWebsposeMode) {
@@ -1569,7 +1569,7 @@ static NSS *strTemp 	= nil;
 	}
 	return YES;*/
 }
-- (BOOL)application:(NSApplication *)sender openFileWithoutUI:(NSS *)filename {
+- (BOOL)application:(NSApplication *)sender openFileWithoutUI:(NSS*) filename {
 	return [self application:sender openFile:filename];
 }
 - (void) application: (NSApplication*) sender openFiles: (NSA*) filenames
@@ -1671,7 +1671,7 @@ static NSS *strTemp 	= nil;
 }
 
 #pragma mark WebKit
-- (void) showErrorPageForReason:(NSS *)reason title:(NSS *)title webview:(WebView *)wv {
+- (void) showErrorPageForReason:(NSS*) reason title:(NSS*) title webview:(WebView *)wv {
 	// load the template html file
 	NSS *resourcesPath = [[NSBundle mainBundle] resourcePath];
 	NSURL *resURL = [NSURL fileURLWithPath:resourcesPath];
@@ -1690,7 +1690,7 @@ static NSS *strTemp 	= nil;
 	[self setURLText:url];
 	[tab setURLString:url];
 }
-- (BOOL)handleFileProtocolForPath:(NSS *)path webview:(WebView *)wv {
+- (BOOL)handleFileProtocolForPath:(NSS*) path webview:(WebView *)wv {
 	if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
 		[[NSWorkspace sharedWorkspace] selectFile:[path stringByExpandingTildeInPath] inFileViewerRootedAtPath:@""]; // show file in finder
 		[self setStatusText:@"Done"];
@@ -1732,7 +1732,7 @@ static NSS *strTemp 	= nil;
 		}
 	}
 }
-- (void)webView:(WebView *)sender didReceiveTitle:(NSS *)title
+- (void)webView:(WebView *)sender didReceiveTitle:(NSS*) title
 		forFrame:(WebFrame *)frame {
 	DBTab* tab = [tabController tabWithWebView: sender];
 	if(tab)
@@ -1992,7 +1992,7 @@ static NSS *strTemp 	= nil;
 			[self showErrorPageForReason:@"The requested server could not be found." title:@"Error" webview:sender];
 			break;
 		default:
-			NSLog(@"error:%i", [error code]);
+			NSLog(@"error:%li", (long)[error code]);
 			// some other error, show our fancy error page
 			if ([[[error localizedDescription] capitalizedString] rangeOfString:@"Frame Load Interrupted"].location == NSNotFound) {
 	//			[self showErrorPageForReason:[[error localizedDescription] capitalizedString] title:@"Error" webview:sender];
@@ -2111,7 +2111,7 @@ static NSS *strTemp 	= nil;
 	return newView;
 }
 - (void)webViewShow:(WebView *)sender {}
-- (void)webView:(WebView *)sender setStatusText:(NSS *)text {
+- (void)webView:(WebView *)sender setStatusText:(NSS*) text {
 	DBTab* tab = [tabController tabWithWebView: sender];
 	
 	if(tab)
@@ -2124,7 +2124,7 @@ static NSS *strTemp 	= nil;
 		[self setStatusText:text];
 	}
 }
-- (NSS *)webViewStatusText:(WebView *)sender {
+- (NSS*) webViewStatusText:(WebView *)sender {
 	NSS*	status	= nil;	
 	DBTab*		tab		= [tabController tabWithWebView: sender];
 	
@@ -2142,7 +2142,7 @@ static NSS *strTemp 	= nil;
 - (NSR)webViewFrame:(WebView *)sender {
 	return [[sender window] frame];
 }
-- (void)webView:(WebView *)sender runJavaScriptAlertPanelWithMessage:(NSS *)message {
+- (void)webView:(WebView *)sender runJavaScriptAlertPanelWithMessage:(NSS*) message {
 	DBTab *tab = [tabController tabWithWebView:sender];
 	if(sender != currentWebView) // if this is the visible webview
 	{
@@ -2162,7 +2162,7 @@ static NSS *strTemp 	= nil;
 	// Display alert panel
 	[alert beginSheetModalForWindow:[currentWebView window] modalDelegate:self didEndSelector:NULL contextInfo:NULL];
 }
-- (BOOL)webView:(WebView *)sender runJavaScriptConfirmPanelWithMessage:(NSS *)message {
+- (BOOL)webView:(WebView *)sender runJavaScriptConfirmPanelWithMessage:(NSS*) message {
 	DBTab *tab = [tabController tabWithWebView:sender];
 	if(sender != currentWebView) // if this is the visible webview
 	{

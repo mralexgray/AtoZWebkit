@@ -115,7 +115,7 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 		NSBeep();
 	}
 }
-- (void) newTabWithWebView: (WebView*) webView select: (BOOL) selectNewTab URLString:(NSS *)URLString {
+- (void) newTabWithWebView: (WebView*) webView select: (BOOL) selectNewTab URLString:(NSS*) URLString {
 	[self newTabWithWebView:webView select:selectNewTab];
 	[(DBTab *)tabs[([tabs count] - 1)] setURLString:URLString];
 }

@@ -14,12 +14,12 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 	NSImageView *imageView;
 	NSImageView *bgView;
 }
-//- (void)setDownloadFile:(NSS *)filename;
-//- (NSS *)downloadFile;
+//- (void)setDownloadFile:(NSS*) filename;
+//- (NSS*) downloadFile;
 @property (strong, nonatomic) NSS*downloadFile;
 
 - (void)showBezel;
-- (void)showBezelForFile:(NSS *)filename;
+- (void)showBezelForFile:(NSS*) filename;
 - (void)hideBezel;
 - (void)handleNotification:(NSNotification *)note;
 @end

@@ -8,6 +8,6 @@ The DeskBrowse source code is the legal property of its developers, Joel Levin a
 @interface DBPlistUtils : NSObject {}
 + (void)setIsBackgroundApp:(BOOL)bgappflag;
 + (BOOL)isBackgroundApp;
-+ (NSS *)plistFilePath;
++ (NSS*) plistFilePath;
 + (void)updateApp;
 @end
